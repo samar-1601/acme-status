@@ -1,7 +1,7 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link'
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -13,16 +13,14 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h3 className={styles.title}>
-          Welcome to Next.js TIC-TAC-TOE!
-        </h3>
-        <hr/>
-      <Link href="/tic-tac-toe/samar" >
-        <a className={styles.description}>Samar's Game</a>
-      </Link>
+        <h3 className={styles.title}>Welcome to Next.js TIC-TAC-TOE!</h3>
+        <hr />
+        <Link href="/tic-tac-toe/yash">
+          <a className={styles.description}>Yash's Game</a>
+        </Link>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
