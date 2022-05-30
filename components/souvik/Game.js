@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import styles from "../../styles/Home.module.css"
+import styles from "../../styles/Souvik.module.css"
 
 function Square(props) {
     if(props.winningSquares === "no"){

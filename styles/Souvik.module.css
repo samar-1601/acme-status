@@ -1,9 +1,4 @@
-.main {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
-  }
-  
-  .board-row:after {
+  .boardrow:after {
     clear: both;
     content: "";
     display: table;
@@ -27,8 +22,8 @@
     text-align: center;
     width: 34px;
   }
-
-  .square-win {
+  
+  .squarewin {
     background: red;
     border: 1px solid #999;
     float: left;
@@ -54,9 +49,12 @@
   .game {
     display: flex;
     flex-direction: row;
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
   }
   
-  .game-info {
+  .gameinfo {
     margin-left: 20px;
   }
+  
   
