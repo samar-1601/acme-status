@@ -1,5 +1,4 @@
-
-.boardRow{
+.boardRow {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -16,7 +15,8 @@
     background-color: beige;
     margin-bottom: 10px;
 }
-.historyButton{
+
+.historyButton {
     border: none;
     cursor: pointer;
     background-color: rgb(238, 216, 137);
@@ -45,6 +45,7 @@
     grid-gap: 20px;
     margin: auto;
 }
-.winner{
+
+.winner {
     background-color: rgb(140, 233, 97);
 }
