@@ -1,5 +1,5 @@
 import Link from "next/link";
-import App from "../../components/yash-tic-tac-toe/App.js";
+import App from "../../components/yash-tic-tac-toe/App";
 import styles from "../../styles/Home.module.css";
 
 export default function TicTacToeGame() {
