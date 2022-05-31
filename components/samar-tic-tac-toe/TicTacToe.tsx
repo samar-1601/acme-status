@@ -3,29 +3,30 @@ import { useState } from "react";
 import { CalculateWinner } from "./calculateWinner";
 import styles from "./style.module.css";
 
-export let winner; // variable to store the winner 'X' or 'O'
-let winning_cells;
+export let winner:string = ""; // variable to store the winner 'X' or 'O'
+let winning_cells:number[] = [];
 let history = [{
   squares: Array(9).fill(null),
   row: "",
   col: ""
 }];
+let moves;
 
  // contains the history in terms of array of squre values at each step
-let stepNumber = 0; // counter for storing the steps taken in game
-let status; // stores status of the game
+let stepNumber:number = 0; // counter for storing the steps taken in game
+let status:string; // stores status of the game
 
 // temporary array to store the current state or the current value held by each of the 9 squares
-let squares = Array(9).fill("");
+let squares:string[] = Array(9).fill("");
 
 // fill the history with empty values before the game starts
 
 function TicTacToe() {
   // player state
-  const [player, setPlayer] = useState("X");
-  const [ascending, setAscending] = useState(1);
+  const [player, setPlayer] = useState<string>("X");
+  const [ascending, setAscending] = useState<boolean>(true);
   // grid state stored in squareValues
-  const [squareValues, setSquareValues] = useState(squares);
+  const [squareValues, setSquareValues] = useState<string[]>(squares);
 
   // This Function updates the history list based on game stage
   const updateHistory = () => {
@@ -36,7 +37,7 @@ function TicTacToe() {
   };
 
   // Function to Toggle the player and update the related variables
-  const togglePlayer = (index) => {
+  const togglePlayer = (index:number) => {
     updateHistory();
 
     // update the latest squares array with the box value clicked by the player
@@ -46,8 +47,8 @@ function TicTacToe() {
     history = history.concat(
       [{
         squares : squares,
-        row : Math.floor(Number(index) / 3),
-        col: Number(index) % 3,
+        row : String(Math.floor(index / 3)),
+        col: String(index % 3,)
       }]
     );
 
@@ -67,7 +68,7 @@ function TicTacToe() {
 
   // Function to Jump to a new state of the Game based on the history
   // level clicked
-  const jumpTo = (step) => {
+  const jumpTo = (step:number) => {
     console.log("step : " + step);
     console.log("stepNumber : " + stepNumber);
     
@@ -81,7 +82,7 @@ function TicTacToe() {
 
     // whenever we go to a previous game stage, the winner is again null.
     winner = "";
-    winning_cells ="";
+    winning_cells = [];
     setSquareValues(squares);
 
     if (stepNumber%2===0) setPlayer("X");
