@@ -26,8 +26,8 @@ export const HeaderTabs = () => {
       }}
     >
       <Tab title="Open" ><OpenListView/></Tab>
-      <Tab title="Incidents">Incidents</Tab>
-      <Tab title="Maintainances">Maintainances</Tab>
+      <Tab title="Incidents" disabled>Incidents</Tab>
+      <Tab title="Maintainances" disabled>Maintainances</Tab>
     </Tabs>
   );
 }

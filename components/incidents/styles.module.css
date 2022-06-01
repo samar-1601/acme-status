@@ -5,6 +5,7 @@
 }
 
 .headerBar{
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -15,7 +16,7 @@
     padding: 20px 30px 20px 30px;
     margin-top: 20px;
     border-top: 4px rgb(243, 214, 54) solid;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
 }
 
 .listDetails{
@@ -42,4 +43,7 @@
     background-color: rgb(177, 245, 177);
     padding: 2px;
     font-size: 0.8rem;
+}
+.bgBlue{
+    background-color: rgb(193, 193, 255);
 }
