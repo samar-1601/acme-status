@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Tabs, Tab } from "baseui/tabs-motion";
 import { OpenListView } from "./open_list_view";
 
-export const HeaderTabs = () => {
+export const HeaderTabs:React.FC = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
   return (
     <Tabs

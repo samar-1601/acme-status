@@ -45,9 +45,9 @@ export const OpenListView = () => {
 
   return (
     <>
-      {dataList.map((data) => {
+      {dataList.map((data, id) => {
         return (
-          <div className={styles.listItem}>
+          <div key={id} className={styles.listItem}>
             <div className={styles.listDetails}>
               <span className={styles.itemName}>{data["name"]}</span>
               <span className={classValue(data["status"])}>
