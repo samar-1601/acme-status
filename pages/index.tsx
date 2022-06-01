@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
-import { IncidentsList } from './incident_list'
 import Head from 'next/head'
+import Link from 'next/link'
 const Home: NextPage = () => {
   return (
     <>
@@ -9,9 +9,7 @@ const Home: NextPage = () => {
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
     </Head>
-    <div>
-      <IncidentsList/>
-    </div>
+    <Link href="/incidents">Got to Incidents View Page</Link>
     </>
   )
 }
