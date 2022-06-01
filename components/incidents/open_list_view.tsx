@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
-export const OpenListView = () => {
+export const OpenListView:React.FC = () => {
   const [dataList, setData] = useState([]);
   const URL = "https://api.statuspage.io/v1/pages/7dwwybj29fy8/incidents";
   const getData = () => {
