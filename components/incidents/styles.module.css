@@ -1,0 +1,45 @@
+.incidentsListView{
+    max-width: 80%;
+    font-family: 'Lato', sans-serif;
+    margin: auto;
+}
+
+.headerBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.listItem{
+    padding: 20px 30px 20px 30px;
+    margin-top: 20px;
+    border-top: 4px rgb(243, 214, 54) solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.listDetails{
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.itemName{
+    flex: 100%;
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.itemDate{
+    color: grey;
+    padding: 2px;
+    font-size: 0.8rem;
+}
+
+.itemStatus{
+    background-color: rgb(177, 245, 177);
+    padding: 2px;
+    font-size: 0.8rem;
+}
