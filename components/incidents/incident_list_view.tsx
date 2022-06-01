@@ -1,4 +1,4 @@
-import { HeaderTabs } from "./header_navigation"
+import { HeaderTabs } from "./header_tabs"
 import { HeaderBar } from "./header_bar"
 import styles from "./styles.module.css"
 
