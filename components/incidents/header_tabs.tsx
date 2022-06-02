@@ -1,30 +1,53 @@
 import { useState, useEffect } from "react";
 import { Tabs, Tab } from "baseui/tabs-motion";
 import { OpenListView } from "./open_list_view";
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js"
+import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js";
+import styles from "./styles.module.css";
+import { Spinner } from "baseui/spinner";
 
 export const HeaderTabs: React.FC = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   // getting the page ids for the next call
   const [dataList, setData] = useState([]);
-  const URL = "https://api.statuspage.io/v1/pages";
-  const getData = () => {
-    fetch(URL, {
+  let idList: string[] | undefined = [];
+
+  const getIDData = async () => {
+    const URL = "https://api.statuspage.io/v1/pages";
+    const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
-    })
-      .then((response) => response.json())
-      .then((myJson) => setData(myJson));
+    });
+    const myJson = await response.json();
+    setData(myJson);
+    idList = myJson.map((data: any) => data["id"]);
+    if(idList!==undefined)
+    {
+      idList.forEach(getData);
+    }
+    setHasLoaded(true);
+  };
+
+  const getData = async (pageId: string) => {
+    const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents`;
+    const response = await fetch(URL, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+      },
+    });
+    const dataItem = await response.json();
+    setData(dataItem);
   };
 
   useEffect(() => {
-    getData();    
+    getIDData();
+    console.log("here")
   }, []);
 
-  const idList:string[] = dataList.map((data) => data["id"]);
   console.log(dataList);
 
   return (
@@ -47,14 +70,20 @@ export const HeaderTabs: React.FC = () => {
         },
       }}
     >
-      <Tab title="Open">
-        <OpenListView idList={idList} />
+      <Tab title="All">
+        {hasLoaded ? (
+          <OpenListView dataList={dataList} />
+        ) : (
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
+        )}
       </Tab>
-      <Tab title="Incidents" disabled>
-        Incidents
+      <Tab title="Active">
+        <OpenListView dataList={dataList.filter((data)=>(data["status"] !== "resolved"))}/>
       </Tab>
-      <Tab title="Maintainances" disabled>
-        Maintainances
+      <Tab title="Maintainances">
+      <OpenListView dataList={dataList.filter((data)=>(data["impact"] === "maintenance"))}/>
       </Tab>
     </Tabs>
   );

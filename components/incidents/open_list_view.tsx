@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { Spinner } from "baseui/spinner";
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js"
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
@@ -15,34 +12,12 @@ const classValue = (status: string) => {
 };
 
 interface Props {
-  idList: string[];
+  dataList: any[];
 }
 
-export const OpenListView: React.FC<Props> = ({ idList }) => {
-  const [dataList, setData] = useState<any[]>([]);
+export const OpenListView: React.FC<Props> = ({ dataList }) => {
 
-  const [hasLoaded, setHasLoaded] = useState(false);
-
-  const getData = (pageId: string) => {
-    const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents`;
-    fetch(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((dataItem) => {
-        setData(dataItem);
-        setHasLoaded(true);
-      });
-  };
-
-  useEffect(() => {
-    idList.forEach(getData);
-  }, [idList]);
-
-
+  console.log(dataList);
   const formatDate = (date: string | Date) => {
     date = new Date(date);
     const timeElapsed = Date.now() - date.getTime();
@@ -59,13 +34,16 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
 
   const getComponents = (data: any) => {
     let componentsList: JSX.Element[] = [];
-    data["components"].forEach((component: any, id:any) => {
-      componentsList.push(
-        <span key = {id} className={styles.componentItem}>
-          <span>{component["name"]}</span>
-        </span>
-      );
-    });
+    if(data["components"])
+    {
+      data["components"].forEach((component: any, id:any) => {
+        componentsList.push(
+          <span key = {id} className={styles.componentItem}>
+            <span>{component["name"]}</span>
+          </span>
+        );
+      });
+    }
     return componentsList;
   };
 
@@ -84,5 +62,5 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
     );
   });
 
-  return <>{hasLoaded?listItems:<div className={styles.spinner}><Spinner/></div>}</>;
+  return <>{listItems}</>;
 };
