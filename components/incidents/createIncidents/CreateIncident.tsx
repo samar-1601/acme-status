@@ -1,6 +1,4 @@
 import { Button } from 'baseui/button';
-import {FormControl} from 'baseui/form-control';
-import {Input} from 'baseui/input';
 import React, { useEffect, useState } from 'react';
 import styles from "../../../styles/CreateIncident.module.css";
 import {Spinner, SIZE} from 'baseui/spinner';

@@ -1,10 +1,5 @@
 import styles from "../../../styles/CreateIncident.module.css";
 import {Checkbox, STYLE_TYPE, LABEL_PLACEMENT} from 'baseui/checkbox';
-import {ChevronDown} from 'baseui/icon';
-import {StatefulPopover, PLACEMENT} from 'baseui/popover';
-import {StatefulMenu, OptionProfile} from 'baseui/menu';
-// import {Button, KIND, SIZE, SHAPE} from 'baseui/button';
-import {Avatar} from 'baseui/avatar';
 import React from "react";
 import {Select, SIZE, TYPE} from 'baseui/select';
 
@@ -23,7 +18,11 @@ interface ImageProps{
 }
 
 interface statusComponentProps{
-    
+    selected: number,
+    id: string,
+    toggleCheckBox: Function,
+    name: string,
+    changeOption: Function
 }
 
 function Image(props:ImageProps){
@@ -43,7 +42,7 @@ function Image(props:ImageProps){
             src={props.imgUrl}
         /> <div>{props.title}</div></div>);
 }
-export default function SelectStatusComponent(props) {
+export default function SelectStatusComponent(props:statusComponentProps) {
 
     const options = ITEMS.map((item, idx) => {
         return {

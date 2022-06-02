@@ -1,8 +1,5 @@
-import { FlexGrid } from "baseui/flex-grid";
 import { FormControl } from "baseui/form-control";
-import {Input, SIZE, ADJOINED} from 'baseui/input';
 import styles from "../../../styles/CreateIncident.module.css";
-
 import SelectStatusComponent from "./SelectStatusComponent";
 import React from "react";
 

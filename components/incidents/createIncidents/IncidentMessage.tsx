@@ -1,7 +1,5 @@
 import { FormControl } from "baseui/form-control";
 import {Textarea} from 'baseui/textarea';
-import {SIZE} from 'baseui/input';
-
 //not able to use value here as a prop of Textarea
 
 interface IncidentMessageProps{

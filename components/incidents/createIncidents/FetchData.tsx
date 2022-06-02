@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Button } from "baseui/button";
 import CreateIncident from "./CreateIncident";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
 import { useEffect } from "react";

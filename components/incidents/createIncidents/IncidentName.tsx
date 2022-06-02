@@ -1,7 +1,5 @@
 import { FormControl} from "baseui/form-control"
 import { Input, SIZE } from "baseui/input"
-import { Slider } from "baseui/slider";
-import styles from "../../../styles/CreateIncident.module.css";
 
 interface IncidentNameProps{
     handleNameChange: Function,
