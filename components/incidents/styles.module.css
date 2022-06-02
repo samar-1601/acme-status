@@ -1,11 +1,12 @@
 .incidentsListView {
     width: 80%;
     font-family: 'Lato', sans-serif;
-    margin: auto;
-    position: sticky;
+    right: 10%;
+    position: fixed;
+    overflow: hidden;
 }
 
-.headerBar{
+.headerBar {
     margin-top: 1.5rem;
     display: flex;
     align-items: center;
@@ -13,41 +14,53 @@
     flex-direction: row;
 }
 
-.listItem{
+.listItem {
     padding: 20px 30px 20px 30px;
-    margin: 10px 0px 30px 0px;
+    margin: 10px 5px 30px 5px;
     border-top: 4px rgb(243, 214, 54) solid;
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
 }
 
-.spinner{
- position: relative;
- top: 50%;
- left: 50%;
- padding: 3rem;
+.itemList {
+    position: relative;
+    margin-top: 1rem;
+    overflow-y: auto;
+    height: 80vh;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none; 
+}
+.itemList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
-.listDetails{
+.spinner {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    padding: 3rem;
+}
+
+.listDetails {
     display: flex;
     gap: 8px;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.itemName{
+.itemName {
     flex: 100%;
     font-size: 1.2rem;
     font-weight: 900;
     margin-bottom: 8px;
 }
 
-.itemDate{
+.itemDate {
     color: grey;
     padding: 2px;
     font-size: 0.8rem;
 }
 
-.itemStatus{
+.itemStatus {
     background-color: rgb(177, 245, 177);
     padding: 2px 4px;
     border-radius: 4px;
@@ -55,39 +68,46 @@
     letter-spacing: 0.08ch;
     text-transform: uppercase;
 }
-.bgBlue{
+
+.bgBlue {
     background-color: rgb(191, 214, 231);
     color: rgb(32, 32, 212);
     font-weight: 600;
 }
-.bgGreen{
+
+.bgGreen {
     background-color: rgb(195, 225, 199);
     color: rgb(59, 136, 49);
     font-weight: 600;
 }
-.bgPink{
+
+.bgPink {
     background-color: rgb(236, 209, 230);
     color: rgb(174, 68, 160);
     font-weight: 600;
 }
-.bgYellow{
+
+.bgYellow {
     background-color: rgb(233, 236, 139);
     color: rgb(184, 157, 20);
     font-weight: 600;
 }
-.bgOrange{
+
+.bgOrange {
     background-color: rgb(233, 224, 191);
     color: rgb(194, 139, 50);
     font-weight: 600;
 }
 
-.component{
+.component {
     flex: 100%;
     margin-top: 18px;
 }
-.component:empty{
+
+.component:empty {
     margin: 0px;
 }
-.componentItem{
+
+.componentItem {
     padding-right: 1.2rem;
 }

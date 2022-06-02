@@ -71,5 +71,5 @@ export const OpenListView: React.FC<Props> = ({ dataList }) => {
     );
   });
 
-  return <>{listItems}</>;
+  return <div className={styles.itemList}>{listItems}</div>;
 };
