@@ -80,7 +80,7 @@ export const HeaderTabs: React.FC = () => {
         )}
       </Tab>
       <Tab title="Active">
-        <OpenListView dataList={dataList.filter((data)=>(data["status"] !== "resolved"))}/>
+        <OpenListView dataList={dataList.filter((data)=>(data["status"] !== "resolved" && data["status"] !== "completed"))}/>
       </Tab>
       <Tab title="Maintainances">
       <OpenListView dataList={dataList.filter((data)=>(data["impact"] === "maintenance"))}/>

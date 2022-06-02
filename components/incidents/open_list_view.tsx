@@ -8,6 +8,15 @@ const classValue = (status: string) => {
   if (status === "resolved") {
     style = `${style} ${styles.bgGreen}`;
   }
+  if (status === "verifying") {
+    style = `${style} ${styles.bgYellow}`;
+  }
+  if (status === "completed") {
+    style = `${style} ${styles.bgPink}`;
+  }
+  if (status === "scheduled") {
+    style = `${style} ${styles.bgOrange}`;
+  }
   return style;
 };
 
