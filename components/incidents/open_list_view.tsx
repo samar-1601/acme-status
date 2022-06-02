@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { Spinner } from "baseui/spinner";
 
 interface Props {
   idList: string[];
@@ -7,6 +8,8 @@ interface Props {
 
 export const OpenListView: React.FC<Props> = ({ idList }) => {
   const [dataList, setData] = useState<any[]>([]);
+
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   const getData = (pageId: string) => {
     const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents`;
@@ -17,7 +20,10 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
       },
     })
       .then((response) => response.json())
-      .then((dataItem) => setData(dataItem));
+      .then((dataItem) => {
+        setData(dataItem);
+        setHasLoaded(true);
+      });
   };
 
   useEffect(() => {
@@ -76,5 +82,6 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
     );
   });
   console.log(dataList);
-  return <>{listItems}</>;
+
+  return <>{hasLoaded?listItems:<div className={styles.spinner}><Spinner/></div>}</>;
 };
