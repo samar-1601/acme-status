@@ -17,7 +17,16 @@ export const ITEMS = [
     {title: 'Under Maintainence', imgUrl: '/under_maintenance.png', id: '4'},
   ];
 
-function Image(props){
+interface ImageProps{
+    imgUrl: string,
+    title: string
+}
+
+interface statusComponentProps{
+    
+}
+
+function Image(props:ImageProps){
     // return(<div><Avatar
     //     overrides={{
     //         Root: {

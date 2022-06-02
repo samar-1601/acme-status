@@ -2,18 +2,29 @@ import { FlexGrid } from "baseui/flex-grid";
 import { FormControl } from "baseui/form-control";
 import {Input, SIZE, ADJOINED} from 'baseui/input';
 import styles from "../../../styles/CreateIncident.module.css";
-import StatusComponent from "./StatusComponent";
+
 import SelectStatusComponent from "./SelectStatusComponent";
+import React from "react";
 
 
 const label = <div className={styles.componentLabel}>Components Affected</div>
 
-export default function ComponentsAffected(props){
+export interface ComponentObject{
+  compName: string,
+  compType: number,
+  id: string,
+  compId: string
+}
+interface ComponentsAffectedProps{
+  componentList: (ComponentObject)[],
+  toggleCheckBox: Function,
+  changeOption: Function
+}
+
+export default function ComponentsAffected(props:ComponentsAffectedProps){
     return(
         <FormControl
           label={label}
-          positive={undefined}
-          error={undefined}
           overrides ={
             {
               ControlContainer : {
@@ -28,7 +39,7 @@ export default function ComponentsAffected(props){
         >
           {props.componentList.map((item) => {
               return (
-                  <SelectStatusComponent key = {item.id} name = {item.compName} id ={item.id} selected = {item.compType} toggleCheckBox = {(event) => props.toggleCheckBox(event)} changeOption = {(event, compId) => props.changeOption(event, compId)}/>
+                  <SelectStatusComponent key = {item.id} name = {item.compName} id ={item.id} selected = {item.compType} toggleCheckBox = {(event:React.SyntheticEvent) => props.toggleCheckBox(event)} changeOption = {(event:React.SyntheticEvent, compId:Number) => props.changeOption(event, compId)}/>
               );
           })}
           </div>

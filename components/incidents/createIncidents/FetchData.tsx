@@ -4,6 +4,10 @@ import CreateIncident from "./CreateIncident";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
 import { useEffect } from "react";
 import { useState } from "react";
+interface JSONObject{
+    name:String,
+    id:String
+}
 export default function Fetchdata() {
     const [pageID, setPageID] = useState([]);
     const URL = "https://api.statuspage.io/v1/pages";
@@ -17,7 +21,7 @@ export default function Fetchdata() {
         })
         .then(response => response.json())
         .then(json => {
-            const npageID = json.map(item => {
+            const npageID = json.map((item:JSONObject) => {
                 return item.id;
             })
             setPageID(npageID);

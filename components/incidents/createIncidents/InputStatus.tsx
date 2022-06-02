@@ -1,5 +1,4 @@
 import { FormControl} from "baseui/form-control"
-// import { Input, SIZE } from "baseui/input"
 import styles from "../../../styles/CreateIncident.module.css";
 import {ProgressBar, SIZE} from 'baseui/progress-bar';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
@@ -12,7 +11,7 @@ const STATUS = [
     "Resolved"
 ]
 
-function calculateStatus(status){
+function calculateStatus(status:String){
     if(status == "Investigating"){
         return 0
     }
@@ -27,7 +26,12 @@ function calculateStatus(status){
     }
 }
 
-export default function InputStatus(props){
+interface InputStatusprops {
+    updateStatus: Function,
+    incidentStatus: String
+}
+
+export default function InputStatus(props : InputStatusprops){
     const itemProps: BlockProps = {
         height: 'scale1000',
         display: 'flex',
@@ -66,9 +70,6 @@ export default function InputStatus(props){
                 <>
                     <ProgressBar
                         value={calculateStatus(props.incidentStatus)}
-                        //  getProgressLabel={}
-                        //  showLabel
-                        //  infinite
                         size={SIZE.large}
                         steps={undefined}
                         overrides ={{
@@ -85,11 +86,7 @@ export default function InputStatus(props){
                     flexGridColumnGap="scale800"
                     flexGridRowGap="scale800"
                     >
-                    {/* <FlexGridItem {...itemProps}>Investigating</FlexGridItem>
-                    <FlexGridItem {...itemProps}>Identified</FlexGridItem>
-                    <FlexGridItem {...itemProps}>Monitoring</FlexGridItem>
-                    <FlexGridItem {...itemProps}>Resolved</FlexGridItem> */
-                    flexItems}
+                    {flexItems}
                     </FlexGrid>
                 </>
             </FormControl>
