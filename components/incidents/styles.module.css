@@ -23,7 +23,7 @@
 
 .itemList {
     position: relative;
-    margin-top: 1rem;
+    margin-top: 1rem 3rem;
     overflow-y: auto;
     height: 80vh;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
