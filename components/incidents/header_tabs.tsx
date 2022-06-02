@@ -3,7 +3,7 @@ import { Tabs, Tab } from "baseui/tabs-motion";
 import { OpenListView } from "./open_list_view";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js";
 import styles from "./styles.module.css";
-import { Spinner } from "baseui/spinner";
+import { StyledSpinnerNext } from "baseui/spinner";
 
 export const HeaderTabs: React.FC = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
@@ -28,9 +28,8 @@ export const HeaderTabs: React.FC = () => {
     {
       idList.forEach(getData);
     }
-    setHasLoaded(true);
   };
-
+  
   const getData = async (pageId: string) => {
     const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents`;
     const response = await fetch(URL, {
@@ -41,6 +40,7 @@ export const HeaderTabs: React.FC = () => {
     });
     const dataItem = await response.json();
     setData(dataItem);
+    setHasLoaded(true);
   };
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export const HeaderTabs: React.FC = () => {
           <OpenListView dataList={dataList} />
         ) : (
           <div className={styles.spinner}>
-            <Spinner />
+            <StyledSpinnerNext />
           </div>
         )}
       </Tab>
