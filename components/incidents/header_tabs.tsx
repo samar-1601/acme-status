@@ -24,6 +24,7 @@ export const HeaderTabs: React.FC = () => {
   }, []);
 
   const idList:string[] = dataList.map((data) => data["id"]);
+  console.log(dataList);
 
   return (
     <Tabs

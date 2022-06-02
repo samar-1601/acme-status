@@ -2,6 +2,17 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { Spinner } from "baseui/spinner";
 
+const classValue = (status: string) => {
+  let style: string = styles.itemStatus;
+  if (status === "investigating") {
+    style = `${style} ${styles.bgBlue}`;
+  }
+  if (status === "resolved") {
+    style = `${style} ${styles.bgGreen}`;
+  }
+  return style;
+};
+
 interface Props {
   idList: string[];
 }
@@ -30,16 +41,6 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
     idList.forEach(getData);
   }, [idList]);
 
-  const classValue = (status: string) => {
-    let style: string = styles.itemStatus;
-    if (status === "investigating") {
-      style = `${style} ${styles.bgBlue}`;
-    }
-    if (status === "resolved") {
-      style = `${style} ${styles.bgGreen}`;
-    }
-    return style;
-  };
 
   const formatDate = (date: string | Date) => {
     date = new Date(date);
@@ -57,9 +58,9 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
 
   const getComponents = (data: any) => {
     let componentsList: JSX.Element[] = [];
-    data["components"].forEach((component: any) => {
+    data["components"].forEach((component: any, id:any) => {
       componentsList.push(
-        <span className={styles.componentItem}>
+        <span key = {id} className={styles.componentItem}>
           <span>{component["name"]}</span>
         </span>
       );
@@ -81,7 +82,6 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
       </div>
     );
   });
-  console.log(dataList);
 
   return <>{hasLoaded?listItems:<div className={styles.spinner}><Spinner/></div>}</>;
 };
