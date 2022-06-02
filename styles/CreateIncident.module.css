@@ -26,7 +26,7 @@
 }
 
 .incidentStatus{
-    background-color: mono300;
+    background-color: rbg(118, 118, 118);
 }
 
 .hiddenElement{
@@ -38,3 +38,7 @@
     width: 24px;
     padding-right: 5px;
 }
+
+/* .componentLabel{
+   text-decoration: underline;
+} */

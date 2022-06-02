@@ -96,6 +96,18 @@ export default function CreateIncident () {
             <InputStatus updateStatus = {(e) => updateStatus(e)} incidentStatus = {incidentStatus}/>
             <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e) => updateIncidentMessage(e)}/>
             <ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e) => toggleCheckBox(e)} changeOption ={(e, id) => changeOption(e, id)}/>
+            <Button overrides={
+                {
+                    BaseButton : {
+                        style: ({$theme}) => ({
+                            backgroundColor: $theme.colors.accent,
+                            width: '80px',
+                            borderRadius: "5%",
+                            alignSelf: 'end'
+                        })
+                    }
+                }
+            }>Create</Button>
         </div>
         </>
     );

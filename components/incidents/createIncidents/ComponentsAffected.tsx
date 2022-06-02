@@ -5,12 +5,25 @@ import styles from "../../../styles/CreateIncident.module.css";
 import StatusComponent from "./StatusComponent";
 import SelectStatusComponent from "./SelectStatusComponent";
 
+
+const label = <div className={styles.componentLabel}>Components Affected</div>
+
 export default function ComponentsAffected(props){
     return(
         <FormControl
-          label={"Components Affected"}
+          label={label}
           positive={undefined}
-          error={undefined}>
+          error={undefined}
+          overrides ={
+            {
+              ControlContainer : {
+                style:({$theme}) => ({
+                  borderStyle: 'solid none',
+                  borderColor: $theme.colors.borderOpaque
+                })
+              }
+            }
+          }>
         <div className={styles.components}
         >
           {props.componentList.map((item) => {

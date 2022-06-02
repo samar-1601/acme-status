@@ -5,6 +5,13 @@ import {ProgressBar, SIZE} from 'baseui/progress-bar';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {BlockProps} from 'baseui/block';
 
+const STATUS = [
+    "Investigating",
+    "Identified",
+    "Monitoring",
+    "Resolved"
+]
+
 function calculateStatus(status){
     if(status == "Investigating"){
         return 0
@@ -26,12 +33,36 @@ export default function InputStatus(props){
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        onClick: (event) => {props.updateStatus(event)},
+      };
+      const selectedItemProps: BlockProps = {
+        height: 'scale1000',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'blue',
         onClick: (event) => {props.updateStatus(event)}
       };
+      
+      const flexItems = STATUS.map((item, index) => {
+          if(item != props.incidentStatus){
+            return  <FlexGridItem key={index} {...itemProps}>{item}</FlexGridItem>
+          }
+          else{
+              return <FlexGridItem key={index} {...selectedItemProps}>{item}</FlexGridItem>
+          }
+      })
     return (
         <div className={styles.incidentStatus}>
             <FormControl label ={"Incident Status"}
-            overrides={{}}>
+            overrides={{
+                ControlContainer:{
+                        style:({$theme}) =>( {
+                            backgroundColor: $theme.colors.backgroundTertiary
+                        }
+                    )
+                }
+            }}>
                 <>
                     <ProgressBar
                         value={calculateStatus(props.incidentStatus)}
@@ -43,7 +74,8 @@ export default function InputStatus(props){
                         overrides ={{
                             Bar: {
                                 style: ({$theme}) => ({
-                                   margin: "0px 110px 0px 110px"
+                                    
+                                   margin: "25px 110px 0px 110px"
                                 })
                             }
                         }}
@@ -53,10 +85,11 @@ export default function InputStatus(props){
                     flexGridColumnGap="scale800"
                     flexGridRowGap="scale800"
                     >
-                    <FlexGridItem {...itemProps}>Investigating</FlexGridItem>
+                    {/* <FlexGridItem {...itemProps}>Investigating</FlexGridItem>
                     <FlexGridItem {...itemProps}>Identified</FlexGridItem>
                     <FlexGridItem {...itemProps}>Monitoring</FlexGridItem>
-                    <FlexGridItem {...itemProps}>Resolved</FlexGridItem>
+                    <FlexGridItem {...itemProps}>Resolved</FlexGridItem> */
+                    flexItems}
                     </FlexGrid>
                 </>
             </FormControl>
