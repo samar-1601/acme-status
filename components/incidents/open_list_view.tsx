@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { Spinner } from "baseui/spinner";
+import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js"
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
@@ -27,7 +28,7 @@ export const OpenListView: React.FC<Props> = ({ idList }) => {
     fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     })
       .then((response) => response.json())

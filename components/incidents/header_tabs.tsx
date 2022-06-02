@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, Tab } from "baseui/tabs-motion";
 import { OpenListView } from "./open_list_view";
+import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants.js"
 
 export const HeaderTabs: React.FC = () => {
   const [activeKey, setActiveKey] = useState<number>(0);
@@ -12,7 +13,7 @@ export const HeaderTabs: React.FC = () => {
     fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     })
       .then((response) => response.json())
