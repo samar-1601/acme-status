@@ -39,6 +39,10 @@
     padding-right: 5px;
 }
 
+
+.Spinner{
+    align-self: center;
+}
 /* .componentLabel{
    text-decoration: underline;
 } */

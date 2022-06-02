@@ -1,0 +1,27 @@
+import * as React from "react";
+import { Button } from "baseui/button";
+import CreateIncident from "./CreateIncident";
+import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
+import { useEffect } from "react";
+import { useState } from "react";
+export default function Fetchdata() {
+    const [pageID, setPageID] = useState([]);
+    const URL = "https://api.statuspage.io/v1/pages";
+    useEffect(() => {
+        fetch(URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+            },
+        })
+        .then(response => response.json())
+        .then(json => {
+            const npageID = json.map(item => {
+                return item.id;
+            })
+            setPageID(npageID);
+        })
+    }, [])
+    return (<CreateIncident pageID = {pageID}/>);
+}
