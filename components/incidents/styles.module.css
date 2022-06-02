@@ -30,7 +30,7 @@
     flex: 100%;
     font-size: 1.2rem;
     font-weight: 900;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .itemDate{
@@ -41,9 +41,30 @@
 
 .itemStatus{
     background-color: rgb(177, 245, 177);
-    padding: 2px;
+    padding: 2px 4px;
+    border-radius: 4px;
     font-size: 0.8rem;
+    letter-spacing: 0.08ch;
 }
 .bgBlue{
-    background-color: rgb(193, 193, 255);
+    background-color: rgb(191, 214, 231);
+    color: rgb(32, 32, 212);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.bgGreen{
+    background-color: rgb(195, 225, 199);
+    color: rgb(59, 136, 49);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.component{
+    flex: 100%;
+    margin-top: 18px;
+}
+.component:empty{
+    margin: 0px;
+}
+.componentItem{
+    padding-right: 1.2rem;
 }
