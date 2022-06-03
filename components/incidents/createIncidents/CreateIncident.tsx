@@ -23,7 +23,7 @@ const  STATUS:STATUSType = {
     "degraded_performance": 2,
     "partial_outage": 3,
     "major_outage": 4,
-    "under_maintainance": 5,
+    "under_maintenance": 5,
 }
 
 const getStatus = (id:number) => {
@@ -32,11 +32,19 @@ const getStatus = (id:number) => {
         case 2: return "degraded_performance"
         case 3: return "partial_outage"
         case 4: return "major_outage"
-        case 5: return "under_maintainance"
+        case 5: return "under_maintenance"
        
     }
 }
 
+const getIncidentStatus = (id:String) => {
+    switch(id){
+        case "Investigating" : return "scheduled"
+        case "Identified" : return "in_progress"
+        case "Monitoring" : return "verifying"
+        case "Resolved" : return "completed"
+    }
+}
 
 interface JSONObject{
     name:String,
@@ -148,7 +156,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
         const submit = {
             "incident": {
               "name": incidentName,
-              "status": incidentStatus.toLocaleLowerCase(),
+              "status": getIncidentStatus(incidentStatus),
               "impact_override": "none",
               "scheduled_for": getDateTime(),
               "scheduled_until": "2022-06-12T06:00:00.007Z",
@@ -161,12 +169,8 @@ export default function CreateIncident (props:CreateIncidentProps) {
               "auto_transition_deliver_notifications_at_start": true,
               "auto_transition_to_maintenance_state": true,
               "auto_transition_to_operational_state": true,
-              "auto_tweet_at_beginning": true,
-              "auto_tweet_on_completion": true,
-              "auto_tweet_on_creation": true,
-              "auto_tweet_one_hour_before": true,
               "backfill_date": "string",
-              "backfilled": true,
+              "backfilled": false,
               "body": "string",
               "components": components,
               "component_ids": componentIDs,
@@ -174,7 +178,18 @@ export default function CreateIncident (props:CreateIncidentProps) {
             }
           }
         console.log(submit);
-        Router.push('/');
+        console.log(props.pageID[0]);
+        fetch("https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+            },
+            body: JSON.stringify(submit),
+        })
+        .then(response => response.json())
+        .then((json) => console.log(json))
+        .then(() => {Router.push('/')})
     }
 
     const toggleCheckBox = (e:React.BaseSyntheticEvent) =>{
