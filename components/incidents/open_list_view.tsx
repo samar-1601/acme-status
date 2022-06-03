@@ -114,6 +114,11 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
           <StyledSpinnerNext />
         </div>
       }
+      endMessage={
+        <p style={{ textAlign: "center" }}>
+          <b>You've reached the end of page</b>
+        </p>
+      }
     >
       {
         <div className={styles.itemList}>
