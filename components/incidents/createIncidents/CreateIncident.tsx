@@ -121,12 +121,6 @@ export default function CreateIncident (props:CreateIncidentProps) {
         setIncidentMessage(e.target.value);
     }
 
-    const getDateTime = () => {
-        const today = new Date();
-        return today.toISOString();
-
-    }
-
     const submitForm = () => {
         console.log(isLoaded);
         console.log(incidentName);
@@ -155,8 +149,8 @@ export default function CreateIncident (props:CreateIncidentProps) {
               "name": incidentName,
               "status": getIncidentStatus(incidentStatus),
               "impact_override": "none",
-              "scheduled_for": getDateTime(),
-              "scheduled_until": "2022-06-12T06:00:00.007Z",
+              "scheduled_for": "2022-07-12T06:00:00.007Z",
+              "scheduled_until": "2022-08-12T06:00:00.007Z",
               "scheduled_remind_prior": true,
               "scheduled_auto_in_progress": true,
               "scheduled_auto_completed": true,
