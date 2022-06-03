@@ -10,7 +10,8 @@ export interface ComponentObject{
   compName: string,
   compType: number,
   id: string,
-  compId: string
+  compId: string,
+  selected: boolean
 }
 interface ComponentsAffectedProps{
   componentList: (ComponentObject)[],
@@ -36,7 +37,7 @@ export default function ComponentsAffected(props:ComponentsAffectedProps){
         >
           {props.componentList.map((item) => {
               return (
-                  <SelectStatusComponent key = {item.id} name = {item.compName} id ={item.id} selected = {item.compType} toggleCheckBox = {(event:React.SyntheticEvent) => props.toggleCheckBox(event)} changeOption = {(event:React.SyntheticEvent, compId:Number) => props.changeOption(event, compId)}/>
+                  <SelectStatusComponent key = {item.id} name = {item.compName} id ={item.id} type = {item.compType} selected = {item.selected} toggleCheckBox = {(event:React.SyntheticEvent) => props.toggleCheckBox(event)} changeOption = {(event:React.SyntheticEvent, compId:Number) => props.changeOption(event, compId)}/>
               );
           })}
           </div>

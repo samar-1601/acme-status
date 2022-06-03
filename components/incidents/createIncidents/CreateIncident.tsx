@@ -8,10 +8,36 @@ import IncidentMessage from './IncidentMessage';
 import ComponentsAffected from './ComponentsAffected';
 import {NEXT_PUBLIC_AUTH_TOKEN} from './../../../constants';
 import { ComponentObject } from './ComponentsAffected';
+import Router from 'next/router'
+
+interface STATUSType {
+    [key: string]: number
+  }
+
+const  STATUS:STATUSType = {
+    "operational" : 1,
+    "degraded_performance": 2,
+    "partial_outage": 3,
+    "major_outage": 4,
+    "under_maintainance": 5,
+}
+
+const getStatus = (id) => {
+    switch(id){
+        case 1: return "operational";
+        case 2: return "degraded_performance"
+        case 3: return "partial_outage"
+        case 4: return "major_outage"
+        case 5: return "under_maintainance"
+       
+    }
+}
+
 
 interface JSONObject{
     name:String,
-    id:String
+    id:String,
+    status: string
 }
 
 interface optionType{
@@ -19,6 +45,8 @@ interface optionType{
         id: Number;
     }
 }
+
+let InitialData:(ComponentObject|never)[] = [];
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -49,15 +77,17 @@ export default function CreateIncident (props:CreateIncidentProps) {
             })
             .then(response => response.json())
             .then(json => {
-                const njson = json.map((item:JSONObject, index:Number) => {
+                console.log(json);
+                InitialData = json.map((item:JSONObject, index:Number) => {
                     return({
                         compName: item.name,
-                        compType: 0,
+                        compType: STATUS[item.status],
                         id: index,
-                        compId: item.id
+                        compId: item.id,
+                        selected: false
                     });
                 })
-                setComponentsAffected(njson);
+                setComponentsAffected(InitialData);
                 setIsLoaded(true);
             })
             .catch(error => console.log(error));
@@ -79,14 +109,76 @@ export default function CreateIncident (props:CreateIncidentProps) {
         setIncidentMessage(e.target.value);
     }
 
+    const getDateTime = () => {
+        const today = new Date();
+        return today.toISOString();
+
+    }
+
+    const submitForm = () => {
+        console.log(isLoaded);
+        console.log(incidentName);
+        console.log(incidentMessage);
+        console.log(incidentStatus);
+        console.log(componentsAffected);
+        const componentIDs = componentsAffected.filter(function(item){
+            if(!item.selected){
+                return false;
+            }
+            else if(item.compType != InitialData[Number(item.id)].compType){
+                return false
+            }
+            return true;
+        }).map(function(item){
+            return item.compId;
+        })
+        let components = {};
+        componentsAffected.forEach((item) => {
+            if(item.selected && item.compType != InitialData[Number(item.id)].compType){
+                components[`${item.compId}`] = getStatus(item.compType);
+            }
+        });
+        const submit = {
+            "incident": {
+              "name": incidentName,
+              "status": incidentStatus.toLocaleLowerCase(),
+              "impact_override": "none",
+              "scheduled_for": getDateTime(),
+              "scheduled_until": "2022-06-12T06:00:00.007Z",
+              "scheduled_remind_prior": true,
+              "scheduled_auto_in_progress": true,
+              "scheduled_auto_completed": true,
+              "metadata": {},
+              "deliver_notifications": true,
+              "auto_transition_deliver_notifications_at_end": true,
+              "auto_transition_deliver_notifications_at_start": true,
+              "auto_transition_to_maintenance_state": true,
+              "auto_transition_to_operational_state": true,
+              "auto_tweet_at_beginning": true,
+              "auto_tweet_on_completion": true,
+              "auto_tweet_on_creation": true,
+              "auto_tweet_one_hour_before": true,
+              "backfill_date": "string",
+              "backfilled": true,
+              "body": "string",
+              "components": components,
+              "component_ids": componentIDs,
+              "scheduled_auto_transition": true
+            }
+          }
+        console.log(submit);
+        Router.push('/');
+    }
+
     const toggleCheckBox = (e:React.BaseSyntheticEvent) =>{
         const newComponentsAffected =  componentsAffected.map((item:ComponentObject) => {
             if(item.id == e.target.name){
                 return {
                     compName: item.compName,
-                    compType: (item.compType == 0 ? 1 : 0),
+                    compType: item.compType,
                     id: item.id,
-                    compId: item.compId
+                    compId: item.compId,
+                    selected: !item.selected
                 }
             }
             else{
@@ -105,7 +197,8 @@ export default function CreateIncident (props:CreateIncidentProps) {
                     compName: item.compName,
                     compType: Number(e.option.id) + 1,
                     id: item.id,
-                    compId: item.compId
+                    compId: item.compId,
+                    selected: item.selected
                 }
             }
             else{
@@ -128,7 +221,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
             <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
             <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
             <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
-            {isLoaded == true ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> <Button overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>Create</Button></> : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
+            {isLoaded == true ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> <Button onClick={() => {submitForm()}} overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>Create</Button></> : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
             </div></>
     );
     
