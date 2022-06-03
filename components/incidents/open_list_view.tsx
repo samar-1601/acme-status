@@ -1,7 +1,9 @@
 import styles from "./styles.module.css";
 import useLoadPageData from "./loadPageData";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { StyledSpinnerNext } from "baseui/spinner";
+// import { InfiniteLoader, List } from "react-virtualized";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
@@ -27,19 +29,29 @@ interface Props {
   pageType: string;
 }
 
+let prevDataListLength = 0;
 export const OpenListView: React.FC<Props> = ({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
-  // let dataList:any[] =Array();
   let listItems: JSX.Element[] = [];
-  // let isLoaded:boolean = false;
-  
-  let {dataList, isLoaded} = useLoadPageData(pageNumber, pageType);
+
+  let { dataList, isLoaded } = useLoadPageData(pageNumber, pageType);
 
   useEffect(()=>{
-    if(isLoaded) setHasLoaded(true);
-  }, [isLoaded])
+    prevDataListLength = 0;
+  },[]);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setHasLoaded(true);
+      if (prevDataListLength == dataList.length) {
+        setHasMore(false);
+      }
+      prevDataListLength = dataList.length;
+    }
+  }, [isLoaded]);
 
   const formatDate = (date: string | Date) => {
     date = new Date(date);
@@ -85,12 +97,41 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
       );
     });
   }
+  console.log(pageNumber);
+  const fetchMoreData = () => {
+    console.log("called");
+    setPageNumber((p) => p + 1);
+  };
 
+  console.log(dataList);
   return hasLoaded ? (
-    <div className={styles.itemList}>{listItems.length>0?listItems:"No items found!!"}</div>
+    <InfiniteScroll
+      dataLength={listItems.length}
+      next={fetchMoreData}
+      hasMore={hasMore}
+      loader={
+        <div className={styles.spinner}>
+          <StyledSpinnerNext />
+        </div>
+      }
+    >
+      {
+        <div className={styles.itemList}>
+          {listItems.length > 0 ? listItems : "No items found!!"}
+        </div>
+      }
+    </InfiniteScroll>
   ) : (
     <div className={styles.spinner}>
       <StyledSpinnerNext />
     </div>
   );
+
+  // return hasLoaded ? (
+  //   <div className={styles.itemList}>{listItems.length>0?listItems:"No items found!!"}</div>
+  // ) : (
+  //   <div className={styles.spinner}>
+  //     <StyledSpinnerNext />
+  //   </div>
+  // );
 };

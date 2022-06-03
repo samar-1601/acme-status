@@ -1,13 +1,11 @@
 .incidentsListView {
     width: 80%;
     font-family: 'Lato', sans-serif;
-    right: 10%;
-    position: fixed;
-    overflow: hidden;
+    margin: auto;
 }
 
 .headerBar {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,18 +18,19 @@
     border-top: 4px rgb(243, 214, 54) solid;
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
 }
-
+/* 
 .itemList {
     position: relative;
     margin-top: 1rem;
     overflow-y: auto;
     height: 80vh;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    -ms-overflow-style: none;   Internet Explorer 10+ 
     scrollbar-width: none; 
 }
 .itemList::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
+    display: none;  /* Safari and Chrome 
+} 
+*/
 
 .spinner {
     position: relative;
