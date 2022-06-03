@@ -14,6 +14,10 @@ interface STATUSType {
     [key: string]: number
   }
 
+interface SendComponentObject{
+    [key: string]: string
+}
+
 const  STATUS:STATUSType = {
     "operational" : 1,
     "degraded_performance": 2,
@@ -22,7 +26,7 @@ const  STATUS:STATUSType = {
     "under_maintainance": 5,
 }
 
-const getStatus = (id) => {
+const getStatus = (id:number) => {
     switch(id){
         case 1: return "operational";
         case 2: return "degraded_performance"
@@ -132,10 +136,13 @@ export default function CreateIncident (props:CreateIncidentProps) {
         }).map(function(item){
             return item.compId;
         })
-        let components = {};
+        let components:(SendComponentObject|null) = {};
         componentsAffected.forEach((item) => {
             if(item.selected && item.compType != InitialData[Number(item.id)].compType){
-                components[`${item.compId}`] = getStatus(item.compType);
+                const key = item.compId;
+                // Object.assign(components,{ key : getStatus(item.compType}))
+                components = {...components, key: getStatus(item.compType)!}
+                // components[`${item.compId}`] = getStatus(item.compType);
             }
         });
         const submit = {
