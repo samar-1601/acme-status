@@ -65,12 +65,12 @@ export default function SelectStatusComponent(props:statusComponentProps) {
                     }
                     },
                     Checkmark: {
-                        style: ({ $checked, $theme }) => ({
+                        style: ({ $checked}) => ({
                         borderLeftColor: "blue",
                         borderRightColor: "blue",
                         borderTopColor: "blue",
                         borderBottomColor: "blue",
-                        backgroundColor: $checked ? "blue" : null
+                        backgroundColor: $checked ? "blue" : "white"
                         })
                     }
                 }}>

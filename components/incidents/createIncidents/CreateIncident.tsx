@@ -136,13 +136,13 @@ export default function CreateIncident (props:CreateIncidentProps) {
         }).map(function(item){
             return item.compId;
         })
-        let components:(SendComponentObject|null) = {};
+        let components:(SendComponentObject) = {};
         componentsAffected.forEach((item) => {
             if(item.selected && item.compType != InitialData[Number(item.id)].compType){
                 const key = item.compId;
                 // Object.assign(components,{ key : getStatus(item.compType}))
-                components = {...components, key: getStatus(item.compType)!}
-                // components[`${item.compId}`] = getStatus(item.compType);
+                // components = {...components, key: getStatus(item.compType)!}
+                components[key] = getStatus(item.compType)!;
             }
         });
         const submit = {
