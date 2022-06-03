@@ -87,7 +87,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
   }
 
   return hasLoaded ? (
-    <div className={styles.itemList}>{listItems}</div>
+    <div className={styles.itemList}>{listItems.length>0?listItems:"No items found!!"}</div>
   ) : (
     <div className={styles.spinner}>
       <StyledSpinnerNext />
