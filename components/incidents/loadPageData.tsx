@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
 
-export const LoadPageData = (pageNumber:string) => {
-  const [hasLoaded, setHasLoaded] = useState(false);
+export default function LoadPageData(pageNumber: number, pageType: string) {
+  const [dataList, setData] = useState<any[]>(Array());
+  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
 
-  // getting the page ids for the next call
-  const [dataList, setData] = useState([]);
   let idList: string[] | undefined = [];
 
   const getIDData = async () => {
@@ -17,7 +16,6 @@ export const LoadPageData = (pageNumber:string) => {
       },
     });
     const myJson = await response.json();
-    setData(myJson);
     idList = myJson.map((data: any) => data["id"]);
     if (idList !== undefined) {
       idList.forEach(getData);
@@ -25,7 +23,7 @@ export const LoadPageData = (pageNumber:string) => {
   };
 
   const getData = async (pageId: string) => {
-    const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=5&page=${pageNumber}`;
+    const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
@@ -33,8 +31,32 @@ export const LoadPageData = (pageNumber:string) => {
       },
     });
     const dataItem = await response.json();
-    setData(dataItem);
+    setData((prevDataItems) => {
+      if (prevDataItems) return [...prevDataItems, ...dataItem];
+      else return dataItem;
+    });
     setHasLoaded(true);
   };
-  return {dataList, pageNumber};
-};
+
+  useEffect(() => {
+    setHasLoaded(false);
+    getIDData();
+  }, [pageNumber]);
+
+  let data:any[] = Array() ;
+  switch (pageType) {
+    case "All":
+      data =  dataList;
+      break;
+    case "Active":
+      data =  dataList.filter(
+        (data) =>
+          data["status"] !== "resolved" && data["status"] !== "completed"
+      );
+      break;
+    case "Maintainances":
+      data =  dataList.filter((data) => data["impact"] === "maintenance");
+      break;
+  }
+  return {"dataList": data, "isLoaded" :hasLoaded};
+}

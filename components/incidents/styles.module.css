@@ -16,14 +16,14 @@
 
 .listItem {
     padding: 20px 30px 20px 30px;
-    margin: 10px 5px 30px 5px;
+    margin: 10px 8px 30px 8px;
     border-top: 4px rgb(243, 214, 54) solid;
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
 }
 
 .itemList {
     position: relative;
-    margin-top: 1rem 3rem;
+    margin-top: 1rem;
     overflow-y: auto;
     height: 80vh;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */

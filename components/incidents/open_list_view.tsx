@@ -1,4 +1,7 @@
 import styles from "./styles.module.css";
+import useLoadPageData from "./loadPageData";
+import { useEffect, useState } from "react";
+import { StyledSpinnerNext } from "baseui/spinner";
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
@@ -21,12 +24,23 @@ const classValue = (status: string) => {
 };
 
 interface Props {
-  dataList: any[];
+  pageType: string;
 }
 
-export const OpenListView: React.FC<Props> = ({ dataList }) => {
+export const OpenListView: React.FC<Props> = ({ pageType }) => {
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
 
-  console.log(dataList);
+  // let dataList:any[] =Array();
+  let listItems: JSX.Element[] = [];
+  // let isLoaded:boolean = false;
+  
+  let {dataList, isLoaded} = useLoadPageData(pageNumber, pageType);
+
+  useEffect(()=>{
+    if(isLoaded) setHasLoaded(true);
+  }, [isLoaded])
+
   const formatDate = (date: string | Date) => {
     date = new Date(date);
     const timeElapsed = Date.now() - date.getTime();
@@ -43,11 +57,10 @@ export const OpenListView: React.FC<Props> = ({ dataList }) => {
 
   const getComponents = (data: any) => {
     let componentsList: JSX.Element[] = [];
-    if(data["components"])
-    {
-      data["components"].forEach((component: any, id:any) => {
+    if (data["components"]) {
+      data["components"].forEach((component: any, id: any) => {
         componentsList.push(
-          <span key = {id} className={styles.componentItem}>
+          <span key={id} className={styles.componentItem}>
             <span>{component["name"]}</span>
           </span>
         );
@@ -56,20 +69,28 @@ export const OpenListView: React.FC<Props> = ({ dataList }) => {
     return componentsList;
   };
 
-  let listItems: JSX.Element[] = dataList.map((data, id) => {
-    return (
-      <div key={id} className={styles.listItem}>
-        <div className={styles.listDetails}>
-          <span className={styles.itemName}>{data["name"]}</span>
-          <span className={classValue(data["status"])}>{data["status"]}</span>
-          <span className={styles.itemDate}>
-            {formatDate(data["created_at"])}
-          </span>
-          <span className={styles.component}>{getComponents(data)}</span>
+  if (dataList !== undefined) {
+    listItems = dataList.map((data, id) => {
+      return (
+        <div key={id} className={styles.listItem}>
+          <div className={styles.listDetails}>
+            <span className={styles.itemName}>{data["name"]}</span>
+            <span className={classValue(data["status"])}>{data["status"]}</span>
+            <span className={styles.itemDate}>
+              {formatDate(data["created_at"])}
+            </span>
+            <span className={styles.component}>{getComponents(data)}</span>
+          </div>
         </div>
-      </div>
-    );
-  });
+      );
+    });
+  }
 
-  return <div className={styles.itemList}>{listItems}</div>;
+  return hasLoaded ? (
+    <div className={styles.itemList}>{listItems}</div>
+  ) : (
+    <div className={styles.spinner}>
+      <StyledSpinnerNext />
+    </div>
+  );
 };
