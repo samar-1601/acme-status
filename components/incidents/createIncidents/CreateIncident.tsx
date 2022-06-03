@@ -137,9 +137,6 @@ export default function CreateIncident (props:CreateIncidentProps) {
             if(!item.selected){
                 return false;
             }
-            else if(item.compType != InitialData[Number(item.id)].compType){
-                return false
-            }
             return true;
         }).map(function(item){
             return item.compId;
