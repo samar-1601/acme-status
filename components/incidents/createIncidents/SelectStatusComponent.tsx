@@ -2,6 +2,9 @@ import styles from "../../../styles/CreateIncident.module.css";
 import {Checkbox, STYLE_TYPE, LABEL_PLACEMENT} from 'baseui/checkbox';
 import React from "react";
 import {Select, SIZE, TYPE} from 'baseui/select';
+import {StatefulPopover, TRIGGER_TYPE} from 'baseui/popover';
+import {ParagraphSmall} from 'baseui/typography';
+import {useStyletron} from 'baseui';
 
 
 export const ITEMS = [
@@ -27,23 +30,12 @@ interface statusComponentProps{
 }
 
 function Image(props:ImageProps){
-    // return(<div><Avatar
-    //     overrides={{
-    //         Root: {
-    //             style: {
-    //             margin: "0  10px 0 0"
-    //             }
-    //         }
-    //         }}
-    //         name={props.title}
-    //         size="scale800"
-    //         src={props.imgUrl}
-    //     /> {props.title}</div>);
     return(<div className={styles.option}><img className={styles.icon}
             src={props.imgUrl}
         /> <div>{props.title}</div></div>);
 }
 export default function SelectStatusComponent(props:statusComponentProps) {
+    const [css, theme] = useStyletron();
 
     const options = ITEMS.map((item, idx) => {
         return {
@@ -51,107 +43,123 @@ export default function SelectStatusComponent(props:statusComponentProps) {
             id: idx
         }
     })
-    return (
-    <div className={styles.statusComponent} id = {props.id}>
-        <Checkbox
-                labelPlacement={LABEL_PLACEMENT.right}
-                checked = {props.selected}
-                onChange = {(event) => {props.toggleCheckBox(event)}}
-                name = {props.id}
-                overrides = {{
-                    Root:{
-                    style:{
-                        paddingTop: "15px"
-                    }
-                    },
-                    Checkmark: {
-                        style: ({ $checked}) => ({
-                        borderLeftColor: "blue",
-                        borderRightColor: "blue",
-                        borderTopColor: "blue",
-                        borderBottomColor: "blue",
-                        backgroundColor: $checked ? "blue" : "white"
+    if(!props.selected){
+        return (
+        <div className={styles.statusComponent} id = {props.id}>
+            <Checkbox
+                    labelPlacement={LABEL_PLACEMENT.right}
+                    checked = {props.selected}
+                    onChange = {(event) => {props.toggleCheckBox(event)}}
+                    name = {props.id}
+                    overrides = {{
+                        Root:{
+                        style:{
+                            paddingTop: "15px"
+                        }
+                        },
+                        Checkmark: {
+                            style: ({ $checked}) => ({
+                            borderLeftColor: "blue",
+                            borderRightColor: "blue",
+                            borderTopColor: "blue",
+                            borderBottomColor: "blue",
+                            backgroundColor: $checked ? "blue" : "white"
+                            })
+                        }
+                    }}>
+                    {props.name}
+                </Checkbox>
+            
+            
+            
+            <StatefulPopover
+            content={
+                <ParagraphSmall padding="scale500">
+                    Select Component to enable options
+                </ParagraphSmall>
+            }
+            accessibilityType={'tooltip'}
+            triggerType={TRIGGER_TYPE.hover}
+            >
+            <span className={css({...theme.typography.font300})}>
+                <Select
+                    options={options}
+                    disabled ={!props.selected}
+                    backspaceRemoves = {false}
+                    clearable ={false}
+                    searchable ={false}
+                    value={[options[props.type - 1]]}
+                    placeholder="Select color"
+                    onChange={(event) => {props.changeOption(event, props.id);}}
+                    overrides={{
+                    DropdownOption: {
+                        style: ({ $theme }) => ({
+                        outline: `${$theme.colors.warning200} solid`,
+                        backgroundColor: $theme.colors.warning200
                         })
+                    },
+                    Root:{
+                        style:{
+                            width: '300px'
+                            }
                     }
-                }}>
-                {props.name}
-            </Checkbox>
-    <Select
-        options={options}
-        disabled ={!props.selected}
-        backspaceRemoves = {false}
-        clearable ={false}
-        searchable ={false}
-        value={[options[props.type - 1]]}
-        placeholder="Select color"
-        onChange={(event) => {props.changeOption(event, props.id);}}
-        overrides={{
-        DropdownOption: {
-            style: ({ $theme }) => ({
-            outline: `${$theme.colors.warning200} solid`,
-            backgroundColor: $theme.colors.warning200
-            })
-        },
-        Root:{
-            style:{
-                width: '300px'
-                }
-        }
-        }}
-    />
-    </div>
-    );
-    // else{
-    //     return (
-    //         <div className={styles.statusComponent} id = {props.id}>
-    //             <Checkbox
-    //                     labelPlacement={LABEL_PLACEMENT.right}
-    //                     checked = {false}
-    //                     onChange = {(event) => {props.toggleCheckBox(event)}}
-    //                     name = {props.id}
-    //                     overrides = {{
-    //                         Root:{
-    //                         style:{
-    //                             paddingTop: "15px"
-    //                         }
-    //                         },
-    //                         Checkmark: {
-    //                             style: ({ $checked, $theme }) => ({
-    //                             borderLeftColor: "blue",
-    //                             borderRightColor: "blue",
-    //                             borderTopColor: "blue",
-    //                             borderBottomColor: "blue",
-    //                             backgroundColor: $checked ? "blue" : null
-    //                             })
-    //                         }
-    //                     }}>
-    //                     {props.name}
-    //                 </Checkbox>
-    //         <div className={styles.hiddenElement}>
-    //         <Select
-    //             options={options}
-    //             backspaceRemoves = {false}
-    //             clearable ={false}
-    //             searchable ={false}
-    //             value={[options[0]]}
-    //             placeholder="Select color"
-    //             onChange={(event) => {props.changeOption(event, props.id);}}
-    //             overrides={{
-    //             DropdownOption: {
-    //                 style: ({ $theme }) => ({
-    //                 outline: `${$theme.colors.warning200} solid`,
-    //                 backgroundColor: $theme.colors.warning200
-    //                 })
-    //             },
-    //             Root:{
-    //                 style:{
-    //                     width: '300px'
-    //                     }
-    //             }
-    //             }}
-    //         />
-    //         </div>
-    //         </div>
-    //         );
-    // }
+                    }}
+                />
+            </span>
+            </StatefulPopover>
+        </div>
+        );
+    }
+    else{
+        return (
+            <div className={styles.statusComponent} id = {props.id}>
+                <Checkbox
+                        labelPlacement={LABEL_PLACEMENT.right}
+                        checked = {props.selected}
+                        onChange = {(event) => {props.toggleCheckBox(event)}}
+                        name = {props.id}
+                        overrides = {{
+                            Root:{
+                            style:{
+                                paddingTop: "15px"
+                            }
+                            },
+                            Checkmark: {
+                                style: ({ $checked}) => ({
+                                borderLeftColor: "blue",
+                                borderRightColor: "blue",
+                                borderTopColor: "blue",
+                                borderBottomColor: "blue",
+                                backgroundColor: $checked ? "blue" : "white"
+                                })
+                            }
+                        }}>
+                        {props.name}
+                    </Checkbox>
+                    <Select
+                        options={options}
+                        disabled ={!props.selected}
+                        backspaceRemoves = {false}
+                        clearable ={false}
+                        searchable ={false}
+                        value={[options[props.type - 1]]}
+                        placeholder="Select color"
+                        onChange={(event) => {props.changeOption(event, props.id);}}
+                        overrides={{
+                        DropdownOption: {
+                            style: ({ $theme }) => ({
+                            outline: `${$theme.colors.warning200} solid`,
+                            backgroundColor: $theme.colors.warning200
+                            })
+                        },
+                        Root:{
+                            style:{
+                                width: '300px'
+                                }
+                        }
+                        }}
+                    />
+            </div>
+            );
+    }
   }
