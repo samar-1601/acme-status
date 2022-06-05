@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
 
 export default function LoadPageData(pageNumber: number, pageType: string) {
+  
   const [dataList, setData] = useState<any[]>(Array());
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
 
   let idList: string[] | undefined = [];
-
+  console.log("inside getData module: --------");
+  console.log(pageNumber);
   const getIDData = async () => {
     const URL = "https://api.statuspage.io/v1/pages";
     const response = await fetch(URL, {
@@ -17,8 +19,12 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     });
     const myJson = await response.json();
     idList = myJson.map((data: any) => data["id"]);
+    console.log(idList);
     if (idList !== undefined) {
-      idList.forEach(getData);
+      for(let i=0; i<idList.length; i++)
+      {
+        getData(idList[i]);
+      }
     }
   };
 
@@ -31,32 +37,27 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
       },
     });
     const dataItem = await response.json();
+
+    console.log("inside function+++")
+
     setData((prevDataItems) => {
-      if (prevDataItems) return [...prevDataItems, ...dataItem];
-      else return dataItem;
+      console.log(prevDataItems);
+      // if (prevDataItems) 
+      return [...prevDataItems, ...dataItem];
+      // else return dataItem;
     });
+
     setHasLoaded(true);
   };
+
+  console.log(dataList);
 
   useEffect(() => {
     setHasLoaded(false);
     getIDData();
   }, [pageNumber]);
 
-  let data:any[] = Array() ;
-  switch (pageType) {
-    case "All":
-      data =  dataList;
-      break;
-    case "Active":
-      data =  dataList.filter(
-        (data) =>
-          data["status"] !== "resolved" && data["status"] !== "completed"
-      );
-      break;
-    case "Maintainances":
-      data =  dataList.filter((data) => data["impact"] === "maintenance");
-      break;
-  }
-  return {"dataList": data, "isLoaded" :hasLoaded};
+  console.log("outside getdata module-------");
+  
+  return { dataList: dataList, isLoaded: hasLoaded };
 }

@@ -10,6 +10,7 @@ export function generateUsers() {
     incident: {
       name: `${name}`,
       status: `${status[statusID]}`,
+      impact: "maintenance",
       impact_override: "none",
       scheduled_for: "2022-06-03T17:35:43.583Z",
       scheduled_until: "2022-06-03T17:45:43.583Z",

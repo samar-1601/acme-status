@@ -4,13 +4,6 @@
     margin: auto;
 }
 
-.headerBar {
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
 
 .listItem {
     padding: 20px 30px 20px 30px;
@@ -18,17 +11,6 @@
     border-top: 4px rgb(243, 214, 54) solid;
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
 }
-/* .itemList {
-    position: relative;
-    margin-top: 1rem;
-    overflow-y: scroll;
-    height: 80vh;
-    scrollbar-width: none; 
-}
-.itemList::-webkit-scrollbar { 
-    display: none;  
-}  */
-
 
 .spinner {
     position: relative;
@@ -49,11 +31,12 @@
     font-size: 1.2rem;
     font-weight: 900;
     margin-bottom: 8px;
+    text-transform: capitalize;
 }
 
 .itemDate {
     color: grey;
-    padding: 2px;
+    margin-left: 10px;
     font-size: 0.8rem;
 }
 
@@ -95,10 +78,17 @@
     color: rgb(194, 139, 50);
     font-weight: 600;
 }
+.bgGreyBlue {
+    background-color: rgb(184, 223, 222);
+    color: rgb(54, 115, 165);
+    font-weight: 600;
+}
 
 .component {
-    flex: 100%;
     margin-top: 18px;
+}
+.itemDetail1{
+    flex: 100%;
 }
 
 .component:empty {

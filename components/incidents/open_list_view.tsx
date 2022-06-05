@@ -1,12 +1,13 @@
-import styles from "./styles.module.css";
+import styles from "./styles/styles.module.css";
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { StyledSpinnerNext } from "baseui/spinner";
-// import { InfiniteLoader, List } from "react-virtualized";
 import InfiniteScroll from "react-infinite-scroll-component";
+
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
+  status = status.toLowerCase();
   if (status === "investigating") {
     style = `${style} ${styles.bgBlue}`;
   }
@@ -22,6 +23,9 @@ const classValue = (status: string) => {
   if (status === "scheduled") {
     style = `${style} ${styles.bgOrange}`;
   }
+  if (status === "in_progress") {
+    style = `${style} ${styles.bgGreyBlue}`;
+  }
   return style;
 };
 
@@ -30,7 +34,11 @@ interface Props {
 }
 
 let prevDataListLength = 0;
+
+
 export const OpenListView: React.FC<Props> = ({ pageType }) => {
+  console.log("PAGE TYPE IS ::::");
+  console.log(pageType);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [hasLoaded, setHasLoaded] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -39,19 +47,24 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
 
   let { dataList, isLoaded } = useLoadPageData(pageNumber, pageType);
 
-  useEffect(()=>{
+  useEffect(() => {
     prevDataListLength = 0;
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (isLoaded) {
       setHasLoaded(true);
-      if (prevDataListLength == dataList.length) {
+      if (dataList.length == 0 || dataList.length == prevDataListLength) {
         setHasMore(false);
       }
       prevDataListLength = dataList.length;
     }
   }, [isLoaded]);
+
+  const fetchMoreData = () => {
+    console.log("called");
+    setPageNumber((p) => p + 1);
+  };
 
   const formatDate = (date: string | Date) => {
     date = new Date(date);
@@ -73,7 +86,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
       data["components"].forEach((component: any, id: any) => {
         componentsList.push(
           <span key={id} className={styles.componentItem}>
-            <span>{component["name"]}</span>
+            {component["name"]}
           </span>
         );
       });
@@ -81,32 +94,58 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
     return componentsList;
   };
 
-  if (dataList !== undefined) {
-    listItems = dataList.map((data, id) => {
-      return (
-        <div key={id} className={styles.listItem}>
-          <div className={styles.listDetails}>
-            <span className={styles.itemName}>{data["name"]}</span>
-            <span className={classValue(data["status"])}>{data["status"]}</span>
-            <span className={styles.itemDate}>
-              {formatDate(data["created_at"])}
-            </span>
-            <span className={styles.component}>{getComponents(data)}</span>
-          </div>
-        </div>
-      );
-    });
-  }
-  console.log(pageNumber);
-  const fetchMoreData = () => {
-    console.log("called");
-    setPageNumber((p) => p + 1);
-  };
+  if (dataList.length !== 0) {
+    let data: any[] = Array();
+    switch (pageType) {
+      case "All":
+        data = dataList;
+        break;
+      case "Active":
+        data = dataList.filter(
+          (data) =>
+            data["status"] !== "resolved" && data["status"] !== "completed"
+        );
+        break;
+      case "Maintainances":
+        data = dataList.filter((data) => data["impact"] === "critical");
+        break;
+    }
 
+    console.log("data");
+    console.log(data);
+    if (data.length !== 0) {
+      listItems = data.map((data, id) => {
+        return (
+          <div key={id} className={styles.listItem}>
+            <div className={styles.listDetails}>
+              <span className={styles.itemName}>{data["name"]}</span>
+              <div className={styles.itemDetail1}>
+                <span className={classValue(data["status"])}>
+                  {data["status"]}
+                </span>
+                <span className={styles.itemDate}>
+                  {formatDate(data["created_at"])}
+                </span>
+              </div>
+              <span className={styles.component}>{getComponents(data)}</span>
+            </div>
+          </div>
+        );
+      });
+    } 
+    else{
+      console.log("here");
+      // setHasMore(false);
+      // fetchMoreData();
+    }
+  }
+
+  console.log(pageNumber);
   console.log(dataList);
+
   return hasLoaded ? (
     <InfiniteScroll
-      dataLength={listItems.length}
+      dataLength={dataList.length}
       next={fetchMoreData}
       hasMore={hasMore}
       loader={
@@ -114,17 +153,14 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
           <StyledSpinnerNext />
         </div>
       }
+      className={styles.itemList}
       endMessage={
         <p style={{ textAlign: "center" }}>
           <b>You've reached the end of page</b>
         </p>
       }
     >
-      {
-        <div className={styles.itemList}>
-          {listItems.length > 0 ? listItems : "No items found!!"}
-        </div>
-      }
+      {<div>{listItems.length > 0 ? listItems : "No items found!!"}</div>}
     </InfiniteScroll>
   ) : (
     <div className={styles.spinner}>
