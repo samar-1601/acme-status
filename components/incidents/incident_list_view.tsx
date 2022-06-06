@@ -4,21 +4,14 @@ import { OpenListView } from "./open_list_view";
 import { generateUsers } from "./populateData";
 import { useState } from "react";
 
-let id = [1,0,0];
+export enum PageType {
+  All = "All",
+  Active = "Active",
+  Maintenance = "Maintenance",
+}
+
 export const IncidentsListView: React.FC = () => {
-
-    const [content, setContent] = useState(<OpenListView pageType="All" />);
-
-    const toggleContent = (pageType:string, index:number)=>
-    {
-        setContent(<OpenListView pageType={pageType} />);
-        for(let i=0; i<id.length; i++)
-        {
-            if(i==index)
-                id[i] = 1;
-            else id[i] = 0;
-        }
-    }
+  const [page, setPage] = useState<PageType>(PageType.All);
 
   return (
     <div className={styles.incidentsListView}>
@@ -28,13 +21,25 @@ export const IncidentsListView: React.FC = () => {
           <button onClick={generateUsers}>Populate Data</button>
         </div>
         <nav className={navstyles.nav}>
-          <div onClick={()=>toggleContent("All", 0)}><a className={id[0]?navstyles.l1:""} href="#">All</a></div>
-          <div onClick={()=>toggleContent("Active", 1)}><a className={id[1]?navstyles.l1:""} href="#">Active</a></div>
-          <div onClick={()=>toggleContent("Maintenances", 2)}><a className={id[2]?navstyles.l1:""} href="#">Maintenance</a></div>
+          <div onClick={() => setPage(PageType.All)}>
+            <span className={page === PageType.All ? navstyles.l1 : ""}>
+              All
+            </span>
+          </div>
+          <div onClick={() => setPage(PageType.Active)}>
+            <span className={page === PageType.Active ? navstyles.l1 : ""}>
+              Active
+            </span>
+          </div>
+          <div onClick={() => setPage(PageType.Maintenance)}>
+            <span className={page === PageType.Maintenance ? navstyles.l1 : ""}>
+              Maintenance
+            </span>
+          </div>
         </nav>
       </div>
       <div className={navstyles.content}>
-        {content}
+        <OpenListView pageType={page} />
       </div>
     </div>
   );

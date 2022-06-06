@@ -38,7 +38,7 @@
     font-size: 14px;
     text-decoration: none;
 }
-.nav a{
+.nav span{
     padding-right: 14px;
     padding-left: 14px;
     padding-bottom: 16px;
@@ -46,7 +46,7 @@
     text-decoration: none;
 }
 
-.nav a:hover{
+.nav span:hover{
     /* font-weight: 600; */
     color: rgb(106, 147, 197);
 }

@@ -3,7 +3,18 @@ import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { StyledSpinnerNext } from "baseui/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { PageType } from "./incident_list_view";
 
+// enum comp{
+//   test = 'test'
+
+// }
+
+// const icons = {
+//   [comp.test]: '/logo1.png',
+// }
+
+// icons[comp.test]
 
 const classValue = (status: string) => {
   let style: string = styles.itemStatus;
@@ -30,39 +41,45 @@ const classValue = (status: string) => {
 };
 
 interface Props {
-  pageType: string;
+  pageType: PageType;
 }
 
-let prevDataListLength = 0;
-
+let prevDataLenth = 0;
 
 export const OpenListView: React.FC<Props> = ({ pageType }) => {
-  console.log("PAGE TYPE IS ::::");
-  console.log(pageType);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [pageLoaded, setPageLoaded] = useState<boolean>(false);
 
-  let listItems: JSX.Element[] = [];
-
-  let { dataList, isLoaded } = useLoadPageData(pageNumber, pageType);
+  const { dataList, isLoaded, hasMore } = useLoadPageData(pageNumber, pageType);
 
   useEffect(() => {
-    prevDataListLength = 0;
-  }, []);
+    const data = filterData(dataList, pageType);
+    console.log("filter data", data.length, "prev data:", prevDataLenth);
 
-  useEffect(() => {
-    if (isLoaded) {
-      setHasLoaded(true);
-      if (dataList.length == 0 || dataList.length == prevDataListLength) {
-        setHasMore(false);
-      }
-      prevDataListLength = dataList.length;
+    const fetchMore =
+      isLoaded &&
+      hasMore &&
+      (data.length === prevDataLenth || data.length < 10);
+
+    if (fetchMore) {
+      return fetchMoreData();
+    }
+
+    const setData =
+      (data.length > 0 && data.length !== prevDataLenth) || !hasMore;
+    if (setData) {
+      prevDataLenth = data.length;
+      return setPageLoaded(true);
     }
   }, [isLoaded]);
 
+  useEffect(() => {
+    setPageLoaded(false);
+    prevDataLenth = 0;
+    setPageNumber(1);
+  }, [pageType]);
+
   const fetchMoreData = () => {
-    console.log("called");
     setPageNumber((p) => p + 1);
   };
 
@@ -94,58 +111,48 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
     return componentsList;
   };
 
-  if (dataList.length !== 0) {
-    let data: any[] = Array();
-    switch (pageType) {
-      case "All":
-        data = dataList;
-        break;
-      case "Active":
-        data = dataList.filter(
+  const filterData = (data: any[], filter: PageType) => {
+    switch (filter) {
+      case PageType.All:
+        return data;
+      case PageType.Active:
+        return data.filter(
           (data) =>
             data["status"] !== "resolved" && data["status"] !== "completed"
         );
-        break;
-      case "Maintainances":
-        data = dataList.filter((data) => data["impact"] === "critical");
-        break;
+      case PageType.Maintenance:
+        return data.filter((data) => data["impact"] === "critical");
+      default:
+        throw new Error("Invalid page type");
     }
+  };
 
-    console.log("data");
-    console.log(data);
-    if (data.length !== 0) {
-      listItems = data.map((data, id) => {
-        return (
-          <div key={id} className={styles.listItem}>
-            <div className={styles.listDetails}>
-              <span className={styles.itemName}>{data["name"]}</span>
-              <div className={styles.itemDetail1}>
-                <span className={classValue(data["status"])}>
-                  {data["status"]}
-                </span>
-                <span className={styles.itemDate}>
-                  {formatDate(data["created_at"])}
-                </span>
-              </div>
-              <span className={styles.component}>{getComponents(data)}</span>
+  const renderListData = (data: any[]) => {
+    return filterData(data, pageType).map((data, id) => {
+      return (
+        <div key={id} className={styles.listItem}>
+          <div className={styles.listDetails}>
+            <span className={styles.itemName}>{data["name"]}</span>
+            <div className={styles.itemDetail1}>
+              <span className={classValue(data["status"])}>
+                {data["status"]}
+              </span>
+              <span className={styles.itemDate}>
+                {formatDate(data["created_at"])}
+              </span>
             </div>
+            <span className={styles.component}>{getComponents(data)}</span>
           </div>
-        );
-      });
-    } 
-    else{
-      console.log("here");
-      // setHasMore(false);
-      // fetchMoreData();
-    }
-  }
+        </div>
+      );
+    });
+  };
 
-  console.log(pageNumber);
-  console.log(dataList);
+  const displayItemList = renderListData(dataList);
 
-  return hasLoaded ? (
+  return pageLoaded ? (
     <InfiniteScroll
-      dataLength={dataList.length}
+      dataLength={displayItemList.length}
       next={fetchMoreData}
       hasMore={hasMore}
       loader={
@@ -160,19 +167,13 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
         </p>
       }
     >
-      {<div>{listItems.length > 0 ? listItems : "No items found!!"}</div>}
+      <div>
+        {displayItemList.length > 0 ? displayItemList : "No items found!!"}
+      </div>
     </InfiniteScroll>
   ) : (
     <div className={styles.spinner}>
       <StyledSpinnerNext />
     </div>
   );
-
-  // return hasLoaded ? (
-  //   <div className={styles.itemList}>{listItems.length>0?listItems:"No items found!!"}</div>
-  // ) : (
-  //   <div className={styles.spinner}>
-  //     <StyledSpinnerNext />
-  //   </div>
-  // );
 };

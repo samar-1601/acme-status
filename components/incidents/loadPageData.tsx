@@ -4,12 +4,11 @@ import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
 export default function LoadPageData(pageNumber: number, pageType: string) {
   
   const [dataList, setData] = useState<any[]>(Array());
-  const [hasLoaded, setHasLoaded] = useState<boolean>(false);
+  const [ hasLoaded, setHasLoaded ] = useState<boolean>( false );
+  const [ hasMore, setHasMore ] = useState<boolean>( true );
 
   let idList: string[] | undefined = [];
-  console.log("inside getData module: --------");
-  console.log(pageNumber);
-  const getIDData = async () => {
+  const getIDData = async (pageNumber: number) => {
     const URL = "https://api.statuspage.io/v1/pages";
     const response = await fetch(URL, {
       headers: {
@@ -19,16 +18,16 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     });
     const myJson = await response.json();
     idList = myJson.map((data: any) => data["id"]);
-    console.log(idList);
+  
     if (idList !== undefined) {
       for(let i=0; i<idList.length; i++)
       {
-        getData(idList[i]);
+        getData(idList[i],pageNumber);
       }
     }
   };
 
-  const getData = async (pageId: string) => {
+  const getData = async (pageId: string, pageNumber: number) => {
     const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
     const response = await fetch(URL, {
       headers: {
@@ -38,26 +37,31 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     });
     const dataItem = await response.json();
 
-    console.log("inside function+++")
+    console.log('pageNo:',pageNumber,'hasMore',dataItem.length>0, 'API data:', dataItem.length );
 
     setData((prevDataItems) => {
-      console.log(prevDataItems);
-      // if (prevDataItems) 
-      return [...prevDataItems, ...dataItem];
-      // else return dataItem;
+      return pageNumber==1 ? dataItem:  [...prevDataItems, ...dataItem];
     });
 
+    setHasMore(dataItem.length>0)
     setHasLoaded(true);
   };
 
-  console.log(dataList);
-
-  useEffect(() => {
-    setHasLoaded(false);
-    getIDData();
-  }, [pageNumber]);
-
-  console.log("outside getdata module-------");
+  useEffect( () => {
+    if ( pageNumber !== 1 ) {
+      setHasLoaded( false );
+      getIDData(pageNumber); 
+    }
+  }, [ pageNumber ] );
   
-  return { dataList: dataList, isLoaded: hasLoaded };
+  useEffect( () => {
+    setHasLoaded( false );
+    setHasMore( true );
+    setData( [] );
+    getIDData(1); 
+  },[pageType])
+
+  
+  
+  return { dataList: dataList, isLoaded: hasLoaded, hasMore: hasMore};
 }
