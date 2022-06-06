@@ -82,10 +82,12 @@ export default function InputStatus(props : InputStatusprops){
                         overrides ={{
                             Bar: {
                                 style: ({$theme}) => ({
-                                    
+                                   cursor: "pointer", 
                                    margin: "25px 110px 0px 110px"
-                                })
+                                }),
                             }
+                            ,
+                            
                         }}
                     />
                     <FlexGrid
