@@ -38,6 +38,13 @@ export default function InputStatus(props : InputStatusprops){
         alignItems: 'center',
         justifyContent: 'center',
         onClick: (event) => {props.updateStatus(event)},
+        overrides: {
+           Block :{
+               style:{
+                   cursor: "pointer"
+               }
+           }
+        }
       };
       const selectedItemProps: BlockProps = {
         height: 'scale1000',
