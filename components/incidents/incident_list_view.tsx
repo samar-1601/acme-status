@@ -4,12 +4,22 @@ import { OpenListView } from "./open_list_view";
 import { generateUsers } from "./populateData";
 import { useState } from "react";
 
+/**
+ * PageType
+ * defines the page to show on screen based on navbar menu selected
+ * @type {enum}
+ */
 export enum PageType {
   All = "All",
   Active = "Active",
   Maintenance = "Maintenance",
 }
 
+/**
+ * IncidentsList View
+ * triggered when /incidents is accessed
+ * @returns a custom made fixed navbar with menu items and infinite scrolling 
+ */
 export const IncidentsListView: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
 
