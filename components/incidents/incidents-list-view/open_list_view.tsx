@@ -3,7 +3,7 @@ import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { PageType } from "./incident_list_view";
 
-import { StyledSpinnerNext } from "baseui/spinner";
+import { Spinner } from "baseui/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 /**
@@ -215,7 +215,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
       hasMore={hasMore}
       loader={
         <div className={styles.spinner}>
-          <StyledSpinnerNext />
+          <Spinner />
         </div>
       }
       className={styles.itemList}
@@ -231,7 +231,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
     </InfiniteScroll>
   ) : (
     <div className={styles.spinner}>
-      <StyledSpinnerNext />
+      <Spinner />
     </div>
   );
 };
