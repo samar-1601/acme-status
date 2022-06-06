@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
+import { PageType } from "./incident_list_view";
 
 /**
  * Loads data from API
@@ -8,7 +9,6 @@ import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
  * @returns API response and API loading status
  */
 export default function LoadPageData(pageNumber: number, pageType: string) {
-
   const [dataList, setData] = useState<any[]>(Array()); // stores data response from API
   const [hasLoaded, setHasLoaded] = useState<boolean>(false); // status of loading data from API
   const [hasMore, setHasMore] = useState<boolean>(true); // do we have to fetch more data
@@ -18,28 +18,29 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
   /**
    * Get the ID list from API and then call for data in each page
    * @param pageNumber pageNumber for getting paginated data
+   * @param pageType type of page to be rendered
    */
-  const getIDData = async (pageNumber: number) => {
-    try{
-    const URL = "https://api.statuspage.io/v1/pages";
-    const response = await fetch(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-    });
-    const myJson = await response.json();
-    idList = myJson.map((data: any) => data["id"]);
-  }
-  catch(err){
-    alert('Too many API calls');
-    console.log(err);
-  }
+  const getIDData = async (pageNumber: number, pageType: string) => {
+    try {
+      const URL = "https://api.statuspage.io/v1/pages";
+      const response = await fetch(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        },
+      });
+      const myJson = await response.json();
+      idList = myJson.map((data: any) => data["id"]);
+      // console.log(idList);
+    } catch (err) {
+      alert("Too many API calls");
+      console.log(err);
+    }
 
     // call getData for each pageID
     if (idList !== undefined) {
       for (let i = 0; i < idList.length; i++) {
-        getData(idList[i], pageNumber);
+        getData(idList[i], pageNumber, pageType);
       }
     }
   };
@@ -48,40 +49,49 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
    * Get data response from API for a given pageID
    * @param pageId ID of the page from which we need to fetch data from
    * @param pageNumber page number for pagination
+   * @param pageType type of the page to be rendered
    */
-  const getData = async (pageId: string, pageNumber: number) => {
-    try{
-    const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
-    const response = await fetch(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-    });
-    const dataItem = await response.json();
-    
-    console.log(
-      "pageNo:",
-      pageNumber,
-      "hasMore",
-      dataItem.length > 0,
-      "API data:",
-      dataItem.length
+  const getData = async (
+    pageId: string,
+    pageNumber: number,
+    pageType: string
+  ) => {
+    try {
+      let URL ;
+      URL= `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
+      if (pageType == PageType.Maintenance) {
+        URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/active_maintenance/?per_page=10&page=${pageNumber}`;
+      }
+      // console.log("URL : ",URL);
+      const response = await fetch(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        },
+      });
+      const dataItem = await response.json();
+
+      console.log(
+        "pageNo:",
+        pageNumber,
+        "hasMore",
+        dataItem.length > 0,
+        "API data:",
+        dataItem.length
       );
-      
+
       /**
        * concat data obtained in the current response to previous datalist
        */
       setData((prevDataItems) => {
         return pageNumber == 1 ? dataItem : [...prevDataItems, ...dataItem];
       });
-      
+
       setHasMore(dataItem.length > 0); // if we get data in the current page, set hasMore to true
       setHasLoaded(true); // after all the above processes are done update the hasLoaded status
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
-      alert('Too many API calls');
+      alert("Too many API calls");
     }
   };
 
@@ -91,7 +101,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
   useEffect(() => {
     if (pageNumber !== 1) {
       setHasLoaded(false);
-      getIDData(pageNumber);
+      getIDData(pageNumber, pageType);
     }
   }, [pageNumber]);
 
@@ -102,7 +112,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     setHasLoaded(false);
     setHasMore(true);
     setData([]);
-    getIDData(1);
+    getIDData(1, pageType);
   }, [pageType]);
 
   return { dataList: dataList, isLoaded: hasLoaded, hasMore: hasMore };

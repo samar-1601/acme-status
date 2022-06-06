@@ -170,7 +170,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
             data["status"] !== "resolved" && data["status"] !== "completed"
         );
       case PageType.Maintenance:
-        return data.filter((data) => data["impact"] === "critical");
+        return data;
       default:
         throw new Error("Invalid page type");
     }
