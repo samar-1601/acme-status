@@ -59,12 +59,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
       },
     });
     const dataItem = await response.json();
-  }
-  catch(err){
-    alert("Multiple API calls");
-    console.log(err);
-  }
-
+    
     console.log(
       "pageNo:",
       pageNumber,
@@ -72,17 +67,22 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
       dataItem.length > 0,
       "API data:",
       dataItem.length
-    );
-
-    /**
-     * concat data obtained in the current response to previous datalist
-     */
-    setData((prevDataItems) => {
-      return pageNumber == 1 ? dataItem : [...prevDataItems, ...dataItem];
-    });
-
-    setHasMore(dataItem.length > 0); // if we get data in the current page, set hasMore to true
-    setHasLoaded(true); // after all the above processes are done update the hasLoaded status
+      );
+      
+      /**
+       * concat data obtained in the current response to previous datalist
+       */
+      setData((prevDataItems) => {
+        return pageNumber == 1 ? dataItem : [...prevDataItems, ...dataItem];
+      });
+      
+      setHasMore(dataItem.length > 0); // if we get data in the current page, set hasMore to true
+      setHasLoaded(true); // after all the above processes are done update the hasLoaded status
+    }
+    catch(err){
+      console.log(err);
+      alert('Too many API calls');
+    }
   };
 
   /**
