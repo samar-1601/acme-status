@@ -20,6 +20,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
    * @param pageNumber pageNumber for getting paginated data
    */
   const getIDData = async (pageNumber: number) => {
+    try{
     const URL = "https://api.statuspage.io/v1/pages";
     const response = await fetch(URL, {
       headers: {
@@ -29,6 +30,11 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     });
     const myJson = await response.json();
     idList = myJson.map((data: any) => data["id"]);
+  }
+  catch(err){
+    alert('Too many API calls');
+    console.log(err);
+  }
 
     // call getData for each pageID
     if (idList !== undefined) {
@@ -44,6 +50,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
    * @param pageNumber page number for pagination
    */
   const getData = async (pageId: string, pageNumber: number) => {
+    try{
     const URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
     const response = await fetch(URL, {
       headers: {
@@ -52,6 +59,11 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
       },
     });
     const dataItem = await response.json();
+  }
+  catch(err){
+    alert("Multiple API calls");
+    console.log(err);
+  }
 
     console.log(
       "pageNo:",
