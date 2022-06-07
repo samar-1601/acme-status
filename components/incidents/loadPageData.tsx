@@ -59,6 +59,10 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
     pageNumber: number,
     pageType: string
   ) => {
+
+    /**
+     * The URL value is changed according to the PageType to get the desired response.
+     */
     try {
       let URL ;
       URL= `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=${limit}&page=${pageNumber}`;
@@ -73,7 +77,7 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
       {
         URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
       }
-      // console.log("URL : ",URL);
+
       const response = await fetch(URL, {
         headers: {
           "Content-Type": "application/json",
