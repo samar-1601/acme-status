@@ -8,6 +8,9 @@ import { PageType } from "./incident_list_view";
  * @param pageType type of page
  * @returns API response and API loading status
  */
+
+const limit = 10; // determines the no. of rows of data in a page
+
 export default function LoadPageData(pageNumber: number, pageType: string) {
   const [dataList, setData] = useState<any[]>(Array()); // stores data response from API
   const [hasLoaded, setHasLoaded] = useState<boolean>(false); // status of loading data from API
@@ -58,9 +61,17 @@ export default function LoadPageData(pageNumber: number, pageType: string) {
   ) => {
     try {
       let URL ;
-      URL= `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=10&page=${pageNumber}`;
+      URL= `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=${limit}&page=${pageNumber}`;
       if (pageType == PageType.Maintenance) {
-        URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/active_maintenance/?per_page=10&page=${pageNumber}`;
+        URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
+      }
+      else if(pageType == PageType.Active)
+      {
+        URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+      }
+      else if(pageType == PageType.Scheduled)
+      {
+        URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
       }
       // console.log("URL : ",URL);
       const response = await fetch(URL, {

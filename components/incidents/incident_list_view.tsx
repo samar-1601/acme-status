@@ -13,6 +13,7 @@ export enum PageType {
   All = "All",
   Active = "Active",
   Maintenance = "Maintenance",
+  Scheduled = "Scheduled",
 }
 
 /**
@@ -44,6 +45,11 @@ export const IncidentsListView: React.FC = () => {
           <div onClick={() => setPage(PageType.Maintenance)}>
             <span className={page === PageType.Maintenance ? navstyles.l1 : ""}>
               Maintenance
+            </span>
+          </div>
+          <div onClick={() => setPage(PageType.Scheduled)}>
+            <span className={page === PageType.Scheduled ? navstyles.l1 : ""}>
+              Scheduled
             </span>
           </div>
         </nav>

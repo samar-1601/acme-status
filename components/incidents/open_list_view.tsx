@@ -4,8 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import { PageType } from "./incident_list_view";
 
 import { Spinner } from "baseui/spinner";
-import InfiniteScroll from "react-infinite-scroll-component";
-
 import {
   InfiniteLoader,
   List,
@@ -81,8 +79,6 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
    * triggered when the data is loaded from the API
    */
   useEffect(() => {
-    const data = filterData(dataList, pageType); // filter the data based on pageType
-    console.log("filter data", data.length, "prev data:", prevDataLength);
 
     /**
      * Check if we need to fetch more data for the next page
@@ -93,7 +89,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
     const fetchMore =
       isLoaded &&
       hasMore &&
-      (data.length === prevDataLength || data.length < 10);
+      (dataList.length === prevDataLength || dataList.length < 10);
 
     /**
      * if more data needs to be loaded, fetch more from the API
@@ -106,10 +102,10 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
      * Set the data for the current page
      */
     const setData =
-      (data.length > 0 && data.length !== prevDataLength) || !hasMore;
+      (dataList.length > 0 && dataList.length !== prevDataLength) || !hasMore;
 
     if (setData) {
-      prevDataLength = data.length;
+      prevDataLength = dataList.length;
       return setPageLoaded(true);
     }
   }, [isLoaded]);
@@ -176,21 +172,21 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
    * @param filter pageType for the menu
    * @returns filtered data in JSON array
    */
-  const filterData = (data: any[], filter: PageType) => {
-    switch (filter) {
-      case PageType.All:
-        return data;
-      case PageType.Active:
-        return data.filter(
-          (data) =>
-            data["status"] !== "resolved" && data["status"] !== "completed"
-        );
-      case PageType.Maintenance:
-        return data;
-      default:
-        throw new Error("Invalid page type");
-    }
-  };
+  // const filterData = (data: any[], filter: PageType) => {
+  //   switch (filter) {
+  //     case PageType.All:
+  //       return data;
+  //     case PageType.Active:
+  //       return data.filter(
+  //         (data) =>
+  //           data["status"] !== "resolved" && data["status"] !== "completed"
+  //       );
+  //     case PageType.Maintenance:
+  //       return data;
+  //     default:
+  //       throw new Error("Invalid page type");
+  //   }
+  // };
 
   /**
    * list of data-items to display on screen
@@ -198,7 +194,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
    * @returns JSX component list
    */
   const renderListData = (data: any[]) => {
-    return filterData(data, pageType).map((data, id) => {
+    return data.map((data, id) => {
       return (
         <div key={id} className={styles.listItem}>
           <div className={styles.listDetails}>
@@ -224,23 +220,33 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
    */
   const displayItemList = renderListData(dataList);
 
-  const loadMoreRows = (param: any) =>{  
+  /**
+   * Triggers more loading of data for infinite scrolling
+   * @param param the startIndex and endIndex of rows 
+   * @returns the loaded data to show in infinite scrolling
+   */
+  const loadMoreRows = (param: any) => {
     const startIndex = param.startIndex;
     const stopIndex = param.stopIndex;
-    
-    const dataLoaded = [];    
-    for (let i = startIndex; i < stopIndex; i++) {
-        dataLoaded[i] = displayItemList[i];
-    }
-    fetchMoreData();
-    return Promise.resolve(dataLoaded);
-}
 
+    const dataLoaded = [];
+    for (let i = startIndex; i < stopIndex; i++) {
+      dataLoaded[i] = displayItemList[i];
+    }
+    fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
+    return Promise.resolve(dataLoaded);
+  };
+
+  /**
+   * AutoSizer : enables the auto sizing of the child elements based on their size
+   * List : enables virtualization by populating the DOM with only the rows which are seen on screen
+   * CellMeasurer : tells the size of the element
+   */
   return pageLoaded ? (
     <InfiniteLoader
-      isRowLoaded={({index}) => !hasMore || index < displayItemList.length}
+      isRowLoaded={({ index }) => !hasMore || index < displayItemList.length}
       loadMoreRows={loadMoreRows}
-      rowCount={displayItemList.length+1}
+      rowCount={displayItemList.length + 1}
     >
       {({ onRowsRendered, registerChild }) => (
         <div style={{ width: "100%", height: "100vh" }}>
