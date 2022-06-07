@@ -178,7 +178,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
           }
         console.log(submit);
         console.log(props.pageID[0]);
-        fetch("https://api.statuspiage.io/v1/pages/" + props.pageID[0] + "/incidents", {
+        fetch("https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
