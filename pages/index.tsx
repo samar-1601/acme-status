@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { IncidentsListView } from "../components/incidents/incident_list_view";
+
 const Home: NextPage = () => {
   return (
     <>
@@ -9,7 +11,7 @@ const Home: NextPage = () => {
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
     </Head>
-    <Link href="/incidents">Got to Incidents View Page</Link>
+    <IncidentsListView/>
     </>
   )
 }

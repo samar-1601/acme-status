@@ -65,7 +65,6 @@
     border-bottom: rgb(32, 65, 230) solid 5px;
     color: rgb(32, 65, 230) !important;
     font-weight: 600;
-    cursor: cell;
 }
 
 .active {
