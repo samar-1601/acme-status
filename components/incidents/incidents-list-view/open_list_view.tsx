@@ -6,6 +6,10 @@ import { PageType } from "./incident_list_view";
 import { StyledSpinnerNext } from "baseui/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import { InfiniteLoader, List } from 'react-virtualized';
+import 'react-virtualized/styles.css'; 
+
+
 /**
  * Status' classValue
  * @param { string } status Status's name obtained in API response
@@ -135,6 +139,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
     return timeStatus;
   };
 
+  console.log(dataList)
   /**
    * getComponents
    * @param data the data from which the components list is made
