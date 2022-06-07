@@ -9,6 +9,8 @@ import ComponentsAffected from './ComponentsAffected';
 import {NEXT_PUBLIC_AUTH_TOKEN} from './../../../constants';
 import { ComponentObject } from './ComponentsAffected';
 import Router from 'next/router'
+import { Block } from 'baseui/block';
+
 
 interface STATUSType {
     [key: string]: number
@@ -69,7 +71,7 @@ interface CreateIncidentProps{
 export default function CreateIncident (props:CreateIncidentProps) {
 
    
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [isLoaded, setIsLoaded] = useState<number>(0);
     const [incidentName , setIncidentName] = useState<string>('');
     const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
     const [incidentMessage, setIncidentMessage] = useState<String>('');
@@ -100,9 +102,9 @@ export default function CreateIncident (props:CreateIncidentProps) {
                     });
                 })
                 setComponentsAffected(InitialData);
-                setIsLoaded(true);
+                setIsLoaded(1);
             })
-            .catch(error => console.log(error));
+            .catch(() => {setIsLoaded(2)});
         });
     }, [props.pageID])
 
@@ -226,7 +228,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
     const updateStatus =(e:React.BaseSyntheticEvent) =>{
         setIncidentStatus(e.target.innerHTML);
     }
-
+    if(isLoaded != 2){
     return (
         <>
         <div className = {styles.main}>
@@ -234,9 +236,33 @@ export default function CreateIncident (props:CreateIncidentProps) {
             <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
             <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
             <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
-            {isLoaded == true ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> <Button onClick={() => {submitForm()}} overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>Create</Button></> : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
+            {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> <Button onClick={() => {submitForm()}} overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>Create</Button></> : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
             </div></>
     );
-    
+    }
+    else{
+        return (
+            <>
+            <div className = {styles.main}>
+                <h2>Create Incident</h2>
+                <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
+                <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
+                <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                <Block overrides={
+                    {
+                        Block:{
+                            style: {
+                                display: "flex",
+                                alignContent: "center",
+                                justifyContent: "center"
+                            }
+                        }
+                    }
+                }>
+                    <h1>Sorry Unable to Fetch Components</h1>
+                </Block>
+                </div></>
+        );
+    }
    
 }
