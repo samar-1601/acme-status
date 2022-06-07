@@ -10,6 +10,11 @@ import {NEXT_PUBLIC_AUTH_TOKEN} from './../../../constants';
 import { ComponentObject } from './ComponentsAffected';
 import Router from 'next/router'
 import { Block } from 'baseui/block';
+import {
+    SnackbarProvider,
+    useSnackbar,
+    DURATION,
+  } from 'baseui/snackbar';
 
 
 interface STATUSType {
@@ -77,6 +82,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
     const [incidentMessage, setIncidentMessage] = useState<String>('');
     const [componentsAffected, setComponentsAffected] = useState<ComponentObject[]>([]);
     const tempData = ["API", "Website", "Mangement Portral"];
+    const {enqueue, dequeue} = useSnackbar();
 
     useEffect(() => {
         const pageID = props.pageID;
@@ -172,7 +178,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
           }
         console.log(submit);
         console.log(props.pageID[0]);
-        fetch("https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents", {
+        fetch("https://api.statuspiage.io/v1/pages/" + props.pageID[0] + "/incidents", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -181,8 +187,18 @@ export default function CreateIncident (props:CreateIncidentProps) {
             body: JSON.stringify(submit),
         })
         .then(response => response.json())
-        .then((json) => console.log(json))
-        .then(() => {Router.push('/')})
+        .then((json) => {console.log(json);
+            dequeue();
+            enqueue({
+                message: "Successfully submitted form details",
+            }, DURATION.short)
+        })
+        .then(() => {
+            Router.push('/')
+        })
+        .catch((err) => {console.log(err); dequeue(); enqueue({
+            message: "Sorry not able to submit form"
+        }, DURATION.short)})
     }
 
     const toggleCheckBox = (e:React.BaseSyntheticEvent) =>{
@@ -236,7 +252,17 @@ export default function CreateIncident (props:CreateIncidentProps) {
             <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
             <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
             <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
-            {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> <Button onClick={() => {submitForm()}} overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>Create</Button></> : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
+            {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+            <Button onClick={() => {submitForm();
+            // dequeue();
+            enqueue({
+                message: 'Submitting Form Details',
+                progress: true
+            }, DURATION.infinite)}} 
+            overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>
+                Create
+            </Button></> 
+            : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
             </div></>
     );
     }
