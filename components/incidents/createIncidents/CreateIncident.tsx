@@ -81,7 +81,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
     const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
     const [incidentMessage, setIncidentMessage] = useState<String>('');
     const [componentsAffected, setComponentsAffected] = useState<ComponentObject[]>([]);
-    const tempData = ["API", "Website", "Mangement Portral"];
+    const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
     const {enqueue, dequeue} = useSnackbar();
 
     useEffect(() => {
@@ -178,7 +178,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
           }
         console.log(submit);
         console.log(props.pageID[0]);
-        fetch("https://api.statuspiage.io/v1/pages/" + props.pageID[0] + "/incidents", {
+        fetch("https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents", {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -191,14 +191,20 @@ export default function CreateIncident (props:CreateIncidentProps) {
             dequeue();
             enqueue({
                 message: "Successfully submitted form details",
-            }, DURATION.short)
+            }, DURATION.short);
+            setIsSubmitClicked(false);
         })
         .then(() => {
             Router.push('/')
         })
-        .catch((err) => {console.log(err); dequeue(); enqueue({
+        .catch((err) => {
+            console.log(err); 
+            dequeue(); 
+            enqueue({
             message: "Sorry not able to submit form"
-        }, DURATION.short)})
+            }, DURATION.long);
+            setIsSubmitClicked(false);
+    })
     }
 
     const toggleCheckBox = (e:React.BaseSyntheticEvent) =>{
@@ -245,26 +251,47 @@ export default function CreateIncident (props:CreateIncidentProps) {
         setIncidentStatus(e.target.innerHTML);
     }
     if(isLoaded != 2){
-    return (
-        <>
-        <div className = {styles.main}>
-            <h2>Create Incident</h2>
-            <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
-            <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
-            <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
-            {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
-            <Button onClick={() => {submitForm();
-            // dequeue();
-            enqueue({
-                message: 'Submitting Form Details',
-                progress: true
-            }, DURATION.infinite)}} 
-            overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>
-                Create
-            </Button></> 
-            : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
-            </div></>
-    );
+        if(!isSubmitClicked)
+            return (
+                <>
+                <div className = {styles.main}>
+                    <h2>Create Incident</h2>
+                    <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
+                    <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
+                    <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                    {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+                    <Button
+                    onClick={() => {
+                    setIsSubmitClicked(true);
+                    submitForm();
+                    // dequeue();
+                    enqueue({
+                        message: 'Submitting Form Details',
+                        progress: true
+                    }, DURATION.infinite)}} 
+                    overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>
+                        Create
+                    </Button></> 
+                    : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
+                    </div></>
+            );
+        else{
+            return (
+                <>
+                <div className = {styles.main}>
+                    <h2>Create Incident</h2>
+                    <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
+                    <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
+                    <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                    {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+                    <Button
+                    overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end', cursor: "wait"})}}}>
+                        Create
+                    </Button></> 
+                    : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
+                    </div></>
+            );
+        }
     }
     else{
         return (
