@@ -2,7 +2,9 @@ import { FormControl} from "baseui/form-control"
 import styles from "../../../styles/CreateIncident.module.css";
 import {ProgressBar, SIZE} from 'baseui/progress-bar';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
-import {BlockProps} from 'baseui/block';
+import {Block, BlockProps} from 'baseui/block';
+import React from "react";
+import { SpecialEvent } from "./CreateIncident";
 
 const STATUS = [
     "Investigating",
@@ -28,7 +30,8 @@ function calculateStatus(status:String){
 
 interface InputStatusprops {
     updateStatus: Function,
-    incidentStatus: String
+    incidentStatus: String,
+    updateStatusBarOnClick: Function
 }
 
 export default function InputStatus(props : InputStatusprops){
@@ -75,27 +78,44 @@ export default function InputStatus(props : InputStatusprops){
                 }
             }}>
                 <>
-                    <ProgressBar
-                        value={calculateStatus(props.incidentStatus)}
-                        size={SIZE.large}
-                        steps={undefined}
-                        overrides ={{
-                            Bar: {
-                                style: ({$theme}) => ({
-                                   cursor: "pointer", 
-                                   margin: "25px 110px 0px 110px"
-                                }),
+                    <Block
+                    overrides={{
+                        Block: {
+                            props: {
+                                 onClick: (event:SpecialEvent) => props.updateStatusBarOnClick(event)
                             }
-                            ,
-                            
-                        }}
-                    />
+                        }
+                    }}>
+                        <ProgressBar
+                            value={calculateStatus(props.incidentStatus)}
+                            size={SIZE.large}
+                            steps={undefined}
+                            overrides ={{
+                                Bar: {
+                                    style: ({$theme}) => ({
+                                    cursor: "pointer", 
+                                    margin: "25px 110px 0px 110px"
+                                    }),
+                                    props:{
+                                        className: "bar"
+                                    } 
+                                }
+                                ,
+                                Root:{
+                                    props: {
+                                        className: "root"
+                                    }
+                                }
+                                
+                            }}
+                        />
+                    </Block>
                     <FlexGrid
-                    flexGridColumnCount={4}
-                    flexGridColumnGap="scale800"
-                    flexGridRowGap="scale800"
-                    >
-                    {flexItems}
+                        flexGridColumnCount={4}
+                        flexGridColumnGap="scale800"
+                        flexGridRowGap="scale800"
+                        >
+                        {flexItems}
                     </FlexGrid>
                 </>
             </FormControl>
