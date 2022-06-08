@@ -2,6 +2,7 @@ import styles from "./styles/styles.module.css";
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { PageType } from "./incident_list_view";
+import { renderListData } from "./helperFunctions";
 
 import { Spinner } from "baseui/spinner";
 import {
@@ -12,36 +13,6 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
-
-/**
- * Status' classValue
- * @param { string } status Status's name obtained in API response
- * @returns { string } The style for the status in list-view
- * @global
- */
-const classValue = (status: string) => {
-  let style: string = styles.itemStatus;
-  status = status.toLowerCase();
-  if (status === "investigating") {
-    style = `${style} ${styles.bgBlue}`;
-  }
-  if (status === "resolved") {
-    style = `${style} ${styles.bgGreen}`;
-  }
-  if (status === "verifying") {
-    style = `${style} ${styles.bgYellow}`;
-  }
-  if (status === "completed") {
-    style = `${style} ${styles.bgPink}`;
-  }
-  if (status === "scheduled") {
-    style = `${style} ${styles.bgOrange}`;
-  }
-  if (status === "in_progress") {
-    style = `${style} ${styles.bgGreyBlue}`;
-  }
-  return style;
-};
 
 interface Props {
   pageType: PageType;
@@ -79,7 +50,6 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
    * triggered when the data is loaded from the API
    */
   useEffect(() => {
-
     /**
      * Check if we need to fetch more data for the next page
      * Conditions:  If the current data has loaded
@@ -129,92 +99,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
   };
 
   /**
-   * Format date for display
-   * @param date The date which needs to be formatted to display
-   * @returns formatted data in x days ago format
-   */
-  const formatDate = (date: string | Date) => {
-    date = new Date(date);
-    const timeElapsed = Date.now() - date.getTime();
-
-    let seconds = timeElapsed / 1000;
-    let minutes = seconds / 60;
-    let hours = minutes / 60;
-    let days = Math.floor(hours / 24);
-
-    let timeStatus = `${days} DAYS AGO (${date.getUTCHours()}:${date.getUTCMinutes()} UTC)`;
-
-    return timeStatus;
-  };
-
-  /**
-   * getComponents
-   * @param data the data from which the components list is made
-   * @returns JSX containing the components in the current incident
-   */
-  const getComponents = (data: any) => {
-    let componentsList: JSX.Element[] = [];
-    if (data["components"]) {
-      data["components"].forEach((component: any, id: any) => {
-        componentsList.push(
-          <span key={id} className={styles.componentItem}>
-            {component["name"]}
-          </span>
-        );
-      });
-    }
-    return componentsList;
-  };
-
-  /**
-   * filter data from API
-   * @param data data recieved from API
-   * @param filter pageType for the menu
-   * @returns filtered data in JSON array
-   */
-  // const filterData = (data: any[], filter: PageType) => {
-  //   switch (filter) {
-  //     case PageType.All:
-  //       return data;
-  //     case PageType.Active:
-  //       return data.filter(
-  //         (data) =>
-  //           data["status"] !== "resolved" && data["status"] !== "completed"
-  //       );
-  //     case PageType.Maintenance:
-  //       return data;
-  //     default:
-  //       throw new Error("Invalid page type");
-  //   }
-  // };
-
-  /**
-   * list of data-items to display on screen
-   * @param data filtered JSON data from API
-   * @returns JSX component list
-   */
-  const renderListData = (data: any[]) => {
-    return data.map((data, id) => {
-      return (
-        <div key={id} className={styles.listItem}>
-          <div className={styles.listDetails}>
-            <span className={styles.itemName}>{data["name"]}</span>
-            <div className={styles.itemDetail1}>
-              <span className={classValue(data["status"])}>
-                {data["status"]}
-              </span>
-              <span className={styles.itemDate}>
-                {formatDate(data["created_at"])}
-              </span>
-            </div>
-            <span className={styles.component}>{getComponents(data)}</span>
-          </div>
-        </div>
-      );
-    });
-  };
-
-  /**
+   * the list of elements in formatted JSX form directly ready to render
    * Variable storing the data-items list after API fetching, filtering and converting to JSX components list
    * @const
    */
@@ -222,7 +107,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
 
   /**
    * Triggers more loading of data for infinite scrolling
-   * @param param the startIndex and endIndex of rows 
+   * @param param the startIndex and endIndex of rows
    * @returns the loaded data to show in infinite scrolling
    */
   const loadMoreRows = (param: any) => {
@@ -249,7 +134,7 @@ export const OpenListView: React.FC<Props> = ({ pageType }) => {
       rowCount={displayItemList.length + 1}
     >
       {({ onRowsRendered, registerChild }) => (
-        <div style={{ width: "100%", height: "100vh" }}>
+        <div style={{ width: "100%", height: `calc(100vh - 160px)` }}>
           <AutoSizer>
             {({ width, height }) => (
               <List
