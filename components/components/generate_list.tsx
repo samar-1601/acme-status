@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
 
 export const generateList = function (dataList: any) {
-  let listItems: JSX.Element[] = dataList.map((data, id) => {
+  let listItems: JSX.Element[] = dataList.map((data) => {
     return (
-      <div key={id} className={styles.listItem}>
+      <div key={data["id"]} className={styles.listItem}>
         <span className={styles.itemName}>{data["name"]}</span><br/>
-        <span className={styles.itemDescription}>this was up</span>
+        <span className={styles.itemDescription}>{data["status"]}</span>
       </div>
     );
   });
