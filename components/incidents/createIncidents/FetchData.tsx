@@ -25,6 +25,7 @@ export default function Fetchdata() {
             })
             setPageID(npageID);
         })
+        .catch(() => setPageID([]))
     }, [])
     return (<CreateIncident pageID = {pageID}/>);
 }

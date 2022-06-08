@@ -250,15 +250,20 @@ export default function CreateIncident (props:CreateIncidentProps) {
     const updateStatus =(e:React.BaseSyntheticEvent) =>{
         setIncidentStatus(e.target.innerHTML);
     }
+
+    const formConstant = (
+    <>
+      <h2>Create Incident</h2>
+        <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
+        <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
+        <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>  
+    </>);
     if(isLoaded != 2){
         if(!isSubmitClicked)
             return (
                 <>
                 <div className = {styles.main}>
-                    <h2>Create Incident</h2>
-                    <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
-                    <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
-                    <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                    {formConstant}
                     {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
                     <Button
                     onClick={() => {
@@ -279,10 +284,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
             return (
                 <>
                 <div className = {styles.main}>
-                    <h2>Create Incident</h2>
-                    <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
-                    <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
-                    <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                    {formConstant}
                     {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
                     <Button
                     overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end', cursor: "wait"})}}}>
@@ -297,10 +299,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
         return (
             <>
             <div className = {styles.main}>
-                <h2>Create Incident</h2>
-                <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
-                <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
-                <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>
+                {formConstant}
                 <Block overrides={
                     {
                         Block:{
