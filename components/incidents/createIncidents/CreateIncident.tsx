@@ -25,6 +25,17 @@ interface SendComponentObject{
     [key: string]: string
 }
 
+export interface SpecialEvent{
+    nativeEvent:{
+        offsetX: number
+    },
+    target: {
+        offsetWidth: number,
+        classList: DOMTokenList
+    },
+    
+}
+
 const  STATUS:STATUSType = {
     "operational" : 1,
     "degraded_performance": 2,
@@ -157,8 +168,8 @@ export default function CreateIncident (props:CreateIncidentProps) {
               "name": incidentName,
               "status": getIncidentStatus(incidentStatus),
               "impact_override": "none",
-              "scheduled_for": "2022-07-12T06:00:00.007Z",
-              "scheduled_until": "2022-08-12T06:00:00.007Z",
+              "scheduled_for": "2022-09-12T06:00:00.007Z",
+              "scheduled_until": "2022-10-12T06:00:00.007Z",
               "scheduled_remind_prior": true,
               "scheduled_auto_in_progress": true,
               "scheduled_auto_completed": true,
@@ -251,11 +262,43 @@ export default function CreateIncident (props:CreateIncidentProps) {
         setIncidentStatus(e.target.innerHTML);
     }
 
+    const updateStatusBarOnClick = (e:SpecialEvent) => {
+        let percentage = 0;
+        let native = e.nativeEvent.offsetX;
+        if(!e.target.classList.contains("bar")){
+            console.log("YES!!!!");
+            let substractedTo = 0;
+            if(incidentStatus == "Identified"){
+                substractedTo = (66/100) * e.target.offsetWidth;
+            }
+            else if(incidentStatus == "Monitoring"){
+                substractedTo = (33/100) * e.target.offsetWidth;
+            }
+            percentage = ((e.nativeEvent.offsetX - substractedTo) * 100 / e.target.offsetWidth)
+        }
+        else{
+            percentage = (e.nativeEvent.offsetX * 100 / e.target.offsetWidth)
+            console.log("NO!!!!");
+        }
+        if(percentage < 16){
+            setIncidentStatus("Investigating");
+        }
+        else if(percentage < 50){
+            setIncidentStatus("Identified");
+        }
+        else if(percentage < 83){
+            setIncidentStatus( "Monitoring");
+        }
+        else{
+            setIncidentStatus("Resolved");
+        }
+    }
+
     const formConstant = (
     <>
       <h2>Create Incident</h2>
         <IncidentName value = {incidentName} handleNameChange = {(e:React.BaseSyntheticEvent) => handleNameChange(e)}/>
-        <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus}/>
+        <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus} updateStatusBarOnClick = {(event:SpecialEvent) => updateStatusBarOnClick(event)}/>
         <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>  
     </>);
     if(isLoaded != 2){
