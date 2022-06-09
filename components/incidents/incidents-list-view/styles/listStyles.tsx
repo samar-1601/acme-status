@@ -18,9 +18,8 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "80%",
-        fontFamily: "'Lato', sans-serif",
-        margin: "auto",
-      },
+    fontFamily: "'Lato', sans-serif",
+    margin: "auto"},
     },
   },
 };
@@ -90,7 +89,7 @@ export const componentItem: BlockProps = {
     Block: {
       style: {
         paddingRight: "1.2rem",
-        display: "inline",
+        display : "inline",
       },
     },
   },

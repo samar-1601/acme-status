@@ -4,7 +4,7 @@ import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
 
-import { Block } from "baseui/block";
+import { Block, BlockProps } from "baseui/block";
 
 /**
  * PageType
@@ -26,13 +26,64 @@ export enum PageType {
 export const IncidentsListViewHeader: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
 
+  const container: BlockProps = {
+    overrides: {
+      Block: {
+        style: {
+          position: "fixed",
+          top: "0ch",
+          width: "80%",
+          zIndex: "100",
+          backgroundColor: "white",
+          padding: "0.5rem",
+        },
+      },
+    },
+  };
+  
+  const content: BlockProps = {
+    overrides: {
+      Block: {
+        style: {
+          position: "relative",
+          top: "150px",
+          width: "100%",
+          paddingLeft: "10px",
+        },
+      },
+    },
+  };
+  const headerBar: BlockProps = {
+    overrides: {
+      Block: {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexDirection: "row",
+        },
+      },
+    },
+  };
+  const navbarWrapper: BlockProps = {
+    overrides: {
+      Block: {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          borderBottom: "5px rgb(205, 203, 203) solid",
+        },
+      },
+    },
+  };
+
   return (
     <Block {...incidentsListView}>
-      <div className={navstyles.container}>
-        <div className={navstyles.headerBar}>
+      <Block {...container}>
+        <Block {...headerBar}>
           <h1>Incidents</h1>
-        </div>
-        <div className={navstyles.navbarWrapper}>
+        </Block>
+        <Block className={navstyles.navbarWrapper}>
           <nav className={navstyles.nav}>
             <div onClick={() => setPage(PageType.All)}>
               <span className={page === PageType.All ? navstyles.l1 : ""}>
@@ -62,11 +113,11 @@ export const IncidentsListViewHeader: React.FC = () => {
               <button>Create incident</button>
             </Link>
           </div>
-        </div>
-      </div>
-      <div className={navstyles.content}>
+        </Block>
+      </Block>
+      <Block {...content}>
         <IncidentsList pageType={page} />
-      </div>
+      </Block>
     </Block>
   );
 };
