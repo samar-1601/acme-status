@@ -11,6 +11,7 @@ import {
   navActiveItem,
   notActiveNavItem,
 } from "./styles/navStyles";
+
 import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
