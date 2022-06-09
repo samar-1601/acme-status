@@ -21,7 +21,7 @@ export enum PageType {
  * triggered when /incidents is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
-export const IncidentsListView: React.FC = () => {
+export const IncidentsListViewHeader: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
 
   return (
