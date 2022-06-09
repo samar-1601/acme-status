@@ -1,6 +1,6 @@
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
-import { PageType } from "./Header";
+import { PageType } from "../../../constants"
 import { renderData } from "./helperFunctions";
 
 import { Spinner } from "baseui/spinner";

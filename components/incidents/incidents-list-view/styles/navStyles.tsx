@@ -1,4 +1,6 @@
 import { BlockProps } from "baseui/block";
+import { ButtonProps } from "baseui/button";
+
   export const container: BlockProps = {
     overrides: {
       Block: {
@@ -74,31 +76,16 @@ import { BlockProps } from "baseui/block";
       },
     },
   };
-  export const createIncidentButton: BlockProps = {
-    onMouseEnter: (event) => {
-      if (event.target) {
-        let element = event.target as HTMLElement;
-        element.style.boxShadow =
-          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)";
-        element.style.cursor = "pointer";
-      }
-    },
-    onMouseLeave: (event) => {
-      if (event.target) {
-        let element = event.target as HTMLElement;
-        element.style.boxShadow = "";
-        element.style.cursor = "";
-      }
-    },
+  export const createIncidentButton: ButtonProps = {
     overrides: {
-      Block: {
+      BaseButton: {
         style: {
           alignSelf: "flex-end",
-          marginBottom: "6px",
+          marginBottom: "8px",
           border: "0ch",
           borderRadius: "4px",
           color: "white",
-          padding: "10px",
+          padding: "8px",
           backgroundColor: "rgb(32, 65, 230)",
         },
       },
@@ -111,7 +98,7 @@ import { BlockProps } from "baseui/block";
     fontWeight: "600",
     paddingRight: "14px",
     paddingLeft: "14px",
-    paddingBottom: "16px",
+    paddingBottom: "16.5px",
     textDecoration: "none",
     fontSize: "14px",
     display: "inline",
