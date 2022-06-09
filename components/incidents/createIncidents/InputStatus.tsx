@@ -27,8 +27,9 @@ export default function InputStatus(props: InputStatusprops) {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    onClick: (event) => {
-      props.updateStatus(event);
+    onClick: (e: Event) => {
+      const target = e.target as Element;
+      props.updateStatus(target.innerHTML!);
     },
     overrides: {
       Block: {
@@ -44,11 +45,39 @@ export default function InputStatus(props: InputStatusprops) {
     alignItems: "center",
     justifyContent: "center",
     color: "blue",
-    onClick: (event) => {
-      props.updateStatus(event);
+    onClick: (e: Event) => {
+      const target = e.target as Element;
+      props.updateStatus(target.innerHTML!);
     },
   };
 
+  const updateStatusBarOnClick = (e: SpecialEvent) => {
+    let percentage = 0;
+    if (e.target.classList.contains("root")) {
+      return;
+    }
+    if (!e.target.classList.contains("bar")) {
+      let substractedTo = 0;
+      if (props.incidentStatus == "Identified") {
+        substractedTo = (66 / 100) * e.target.offsetWidth;
+      } else if (props.incidentStatus == "Monitoring") {
+        substractedTo = (33 / 100) * e.target.offsetWidth;
+      }
+      percentage =
+        ((e.nativeEvent.offsetX - substractedTo) * 100) / e.target.offsetWidth;
+    } else {
+      percentage = (e.nativeEvent.offsetX * 100) / e.target.offsetWidth;
+    }
+    if (percentage < 16) {
+      props.updateStatus("Investigating");
+    } else if (percentage < 50) {
+      props.updateStatus("Identified");
+    } else if (percentage < 83) {
+      props.updateStatus("Monitoring");
+    } else {
+      props.updateStatus("Resolved");
+    }
+  };
   const flexItems = STATUSNames.map((item, index) => {
     if (item != props.incidentStatus) {
       return (
@@ -82,7 +111,7 @@ export default function InputStatus(props: InputStatusprops) {
               Block: {
                 props: {
                   onClick: (event: SpecialEvent) =>
-                    props.updateStatusBarOnClick(event),
+                    updateStatusBarOnClick(event),
                 },
               },
             }}
@@ -101,7 +130,7 @@ export default function InputStatus(props: InputStatusprops) {
                     className: "bar",
                   },
                 },
-                Root: {
+                BarContainer: {
                   props: {
                     className: "root",
                   },

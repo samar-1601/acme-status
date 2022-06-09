@@ -241,36 +241,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
     setComponentsAffected(newComponentsAffected);
   };
 
-  const updateStatus = (e: React.BaseSyntheticEvent) => {
-    setIncidentStatus(e.target.innerHTML);
-  };
-
-  const updateStatusBarOnClick = (e: SpecialEvent) => {
-    let percentage = 0;
-    let native = e.nativeEvent.offsetX;
-    if (!e.target.classList.contains("bar")) {
-      console.log("YES!!!!");
-      let substractedTo = 0;
-      if (incidentStatus == "Identified") {
-        substractedTo = (66 / 100) * e.target.offsetWidth;
-      } else if (incidentStatus == "Monitoring") {
-        substractedTo = (33 / 100) * e.target.offsetWidth;
-      }
-      percentage =
-        ((e.nativeEvent.offsetX - substractedTo) * 100) / e.target.offsetWidth;
-    } else {
-      percentage = (e.nativeEvent.offsetX * 100) / e.target.offsetWidth;
-      console.log("NO!!!!");
-    }
-    if (percentage < 16) {
-      setIncidentStatus("Investigating");
-    } else if (percentage < 50) {
-      setIncidentStatus("Identified");
-    } else if (percentage < 83) {
-      setIncidentStatus("Monitoring");
-    } else {
-      setIncidentStatus("Resolved");
-    }
+  const updateStatus = (e: string) => {
+    setIncidentStatus(e);
   };
 
   const formConstant = (
@@ -281,11 +253,11 @@ export default function CreateIncident(props: CreateIncidentProps) {
         handleNameChange={(e: React.BaseSyntheticEvent) => handleNameChange(e)}
       />
       <InputStatus
-        updateStatus={(e: React.BaseSyntheticEvent) => updateStatus(e)}
+        updateStatus={(e: string) => updateStatus(e)}
         incidentStatus={incidentStatus}
-        updateStatusBarOnClick={(event: SpecialEvent) =>
-          updateStatusBarOnClick(event)
-        }
+        // updateStatusBarOnClick={(event: SpecialEvent) =>
+        //   updateStatusBarOnClick(event)
+        // }
       />
       <IncidentMessage
         value={incidentMessage}
