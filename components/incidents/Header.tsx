@@ -1,6 +1,6 @@
 import styles from "./styles/styles.module.css";
 import navstyles from "./styles/navstyles.module.css";
-import { OpenListView } from "./open_list_view";
+import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -63,7 +63,7 @@ export const IncidentsListView: React.FC = () => {
         </div>
       </div>
       <div className={navstyles.content}>
-        <OpenListView pageType={page} />
+        <IncidentsList pageType={page} />
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { IncidentsListView } from "../components/incidents/incident_list_view";
+import { IncidentsListView } from "../components/incidents/Header";
 
 const Home: NextPage = () => {
   return (
