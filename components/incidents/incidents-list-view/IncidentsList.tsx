@@ -1,7 +1,7 @@
 import styles from "./styles/styles.module.css";
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
-import { PageType } from "./incident_list_view";
+import { PageType } from "./Header";
 import { renderListData } from "./helperFunctions";
 
 import { Spinner } from "baseui/spinner";
@@ -32,7 +32,7 @@ let prevDataLength: number = 0;
  * @param { enum.<PageType> } pageType Type of the page to be displayed
  * @returns A list of JSX Elements with data obtained from the API response
  */
-export const OpenListView: React.FC<Props> = ({ pageType }) => {
+export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
   const cache = useRef(

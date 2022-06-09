@@ -59,7 +59,7 @@ const getComponents = (data: any) => {
   if (data["components"]) {
     data["components"].forEach((component: any, id: any) => {
       componentsList.push(
-        <span key={id} className={styles.componentItem}>
+        <span key={component["name"]} className={styles.componentItem}>
           {component["name"]}
         </span>
       );
@@ -76,7 +76,7 @@ const getComponents = (data: any) => {
 export const renderListData = (data: any[]) => {
   return data.map((data, id) => {
     return (
-      <div key={id} className={styles.listItem}>
+      <div key={data["name"]} className={styles.listItem}>
         <div className={styles.listDetails}>
           <span className={styles.itemName}>{data["name"]}</span>
           <div className={styles.itemDetail1}>

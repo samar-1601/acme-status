@@ -1,6 +1,6 @@
 import styles from "./styles/styles.module.css";
 import navstyles from "./styles/navstyles.module.css";
-import { OpenListView } from "./open_list_view";
+import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export enum PageType {
  * triggered when /incidents is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
-export const IncidentsListView: React.FC = () => {
+export const IncidentsListViewHeader: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
 
   return (
@@ -63,7 +63,7 @@ export const IncidentsListView: React.FC = () => {
         </div>
       </div>
       <div className={navstyles.content}>
-        <OpenListView pageType={page} />
+        <IncidentsList pageType={page} />
       </div>
     </div>
   );
