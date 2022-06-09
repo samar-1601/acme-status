@@ -5,29 +5,8 @@ import {Select, SIZE, TYPE} from 'baseui/select';
 import {StatefulPopover, TRIGGER_TYPE} from 'baseui/popover';
 import {ParagraphSmall} from 'baseui/typography';
 import {useStyletron} from 'baseui';
-
-
-export const ITEMS = [
-    {title: 'Operational', imgUrl: '/operational2.webp', id: '0'},
-    {title: 'Degraded Performance', imgUrl: '/degraded_performance.png', id: '1'},
-    {title: 'Partial Outage', imgUrl: '/paritial_outage.png', id: '2'},
-    {title: 'Major Outage', imgUrl: '/major_outage.png', id: '3'},
-    {title: 'Under Maintainence', imgUrl: '/under_maintenance.png', id: '4'},
-  ];
-
-interface ImageProps{
-    imgUrl: string,
-    title: string
-}
-
-interface statusComponentProps{
-    selected: boolean,
-    id: string,
-    toggleCheckBox: Function,
-    name: string,
-    changeOption: Function,
-    type: number
-}
+import {ITEMS} from "./../../../constants"
+import {ImageProps, statusComponentProps} from "./../../../variableTypes"
 
 function Image(props:ImageProps){
     return(<div className={styles.option}><img className={styles.icon}

@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Button } from "baseui/button";
-import Fetchdata from "../../components/incidents/createIncidents/FetchData";
+import IncidentCreationForm from "../../components/incidents/createIncidents/IncidentCreationForm";
 
 export default () => {
   return (
-    <Fetchdata/>
+    <IncidentCreationForm/>
   );
 }

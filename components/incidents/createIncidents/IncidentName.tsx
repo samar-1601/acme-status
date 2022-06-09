@@ -1,10 +1,6 @@
 import { FormControl} from "baseui/form-control"
 import { Input, SIZE } from "baseui/input"
-
-interface IncidentNameProps{
-    handleNameChange: Function,
-    value: string
-}
+import { IncidentNameProps } from "../../../variableTypes";
 
 export default function IncidentName(props:IncidentNameProps){
     return (
