@@ -259,61 +259,93 @@ export default function CreateIncident (props:CreateIncidentProps) {
         <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>  
     </>);
     if(currentStateOfPage != 2){
-        if(!isSubmitClicked)
-            return (
-                <>
-                <div className = {styles.main}>
-                    {formConstant}
-                    {currentStateOfPage == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
-                    <Button
-                    onClick={() => {
-                    setIsSubmitClicked(true);
-                    submitForm();
-                    // dequeue();
-                    enqueue({
-                        message: 'Submitting Form Details',
-                        progress: true
-                    }, DURATION.infinite)}} 
-                    overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>
-                        Create
-                    </Button></> 
-                    : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
-                    </div></>
-            );
+        if(!isSubmitClicked){
+            if(currentStateOfPage == 1){
+                return (
+                    <>
+                        <div className = {styles.main}>
+                            {formConstant}
+                            <ComponentsAffected 
+                            componentList = {componentsAffected} 
+                            toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} 
+                            changeOption ={(e:optionType, id:String) => changeOption(e, id)}
+                            /> 
+                            <Button
+                            onClick={() => {
+                            setIsSubmitClicked(true);
+                            submitForm();
+                            // dequeue();
+                            enqueue({
+                                message: 'Submitting Form Details',
+                                progress: true
+                            }, DURATION.infinite)}} 
+                            overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end'})}}}>
+                                Create
+                            </Button>
+                        </div>
+                    </>
+                );
+            }
+            else{
+                return (
+                    <>
+                        <Block
+                        overrides={
+                            {
+                                Block: {
+                                    style:{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "80vh"
+                                    }
+                                }
+                            }
+                        }>
+                            <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> 
+                        </Block>
+                    </>
+                );
+            }
+        }
         else{
             return (
                 <>
-                <div className = {styles.main}>
-                    {formConstant}
-                    {currentStateOfPage == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
-                    <Button
-                    overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end', cursor: "wait"})}}}>
-                        Create
-                    </Button></> 
-                    : <div className={styles.Spinner}><Spinner $size={SIZE.large} /></div> }
-                    </div></>
+                    <div className = {styles.main}>
+                        {formConstant}
+                        <ComponentsAffected 
+                        componentList = {componentsAffected} 
+                        toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} 
+                        changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+                        <Button
+                        overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end', cursor: "wait"})}}}>
+                            Create
+                        </Button>
+                    </div>
+                </>
             );
         }
     }
     else{
         return (
             <>
-            <div className = {styles.main}>
-                {formConstant}
-                <Block overrides={
-                    {
-                        Block:{
-                            style: {
-                                display: "flex",
-                                alignContent: "center",
-                                justifyContent: "center"
+                <div className = {styles.main}>
+                    <Block overrides={
+                        {
+                            Block:{
+                                style: {
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    height: "80vh"
+                                }
                             }
                         }
-                    }
-                }>
-                    <h1>Sorry Unable to Fetch Components</h1>
-                </Block>
-                </div></>
+                    }>
+                        <h1>Sorry Unable to Fetch Components. Please Try Again</h1>
+                    </Block>
+                </div>
+            </>
         );
     }
    
