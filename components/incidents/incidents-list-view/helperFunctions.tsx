@@ -73,8 +73,7 @@ const getComponents = (data: any) => {
  * @param data filtered JSON data from API
  * @returns JSX component list
  */
-export const renderListData = (data: any[]) => {
-  return data.map((data, id) => {
+export const renderData = (data:any) => {
     return (
       <div key={data["name"]} className={styles.listItem}>
         <div className={styles.listDetails}>
@@ -89,5 +88,4 @@ export const renderListData = (data: any[]) => {
         </div>
       </div>
     );
-  });
 };

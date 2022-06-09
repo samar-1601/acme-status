@@ -2,7 +2,7 @@ import styles from "./styles/styles.module.css";
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { PageType } from "./Header";
-import { renderListData } from "./helperFunctions";
+import { renderData } from "./helperFunctions";
 
 import { Spinner } from "baseui/spinner";
 
@@ -13,8 +13,7 @@ import {
   CellMeasurer,
   CellMeasurerCache,
 } from "react-virtualized";
-import 'react-virtualized/styles.css'; 
-
+import "react-virtualized/styles.css";
 
 interface Props {
   pageType: PageType;
@@ -101,13 +100,6 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   };
 
   /**
-   * the list of elements in formatted JSX form directly ready to render
-   * Variable storing the data-items list after API fetching, filtering and converting to JSX components list
-   * @const
-   */
-  const displayItemList = renderListData(dataList);
-
-  /**
    * Triggers more loading of data for infinite scrolling
    * @param param the startIndex and endIndex of rows
    * @returns the loaded data to show in infinite scrolling
@@ -118,7 +110,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
 
     const dataLoaded = [];
     for (let i = startIndex; i < stopIndex; i++) {
-      dataLoaded[i] = displayItemList[i];
+      dataLoaded[i] = dataList[i];
     }
     fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
     return Promise.resolve(dataLoaded);
@@ -131,9 +123,9 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
    */
   return pageLoaded ? (
     <InfiniteLoader
-      isRowLoaded={({ index }) => !hasMore || index < displayItemList.length}
+      isRowLoaded={({ index }) => !hasMore || index < dataList.length}
       loadMoreRows={loadMoreRows}
-      rowCount={displayItemList.length + 1}
+      rowCount={dataList.length + 1}
     >
       {({ onRowsRendered, registerChild }) => (
         <div style={{ width: "100%", height: `calc(100vh - 160px)` }}>
@@ -146,9 +138,9 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
                 ref={registerChild}
                 rowHeight={cache.current.rowHeight}
                 deferredMeasurementCache={cache.current}
-                rowCount={displayItemList.length}
+                rowCount={dataList.length}
                 rowRenderer={({ key, index, style, parent }) => {
-                  const element = displayItemList[index];
+                  const element = dataList[index];
                   return (
                     <CellMeasurer
                       key={key}
@@ -157,7 +149,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
                       columnIndex={0}
                       rowIndex={index}
                     >
-                      <div style={style}>{element}</div>
+                      <div style={style}>{renderData(element)}</div>
                     </CellMeasurer>
                   );
                 }}
