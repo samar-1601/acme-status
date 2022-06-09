@@ -7,42 +7,15 @@ import IncidentName from './IncidentName';
 import IncidentMessage from './IncidentMessage';
 import ComponentsAffected from './ComponentsAffected';
 import {NEXT_PUBLIC_AUTH_TOKEN} from './../../../constants';
-import { ComponentObject } from './ComponentsAffected';
+import { ComponentObject } from '../../../variableTypes';
 import Router from 'next/router'
 import { Block } from 'baseui/block';
+import {STATUS} from "./../../../constants";
+import { SendComponentObject, SpecialEvent, JSONObject, optionType, CreateIncidentProps } from '../../../variableTypes';
 import {
-    SnackbarProvider,
     useSnackbar,
     DURATION,
   } from 'baseui/snackbar';
-
-
-interface STATUSType {
-    [key: string]: number
-  }
-
-interface SendComponentObject{
-    [key: string]: string
-}
-
-export interface SpecialEvent{
-    nativeEvent:{
-        offsetX: number
-    },
-    target: {
-        offsetWidth: number,
-        classList: DOMTokenList
-    },
-    
-}
-
-const  STATUS:STATUSType = {
-    "operational" : 1,
-    "degraded_performance": 2,
-    "partial_outage": 3,
-    "major_outage": 4,
-    "under_maintenance": 5,
-}
 
 const getStatus = (id:number) => {
     switch(id){
@@ -64,30 +37,14 @@ const getIncidentStatus = (id:String) => {
     }
 }
 
-interface JSONObject{
-    name:String,
-    id:String,
-    status: string
-}
-
-interface optionType{
-    option: {
-        id: Number;
-    }
-}
-
 let InitialData:(ComponentObject|never)[] = [];
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
-interface CreateIncidentProps{
-    pageID: String[]
-}
-
 export default function CreateIncident (props:CreateIncidentProps) {
 
    
-    const [isLoaded, setIsLoaded] = useState<number>(0);
+    const [currentStateOfPage, setCurrentStateOfPage] = useState<number>(0);  //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data 
     const [incidentName , setIncidentName] = useState<string>('');
     const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
     const [incidentMessage, setIncidentMessage] = useState<String>('');
@@ -119,9 +76,9 @@ export default function CreateIncident (props:CreateIncidentProps) {
                     });
                 })
                 setComponentsAffected(InitialData);
-                setIsLoaded(1);
+                setCurrentStateOfPage(1);
             })
-            .catch(() => {setIsLoaded(2)});
+            .catch(() => {setCurrentStateOfPage(2)});
         });
     }, [props.pageID])
 
@@ -141,7 +98,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
     }
 
     const submitForm = () => {
-        console.log(isLoaded);
+        console.log(currentStateOfPage);
         console.log(incidentName);
         console.log(incidentMessage);
         console.log(incidentStatus);
@@ -301,13 +258,13 @@ export default function CreateIncident (props:CreateIncidentProps) {
         <InputStatus updateStatus = {(e:React.BaseSyntheticEvent) => updateStatus(e)} incidentStatus = {incidentStatus} updateStatusBarOnClick = {(event:SpecialEvent) => updateStatusBarOnClick(event)}/>
         <IncidentMessage value = {incidentMessage} updateIncidentMessage = {(e:React.BaseSyntheticEvent) => updateIncidentMessage(e)}/>  
     </>);
-    if(isLoaded != 2){
+    if(currentStateOfPage != 2){
         if(!isSubmitClicked)
             return (
                 <>
                 <div className = {styles.main}>
                     {formConstant}
-                    {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+                    {currentStateOfPage == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
                     <Button
                     onClick={() => {
                     setIsSubmitClicked(true);
@@ -328,7 +285,7 @@ export default function CreateIncident (props:CreateIncidentProps) {
                 <>
                 <div className = {styles.main}>
                     {formConstant}
-                    {isLoaded == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
+                    {currentStateOfPage == 1 ? <><ComponentsAffected componentList = {componentsAffected} toggleCheckBox = {(e:React.BaseSyntheticEvent) => toggleCheckBox(e)} changeOption ={(e:optionType, id:String) => changeOption(e, id)}/> 
                     <Button
                     overrides={{BaseButton : {style: ({$theme}) => ({backgroundColor: $theme.colors.accent,width: '80px',alignSelf: 'end', cursor: "wait"})}}}>
                         Create

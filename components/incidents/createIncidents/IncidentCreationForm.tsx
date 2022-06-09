@@ -7,7 +7,7 @@ interface JSONObject{
     name:String,
     id:String
 }
-export default function Fetchdata() {
+export default function IncidentCreationForm() {
     const [pageID, setPageID] = useState([]);
     const URL = "https://api.statuspage.io/v1/pages";
     useEffect(() => {

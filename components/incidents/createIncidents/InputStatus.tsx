@@ -4,14 +4,9 @@ import {ProgressBar, SIZE} from 'baseui/progress-bar';
 import {FlexGrid, FlexGridItem} from 'baseui/flex-grid';
 import {Block, BlockProps} from 'baseui/block';
 import React from "react";
-import { SpecialEvent } from "./CreateIncident";
+import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
+import {STATUSNames} from "./../../../constants"
 
-const STATUS = [
-    "Investigating",
-    "Identified",
-    "Monitoring",
-    "Resolved"
-]
 
 function calculateStatus(status:String){
     if(status == "Investigating"){
@@ -26,12 +21,6 @@ function calculateStatus(status:String){
     else{
         return 100
     }
-}
-
-interface InputStatusprops {
-    updateStatus: Function,
-    incidentStatus: String,
-    updateStatusBarOnClick: Function
 }
 
 export default function InputStatus(props : InputStatusprops){
@@ -58,7 +47,7 @@ export default function InputStatus(props : InputStatusprops){
         onClick: (event) => {props.updateStatus(event)}
       };
       
-      const flexItems = STATUS.map((item, index) => {
+      const flexItems = STATUSNames.map((item, index) => {
           if(item != props.incidentStatus){
             return  <FlexGridItem key={index} {...itemProps}>{item}</FlexGridItem>
           }

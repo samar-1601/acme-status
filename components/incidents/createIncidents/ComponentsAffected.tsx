@@ -2,22 +2,9 @@ import { FormControl } from "baseui/form-control";
 import styles from "../../../styles/CreateIncident.module.css";
 import SelectStatusComponent from "./SelectStatusComponent";
 import React from "react";
-
+import { ComponentsAffectedProps } from "../../../variableTypes";
 
 const label = <div className={styles.componentLabel}>Components Affected</div>
-
-export interface ComponentObject{
-  compName: string,
-  compType: number,
-  id: string,
-  compId: string,
-  selected: boolean
-}
-interface ComponentsAffectedProps{
-  componentList: (ComponentObject)[],
-  toggleCheckBox: Function,
-  changeOption: Function
-}
 
 export default function ComponentsAffected(props:ComponentsAffectedProps){
     return(

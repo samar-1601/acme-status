@@ -2,10 +2,7 @@ import { FormControl } from "baseui/form-control";
 import {Textarea} from 'baseui/textarea';
 //not able to use value here as a prop of Textarea
 
-interface IncidentMessageProps{
-    updateIncidentMessage: Function,
-    value: String
-}
+import { IncidentMessageProps } from "../../../variableTypes";
 
 export default function IncidentMessage(props:IncidentMessageProps){
     return(
