@@ -1,10 +1,10 @@
 import { FormControl } from "baseui/form-control";
-import styles from "../../../styles/CreateIncident.module.css";
 import SelectStatusComponent from "./SelectStatusComponent";
 import React from "react";
 import { ComponentsAffectedProps } from "../../../variableTypes";
+import { Block } from "baseui/block";
 
-const label = <div className={styles.componentLabel}>Components Affected</div>;
+const label = <Block>Components Affected</Block>;
 
 export default function ComponentsAffected(props: ComponentsAffectedProps) {
   return (
@@ -19,7 +19,7 @@ export default function ComponentsAffected(props: ComponentsAffectedProps) {
         },
       }}
     >
-      <div className={styles.components}>
+      <div>
         {props.componentList.map((item) => {
           return (
             <SelectStatusComponent

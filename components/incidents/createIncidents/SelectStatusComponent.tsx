@@ -1,4 +1,3 @@
-import styles from "../../../styles/CreateIncident.module.css";
 import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
 import React from "react";
 import { Select, SIZE, TYPE } from "baseui/select";
@@ -7,13 +6,18 @@ import { ParagraphSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
+import { Block } from "baseui/block";
+import { Avatar } from "baseui/avatar";
 
 function Image(props: ImageProps) {
   return (
-    <div className={styles.option}>
-      <img className={styles.icon} src={props.imgUrl} />{" "}
-      <div>{props.title}</div>
-    </div>
+    <Block overrides={{ Block: { style: { display: "flex" } } }}>
+      <img
+        style={{ paddingRight: "5px", height: "24px", width: "24px" }}
+        src={props.imgUrl}
+      />{" "}
+      <Block>{props.title}</Block>
+    </Block>
   );
 }
 export default function SelectStatusComponent(props: statusComponentProps) {
@@ -27,7 +31,18 @@ export default function SelectStatusComponent(props: statusComponentProps) {
   });
   if (!props.selected) {
     return (
-      <div className={styles.statusComponent} id={props.id}>
+      <Block
+        id={props.id}
+        overrides={{
+          Block: {
+            style: {
+              margin: "20px 0px",
+              display: "flex",
+              justifyContent: "space-between",
+            },
+          },
+        }}
+      >
         <Checkbox
           labelPlacement={LABEL_PLACEMENT.right}
           checked={props.selected}
@@ -92,11 +107,22 @@ export default function SelectStatusComponent(props: statusComponentProps) {
             />
           </span>
         </StatefulPopover>
-      </div>
+      </Block>
     );
   } else {
     return (
-      <div className={styles.statusComponent} id={props.id}>
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              margin: "20px 0px",
+              display: "flex",
+              justifyContent: "space-between",
+            },
+          },
+        }}
+        id={props.id}
+      >
         <Checkbox
           labelPlacement={LABEL_PLACEMENT.right}
           checked={props.selected}
@@ -148,7 +174,7 @@ export default function SelectStatusComponent(props: statusComponentProps) {
             },
           }}
         />
-      </div>
+      </Block>
     );
   }
 }

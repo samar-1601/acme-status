@@ -1,6 +1,5 @@
 import { Button } from "baseui/button";
 import React, { useEffect, useState } from "react";
-import styles from "../../../styles/CreateIncident.module.css";
 import { Spinner, SIZE } from "baseui/spinner";
 import InputStatus from "./InputStatus";
 import IncidentName from "./IncidentName";
@@ -13,7 +12,6 @@ import { Block } from "baseui/block";
 import { STATUS } from "./../../../constants";
 import {
   SendComponentObject,
-  SpecialEvent,
   JSONObject,
   optionType,
   CreateIncidentProps,
@@ -272,7 +270,19 @@ export default function CreateIncident(props: CreateIncidentProps) {
       if (currentStateOfPage == 1) {
         return (
           <>
-            <div className={styles.main}>
+            <Block
+              overrides={{
+                Block: {
+                  style: {
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingLeft: "20%",
+                    paddingRight: "20%",
+                    fontFamily: "Arial, Helvetica, sans-serif",
+                  },
+                },
+              }}
+            >
               {formConstant}
               <ComponentsAffected
                 componentList={componentsAffected}
@@ -308,7 +318,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
               >
                 Create
               </Button>
-            </div>
+            </Block>
           </>
         );
       } else {
@@ -326,9 +336,17 @@ export default function CreateIncident(props: CreateIncidentProps) {
                 },
               }}
             >
-              <div className={styles.Spinner}>
+              <Block
+                overrides={{
+                  Block: {
+                    style: {
+                      alignSelf: "center",
+                    },
+                  },
+                }}
+              >
                 <Spinner $size={SIZE.large} />
-              </div>
+              </Block>
             </Block>
           </>
         );
@@ -336,7 +354,19 @@ export default function CreateIncident(props: CreateIncidentProps) {
     } else {
       return (
         <>
-          <div className={styles.main}>
+          <Block
+            overrides={{
+              Block: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  paddingLeft: "20%",
+                  paddingRight: "20%",
+                  fontFamily: "Arial, Helvetica, sans-serif",
+                },
+              },
+            }}
+          >
             {formConstant}
             <ComponentsAffected
               componentList={componentsAffected}
@@ -359,14 +389,26 @@ export default function CreateIncident(props: CreateIncidentProps) {
             >
               Create
             </Button>
-          </div>
+          </Block>
         </>
       );
     }
   } else {
     return (
       <>
-        <div className={styles.main}>
+        <Block
+          overrides={{
+            Block: {
+              style: {
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "20%",
+                paddingRight: "20%",
+                fontFamily: "Arial, Helvetica, sans-serif",
+              },
+            },
+          }}
+        >
           <Block
             overrides={{
               Block: {
@@ -381,7 +423,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
           >
             <h1>Sorry Unable to Fetch Components. Please Try Again</h1>
           </Block>
-        </div>
+        </Block>
       </>
     );
   }

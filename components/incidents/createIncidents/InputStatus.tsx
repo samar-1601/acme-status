@@ -1,5 +1,4 @@
 import { FormControl } from "baseui/form-control";
-import styles from "../../../styles/CreateIncident.module.css";
 import { ProgressBar, SIZE } from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block, BlockProps } from "baseui/block";
@@ -94,7 +93,11 @@ export default function InputStatus(props: InputStatusprops) {
     }
   });
   return (
-    <div className={styles.incidentStatus}>
+    <Block
+    // overrides={{
+    //   Block: { style: { backgroundColor: "rbg(118, 118, 118)" } },
+    // }}
+    >
       <FormControl
         label={"Incident Status"}
         overrides={{
@@ -147,6 +150,6 @@ export default function InputStatus(props: InputStatusprops) {
           </FlexGrid>
         </>
       </FormControl>
-    </div>
+    </Block>
   );
 }
