@@ -1,25 +1,25 @@
-.incidentsListView {
+/* .incidentsListView {
     width: 80%;
     font-family: 'Lato', sans-serif;
     margin: auto;
-}
+} */
 
 
-.listItem {
+/* .listItem {
     padding: 20px 30px 15px 30px;
     margin: 10px 8px 20px 8px;
     border-top: 4px rgb(243, 214, 54) solid;
     box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
-}
+} */
 
-.spinner {
+/* .spinner {
     margin-top : 35vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.listDetails {
+/* .listDetails {
     display: flex;
     gap: 8px;
     flex-direction: row;
@@ -32,30 +32,30 @@
     font-weight: 900;
     margin-bottom: 8px;
     text-transform: capitalize;
-}
+} */
 
-.itemDate {
+/* .itemDate {
     color: grey;
     margin-left: 10px;
     font-size: 0.8rem;
-}
+} */
 
-.itemStatus {
+/* .itemStatus {
     background-color: rgb(177, 245, 177);
     padding: 2px 4px;
     border-radius: 4px;
     font-size: 0.8rem;
     letter-spacing: 0.08ch;
     text-transform: uppercase;
-}
+} */
 
-.bgBlue {
+/* .bgBlue {
     background-color: rgb(191, 214, 231);
     color: rgb(32, 32, 212);
     font-weight: 600;
-}
+} */
 
-.bgGreen {
+/* .bgGreen {
     background-color: rgb(195, 225, 199);
     color: rgb(59, 136, 49);
     font-weight: 600;
@@ -83,20 +83,20 @@
     background-color: rgb(184, 223, 222);
     color: rgb(54, 115, 165);
     font-weight: 600;
-}
+} */
 
-.component {
+/* .component {
     margin-top: 18px;
-}
+} */
 
-.itemDetail1 {
+/* .itemDetail1 {
     flex: 100%;
-}
+} */
 
-.component:empty {
+/* .component:empty {
     margin: 0px;
-}
+} */
 
-.componentItem {
+/* .componentItem {
     padding-right: 1.2rem;
-}
+} */

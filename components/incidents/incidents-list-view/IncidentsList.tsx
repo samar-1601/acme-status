@@ -1,4 +1,3 @@
-import styles from "./styles/styles.module.css";
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
 import { PageType } from "./Header";
@@ -14,6 +13,7 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
+import { Block } from "baseui/block";
 
 interface Props {
   pageType: PageType;
@@ -160,8 +160,19 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       )}
     </InfiniteLoader>
   ) : (
-    <div className={styles.spinner}>
+    <Block
+      overrides={{
+        Block: {
+          style: {  
+            marginTop : "35vh",
+            display : "flex",
+            justifyContent : "center",
+            alignItems : "center"
+          }
+        },
+      }}
+    >
       <Spinner />
-    </div>
+    </Block>
   );
 };

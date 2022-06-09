@@ -1,4 +1,3 @@
-import { stat } from "fs";
 import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
 import { PageType } from "./Header";
@@ -108,7 +107,7 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
         ...state,
         hasLoaded: true, //
         hasMore: dataItem.length > 0, //
-        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], //concat data obtained in the current response to previous datalist
+        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
       });
     } catch (err) {
       console.log(err);
@@ -134,7 +133,6 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
     getIDData(1, pageType);
   }, [pageType]);
 
-  // return { dataList: dataList, isLoaded: hasLoaded, hasMore: hasMore };
   return {
     dataList: state.dataList,
     isLoaded: state.hasLoaded,

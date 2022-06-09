@@ -1,8 +1,10 @@
-import styles from "./styles/styles.module.css";
+import { incidentsListView } from "./styles/listStyles";
 import navstyles from "./styles/navstyles.module.css";
 import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
+
+import { Block } from "baseui/block";
 
 /**
  * PageType
@@ -25,7 +27,7 @@ export const IncidentsListViewHeader: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
 
   return (
-    <div className={styles.incidentsListView}>
+    <Block {...incidentsListView}>
       <div className={navstyles.container}>
         <div className={navstyles.headerBar}>
           <h1>Incidents</h1>
@@ -65,6 +67,6 @@ export const IncidentsListViewHeader: React.FC = () => {
       <div className={navstyles.content}>
         <IncidentsList pageType={page} />
       </div>
-    </div>
+    </Block>
   );
 };
