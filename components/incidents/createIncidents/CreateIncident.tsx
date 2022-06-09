@@ -1,6 +1,5 @@
 import { Button } from "baseui/button";
 import React, { useEffect, useState } from "react";
-import styles from "../../../styles/CreateIncident.module.css";
 import { Spinner, SIZE } from "baseui/spinner";
 import InputStatus from "./InputStatus";
 import IncidentName from "./IncidentName";
@@ -13,7 +12,6 @@ import { Block } from "baseui/block";
 import { STATUS } from "./../../../constants";
 import {
   SendComponentObject,
-  SpecialEvent,
   JSONObject,
   optionType,
   CreateIncidentProps,
@@ -241,36 +239,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
     setComponentsAffected(newComponentsAffected);
   };
 
-  const updateStatus = (e: React.BaseSyntheticEvent) => {
-    setIncidentStatus(e.target.innerHTML);
-  };
-
-  const updateStatusBarOnClick = (e: SpecialEvent) => {
-    let percentage = 0;
-    let native = e.nativeEvent.offsetX;
-    if (!e.target.classList.contains("bar")) {
-      console.log("YES!!!!");
-      let substractedTo = 0;
-      if (incidentStatus == "Identified") {
-        substractedTo = (66 / 100) * e.target.offsetWidth;
-      } else if (incidentStatus == "Monitoring") {
-        substractedTo = (33 / 100) * e.target.offsetWidth;
-      }
-      percentage =
-        ((e.nativeEvent.offsetX - substractedTo) * 100) / e.target.offsetWidth;
-    } else {
-      percentage = (e.nativeEvent.offsetX * 100) / e.target.offsetWidth;
-      console.log("NO!!!!");
-    }
-    if (percentage < 16) {
-      setIncidentStatus("Investigating");
-    } else if (percentage < 50) {
-      setIncidentStatus("Identified");
-    } else if (percentage < 83) {
-      setIncidentStatus("Monitoring");
-    } else {
-      setIncidentStatus("Resolved");
-    }
+  const updateStatus = (e: string) => {
+    setIncidentStatus(e);
   };
 
   const formConstant = (
@@ -281,11 +251,11 @@ export default function CreateIncident(props: CreateIncidentProps) {
         handleNameChange={(e: React.BaseSyntheticEvent) => handleNameChange(e)}
       />
       <InputStatus
-        updateStatus={(e: React.BaseSyntheticEvent) => updateStatus(e)}
+        updateStatus={(e: string) => updateStatus(e)}
         incidentStatus={incidentStatus}
-        updateStatusBarOnClick={(event: SpecialEvent) =>
-          updateStatusBarOnClick(event)
-        }
+        // updateStatusBarOnClick={(event: SpecialEvent) =>
+        //   updateStatusBarOnClick(event)
+        // }
       />
       <IncidentMessage
         value={incidentMessage}
@@ -296,115 +266,164 @@ export default function CreateIncident(props: CreateIncidentProps) {
     </>
   );
   if (currentStateOfPage != 2) {
-    if (!isSubmitClicked)
+    if (!isSubmitClicked) {
+      if (currentStateOfPage == 1) {
+        return (
+          <>
+            <Block
+              overrides={{
+                Block: {
+                  style: {
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingLeft: "20%",
+                    paddingRight: "20%",
+                    fontFamily: "Arial, Helvetica, sans-serif",
+                  },
+                },
+              }}
+            >
+              {formConstant}
+              <ComponentsAffected
+                componentList={componentsAffected}
+                toggleCheckBox={(e: React.BaseSyntheticEvent) =>
+                  toggleCheckBox(e)
+                }
+                changeOption={(e: optionType, id: String) =>
+                  changeOption(e, id)
+                }
+              />
+              <Button
+                onClick={() => {
+                  setIsSubmitClicked(true);
+                  submitForm();
+                  // dequeue();
+                  enqueue(
+                    {
+                      message: "Submitting Form Details",
+                      progress: true,
+                    },
+                    DURATION.infinite
+                  );
+                }}
+                overrides={{
+                  BaseButton: {
+                    style: ({ $theme }) => ({
+                      backgroundColor: $theme.colors.accent,
+                      width: "80px",
+                      alignSelf: "end",
+                    }),
+                  },
+                }}
+              >
+                Create
+              </Button>
+            </Block>
+          </>
+        );
+      } else {
+        return (
+          <>
+            <Block
+              overrides={{
+                Block: {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "80vh",
+                  },
+                },
+              }}
+            >
+              <Block
+                overrides={{
+                  Block: {
+                    style: {
+                      alignSelf: "center",
+                    },
+                  },
+                }}
+              >
+                <Spinner $size={SIZE.large} />
+              </Block>
+            </Block>
+          </>
+        );
+      }
+    } else {
       return (
         <>
-          <div className={styles.main}>
+          <Block
+            overrides={{
+              Block: {
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  paddingLeft: "20%",
+                  paddingRight: "20%",
+                  fontFamily: "Arial, Helvetica, sans-serif",
+                },
+              },
+            }}
+          >
             {formConstant}
-            {currentStateOfPage == 1 ? (
-              <>
-                <ComponentsAffected
-                  componentList={componentsAffected}
-                  toggleCheckBox={(e: React.BaseSyntheticEvent) =>
-                    toggleCheckBox(e)
-                  }
-                  changeOption={(e: optionType, id: String) =>
-                    changeOption(e, id)
-                  }
-                />
-                <Button
-                  onClick={() => {
-                    setIsSubmitClicked(true);
-                    submitForm();
-                    // dequeue();
-                    enqueue(
-                      {
-                        message: "Submitting Form Details",
-                        progress: true,
-                      },
-                      DURATION.infinite
-                    );
-                  }}
-                  overrides={{
-                    BaseButton: {
-                      style: ({ $theme }) => ({
-                        backgroundColor: $theme.colors.accent,
-                        width: "80px",
-                        alignSelf: "end",
-                      }),
-                    },
-                  }}
-                >
-                  Create
-                </Button>
-              </>
-            ) : (
-              <div className={styles.Spinner}>
-                <Spinner $size={SIZE.large} />
-              </div>
-            )}
-          </div>
-        </>
-      );
-    else {
-      return (
-        <>
-          <div className={styles.main}>
-            {formConstant}
-            {currentStateOfPage == 1 ? (
-              <>
-                <ComponentsAffected
-                  componentList={componentsAffected}
-                  toggleCheckBox={(e: React.BaseSyntheticEvent) =>
-                    toggleCheckBox(e)
-                  }
-                  changeOption={(e: optionType, id: String) =>
-                    changeOption(e, id)
-                  }
-                />
-                <Button
-                  overrides={{
-                    BaseButton: {
-                      style: ({ $theme }) => ({
-                        backgroundColor: $theme.colors.accent,
-                        width: "80px",
-                        alignSelf: "end",
-                        cursor: "wait",
-                      }),
-                    },
-                  }}
-                >
-                  Create
-                </Button>
-              </>
-            ) : (
-              <div className={styles.Spinner}>
-                <Spinner $size={SIZE.large} />
-              </div>
-            )}
-          </div>
+            <ComponentsAffected
+              componentList={componentsAffected}
+              toggleCheckBox={(e: React.BaseSyntheticEvent) =>
+                toggleCheckBox(e)
+              }
+              changeOption={(e: optionType, id: String) => changeOption(e, id)}
+            />
+            <Button
+              overrides={{
+                BaseButton: {
+                  style: ({ $theme }) => ({
+                    backgroundColor: $theme.colors.accent,
+                    width: "80px",
+                    alignSelf: "end",
+                    cursor: "wait",
+                  }),
+                },
+              }}
+            >
+              Create
+            </Button>
+          </Block>
         </>
       );
     }
   } else {
     return (
       <>
-        <div className={styles.main}>
-          {formConstant}
+        <Block
+          overrides={{
+            Block: {
+              style: {
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "20%",
+                paddingRight: "20%",
+                fontFamily: "Arial, Helvetica, sans-serif",
+              },
+            },
+          }}
+        >
           <Block
             overrides={{
               Block: {
                 style: {
                   display: "flex",
-                  alignContent: "center",
+                  alignItems: "center",
                   justifyContent: "center",
+                  height: "80vh",
                 },
               },
             }}
           >
-            <h1>Sorry Unable to Fetch Components</h1>
+            <h1>Sorry Unable to Fetch Components. Please Try Again</h1>
           </Block>
-        </div>
+        </Block>
       </>
     );
   }
