@@ -1,10 +1,21 @@
 import { incidentsListView } from "./styles/listStyles";
-import navstyles from "./styles/navstyles.module.css";
+import {
+  container,
+  content,
+  headerBar,
+  navbarWrapper,
+  nav,
+  divInsideNav,
+  createIncidentButton,
+  spanInsideNav,
+  navActiveItem,
+  notActiveNavItem,
+} from "./styles/navStyles";
 import { IncidentsList } from "./IncidentsList";
 import { useState } from "react";
 import Link from "next/link";
 
-import { Block, BlockProps } from "baseui/block";
+import { Block } from "baseui/block";
 
 /**
  * PageType
@@ -20,62 +31,11 @@ export enum PageType {
 
 /**
  * IncidentsList View
- * triggered when /incidents is accessed
+ * triggers when / is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
 export const IncidentsListViewHeader: React.FC = () => {
   const [page, setPage] = useState<PageType>(PageType.All);
-
-  const container: BlockProps = {
-    overrides: {
-      Block: {
-        style: {
-          position: "fixed",
-          top: "0ch",
-          width: "80%",
-          zIndex: "100",
-          backgroundColor: "white",
-          padding: "0.5rem",
-        },
-      },
-    },
-  };
-  
-  const content: BlockProps = {
-    overrides: {
-      Block: {
-        style: {
-          position: "relative",
-          top: "150px",
-          width: "100%",
-          paddingLeft: "10px",
-        },
-      },
-    },
-  };
-  const headerBar: BlockProps = {
-    overrides: {
-      Block: {
-        style: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexDirection: "row",
-        },
-      },
-    },
-  };
-  const navbarWrapper: BlockProps = {
-    overrides: {
-      Block: {
-        style: {
-          display: "flex",
-          justifyContent: "space-between",
-          borderBottom: "5px rgb(205, 203, 203) solid",
-        },
-      },
-    },
-  };
 
   return (
     <Block {...incidentsListView}>
@@ -83,36 +43,76 @@ export const IncidentsListViewHeader: React.FC = () => {
         <Block {...headerBar}>
           <h1>Incidents</h1>
         </Block>
-        <Block className={navstyles.navbarWrapper}>
-          <nav className={navstyles.nav}>
-            <div onClick={() => setPage(PageType.All)}>
-              <span className={page === PageType.All ? navstyles.l1 : ""}>
+        <Block {...navbarWrapper}>
+          <Block {...nav}>
+            <Block {...divInsideNav} onClick={() => setPage(PageType.All)}>
+              <Block
+                {...spanInsideNav}
+                overrides={{
+                  Block: {
+                    style:
+                      page === PageType.All ? navActiveItem : notActiveNavItem,
+                  },
+                }}
+              >
                 All
-              </span>
-            </div>
-            <div onClick={() => setPage(PageType.Active)}>
-              <span className={page === PageType.Active ? navstyles.l1 : ""}>
+              </Block>
+            </Block>
+            <Block {...divInsideNav} onClick={() => setPage(PageType.Active)}>
+              <Block
+                {...spanInsideNav}
+                overrides={{
+                  Block: {
+                    style:
+                      page === PageType.Active
+                        ? navActiveItem
+                        : notActiveNavItem,
+                  },
+                }}
+              >
                 Active
-              </span>
-            </div>
-            <div onClick={() => setPage(PageType.Maintenance)}>
-              <span
-                className={page === PageType.Maintenance ? navstyles.l1 : ""}
+              </Block>
+            </Block>
+            <Block
+              {...divInsideNav}
+              onClick={() => setPage(PageType.Maintenance)}
+            >
+              <Block
+                {...spanInsideNav}
+                overrides={{
+                  Block: {
+                    style:
+                      page === PageType.Maintenance
+                        ? navActiveItem
+                        : notActiveNavItem,
+                  },
+                }}
               >
                 Maintenance
-              </span>
-            </div>
-            <div onClick={() => setPage(PageType.Scheduled)}>
-              <span className={page === PageType.Scheduled ? navstyles.l1 : ""}>
+              </Block>
+            </Block>
+            <Block
+              {...divInsideNav}
+              onClick={() => setPage(PageType.Scheduled)}
+            >
+              <Block
+                {...spanInsideNav}
+                overrides={{
+                  Block: {
+                    style:
+                      page === PageType.Scheduled
+                        ? navActiveItem
+                        : notActiveNavItem,
+                  },
+                }}
+              >
                 Scheduled
-              </span>
-            </div>
-          </nav>
-          <div className={navstyles.createIncidentButton}>
-            <Link href="/incident/new">
-              <button>Create incident</button>
-            </Link>
-          </div>
+              </Block>
+            </Block>
+          </Block>
+          <Link href="/incident/new">
+            <Block {...createIncidentButton}>Create incident</Block>
+          </Link>
         </Block>
       </Block>
       <Block {...content}>
