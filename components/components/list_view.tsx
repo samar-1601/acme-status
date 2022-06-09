@@ -2,6 +2,7 @@ import { generateList } from "./generate_list";
 import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
 
+let stat = "uptime data unavailable!";
 
 const ListView = function () {
   const [dataList, setDataList] = useState([]);
@@ -10,23 +11,26 @@ const ListView = function () {
 
   const getUpTimeStatus = async (pageId: string, componentId: string) => {
     const URL = `https://api.statuspage.io/v1/pages/${pageId}/components/${componentId}/uptime`;
-    let component: any;
 
-    const response = fetch(URL, {
+    fetch(URL, {
       headers : {
         "Content-Type": "application/json",
         Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
       }
     })
-
-    component = (await response).json();
-    component = Promise.resolve(component);
-    const date1 = new Date(component.range_end);
-    const date2 = new Date(component.range_start);
-    let days = Math.ceil(Math.abs(date1.valueOf()-date2.valueOf())/(1000*60*60*24));
-    let stat = String(component.uptime_percentage)+"% uptime in the past "+String(days)+" days";
-    console.log(stat);
-    return stat;
+    .then(response => response.json())
+    .then(response => {
+      stat = "uptime data unavailable!";
+      if(!response.error)
+      {
+        const date1 = new Date(response.range_end);
+        const date2 = new Date(response.range_start);
+        let days = Math.ceil(Math.abs(date1.valueOf()-date2.valueOf())/(1000*60*60*24));
+        stat = String(response.uptime_percentage)+"% uptime in the past "+String(days)+" days";
+      }
+      console.log(stat)
+      return stat;
+    })
   }
 
   const getComponentsPage = async (pageId : string) => {
@@ -58,12 +62,30 @@ const ListView = function () {
     pages = await getPageID();
     pages.forEach(async (page: string) => {
       let pageComponents = await getComponentsPage(page);
-      setDataList([]);
+      let tmp = [];
+      let i=0;
       pageComponents.forEach(comp => {
-        let m = Promise.resolve(getUpTimeStatus(comp.page_id, comp.id));
-        console.log(m);
-      });
-      setDataList(dataList.concat(pageComponents));
+        const URL = `https://api.statuspage.io/v1/pages/${comp.page_id}/components/${comp.id}/uptime`;
+
+        fetch(URL, {
+          headers : {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+          }
+        })
+        .then(response => response.json())
+        .then(response => {
+          comp.description = "uptime data unavailable!";
+          if(!response.error) {
+            const date1 = new Date(response.range_end);
+            const date2 = new Date(response.range_start);
+            let days = Math.ceil(Math.abs(date1.valueOf()-date2.valueOf())/(1000*60*60*24));
+            comp.description = String(response.uptime_percentage)+"% uptime in the past "+String(days)+" days";
+          }
+        });
+        tmp[i++]=comp;
+      })
+      setDataList(tmp);
     });
   }
 
@@ -72,7 +94,6 @@ const ListView = function () {
   },[]);
 
   console.log(dataList)
-  
   return <>{generateList(dataList)}</>;
 };
 
