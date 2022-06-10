@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
+import { ICON_URL, NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
 import styles from "./styles.module.css";
+import { Avatar } from "baseui/avatar";
 
 const Item = function (props: any) {
   const [msg, setMsg] = useState("uptime data unavailable!");
@@ -28,9 +29,27 @@ const Item = function (props: any) {
 
   return (
     <div className={styles.listItem}>
-      <span className={styles.itemName}>{props.comp.name}</span><br/>
-      <span className={styles.itemDescription}>{msg}</span>
-      <span>{props.comp.status}</span>
+      <div>
+        <Avatar 
+          name={props.comp.status}
+          src={ICON_URL[props.comp.status]}
+          size="scale600"
+          overrides = {{
+            Root: {
+              style: {
+                paddingTop: "9px",
+                paddingRight: "8px"
+              }
+            }
+
+          }}
+        >
+      </Avatar>
+      </div>
+      <div>
+        <span className={styles.itemName}>{props.comp.name}</span><br/>
+        <span className={styles.itemDescription}>{msg}</span>
+      </div>
     </div>)
 } 
 

@@ -1,7 +1,6 @@
 import { GenerateList } from "./generate_list";
 import { useEffect, useState } from "react";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
-import { tmpdir } from "os";
 
 let stat = "uptime data unavailable!";
 
