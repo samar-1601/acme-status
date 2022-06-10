@@ -4,7 +4,7 @@ export const incidentsListView: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "80%",
+        width: "60%",
         fontFamily: "'Lato', sans-serif",
         margin: "auto",
       },
