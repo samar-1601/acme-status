@@ -39,7 +39,7 @@ export const IncidentsListViewHeader: React.FC = () => {
            <NavBarMenuItem pageType={PageType.Scheduled} currentPage = {activePage} onClick={()=>setPage(PageType.Scheduled)}/>
           </Block>
           <Link href="/incident/new">
-            <Button {...createIncidentButton}>Create incident</Button>
+            <Block {...createIncidentButton}>Create incident</Block>
           </Link>
         </Block>
       </Block>
