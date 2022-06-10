@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Router from "next/router";
 import { Button } from "baseui/button";
 import { Spinner, SIZE } from "baseui/spinner";
@@ -76,13 +76,13 @@ export default function CreateIncident(props: CreateIncidentProps) {
   //     console.log(incidentStatus);
   //     console.log(componentsAffected);
   // })
-  const handleNameChange = (e: React.BaseSyntheticEvent) => {
+  const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
-  };
+  }, []);
 
-  const updateIncidentMessage = (e: React.BaseSyntheticEvent) => {
+  const updateIncidentMessage = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentMessage(e.target.value);
-  };
+  }, []);
 
   const submitForm = () => {
     console.log(currentStateOfPage);
@@ -177,48 +177,57 @@ export default function CreateIncident(props: CreateIncidentProps) {
       });
   };
 
-  const toggleCheckBox = (e: React.BaseSyntheticEvent) => {
-    const newComponentsAffected = affectedComponents.map(
-      (item: ComponentObject) => {
-        if (item.id == e.target.name) {
-          return {
-            compName: item.compName,
-            compType: item.compType,
-            id: item.id,
-            compId: item.compId,
-            selected: !item.selected,
-          };
-        } else {
-          return item;
+  const toggleCheckBox = useCallback(
+    (e: React.BaseSyntheticEvent) => {
+      const newComponentsAffected = affectedComponents.map(
+        (item: ComponentObject) => {
+          if (item.id == e.target.name) {
+            return {
+              compName: item.compName,
+              compType: item.compType,
+              id: item.id,
+              compId: item.compId,
+              selected: !item.selected,
+            };
+          } else {
+            return item;
+          }
         }
-      }
-    );
-    setAffectedComponents(newComponentsAffected);
-  };
+      );
+      setAffectedComponents(newComponentsAffected);
+    },
+    [affectedComponents]
+  );
 
-  const changeOption = (e: optionType, id: String) => {
-    const newComponentsAffected = affectedComponents.map(
-      (item: ComponentObject) => {
-        if (item.id.toString() == id) {
-          return {
-            compName: item.compName,
-            compType: Number(e.option.id) + 1,
-            id: item.id,
-            compId: item.compId,
-            selected: item.selected,
-          };
-        } else {
-          return item;
+  const changeOption = useCallback(
+    (e: optionType, id: String) => {
+      const newComponentsAffected = affectedComponents.map(
+        (item: ComponentObject) => {
+          if (item.id.toString() == id) {
+            return {
+              compName: item.compName,
+              compType: Number(e.option.id) + 1,
+              id: item.id,
+              compId: item.compId,
+              selected: item.selected,
+            };
+          } else {
+            return item;
+          }
         }
-      }
-    );
-    setAffectedComponents(newComponentsAffected);
-  };
+      );
+      setAffectedComponents(newComponentsAffected);
+    },
+    [affectedComponents]
+  );
 
-  const updateStatus = (e: string) => {
+  const updateStatus = useCallback((e: string) => {
     setIncidentStatus(e);
-  };
+  }, []);
 
+  useEffect(() => {
+    console.log("OOPSSIIEEE");
+  }, [toggleCheckBox]);
   const formConstant = (
     <>
       <h2>Create Incident</h2>

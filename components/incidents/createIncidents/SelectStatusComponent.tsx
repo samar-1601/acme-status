@@ -28,6 +28,7 @@ export default function SelectStatusComponent(props: statusComponentProps) {
       id: idx,
     };
   });
+
   if (!props.selected) {
     return (
       <Block
