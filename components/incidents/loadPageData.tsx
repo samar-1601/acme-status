@@ -1,7 +1,5 @@
-import { stat } from "fs";
 import { useEffect, useState } from "react";
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
-import { PageType } from "./Header";
+import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../constants";
 
 /**
  * Loads data from API
@@ -10,7 +8,7 @@ import { PageType } from "./Header";
  * @returns API response and API loading status
  */
 
-const limit = 10; // determines the no. of rows of data in a page
+const limit = 15; // determines the no. of rows of data in a page
 
 export default function useLoadPageData(pageNumber: number, pageType: string) {
   /**
@@ -108,7 +106,7 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
         ...state,
         hasLoaded: true, //
         hasMore: dataItem.length > 0, //
-        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], //concat data obtained in the current response to previous datalist
+        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
       });
     } catch (err) {
       console.log(err);
@@ -134,7 +132,6 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
     getIDData(1, pageType);
   }, [pageType]);
 
-  // return { dataList: dataList, isLoaded: hasLoaded, hasMore: hasMore };
   return {
     dataList: state.dataList,
     isLoaded: state.hasLoaded,

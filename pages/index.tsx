@@ -1,4 +1,4 @@
-import IncidentsHome  from "../components/incidents/IncidentsHome"
+import IncidentsHome  from "../components/IncidentsHome"
 
 const Home = () => {
   return (

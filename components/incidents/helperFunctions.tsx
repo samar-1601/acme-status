@@ -1,34 +1,5 @@
-import styles from "./styles/styles.module.css";
-
-/**
- * Status' classValue
- * @param { string } status Status's name obtained in API response
- * @returns { string } The style for the status in list-view
- * @global
- */
-const classValue = (status: string) => {
-  let style: string = styles.itemStatus;
-  status = status.toLowerCase();
-  if (status === "investigating") {
-    style = `${style} ${styles.bgBlue}`;
-  }
-  if (status === "resolved") {
-    style = `${style} ${styles.bgGreen}`;
-  }
-  if (status === "verifying") {
-    style = `${style} ${styles.bgYellow}`;
-  }
-  if (status === "completed") {
-    style = `${style} ${styles.bgPink}`;
-  }
-  if (status === "scheduled") {
-    style = `${style} ${styles.bgOrange}`;
-  }
-  if (status === "in_progress") {
-    style = `${style} ${styles.bgGreyBlue}`;
-  }
-  return style;
-};
+import { Block } from "baseui/block";
+import { listDetails, listItem, itemStatus , component, itemDate, itemDetailsSecondLine, itemName, componentItem } from "./styles/listStyles";
 
 /**
  * Format date for display
@@ -59,9 +30,9 @@ const getComponents = (data: any) => {
   if (data["components"]) {
     data["components"].forEach((component: any, id: any) => {
       componentsList.push(
-        <span key={component["name"]} className={styles.componentItem}>
+        <Block key={component["name"]} {...componentItem}>
           {component["name"]}
-        </span>
+        </Block>
       );
     });
   }
@@ -73,21 +44,19 @@ const getComponents = (data: any) => {
  * @param data filtered JSON data from API
  * @returns JSX component list
  */
-export const renderListData = (data: any[]) => {
-  return data.map((data, id) => {
-    return (
-      <div key={data["name"]} className={styles.listItem}>
-        <div className={styles.listDetails}>
-          <span className={styles.itemName}>{data["name"]}</span>
-          <div className={styles.itemDetail1}>
-            <span className={classValue(data["status"])}>{data["status"]}</span>
-            <span className={styles.itemDate}>
-              {formatDate(data["created_at"])}
-            </span>
-          </div>
-          <span className={styles.component}>{getComponents(data)}</span>
-        </div>
-      </div>
-    );
-  });
+export const renderData = (data: any) => {
+
+
+  return (
+    <Block key={data["name"]} {...listItem}>
+      <Block {...listDetails}>
+        <Block {...itemName}>{data["name"]}</Block>
+        <Block {...itemDetailsSecondLine}>
+          <Block {...itemStatus}>{data["status"]}</Block>
+          <Block {...itemDate}>{formatDate(data["created_at"])}</Block>
+        </Block>
+        <Block {...component}>{getComponents(data)}</Block>
+      </Block>
+    </Block>
+  );
 };
