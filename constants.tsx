@@ -14,6 +14,19 @@ export enum PageType {
   Scheduled = "Scheduled",
 }
 
+/**
+ * StatusType
+ * status values for incidents
+ * @type {enum}
+ */
+export enum StatusType {
+  Investigating = "investigating",
+  Resolved = "resolved",
+  Verifying = "verifying",
+  Completed = "completed",
+  Scheduled = "scheduled",
+  InProgress = "in_progress",
+}
 export const STATUS: STATUSType = {
   operational: 1,
   degraded_performance: 2,

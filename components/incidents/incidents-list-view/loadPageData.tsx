@@ -1,4 +1,7 @@
+// lib
 import { useEffect, useState } from "react";
+
+// constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../../constants";
 
 /**

@@ -1,5 +1,4 @@
 import { BlockProps } from "baseui/block";
-import { ButtonProps } from "baseui/button";
 
 export const container: BlockProps = {
   overrides: {
@@ -77,6 +76,16 @@ export const divInsideNav: BlockProps = {
   },
 };
 export const createIncidentButton: BlockProps = {
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow = "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow = "";
+    }
+  },
   overrides: {
     Block: {
       style: {
@@ -104,7 +113,7 @@ export const navActiveItem = {
   display: "inline",
 };
 
-export const notActiveNavItem = {
+export const navNonActiveItem = {
   paddingRight: "14px",
   paddingLeft: "14px",
   paddingBottom: "16px",

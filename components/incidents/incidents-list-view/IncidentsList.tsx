@@ -1,10 +1,11 @@
-import useLoadPageData from "./loadPageData";
+// lib
 import { useEffect, useState, useRef } from "react";
-import { PageType } from "../../../constants"
+import useLoadPageData from "./loadPageData";
 import { renderData } from "./helperFunctions";
 
+// components
 import { Spinner } from "baseui/spinner";
-
+import { Block } from "baseui/block";
 import {
   InfiniteLoader,
   List,
@@ -13,7 +14,10 @@ import {
   CellMeasurerCache,
 } from "react-virtualized";
 import "react-virtualized/styles.css";
-import { Block } from "baseui/block";
+
+// constants
+import { PageType } from "../../../constants";
+
 
 interface Props {
   pageType: PageType;
@@ -163,12 +167,12 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
     <Block
       overrides={{
         Block: {
-          style: {  
-            marginTop : "35vh",
-            display : "flex",
-            justifyContent : "center",
-            alignItems : "center"
-          }
+          style: {
+            marginTop: "35vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
         },
       }}
     >
