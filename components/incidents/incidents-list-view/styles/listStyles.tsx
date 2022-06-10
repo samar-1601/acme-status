@@ -94,6 +94,7 @@ export const componentItem: BlockProps = {
     Block: {
       style: {
         paddingRight: "1.2rem",
+        paddingTop: "2px",
         display: "inline",
       },
     },

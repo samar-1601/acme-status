@@ -1,3 +1,4 @@
+
 export const NEXT_PUBLIC_AUTH_TOKEN = "c12226f5-9156-47cd-bf7c-a36379785a25";
 
 /**
@@ -25,3 +26,34 @@ export enum StatusType {
   Scheduled = "scheduled",
   InProgress = "in_progress",
 }
+
+export const ComponentStatusIconUrls = (status : string) => {
+  status = status.toLowerCase();
+  switch (status){
+    case "partial_outage":
+      return "/paritial_outage.png";
+    case "major_outage":
+      return "/major_outage.png";
+    case "degraded_performance":
+      return "//degraded_performance.png";
+    case "under_maintenance":
+      return "/under_maintenance.png";
+    case "operational":
+      return "/operational2.webp";
+    default:
+      return "";
+  }
+};
+
+
+// export const ITEMS = [
+//   { title: "Operational", imgUrl: "/operational2.webp", id: "0" },
+//   {
+//     title: "Degraded Performance",
+//     imgUrl: "/degraded_performance.png",
+//     id: "1",
+//   },
+//   { title: "Partial Outage", imgUrl: "/paritial_outage.png", id: "2" },
+//   { title: "Major Outage", imgUrl: "/major_outage.png", id: "3" },
+//   { title: "Under Maintainence", imgUrl: "/under_maintenance.png", id: "4" },
+// ];
