@@ -28,3 +28,35 @@ export const ITEMS = [
   { title: "Major Outage", imgUrl: "/major_outage.png", id: "3" },
   { title: "Under Maintainence", imgUrl: "/under_maintenance.png", id: "4" },
 ];
+
+export const getStatus = (id: number): string => {
+  switch (id) {
+    case 1:
+      return "operational";
+    case 2:
+      return "degraded_performance";
+    case 3:
+      return "partial_outage";
+    case 4:
+      return "major_outage";
+    case 5:
+      return "under_maintenance";
+    default:
+      return "";
+  }
+};
+
+export const getIncidentStatus = (id: String): string => {
+  switch (id) {
+    case "Investigating":
+      return "scheduled";
+    case "Identified":
+      return "in_progress";
+    case "Monitoring":
+      return "verifying";
+    case "Resolved":
+      return "completed";
+    default:
+      return "";
+  }
+};

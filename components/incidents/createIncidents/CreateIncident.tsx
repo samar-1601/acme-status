@@ -8,7 +8,12 @@ import InputStatus from "./InputStatus";
 import IncidentName from "./IncidentName";
 import IncidentMessage from "./IncidentMessage";
 import AffectedComponents from "./AffectedComponents";
-import { NEXT_PUBLIC_AUTH_TOKEN, STATUS } from "./../../../constants";
+import {
+  NEXT_PUBLIC_AUTH_TOKEN,
+  STATUS,
+  getIncidentStatus,
+  getStatus,
+} from "./../../../constants";
 import {
   SendComponentObject,
   JSONObject,
@@ -16,34 +21,6 @@ import {
   CreateIncidentProps,
   ComponentObject,
 } from "../../../variableTypes";
-
-const getStatus = (id: number) => {
-  switch (id) {
-    case 1:
-      return "operational";
-    case 2:
-      return "degraded_performance";
-    case 3:
-      return "partial_outage";
-    case 4:
-      return "major_outage";
-    case 5:
-      return "under_maintenance";
-  }
-};
-
-const getIncidentStatus = (id: String) => {
-  switch (id) {
-    case "Investigating":
-      return "scheduled";
-    case "Identified":
-      return "in_progress";
-    case "Monitoring":
-      return "verifying";
-    case "Resolved":
-      return "completed";
-  }
-};
 
 let InitialData: (ComponentObject | never)[] = [];
 
@@ -135,7 +112,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         components[key] = getStatus(item.compType)!;
       }
     });
-    const submit = {
+    const payload = {
       incident: {
         name: incidentName,
         status: getIncidentStatus(incidentStatus),
@@ -159,7 +136,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         scheduled_auto_transition: true,
       },
     };
-    console.log(submit);
+    console.log(payload);
     console.log(props.pageID[0]);
     fetch(
       "https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents",
@@ -169,7 +146,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
           "Content-Type": "application/json",
           Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
         },
-        body: JSON.stringify(submit),
+        body: JSON.stringify(payload),
       }
     )
       .then((response) => response.json())
