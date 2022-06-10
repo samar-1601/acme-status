@@ -76,6 +76,16 @@ export const divInsideNav: BlockProps = {
   },
 };
 export const createIncidentButton: BlockProps = {
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow = "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow = "";
+    }
+  },
   overrides: {
     Block: {
       style: {
