@@ -1,5 +1,14 @@
 import { Block } from "baseui/block";
-import { listDetails, listItem, itemStatus , component, itemDate, itemDetailsSecondLine, itemName, componentItem } from "./styles/listStyles";
+import {
+  listDetails,
+  listItem,
+  itemStatus,
+  component,
+  itemDate,
+  itemDetailsSecondLine,
+  itemName,
+  componentItem,
+} from "./styles/listStyles";
 
 /**
  * Format date for display
@@ -45,8 +54,6 @@ const getComponents = (data: any) => {
  * @returns JSX component list
  */
 export const renderData = (data: any) => {
-
-
   return (
     <Block key={data["name"]} {...listItem}>
       <Block {...listDetails}>

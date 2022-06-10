@@ -1,6 +1,6 @@
 import useLoadPageData from "./loadPageData";
 import { useEffect, useState, useRef } from "react";
-import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../constants";
+import { PageType } from "../../../constants";
 import { renderData } from "./helperFunctions";
 
 import { Spinner } from "baseui/spinner";
@@ -163,12 +163,12 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
     <Block
       overrides={{
         Block: {
-          style: {  
-            marginTop : "35vh",
-            display : "flex",
-            justifyContent : "center",
-            alignItems : "center"
-          }
+          style: {
+            marginTop: "35vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
         },
       }}
     >

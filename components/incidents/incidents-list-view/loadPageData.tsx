@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../../constants";
 
 /**
  * Loads data from API

@@ -1,4 +1,4 @@
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
 
 export function generateUsers() {
   const faker = require("faker");
