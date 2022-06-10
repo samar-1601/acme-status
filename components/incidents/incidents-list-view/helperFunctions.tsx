@@ -1,5 +1,9 @@
 // components
 import { Block } from "baseui/block";
+import { Avatar } from "baseui/avatar";
+
+// constants
+import { ComponentStatusIconUrls } from "../../../constants";
 
 // styles
 import {
@@ -18,7 +22,7 @@ import {
  * @param date The date which needs to be formatted to display
  * @returns formatted data in x days ago format
  */
-const formatDate = (date: string | Date):string => {
+const formatDate = (date: string | Date): string => {
   date = new Date(date);
   const timeElapsed = Date.now() - date.getTime();
 
@@ -37,12 +41,24 @@ const formatDate = (date: string | Date):string => {
  * @param data the data from which the components list is made
  * @returns JSX containing the components in the current incident
  */
-const getComponents = (data: any):JSX.Element[] => {
+const getComponents = (data: any): JSX.Element[] => {
   let componentsList: JSX.Element[] = [];
   if (data["components"]) {
     data["components"].forEach((component: any, id: any) => {
       componentsList.push(
         <Block key={component["name"]} {...componentItem}>
+          <Avatar
+            name={component["name"]}
+            src={ComponentStatusIconUrls(component["status"])}
+            size="scale600"
+            overrides={{
+              Root: {
+                style: {
+                  paddingRight: "8px",
+                },
+              },
+            }}
+          ></Avatar>
           {component["name"]}
         </Block>
       );
@@ -56,7 +72,7 @@ const getComponents = (data: any):JSX.Element[] => {
  * @param data filtered JSON data from API
  * @returns JSX component list
  */
-export const renderData:React.FC = (data: any):JSX.Element => {
+export const renderData: React.FC = (data: any): JSX.Element => {
   return (
     <Block key={data["name"]} {...listItem}>
       <Block {...listDetails}>

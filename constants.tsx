@@ -53,3 +53,24 @@ export const ITEMS = [
   { title: "Major Outage", imgUrl: "/major_outage.png", id: "3" },
   { title: "Under Maintainence", imgUrl: "/under_maintenance.png", id: "4" },
 ];
+
+/**
+ * Returns the image URL corresponding to the component status
+ */
+export const ComponentStatusIconUrls = (status : string) => {
+  status = status.toLowerCase();
+  switch (status){
+    case "partial_outage":
+      return "/paritial_outage.png";
+    case "major_outage":
+      return "/major_outage.png";
+    case "degraded_performance":
+      return "//degraded_performance.png";
+    case "under_maintenance":
+      return "/under_maintenance.png";
+    case "operational":
+      return "/operational2.webp";
+    default:
+      return "";
+  }
+};

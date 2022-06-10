@@ -1,5 +1,5 @@
 // lib
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import useLoadPageData from "./loadPageData";
 import { renderData } from "./helperFunctions";
 
@@ -91,24 +91,24 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
    */
   useEffect(() => {
     setPageLoaded(false);
-    prevDataLength = 0;
     setPageNumber(1);
+    prevDataLength = 0;
   }, [pageType]);
 
   /**
    * The functions triggers more data to load by changing the pageNumber's state and hence triggering the above useEffects
    */
-  const fetchMoreData = () => {
+  const fetchMoreData = useCallback(() => {
     console.log("fetchMore Called, pageNo : ", pageNumber);
     setPageNumber((p) => p + 1);
-  };
+  },[]);
 
   /**
    * Triggers more loading of data for infinite scrolling
    * @param param the startIndex and endIndex of rows
    * @returns the loaded data to show in infinite scrolling
    */
-  const loadMoreRows = (param: any) => {
+  const loadMoreRows = useCallback((param: any) => {
     const startIndex = param.startIndex;
     const stopIndex = param.stopIndex;
 
@@ -118,7 +118,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
     }
     fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
     return Promise.resolve(dataLoaded);
-  };
+  }, [pageNumber]);
 
   /**
    * AutoSizer : enables the auto sizing of the child elements based on their size
