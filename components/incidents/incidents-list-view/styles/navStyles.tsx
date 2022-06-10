@@ -1,5 +1,4 @@
 import { BlockProps } from "baseui/block";
-import { ButtonProps } from "baseui/button";
 
 export const container: BlockProps = {
   overrides: {
@@ -103,7 +102,7 @@ export const navActiveItem = {
   display: "inline",
 };
 
-export const notActiveNavItem = {
+export const navNonActiveItem = {
   paddingRight: "14px",
   paddingLeft: "14px",
   paddingBottom: "16px",

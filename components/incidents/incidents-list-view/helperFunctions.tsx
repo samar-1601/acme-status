@@ -1,4 +1,7 @@
+// components
 import { Block } from "baseui/block";
+
+// styles
 import {
   listDetails,
   listItem,

@@ -11,3 +11,17 @@ export enum PageType {
   Maintenance = "Maintenance",
   Scheduled = "Scheduled",
 }
+
+/**
+ * StatusType
+ * status values for incidents
+ * @type {enum}
+ */
+export enum StatusType {
+  Investigating = "investigating",
+  Resolved = "resolved",
+  Verifying = "verifying",
+  Completed = "completed",
+  Scheduled = "scheduled",
+  InProgress = "in_progress",
+}

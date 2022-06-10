@@ -1,9 +1,12 @@
+// styles
 import {
   divInsideNav,
   spanInsideNav,
   navActiveItem,
-  notActiveNavItem,
+  navNonActiveItem,
 } from "./styles/navStyles";
+
+// components
 import { Block } from "baseui/block";
 
 interface Props {
@@ -11,6 +14,7 @@ interface Props {
   pageType: string;
   onClick: any;
 }
+
 export const NavBarMenuItem: React.FC<Props> = ({
   currentPage,
   pageType,
@@ -22,7 +26,7 @@ export const NavBarMenuItem: React.FC<Props> = ({
         {...spanInsideNav}
         overrides={{
           Block: {
-            style: currentPage === pageType ? navActiveItem : notActiveNavItem,
+            style: currentPage === pageType ? navActiveItem : navNonActiveItem,
           },
         }}
       >

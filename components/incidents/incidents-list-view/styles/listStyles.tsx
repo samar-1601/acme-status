@@ -1,3 +1,7 @@
+// constants
+import { StatusType } from "../../../../constants";
+
+// component prop type
 import { BlockProps } from "baseui/block";
 
 export const listItem: BlockProps = {
@@ -18,8 +22,9 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "80%",
-    fontFamily: "'Lato', sans-serif",
-    margin: "auto"},
+        fontFamily: "'Lato', sans-serif",
+        margin: "auto",
+      },
     },
   },
 };
@@ -89,66 +94,63 @@ export const componentItem: BlockProps = {
     Block: {
       style: {
         paddingRight: "1.2rem",
-        display : "inline",
+        display: "inline",
       },
     },
   },
 };
 
 /**
- * Status' classValue
+ * Status' style
  * @param { string } status Status's name obtained in API response
  * @returns { string } The style for the status in list-view
  * @global
  */
 const statusColor = (status: string) => {
   status = status.toLowerCase();
-  if (status === "investigating") {
-    //bgBlue
-    return {
-      backgroundColor: "rgb(191, 214, 231)",
-      color: "rgb(32, 32, 212)",
-    };
+  switch (status) {
+    case StatusType.Investigating:
+      return {
+        //bgBlue
+        backgroundColor: "rgb(191, 214, 231)",
+        color: "rgb(32, 32, 212)",
+      };
+    case StatusType.Resolved:
+      //bgGreen
+      return {
+        backgroundColor: "rgb(195, 225, 199)",
+        color: "gb(59, 136, 49)",
+      };
+    case StatusType.Verifying:
+      // bgYellow
+      return {
+        backgroundColor: "rgb(233, 236, 139)",
+        color: "rgb(184, 157, 20)",
+      };
+    case StatusType.Completed:
+      // bgPink
+      return {
+        backgroundColor: "rgb(236, 209, 230)",
+        color: "rgb(174, 68, 160)",
+      };
+    case StatusType.Scheduled:
+      // bgOrange
+      return {
+        backgroundColor: "rgb(233, 224, 191)",
+        color: "rgb(194, 139, 50)",
+      };
+    case StatusType.InProgress:
+      // bgGreyBlue
+      return {
+        backgroundColor: "rgb(184, 223, 222)",
+        color: "rgb(54, 115, 165)",
+      };
+    default:
+      return {
+        backgroundColor: "grey",
+        color: "black",
+      };
   }
-  if (status === "resolved") {
-    //bgGreen
-    return {
-      backgroundColor: "rgb(195, 225, 199)",
-      color: "gb(59, 136, 49)",
-    };
-  }
-  if (status === "verifying") {
-    // bgYellow
-    return {
-      backgroundColor: "rgb(233, 236, 139)",
-      color: "rgb(184, 157, 20)",
-    };
-  }
-  if (status === "completed") {
-    // bgPink
-    return {
-      backgroundColor: "rgb(236, 209, 230)",
-      color: "rgb(174, 68, 160)",
-    };
-  }
-  if (status === "scheduled") {
-    // bgOrange
-    return {
-      backgroundColor: "rgb(233, 224, 191)",
-      color: "rgb(194, 139, 50)",
-    };
-  }
-  if (status === "in_progress") {
-    // bgGreyBlue
-    return {
-      backgroundColor: "rgb(184, 223, 222)",
-      color: "rgb(54, 115, 165)",
-    };
-  }
-  return {
-    backgroundColor: "grey",
-    color: "black",
-  };
 };
 
 export const itemStatus: BlockProps = {

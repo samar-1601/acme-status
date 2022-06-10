@@ -1,3 +1,16 @@
+// lib
+import { useState } from "react";
+import Link from "next/link";
+
+// components
+import { NavBarMenuItem } from "./navBarMenuItem";
+import { IncidentsList } from "./IncidentsList";
+import { Block } from "baseui/block";
+
+// constants
+import { PageType } from "../../../constants";
+
+// styles
 import { incidentsListView } from "./styles/listStyles";
 import {
   container,
@@ -7,13 +20,6 @@ import {
   nav,
   createIncidentButton,
 } from "./styles/navStyles";
-import { NavBarMenuItem } from "./navBarMenuItem";
-import { IncidentsList } from "./IncidentsList";
-import { useState } from "react";
-import { PageType } from "../../../constants";
-import Link from "next/link";
-
-import { Block } from "baseui/block";
 
 /**
  * IncidentsList View
