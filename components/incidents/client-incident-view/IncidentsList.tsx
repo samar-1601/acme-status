@@ -153,7 +153,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
                       columnIndex={0}
                       rowIndex={index}
                     >
-                      <div style={style}>{renderData(element)}</div>
+                      <div style={style}>{renderData(element, pageType)}</div>
                     </CellMeasurer>
                   );
                 }}
