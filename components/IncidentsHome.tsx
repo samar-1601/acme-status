@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { IncidentsListViewHeader } from "./incidents-list-view/Header";
+import { IncidentsListViewHeader } from "./incidents/incidents-list-view/Header";
 
 const IncidentsHome = () => {
   return (
