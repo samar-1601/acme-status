@@ -1,12 +1,12 @@
-import { FormControl } from "baseui/form-control";
-import SelectStatusComponent from "./SelectStatusComponent";
-import React from "react";
+import * as React from "react";
 import { ComponentsAffectedProps } from "../../../variableTypes";
+import SelectStatusComponent from "./SelectStatusComponent";
 import { Block } from "baseui/block";
+import { FormControl } from "baseui/form-control";
 
 const label = <Block>Components Affected</Block>;
 
-export default function ComponentsAffected(props: ComponentsAffectedProps) {
+export default function AffectedComponents(props: ComponentsAffectedProps) {
   return (
     <FormControl
       label={label}

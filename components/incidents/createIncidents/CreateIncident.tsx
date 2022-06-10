@@ -1,22 +1,21 @@
-import { Button } from "baseui/button";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
+import { Button } from "baseui/button";
 import { Spinner, SIZE } from "baseui/spinner";
+import { Block } from "baseui/block";
+import { useSnackbar, DURATION } from "baseui/snackbar";
 import InputStatus from "./InputStatus";
 import IncidentName from "./IncidentName";
 import IncidentMessage from "./IncidentMessage";
-import ComponentsAffected from "./ComponentsAffected";
-import { NEXT_PUBLIC_AUTH_TOKEN } from "./../../../constants";
-import { ComponentObject } from "../../../variableTypes";
-import Router from "next/router";
-import { Block } from "baseui/block";
-import { STATUS } from "./../../../constants";
+import AffectedComponents from "./AffectedComponents";
+import { NEXT_PUBLIC_AUTH_TOKEN, STATUS } from "./../../../constants";
 import {
   SendComponentObject,
   JSONObject,
   optionType,
   CreateIncidentProps,
+  ComponentObject,
 } from "../../../variableTypes";
-import { useSnackbar, DURATION } from "baseui/snackbar";
 
 const getStatus = (id: number) => {
   switch (id) {
@@ -55,7 +54,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
   const [incidentName, setIncidentName] = useState<string>("");
   const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
   const [incidentMessage, setIncidentMessage] = useState<String>("");
-  const [componentsAffected, setComponentsAffected] = useState<
+  const [affectedComponents, setAffectedComponents] = useState<
     ComponentObject[]
   >([]);
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
@@ -84,7 +83,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
               selected: false,
             };
           });
-          setComponentsAffected(InitialData);
+          setAffectedComponents(InitialData);
           setCurrentStateOfPage(1);
         })
         .catch(() => {
@@ -113,8 +112,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
     console.log(incidentName);
     console.log(incidentMessage);
     console.log(incidentStatus);
-    console.log(componentsAffected);
-    const componentIDs = componentsAffected
+    console.log(affectedComponents);
+    const componentIDs = affectedComponents
       .filter(function (item) {
         if (!item.selected) {
           return false;
@@ -125,7 +124,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         return item.compId;
       });
     let components: SendComponentObject = {};
-    componentsAffected.forEach((item) => {
+    affectedComponents.forEach((item) => {
       if (
         item.selected &&
         item.compType != InitialData[Number(item.id)].compType
@@ -202,7 +201,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
   };
 
   const toggleCheckBox = (e: React.BaseSyntheticEvent) => {
-    const newComponentsAffected = componentsAffected.map(
+    const newComponentsAffected = affectedComponents.map(
       (item: ComponentObject) => {
         if (item.id == e.target.name) {
           return {
@@ -217,11 +216,11 @@ export default function CreateIncident(props: CreateIncidentProps) {
         }
       }
     );
-    setComponentsAffected(newComponentsAffected);
+    setAffectedComponents(newComponentsAffected);
   };
 
   const changeOption = (e: optionType, id: String) => {
-    const newComponentsAffected = componentsAffected.map(
+    const newComponentsAffected = affectedComponents.map(
       (item: ComponentObject) => {
         if (item.id.toString() == id) {
           return {
@@ -236,7 +235,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         }
       }
     );
-    setComponentsAffected(newComponentsAffected);
+    setAffectedComponents(newComponentsAffected);
   };
 
   const updateStatus = (e: string) => {
@@ -284,8 +283,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
               }}
             >
               {formConstant}
-              <ComponentsAffected
-                componentList={componentsAffected}
+              <AffectedComponents
+                componentList={affectedComponents}
                 toggleCheckBox={(e: React.BaseSyntheticEvent) =>
                   toggleCheckBox(e)
                 }
@@ -368,8 +367,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
             }}
           >
             {formConstant}
-            <ComponentsAffected
-              componentList={componentsAffected}
+            <AffectedComponents
+              componentList={affectedComponents}
               toggleCheckBox={(e: React.BaseSyntheticEvent) =>
                 toggleCheckBox(e)
               }

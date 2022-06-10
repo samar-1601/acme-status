@@ -1,13 +1,12 @@
-import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
 import React from "react";
 import { Select, SIZE, TYPE } from "baseui/select";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { ParagraphSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
+import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
+import { Block } from "baseui/block";
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
-import { Block } from "baseui/block";
-import { Avatar } from "baseui/avatar";
 
 function Image(props: ImageProps) {
   return (

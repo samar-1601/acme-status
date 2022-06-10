@@ -1,8 +1,8 @@
+import React from "react";
 import { FormControl } from "baseui/form-control";
 import { ProgressBar, SIZE } from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block, BlockProps } from "baseui/block";
-import React from "react";
 import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
 import { STATUSNames } from "./../../../constants";
 
