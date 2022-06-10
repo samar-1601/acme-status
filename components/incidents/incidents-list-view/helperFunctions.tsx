@@ -1,5 +1,6 @@
 // components
 import { Block } from "baseui/block";
+import { JsxElement } from "typescript";
 
 // styles
 import {
@@ -18,7 +19,7 @@ import {
  * @param date The date which needs to be formatted to display
  * @returns formatted data in x days ago format
  */
-const formatDate = (date: string | Date) => {
+const formatDate = (date: string | Date):string => {
   date = new Date(date);
   const timeElapsed = Date.now() - date.getTime();
 
@@ -37,7 +38,7 @@ const formatDate = (date: string | Date) => {
  * @param data the data from which the components list is made
  * @returns JSX containing the components in the current incident
  */
-const getComponents = (data: any) => {
+const getComponents = (data: any):JSX.Element[] => {
   let componentsList: JSX.Element[] = [];
   if (data["components"]) {
     data["components"].forEach((component: any, id: any) => {
@@ -56,7 +57,7 @@ const getComponents = (data: any) => {
  * @param data filtered JSON data from API
  * @returns JSX component list
  */
-export const renderData = (data: any) => {
+export const renderData:React.FC = (data: any):JSX.Element => {
   return (
     <Block key={data["name"]} {...listItem}>
       <Block {...listDetails}>
