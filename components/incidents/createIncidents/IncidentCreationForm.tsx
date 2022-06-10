@@ -1,8 +1,9 @@
 import * as React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import CreateIncident from "./CreateIncident";
 import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../constants";
-import { useEffect } from "react";
-import { useState } from "react";
+
 interface JSONObject {
   name: String;
   id: String;

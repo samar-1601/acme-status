@@ -74,5 +74,5 @@ export interface IncidentNameProps {
 
 export interface IncidentMessageProps {
   updateIncidentMessage: Function;
-  value: String;
+  value: string | number | undefined;
 }
