@@ -6,6 +6,13 @@ import { Block } from "baseui/block";
 import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
 import { STATUSNames } from "./../../../constants";
 
+function propsareEqual(
+  prevprops: InputStatusprops,
+  nextprops: InputStatusprops
+) {
+  return prevprops.incidentStatus === nextprops.incidentStatus;
+}
+
 function calculateStatus(status: String): number {
   if (status == "Investigating") {
     return 0;
@@ -20,7 +27,7 @@ function calculateStatus(status: String): number {
   }
 }
 
-export default function InputStatus(props: InputStatusprops) {
+export const InputStatus = React.memo((props: InputStatusprops) => {
   const updateStatusBarOnClick = useCallback(
     (e: SpecialEvent) => {
       let percentage = 0;
@@ -137,4 +144,4 @@ export default function InputStatus(props: InputStatusprops) {
       </FormControl>
     </Block>
   );
-}
+}, propsareEqual);

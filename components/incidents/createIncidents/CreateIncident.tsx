@@ -4,10 +4,10 @@ import { Button } from "baseui/button";
 import { Spinner, SIZE } from "baseui/spinner";
 import { Block } from "baseui/block";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import InputStatus from "./InputStatus";
-import IncidentName from "./IncidentName";
-import IncidentMessage from "./IncidentMessage";
-import AffectedComponents from "./AffectedComponents";
+import { InputStatus } from "./InputStatus";
+import { IncidentName } from "./IncidentName";
+import { IncidentMessage } from "./IncidentMessage";
+import { AffectedComponents } from "./AffectedComponents";
 import {
   NEXT_PUBLIC_AUTH_TOKEN,
   STATUS,
@@ -30,7 +30,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
   const [currentStateOfPage, setCurrentStateOfPage] = useState<number>(0); //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
   const [incidentName, setIncidentName] = useState<string>("");
   const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
-  const [incidentMessage, setIncidentMessage] = useState<String>("");
+  const [incidentMessage, setIncidentMessage] = useState<
+    string | number | undefined
+  >("");
   const [affectedComponents, setAffectedComponents] = useState<
     ComponentObject[]
   >([]);
@@ -70,12 +72,11 @@ export default function CreateIncident(props: CreateIncidentProps) {
   }, [props.pageID]);
 
   // useEffect(() => {
-  //     console.log(isLoaded);
-  //     console.log(incidentName);
-  //     console.log(incidentMessage);
-  //     console.log(incidentStatus);
-  //     console.log(componentsAffected);
-  // })
+  // console.log(incidentName);
+  // console.log(incidentMessage);
+  // console.log(incidentStatus);
+  // console.log(affectedComponents);
+  // });
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
   }, []);
@@ -225,9 +226,6 @@ export default function CreateIncident(props: CreateIncidentProps) {
     setIncidentStatus(e);
   }, []);
 
-  useEffect(() => {
-    console.log("OOPSSIIEEE");
-  }, [toggleCheckBox]);
   const formConstant = (
     <>
       <h2>Create Incident</h2>

@@ -1,8 +1,16 @@
+import * as React from "react";
 import { FormControl } from "baseui/form-control";
 import { Input, SIZE } from "baseui/input";
 import { IncidentNameProps } from "../../../variableTypes";
 
-export default function IncidentName(props: IncidentNameProps) {
+function propsareEqual(
+  prevprops: IncidentNameProps,
+  nextprops: IncidentNameProps
+) {
+  return prevprops.value === nextprops.value;
+}
+
+export const IncidentName = React.memo((props: IncidentNameProps) => {
   return (
     <FormControl
       label={"Incident Name"}
@@ -17,4 +25,4 @@ export default function IncidentName(props: IncidentNameProps) {
       />
     </FormControl>
   );
-}
+}, propsareEqual);
