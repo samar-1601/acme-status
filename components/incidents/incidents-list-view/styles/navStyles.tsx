@@ -78,7 +78,8 @@ export const divInsideNav: BlockProps = {
 export const createIncidentButton: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.boxShadow = "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+      (event.target as HTMLElement).style.boxShadow =
+        "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
     }
   },
   onMouseLeave: (event) => {
@@ -91,10 +92,11 @@ export const createIncidentButton: BlockProps = {
       style: {
         alignSelf: "flex-end",
         borderRadiusWidth: "4px",
-        marginBottom : "8px",
-        padding : "8px",
+        marginBottom: "8px",
+        padding: "8px",
         color: "white",
         backgroundColor: "rgb(32, 65, 230)",
+        cursor: "pointer",
       },
     },
   },
