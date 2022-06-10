@@ -1,6 +1,5 @@
 // components
 import { Block } from "baseui/block";
-import { JsxElement } from "typescript";
 
 // styles
 import {
