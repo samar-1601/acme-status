@@ -101,7 +101,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   const fetchMoreData = useCallback(() => {
     console.log("fetchMore Called, pageNo : ", pageNumber);
     setPageNumber((p) => p + 1);
-  },[]);
+  },[pageNumber]);
 
   /**
    * Triggers more loading of data for infinite scrolling

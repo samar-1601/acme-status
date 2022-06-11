@@ -1,3 +1,6 @@
+// lib
+import * as React from "react";
+
 // styles
 import {
   divInsideNav,
@@ -15,11 +18,12 @@ interface Props {
   onClick: any;
 }
 
-export const NavBarMenuItem: React.FC<Props> = ({
+export const NavBarMenuItem: React.FC<Props> = React.memo(({
   currentPage,
   pageType,
   onClick,
 }) => {
+  console.log("nav")
   return (
     <Block {...divInsideNav} onClick={onClick}>
       <Block
@@ -34,4 +38,4 @@ export const NavBarMenuItem: React.FC<Props> = ({
       </Block>
     </Block>
   );
-};
+});

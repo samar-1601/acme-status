@@ -35,7 +35,7 @@ export const ComponentStatusIconUrls = (status : string) => {
     case "major_outage":
       return "/major_outage.png";
     case "degraded_performance":
-      return "//degraded_performance.png";
+      return "/degraded_performance.png";
     case "under_maintenance":
       return "/under_maintenance.png";
     case "operational":

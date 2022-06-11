@@ -1,9 +1,9 @@
 // lib
 import { useState } from "react";
-import Link from "next/link";
 
 // components
 import { NavBarMenuItem } from "./navBarMenuItem";
+import { CreateIncidentButton } from "./createIncidentButton";
 import { IncidentsList } from "./IncidentsList";
 import { Block } from "baseui/block";
 
@@ -18,7 +18,6 @@ import {
   headerBar,
   navbarWrapper,
   nav,
-  createIncidentButton,
 } from "./styles/navStyles";
 
 /**
@@ -27,7 +26,7 @@ import {
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
 export const IncidentsListViewHeader: React.FC = () => {
-  const [activePage, setPage] = useState<PageType>(PageType.All);
+  const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
 
   return (
     <Block {...incidentsListView}>
@@ -58,9 +57,7 @@ export const IncidentsListViewHeader: React.FC = () => {
               onClick={() => setPage(PageType.Scheduled)}
             />
           </Block>
-          <Link href="/incident/new">
-            <Block {...createIncidentButton}>Create incident</Block>
-          </Link>
+          <CreateIncidentButton />
         </Block>
       </Block>
       <Block {...content}>
