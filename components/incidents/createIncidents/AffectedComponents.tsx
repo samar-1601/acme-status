@@ -22,7 +22,7 @@ export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
     // useEffect(() => {
     //   console.log("Here is a problem!!!");
-    // });
+    // }, [props.toggleCheckBox]);
     return (
       <FormControl
         label={label}
@@ -44,12 +44,8 @@ export const AffectedComponents = React.memo(
                 id={item.id}
                 type={item.compType}
                 selected={item.selected}
-                toggleCheckBox={(event: React.SyntheticEvent) =>
-                  props.toggleCheckBox(event)
-                }
-                changeOption={(event: React.SyntheticEvent, compId: Number) =>
-                  props.changeOption(event, compId)
-                }
+                toggleCheckBox={props.toggleCheckBox}
+                changeOption={props.changeOption}
               />
             );
           })}

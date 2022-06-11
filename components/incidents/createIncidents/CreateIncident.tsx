@@ -72,10 +72,10 @@ export default function CreateIncident(props: CreateIncidentProps) {
   }, [props.pageID]);
 
   // useEffect(() => {
-  // console.log(incidentName);
-  // console.log(incidentMessage);
-  // console.log(incidentStatus);
-  // console.log(affectedComponents);
+  //   console.log(incidentName);
+  //   console.log(incidentMessage);
+  //   console.log(incidentStatus);
+  //   console.log(affectedComponents);
   // });
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
@@ -229,22 +229,14 @@ export default function CreateIncident(props: CreateIncidentProps) {
   const formConstant = (
     <>
       <h2>Create Incident</h2>
-      <IncidentName
-        value={incidentName}
-        handleNameChange={(e: React.BaseSyntheticEvent) => handleNameChange(e)}
-      />
+      <IncidentName value={incidentName} handleNameChange={handleNameChange} />
       <InputStatus
-        updateStatus={(e: string) => updateStatus(e)}
+        updateStatus={updateStatus}
         incidentStatus={incidentStatus}
-        // updateStatusBarOnClick={(event: SpecialEvent) =>
-        //   updateStatusBarOnClick(event)
-        // }
       />
       <IncidentMessage
         value={incidentMessage}
-        updateIncidentMessage={(e: React.BaseSyntheticEvent) =>
-          updateIncidentMessage(e)
-        }
+        updateIncidentMessage={updateIncidentMessage}
       />
     </>
   );
@@ -269,12 +261,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
               {formConstant}
               <AffectedComponents
                 componentList={affectedComponents}
-                toggleCheckBox={(e: React.BaseSyntheticEvent) =>
-                  toggleCheckBox(e)
-                }
-                changeOption={(e: optionType, id: String) =>
-                  changeOption(e, id)
-                }
+                toggleCheckBox={toggleCheckBox}
+                changeOption={changeOption}
               />
               <Button
                 onClick={() => {
@@ -353,10 +341,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
             {formConstant}
             <AffectedComponents
               componentList={affectedComponents}
-              toggleCheckBox={(e: React.BaseSyntheticEvent) =>
-                toggleCheckBox(e)
-              }
-              changeOption={(e: optionType, id: String) => changeOption(e, id)}
+              toggleCheckBox={toggleCheckBox}
+              changeOption={changeOption}
             />
             <Button
               overrides={{
