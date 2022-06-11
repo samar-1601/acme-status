@@ -9,7 +9,7 @@ const Index: React.FC = () => {
   return (
     <div>
       <Button onClick={() => console.log("hey")}>
-        <a href="/components">Components</a>
+        <a href="/add_component">Add component</a>
       </Button>
       <p className={css({ color: theme.colors.accent600 })}>Styled by hook</p>
     </div>

@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.goback {
+    text-decoration: none;
+}
+
+.page {
+    padding: 40px;
+    width: 1000px;    
+    margin: auto;
+}
