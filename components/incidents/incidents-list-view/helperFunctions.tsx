@@ -1,6 +1,8 @@
 // components
 import { Block } from "baseui/block";
 import { Avatar } from "baseui/avatar";
+import { Button } from "baseui/button";
+import Link from "next/link";
 
 // constants
 import { ComponentStatusIconUrls } from "../../../constants";
@@ -15,6 +17,7 @@ import {
   itemDetailsSecondLine,
   itemName,
   componentItem,
+  updateIncidentButton,
 } from "./styles/listStyles";
 
 /**
@@ -90,6 +93,14 @@ export const renderData: React.FC = (data: any): JSX.Element => {
         </Block>
         <Block {...component}>{getComponents(data)}</Block>
       </Block>
+      <Link
+        href={{
+          pathname: `/incident/update/${data["id"]}`,
+          query: data["id"],
+        }}
+      >
+        <Block {...updateIncidentButton}>Update</Block>
+      </Link>
     </Block>
   );
 };
