@@ -23,7 +23,7 @@ interface Props {
  * Check function for React.memo on the NavBarMenuItem to reduce unnecesary renders for unchanged menu items
  * @param prevMenu The previous selected menu item
  * @param currentMenu The current selected menu item
- * @returns true if the previous or the current item was untouched 
+ * @returns true if the previous or the current item was untouched
  */
 function menuItemChanged(prevMenu: Props, currentMenu: Props) {
   return (
