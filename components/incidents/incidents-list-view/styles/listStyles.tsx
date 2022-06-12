@@ -8,6 +8,8 @@ export const listItem: BlockProps = {
   overrides: {
     Block: {
       style: {
+        display: "flex",
+        justifyContent: "space-between",
         padding: "20px 30px 15px 30px",
         margin: "10px 8px 20px 8px",
         borderTop: "4px rgb(243, 214, 54) solid",
@@ -168,6 +170,32 @@ export const itemStatus: BlockProps = {
         fontWeight: "600",
         display: "inline",
       }),
+    },
+  },
+};
+
+export const updateIncidentButton: BlockProps = {
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow =
+        "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.boxShadow = "";
+    }
+  },
+  overrides: {
+    Block: {
+      style: {
+        alignSelf: "center",
+        borderRadius: "4px",
+        padding: "10px",
+        color: "grey",
+        backgroundColor: "rgb(237,237,237)",
+        cursor: "pointer",
+      },
     },
   },
 };
