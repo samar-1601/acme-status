@@ -1,33 +1,23 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Router from "next/router";
 import { Button } from "baseui/button";
 import { Spinner, SIZE } from "baseui/spinner";
 import { Block } from "baseui/block";
-import { useSnackbar, DURATION } from "baseui/snackbar";
 import { InputStatus } from "./InputStatus";
 import { IncidentName } from "./IncidentName";
 import { IncidentMessage } from "./IncidentMessage";
 import { AffectedComponents } from "./AffectedComponents";
-import {
-  NEXT_PUBLIC_AUTH_TOKEN,
-  STATUS,
-  getIncidentStatus,
-  getStatus,
-} from "./../../../constants";
+import { getIncidentStatus, getStatus } from "./../../../constants";
 import {
   SendComponentObject,
-  JSONObject,
   optionType,
   CreateIncidentProps,
   ComponentObject,
 } from "../../../variableTypes";
 
-let InitialData: (ComponentObject | never)[] = [];
-
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
 export default function CreateIncident(props: CreateIncidentProps) {
-  const [currentStateOfPage, setCurrentStateOfPage] = useState<number>(0); //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
+  //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
   const [incidentName, setIncidentName] = useState<string>("");
   const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
   const [incidentMessage, setIncidentMessage] = useState<
@@ -35,48 +25,12 @@ export default function CreateIncident(props: CreateIncidentProps) {
   >("");
   const [affectedComponents, setAffectedComponents] = useState<
     ComponentObject[]
-  >([]);
-  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
-  const { enqueue, dequeue } = useSnackbar();
+  >(props.components);
 
   useEffect(() => {
-    const pageID = props.pageID;
-    pageID.forEach((page: String) => {
-      const URL = `https://api.statuspage.io/v1/pages/${page}/components`;
-      fetch(URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          console.log(json);
-          InitialData = json.map((item: JSONObject, index: Number) => {
-            return {
-              compName: item.name,
-              compType: STATUS[item.status],
-              id: index,
-              compId: item.id,
-              selected: false,
-            };
-          });
-          setAffectedComponents(InitialData);
-          setCurrentStateOfPage(1);
-        })
-        .catch(() => {
-          setCurrentStateOfPage(2);
-        });
-    });
-  }, [props.pageID]);
+    setAffectedComponents(props.components);
+  }, [props.components]);
 
-  // useEffect(() => {
-  //   console.log(incidentName);
-  //   console.log(incidentMessage);
-  //   console.log(incidentStatus);
-  //   console.log(affectedComponents);
-  // });
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
   }, []);
@@ -86,7 +40,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
   }, []);
 
   const submitForm = () => {
-    console.log(currentStateOfPage);
+    console.log(props.currentStateOfPage);
     console.log(incidentName);
     console.log(incidentMessage);
     console.log(incidentStatus);
@@ -105,7 +59,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
     affectedComponents.forEach((item) => {
       if (
         item.selected &&
-        item.compType != InitialData[Number(item.id)].compType
+        item.compType != props.components[Number(item.id)].compType
       ) {
         const key = item.compId;
         // Object.assign(components,{ key : getStatus(item.compType}))
@@ -138,48 +92,14 @@ export default function CreateIncident(props: CreateIncidentProps) {
       },
     };
     console.log(payload);
-    console.log(props.pageID[0]);
-    fetch(
-      "https://api.statuspage.io/v1/pages/" + props.pageID[0] + "/incidents",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-        },
-        body: JSON.stringify(payload),
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        dequeue();
-        enqueue(
-          {
-            message: "Successfully submitted form details",
-          },
-          DURATION.short
-        );
-        setIsSubmitClicked(false);
-      })
-      .then(() => {
-        Router.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        dequeue();
-        enqueue(
-          {
-            message: "Sorry not able to submit form",
-          },
-          DURATION.long
-        );
-        setIsSubmitClicked(false);
-      });
+    props.handleSubmit(payload);
+    // console.log(props.pageID[0]);
   };
 
   const toggleCheckBox = useCallback(
     (e: React.BaseSyntheticEvent) => {
+      console.log(affectedComponents);
+      console.log(e);
       const newComponentsAffected = affectedComponents.map(
         (item: ComponentObject) => {
           if (item.id == e.target.name) {
@@ -240,9 +160,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
       />
     </>
   );
-  if (currentStateOfPage != 2) {
-    if (!isSubmitClicked) {
-      if (currentStateOfPage == 1) {
+  if (props.currentStateOfPage != 2) {
+    if (!props.isSubmitClicked) {
+      if (props.currentStateOfPage == 1) {
         return (
           <>
             <Block
@@ -266,16 +186,8 @@ export default function CreateIncident(props: CreateIncidentProps) {
               />
               <Button
                 onClick={() => {
-                  setIsSubmitClicked(true);
                   submitForm();
                   // dequeue();
-                  enqueue(
-                    {
-                      message: "Submitting Form Details",
-                      progress: true,
-                    },
-                    DURATION.infinite
-                  );
                 }}
                 overrides={{
                   BaseButton: {
