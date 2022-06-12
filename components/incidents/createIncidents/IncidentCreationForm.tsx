@@ -111,6 +111,9 @@ export default function IncidentCreationForm() {
       currentStateOfPage={stateOfPage}
       isSubmitClicked={isSubmitClicked}
       handleSubmit={handleSubmit}
+      incidentName={""}
+      incidentStatus={"Investigating"}
+      type={"Create"}
     />
   );
 }

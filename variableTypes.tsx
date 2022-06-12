@@ -35,6 +35,9 @@ export interface CreateIncidentProps {
   currentStateOfPage: number;
   isSubmitClicked: boolean;
   handleSubmit: Function;
+  incidentName: string;
+  incidentStatus: string;
+  type: string;
 }
 
 export interface ComponentObject {
@@ -84,4 +87,13 @@ export interface IncidentMessageProps {
 export interface pageData {
   name: String;
   id: String;
+}
+
+export interface UpdateIncidentFormProps {
+  incidentId: string | string[] | undefined;
+}
+
+export interface IncidentFetchType {
+  id: string;
+  status: string;
 }
