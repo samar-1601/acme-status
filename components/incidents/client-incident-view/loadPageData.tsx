@@ -49,6 +49,8 @@ const getData = async (
     const dataItem = await response.json();
 
     console.log(
+      "pageType:",
+      pageType,
       "pageNo:",
       pageNumber,
       "hasMore",
@@ -101,7 +103,7 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
       // call getData for each pageID
       if (pageIDsList !== undefined) {
         for (let i = 0; i < pageIDsList.length; i++) {
-          const dataItem = await getData(pageIDsList[i], pageNumber, pageType);
+          const dataItem:any[] = await getData(pageIDsList[i], pageNumber, pageType);
           /**
            * state.dataList : concat data obtained in the current response to previous datalist
            * state.hasLoaded : after all the above processes are done update the hasLoaded status

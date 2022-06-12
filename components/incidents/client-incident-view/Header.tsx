@@ -17,7 +17,7 @@ export const ClientsIncidentsListViewHeader: React.FC = () => {
   return (
     <Block {...incidentsListView}>
       <Block {...h1}> Client Incident List View </Block>
-      <IncidentsList pageType={PageType.All} />
+      <IncidentsList pageType={PageType.Active} />
       <Block {...h3}> About This Site</Block>
       <Block {...h3}> Scheduled Maintenance</Block>
       <IncidentsList pageType={PageType.Scheduled} />

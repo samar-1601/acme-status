@@ -65,6 +65,8 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       hasMore &&
       (dataList.length === prevDataLength || dataList.length < 10);
 
+    console.log(pageType, dataList);
+
     /**
      * if more data needs to be loaded, fetch more from the API
      */

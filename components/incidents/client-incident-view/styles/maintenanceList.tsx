@@ -23,7 +23,7 @@ export const maintenanceItemName: BlockProps = {
         fontSize: "1.3rem",
         fontWeight: "bold",
         textTransform: "capitalize",
-        padding: "15px 25px",
+        padding: "15px 0px",
         borderBottom : "0.1px grey solid"
       },
     },
@@ -35,7 +35,6 @@ export const maintenanceItemDate: BlockProps = {
       style: {
         color: "grey",
         fontSize: "0.9rem",
-        marginLeft : "25px",
         marginBottom : "25px",
       },
     },
@@ -51,7 +50,6 @@ export const maintenanceItemStatus: BlockProps = {
         fontSize: "1rem",
         textTransform: "capitalize",
         color : "rgb(51,51,51)",
-        marginLeft : "25px",
         marginTop : "10px",
       }),
     },
