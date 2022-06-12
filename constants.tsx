@@ -105,3 +105,18 @@ export const getIncidentStatus = (id: String): string => {
       return "";
   }
 };
+
+export const getIncidentStatusFromPost = (id: string) => {
+  switch (id) {
+    case "scheduled":
+      return "Investigating";
+    case "in_progress":
+      return "Identified";
+    case "verifying":
+      return "Monitoring";
+    case "completed":
+      return "Resolved";
+    default:
+      return "";
+  }
+};

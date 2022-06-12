@@ -18,8 +18,10 @@ import {
 
 export default function CreateIncident(props: CreateIncidentProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
-  const [incidentName, setIncidentName] = useState<string>("");
-  const [incidentStatus, setIncidentStatus] = useState<String>("Investigating");
+  const [incidentName, setIncidentName] = useState<string>(props.incidentName);
+  const [incidentStatus, setIncidentStatus] = useState<String>(
+    props.incidentStatus
+  );
   const [incidentMessage, setIncidentMessage] = useState<
     string | number | undefined
   >("");
@@ -30,6 +32,14 @@ export default function CreateIncident(props: CreateIncidentProps) {
   useEffect(() => {
     setAffectedComponents(props.components);
   }, [props.components]);
+
+  useEffect(() => {
+    setIncidentName(props.incidentName);
+  }, [props.incidentName]);
+
+  useEffect(() => {
+    setIncidentStatus(props.incidentStatus);
+  }, [props.incidentStatus]);
 
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
@@ -85,7 +95,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         auto_transition_to_operational_state: true,
         backfill_date: "string",
         backfilled: false,
-        body: "string",
+        body: incidentMessage,
         components: components,
         component_ids: componentIDs,
         scheduled_auto_transition: true,
@@ -148,7 +158,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
 
   const formConstant = (
     <>
-      <h2>Create Incident</h2>
+      <h2>{props.type} Incident</h2>
       <IncidentName value={incidentName} handleNameChange={handleNameChange} />
       <InputStatus
         updateStatus={updateStatus}
@@ -199,7 +209,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
                   },
                 }}
               >
-                Create
+                {props.type}
               </Button>
             </Block>
           </>
@@ -268,7 +278,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
                 },
               }}
             >
-              Create
+              {props.type}
             </Button>
           </Block>
         </>
