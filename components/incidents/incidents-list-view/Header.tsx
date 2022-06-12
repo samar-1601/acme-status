@@ -5,6 +5,7 @@ import { useState } from "react";
 import { NavBarMenuItem } from "./navBarMenuItem";
 import { CreateIncidentButton } from "./createIncidentButton";
 import { IncidentsList } from "./IncidentsList";
+import { HeaderBarText } from "./headerBarText";
 import { Block } from "baseui/block";
 
 // constants
@@ -15,7 +16,6 @@ import { incidentsListView } from "./styles/listStyles";
 import {
   container,
   content,
-  headerBar,
   navbarWrapper,
   nav,
 } from "./styles/navStyles";
@@ -31,9 +31,7 @@ export const IncidentsListViewHeader: React.FC = () => {
   return (
     <Block {...incidentsListView}>
       <Block {...container}>
-        <Block {...headerBar}>
-          <h1>Incidents</h1>
-        </Block>
+        <HeaderBarText headerText="Incidents"/>
         <Block {...navbarWrapper}>
           <Block {...nav}>
             <NavBarMenuItem

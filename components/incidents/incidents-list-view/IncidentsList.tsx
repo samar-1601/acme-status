@@ -1,9 +1,12 @@
 // lib
 import { useEffect, useState, useRef, useCallback } from "react";
+import * as React from "react";
+
+// helper functions
 import useLoadPageData from "./loadPageData";
-import { renderData } from "./helperFunctions";
 
 // components
+import { renderData } from "./helperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -17,7 +20,6 @@ import "react-virtualized/styles.css";
 
 // constants
 import { PageType } from "../../../constants";
-
 
 interface Props {
   pageType: PageType;
@@ -35,7 +37,7 @@ let prevDataLength: number = 0;
  * @param { enum.<PageType> } pageType Type of the page to be displayed
  * @returns A list of JSX Elements with data obtained from the API response
  */
-export const IncidentsList: React.FC<Props> = ({ pageType }) => {
+export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
   const cache = useRef(
@@ -101,24 +103,27 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   const fetchMoreData = useCallback(() => {
     console.log("fetchMore Called, pageNo : ", pageNumber);
     setPageNumber((p) => p + 1);
-  },[pageNumber]);
+  }, [pageNumber]);
 
   /**
    * Triggers more loading of data for infinite scrolling
    * @param param the startIndex and endIndex of rows
    * @returns the loaded data to show in infinite scrolling
    */
-  const loadMoreRows = useCallback((param: any) => {
-    const startIndex = param.startIndex;
-    const stopIndex = param.stopIndex;
+  const loadMoreRows = useCallback(
+    (param: any) => {
+      const startIndex = param.startIndex;
+      const stopIndex = param.stopIndex;
 
-    const dataLoaded = [];
-    for (let i = startIndex; i < stopIndex; i++) {
-      dataLoaded[i] = dataList[i];
-    }
-    fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
-    return Promise.resolve(dataLoaded);
-  }, [pageNumber]);
+      const dataLoaded = [];
+      for (let i = startIndex; i < stopIndex; i++) {
+        dataLoaded[i] = dataList[i];
+      }
+      fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
+      return Promise.resolve(dataLoaded);
+    },
+    [pageNumber]
+  );
 
   /**
    * AutoSizer : enables the auto sizing of the child elements based on their size
@@ -179,4 +184,4 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       <Spinner />
     </Block>
   );
-};
+});
