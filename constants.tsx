@@ -44,16 +44,3 @@ export const ComponentStatusIconUrls = (status : string) => {
       return "";
   }
 };
-
-
-// export const ITEMS = [
-//   { title: "Operational", imgUrl: "/operational2.webp", id: "0" },
-//   {
-//     title: "Degraded Performance",
-//     imgUrl: "/degraded_performance.png",
-//     id: "1",
-//   },
-//   { title: "Partial Outage", imgUrl: "/paritial_outage.png", id: "2" },
-//   { title: "Major Outage", imgUrl: "/major_outage.png", id: "3" },
-//   { title: "Under Maintainence", imgUrl: "/under_maintenance.png", id: "4" },
-// ];

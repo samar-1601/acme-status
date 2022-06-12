@@ -18,7 +18,6 @@ import "react-virtualized/styles.css";
 // constants
 import { PageType } from "../../../constants";
 
-
 interface Props {
   pageType: PageType;
 }
@@ -101,24 +100,27 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   const fetchMoreData = useCallback(() => {
     console.log("fetchMore Called, pageNo : ", pageNumber);
     setPageNumber((p) => p + 1);
-  },[]);
+  }, []);
 
   /**
    * Triggers more loading of data for infinite scrolling
    * @param param the startIndex and endIndex of rows
    * @returns the loaded data to show in infinite scrolling
    */
-  const loadMoreRows = useCallback((param: any) => {
-    const startIndex = param.startIndex;
-    const stopIndex = param.stopIndex;
+  const loadMoreRows = useCallback(
+    (param: any) => {
+      const startIndex = param.startIndex;
+      const stopIndex = param.stopIndex;
 
-    const dataLoaded = [];
-    for (let i = startIndex; i < stopIndex; i++) {
-      dataLoaded[i] = dataList[i];
-    }
-    fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
-    return Promise.resolve(dataLoaded);
-  }, [pageNumber]);
+      const dataLoaded = [];
+      for (let i = startIndex; i < stopIndex; i++) {
+        dataLoaded[i] = dataList[i];
+      }
+      fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
+      return Promise.resolve(dataLoaded);
+    },
+    [pageNumber]
+  );
 
   /**
    * AutoSizer : enables the auto sizing of the child elements based on their size

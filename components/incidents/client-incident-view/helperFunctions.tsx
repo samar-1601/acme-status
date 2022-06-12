@@ -27,14 +27,20 @@ const formatDate = (date: string | Date, pageType: string): string => {
   const formatter = new Intl.DateTimeFormat("en", { month: "short" });
   date = new Date(date);
 
+  // making h:m to hh:mm
+  let timeHour: string = `${date.getUTCHours()}`;
+  if (timeHour.length == 1) timeHour = `0${timeHour}`;
+  let timeMins: string = `${date.getUTCMinutes()}`;
+  if (timeMins.length == 1) timeMins = `0${timeMins}`;
+
   if (pageType == PageType.Scheduled)
     return `Posted on ${date.getUTCDay()} ${formatter.format(
       date
-    )}, ${date.getUTCHours()}:${date.getUTCMinutes()} UTC`;
+    )}, ${timeHour}:${timeMins} UTC`;
 
   return `${date.getUTCDay()} ${formatter.format(
     date
-  )}, ${date.getUTCHours()}:${date.getUTCMinutes()} UTC`;
+  )}, ${timeHour}:${timeMins} UTC`;
 };
 
 /**
@@ -51,7 +57,9 @@ export const renderData: React.FC = (
       <Block key={data["name"]} {...maintenanceListItem}>
         <Block {...maintenanceItemName}>{data["name"]}</Block>
         <Block {...maintenanceItemStatus}>{data["status"]}</Block>
-        <Block {...maintenanceItemDate}>{formatDate(data["created_at"], pageType)}</Block>
+        <Block {...maintenanceItemDate}>
+          {formatDate(data["created_at"], pageType)}
+        </Block>
       </Block>
     );
   }
