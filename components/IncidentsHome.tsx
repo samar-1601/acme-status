@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { ClientsIncidentsListViewHeader } from "./incidents/client-incident-view/Header";
+import { ClientsIncidentsListViewHome } from "./incidents/client-incident-view/clientHomePage";
 
 const IncidentsHome = () => {
   return (
@@ -12,7 +12,7 @@ const IncidentsHome = () => {
           rel="stylesheet"
         />
       </Head>
-      <ClientsIncidentsListViewHeader />
+      <ClientsIncidentsListViewHome />
     </>
   );
 };
