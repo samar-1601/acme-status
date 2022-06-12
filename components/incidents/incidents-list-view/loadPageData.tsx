@@ -76,7 +76,6 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
     hasMore: true,
   });
 
-
   /**
    * Get the ID list from API and then call for data in each page
    * @param pageNumber pageNumber for getting paginated data

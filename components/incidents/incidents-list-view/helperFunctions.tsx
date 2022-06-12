@@ -33,11 +33,10 @@ const formatDate = (date: string | Date): string => {
   let days = Math.floor(hours / 24);
 
   // making h:m to hh:mm
-  let timeHour:string = `${date.getUTCHours()}`;
-  if(timeHour.length==1) timeHour = `0${timeHour}`
-  let timeMins:string = `${date.getUTCMinutes()}`;
-  if(timeMins.length==1) timeMins = `0${timeMins}`
-
+  let timeHour: string = `${date.getUTCHours()}`;
+  if (timeHour.length == 1) timeHour = `0${timeHour}`;
+  let timeMins: string = `${date.getUTCMinutes()}`;
+  if (timeMins.length == 1) timeMins = `0${timeMins}`;
 
   let timeStatus = `${days} DAYS AGO (${timeHour}:${timeMins} UTC)`;
 

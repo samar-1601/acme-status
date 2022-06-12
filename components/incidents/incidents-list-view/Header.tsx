@@ -13,12 +13,7 @@ import { PageType } from "../../../constants";
 
 // styles
 import { incidentsListView } from "./styles/listStyles";
-import {
-  container,
-  content,
-  navbarWrapper,
-  nav,
-} from "./styles/navStyles";
+import { container, content, navbarWrapper, nav } from "./styles/navStyles";
 
 /**
  * IncidentsList View
@@ -31,7 +26,7 @@ export const IncidentsListViewHeader: React.FC = () => {
   return (
     <Block {...incidentsListView}>
       <Block {...container}>
-        <HeaderBarText headerText="Incidents"/>
+        <HeaderBarText headerText="Incidents" />
         <Block {...navbarWrapper}>
           <Block {...nav}>
             <NavBarMenuItem
