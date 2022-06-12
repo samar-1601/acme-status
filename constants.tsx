@@ -57,9 +57,9 @@ export const ITEMS = [
 /**
  * Returns the image URL corresponding to the component status
  */
-export const ComponentStatusIconUrls = (status : string) => {
+export const ComponentStatusIconUrls = (status: string) => {
   status = status.toLowerCase();
-  switch (status){
+  switch (status) {
     case "partial_outage":
       return "/paritial_outage.png";
     case "major_outage":
