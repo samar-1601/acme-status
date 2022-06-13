@@ -3,13 +3,6 @@ import { FormControl } from "baseui/form-control";
 import { Input, SIZE } from "baseui/input";
 import { IncidentNameProps } from "../../../variableTypes";
 
-function propsareEqual(
-  prevprops: IncidentNameProps,
-  nextprops: IncidentNameProps
-) {
-  return prevprops.value === nextprops.value;
-}
-
 export const IncidentName = React.memo((props: IncidentNameProps) => {
   return (
     <FormControl
@@ -25,4 +18,4 @@ export const IncidentName = React.memo((props: IncidentNameProps) => {
       />
     </FormControl>
   );
-}, propsareEqual);
+});

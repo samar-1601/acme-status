@@ -1,28 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ComponentsAffectedProps } from "../../../variableTypes";
 import { SelectStatusComponent } from "./SelectStatusComponent";
 import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 
-function propsAreEqual(
-  prevProps: ComponentsAffectedProps,
-  nextProps: ComponentsAffectedProps
-) {
-  return (
-    prevProps.componentList.length === prevProps.componentList.length &&
-    prevProps.componentList.every(
-      (value, index) => value === nextProps.componentList[index]
-    )
-  );
-}
-
 const label = <Block>Components Affected</Block>;
 
 export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
-    // useEffect(() => {
-    //   console.log("Here is a problem!!!");
-    // }, [props.toggleCheckBox]);
+    const handleChange = useCallback(
+      (idx: number, selected: boolean, optionType: number) => {
+        const newComponentsAffected = props.componentList.map(
+          (value, index) => {
+            if (index == idx) {
+              return {
+                compName: value.compName,
+                compType: optionType,
+                id: value.id,
+                compId: value.compId,
+                selected: selected,
+              };
+            } else {
+              return value;
+            }
+          }
+        );
+        props.handleComponentUpdate(newComponentsAffected);
+      },
+      [props.componentList]
+    );
     return (
       <FormControl
         label={label}
@@ -44,14 +50,12 @@ export const AffectedComponents = React.memo(
                 id={item.id}
                 type={item.compType}
                 selected={item.selected}
-                toggleCheckBox={props.toggleCheckBox}
-                changeOption={props.changeOption}
+                handleChange={handleChange}
               />
             );
           })}
         </div>
       </FormControl>
     );
-  },
-  propsAreEqual
+  }
 );

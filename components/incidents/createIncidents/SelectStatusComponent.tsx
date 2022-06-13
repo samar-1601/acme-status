@@ -8,18 +8,6 @@ import { Block } from "baseui/block";
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
 
-function propsAreEqual(
-  prevProps: statusComponentProps,
-  nextProps: statusComponentProps
-) {
-  return (
-    prevProps.id === nextProps.id &&
-    prevProps.name === nextProps.name &&
-    prevProps.selected === nextProps.selected &&
-    prevProps.type === nextProps.type
-  );
-}
-
 function Image(props: ImageProps) {
   return (
     <Block overrides={{ Block: { style: { display: "flex" } } }}>
@@ -43,10 +31,6 @@ export const SelectStatusComponent = React.memo(
         id: idx,
       };
     });
-
-    // useEffect(() => {
-    //   console.log("Hi this is ", props.name);
-    // });
     if (!props.selected) {
       return (
         <Block
@@ -65,7 +49,7 @@ export const SelectStatusComponent = React.memo(
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
             onChange={(event) => {
-              props.toggleCheckBox(event);
+              props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
             overrides={{
@@ -107,7 +91,12 @@ export const SelectStatusComponent = React.memo(
                 value={[options[props.type - 1]]}
                 placeholder="Select color"
                 onChange={(event) => {
-                  props.changeOption(event, props.id);
+                  // props.changeOption(event, props.id);
+                  props.handleChange(
+                    props.id,
+                    props.selected,
+                    Number(event.option!.id) + 1
+                  );
                 }}
                 overrides={{
                   DropdownOption: {
@@ -144,8 +133,8 @@ export const SelectStatusComponent = React.memo(
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
-            onChange={(event) => {
-              props.toggleCheckBox(event);
+            onChange={() => {
+              props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
             overrides={{
@@ -176,7 +165,11 @@ export const SelectStatusComponent = React.memo(
             value={[options[props.type - 1]]}
             placeholder="Select color"
             onChange={(event) => {
-              props.changeOption(event, props.id);
+              props.handleChange(
+                props.id,
+                props.selected,
+                Number(event.option!.id) + 1
+              );
             }}
             overrides={{
               DropdownOption: {

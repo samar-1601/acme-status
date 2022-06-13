@@ -1,11 +1,16 @@
+//lib
 import React, { useEffect, useState, useCallback } from "react";
 import { Button } from "baseui/button";
+
+//components
 import { Spinner, SIZE } from "baseui/spinner";
 import { Block } from "baseui/block";
 import { InputStatus } from "./InputStatus";
 import { IncidentName } from "./IncidentName";
 import { IncidentMessage } from "./IncidentMessage";
 import { AffectedComponents } from "./AffectedComponents";
+
+//constants
 import { getIncidentStatus, getStatus } from "./../../../constants";
 import {
   SendComponentObject,
@@ -15,6 +20,17 @@ import {
 } from "../../../variableTypes";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
+
+/**
+ *
+ * @param props contains
+ * components : contains component list isSelected and choiceType
+ * currentStateofPage : 0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
+ * isSubmitClicked: true or false
+ * incidentName: empty in case of IncidentCreation and not empty in case of UpdateIncident
+ * incidentStatus: status of the incident(default: Investigating)
+ * @returns
+ */
 
 export default function CreateIncident(props: CreateIncidentProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
@@ -72,8 +88,6 @@ export default function CreateIncident(props: CreateIncidentProps) {
         item.compType != props.components[Number(item.id)].compType
       ) {
         const key = item.compId;
-        // Object.assign(components,{ key : getStatus(item.compType}))
-        // components = {...components, key: getStatus(item.compType)!}
         components[key] = getStatus(item.compType)!;
       }
     });
@@ -106,50 +120,11 @@ export default function CreateIncident(props: CreateIncidentProps) {
     // console.log(props.pageID[0]);
   };
 
-  const toggleCheckBox = useCallback(
-    (e: React.BaseSyntheticEvent) => {
-      console.log(affectedComponents);
-      console.log(e);
-      const newComponentsAffected = affectedComponents.map(
-        (item: ComponentObject) => {
-          if (item.id == e.target.name) {
-            return {
-              compName: item.compName,
-              compType: item.compType,
-              id: item.id,
-              compId: item.compId,
-              selected: !item.selected,
-            };
-          } else {
-            return item;
-          }
-        }
-      );
-      setAffectedComponents(newComponentsAffected);
+  const handleComponentUpdate = useCallback(
+    (newComponent: ComponentObject[]) => {
+      setAffectedComponents(newComponent);
     },
-    [affectedComponents]
-  );
-
-  const changeOption = useCallback(
-    (e: optionType, id: String) => {
-      const newComponentsAffected = affectedComponents.map(
-        (item: ComponentObject) => {
-          if (item.id.toString() == id) {
-            return {
-              compName: item.compName,
-              compType: Number(e.option.id) + 1,
-              id: item.id,
-              compId: item.compId,
-              selected: item.selected,
-            };
-          } else {
-            return item;
-          }
-        }
-      );
-      setAffectedComponents(newComponentsAffected);
-    },
-    [affectedComponents]
+    []
   );
 
   const updateStatus = useCallback((e: string) => {
@@ -167,6 +142,10 @@ export default function CreateIncident(props: CreateIncidentProps) {
       <IncidentMessage
         value={incidentMessage}
         updateIncidentMessage={updateIncidentMessage}
+      />
+      <AffectedComponents
+        componentList={affectedComponents}
+        handleComponentUpdate={handleComponentUpdate}
       />
     </>
   );
@@ -189,11 +168,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
               }}
             >
               {formConstant}
-              <AffectedComponents
-                componentList={affectedComponents}
-                toggleCheckBox={toggleCheckBox}
-                changeOption={changeOption}
-              />
+
               <Button
                 onClick={() => {
                   submitForm();
@@ -261,11 +236,6 @@ export default function CreateIncident(props: CreateIncidentProps) {
             }}
           >
             {formConstant}
-            <AffectedComponents
-              componentList={affectedComponents}
-              toggleCheckBox={toggleCheckBox}
-              changeOption={changeOption}
-            />
             <Button
               overrides={{
                 BaseButton: {
