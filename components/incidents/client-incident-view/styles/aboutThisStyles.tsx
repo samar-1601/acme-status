@@ -47,13 +47,7 @@ export const componentNameText: BlockProps = {
     },
   },
 };
-export const componentStatusText: BlockProps = {
-  overrides: {
-    Block: {
-      style: {},
-    },
-  },
-};
+
 
 export const colorfullBarWrapper: BlockProps = {
   overrides: {
@@ -120,11 +114,13 @@ const componentsStatusColor = (status: string) => {
       return {
         //green
         color: "rgb(0,154,23)",
+        content : "Operational",
       };
     case ComponentStatusType.DegradedPerformance:
       //yellow
       return {
         color: "rgb(246,190,0)",
+        content : "Degraded Performance"
       };
     case ComponentStatusType.MajorOutage:
       // red
@@ -153,7 +149,10 @@ export const componentStatus: BlockProps = {
     Block: {
       style: ($value) => ({
         color: componentsStatusColor($value.children).color,
-        textTransform: "capitalize"
+        content : componentsStatusColor($value.children).content,
+        textTransform: "capitalize",
+        fontSize: "17px",
+        fontWeight: "700",
       }),
     },
   },

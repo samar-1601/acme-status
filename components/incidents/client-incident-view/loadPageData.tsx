@@ -95,7 +95,7 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
       ...state,
       hasLoaded: true,
       hasMore: dataItem.length > 0,
-      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
+      dataList: pageNumber == 1 ? dataItem : (dataItem!=undefined)?[...state.dataList, ...dataItem]:[...state.dataList],
     });
   };
 

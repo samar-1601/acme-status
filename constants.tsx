@@ -52,7 +52,7 @@ export const ComponentStatusIconUrls = (status : string) => {
  * @type {enum}
  */
  export enum ComponentStatusType {
-  Operational = "operational",
+  Operational =  "operational",
   UnderMaintenance = "under_maintenance",
   DegradedPerformance = "degraded_performance",
   MajorOutage = "major_outage",

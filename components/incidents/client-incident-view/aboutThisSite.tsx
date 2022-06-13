@@ -84,32 +84,34 @@ const renderComponents = async () => {
   componentList = await getComponents();
   console.log(componentList);
   let renderComponentList: JSX.Element[] = [];
-  for (const component of componentList) {
-    const componentUptime = await getComponentUptime(component["id"]);
-    let bars: JSX.Element = <></>;
-    if (componentUptime) {
-      bars = (
-        <>
-          <Block {...colorfullBarWrapper}>{getColorFullBars(90)}</Block>
-          <Block {...componentTimelineRow}>
-            <Block>90 Days Ago</Block>
-            <Block {...horizontalLine}></Block>
-            <Block>{componentUptime}%</Block>
-            <Block {...horizontalLine}></Block>
-            <Block>Today</Block>
+  if (componentList != undefined) {
+    for (const component of componentList) {
+      const componentUptime = await getComponentUptime(component["id"]);
+      let bars: JSX.Element = <></>;
+      if (componentUptime) {
+        bars = (
+          <>
+            <Block {...colorfullBarWrapper}>{getColorFullBars(90)}</Block>
+            <Block {...componentTimelineRow}>
+              <Block>90 Days Ago</Block>
+              <Block {...horizontalLine}></Block>
+              <Block>{componentUptime}%</Block>
+              <Block {...horizontalLine}></Block>
+              <Block>Today</Block>
+            </Block>
+          </>
+        );
+      }
+      renderComponentList.push(
+        <Block {...componentDetailsWrapper} key={component["name"]}>
+          <Block {...componentHeader}>
+            <Block {...componentNameText}>{component["name"]}</Block>
+            <Block {...componentStatus}>{component["status"]}</Block>
           </Block>
-        </>
+          {bars}
+        </Block>
       );
     }
-    renderComponentList.push(
-      <Block {...componentDetailsWrapper} key={component["name"]}>
-        <Block {...componentHeader}>
-          <Block {...componentNameText}>{component["name"]}</Block>
-          <Block {...componentStatus}>{component["status"]}</Block>
-        </Block>
-        {bars}
-      </Block>
-    );
   }
   return renderComponentList;
 };
