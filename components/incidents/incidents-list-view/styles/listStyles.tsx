@@ -49,7 +49,7 @@ export const itemName: BlockProps = {
       style: {
         flex: "100%",
         fontSize: "1.2rem",
-        fontWeight: "900",
+        fontWeight: 900,
         marginBottom: "8px",
         textTransform: "capitalize",
         display: "inline",
@@ -167,7 +167,7 @@ export const itemStatus: BlockProps = {
         fontSize: "0.8rem",
         letterSpacing: "0.08ch",
         textTransform: "uppercase",
-        fontWeight: "600",
+        fontWeight: 600,
         display: "inline",
       }),
     },

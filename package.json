@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
+    "lint": "eslint 'src/*/.{js,ts,tsx}'",
     "start": "next start",
     "test": "jest",
     "tsc": "tsc --noEmit"
@@ -19,7 +19,7 @@
     "transform": {
       ".(ts|tsx)": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testRegex": "(/_tests_/.*|\\.(test|spec))\\.(ts|tsx|js)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
