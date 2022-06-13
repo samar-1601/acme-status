@@ -36,7 +36,7 @@ export const ComponentStatusIconUrls = (status : string) => {
     case "major_outage":
       return "/major_outage.png";
     case "degraded_performance":
-      return "//degraded_performance.png";
+      return "/degraded_performance.png";
     case "under_maintenance":
       return "/under_maintenance.png";
     case "operational":
@@ -45,3 +45,16 @@ export const ComponentStatusIconUrls = (status : string) => {
       return "";
   }
 };
+
+/**
+ * ComponentStatusType
+ * status values for incidents
+ * @type {enum}
+ */
+ export enum ComponentStatusType {
+  Operational = "operational",
+  UnderMaintenance = "under_maintenance",
+  DegradedPerformance = "degraded_performance",
+  MajorOutage = "major_outage",
+  PartialOutage= "partial_outage",
+}

@@ -1,3 +1,7 @@
+// contstants
+import { ComponentStatusType } from "../../../../constants";
+
+// component proptype
 import { BlockProps } from "baseui/block";
 
 export const componentListWrapper: BlockProps = {
@@ -21,7 +25,6 @@ export const componentDetailsWrapper: BlockProps = {
     },
   },
 };
-
 
 export const componentHeader: BlockProps = {
   overrides: {
@@ -47,8 +50,7 @@ export const componentNameText: BlockProps = {
 export const componentStatusText: BlockProps = {
   overrides: {
     Block: {
-      style: {
-      },
+      style: {},
     },
   },
 };
@@ -82,8 +84,8 @@ export const componentTimelineRow: BlockProps = {
       style: {
         display: "flex",
         justifyContent: "space-between",
-        alignContent : "center",
-        alignItems : "center",
+        alignContent: "center",
+        alignItems: "center",
         flexDirection: "row",
         color: "grey",
         fontSize: "14px",
@@ -98,9 +100,61 @@ export const horizontalLine: BlockProps = {
       style: {
         border: "0.5px solid rgb(211,211,211)",
         width: "1px",
-        flexGrow : "1",
+        flexGrow: "1",
         margin: "0px 15px",
       },
+    },
+  },
+};
+
+/**
+ * Status' style
+ * @param { string } status Status's name obtained in API response
+ * @returns { string } The style for the status in list-view
+ * @global
+ */
+const componentsStatusColor = (status: string) => {
+  status = status.toLowerCase();
+  switch (status) {
+    case ComponentStatusType.Operational:
+      return {
+        //green
+        color: "rgb(0,154,23)",
+      };
+    case ComponentStatusType.DegradedPerformance:
+      //yellow
+      return {
+        color: "rgb(246,190,0)",
+      };
+    case ComponentStatusType.MajorOutage:
+      // red
+      return {
+        color: "rgb(205,0,26)",
+      };
+    case ComponentStatusType.PartialOutage:
+      // orange
+      return {
+        color: "rgb(255,153,19)",
+      };
+    case ComponentStatusType.UnderMaintenance:
+      // pink
+      return {
+        color: "pink",
+      };
+    default:
+      return {
+        color: "black",
+      };
+  }
+};
+
+export const componentStatus: BlockProps = {
+  overrides: {
+    Block: {
+      style: ($value) => ({
+        color: componentsStatusColor($value.children).color,
+        textTransform: "capitalize"
+      }),
     },
   },
 };

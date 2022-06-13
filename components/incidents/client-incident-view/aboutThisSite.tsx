@@ -17,7 +17,7 @@ import {
   componentHeader,
   componentTimelineRow,
   componentDetailsWrapper,
-  componentStatusText,
+  componentStatus,
   horizontalLine,
   componentListWrapper,
   componentNameText,
@@ -105,7 +105,7 @@ const renderComponents = async () => {
       <Block {...componentDetailsWrapper} key={component["name"]}>
         <Block {...componentHeader}>
           <Block {...componentNameText}>{component["name"]}</Block>
-          <Block {...componentStatusText}>{component["status"]}</Block>
+          <Block {...componentStatus}>{component["status"]}</Block>
         </Block>
         {bars}
       </Block>
@@ -136,7 +136,7 @@ export const AboutThisSite = React.memo(() => {
       overrides={{
         Block: {
           style: {
-            marginTop: "35vh",
+            marginTop: "15vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
