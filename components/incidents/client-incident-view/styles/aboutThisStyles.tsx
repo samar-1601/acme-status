@@ -1,11 +1,22 @@
 import { BlockProps } from "baseui/block";
 
+export const componentListWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        borderTop: "0.5px solid grey",
+        borderLeft: "0.5px solid grey",
+        borderRight: "0.5px solid grey",
+      },
+    },
+  },
+};
 export const componentDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        border: "0.5px solid grey",
-        padding: "20px",
+        borderBottom: "0.5px solid grey",
+        padding: "30px 25px",
       },
     },
   },
@@ -23,11 +34,20 @@ export const componentHeader: BlockProps = {
     },
   },
 };
+export const componentNameText: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        fontSize: "18px",
+        fontWeight: "900",
+      },
+    },
+  },
+};
 export const componentStatusText: BlockProps = {
   overrides: {
     Block: {
       style: {
-        fontSize: "14px",
       },
     },
   },
