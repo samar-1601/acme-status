@@ -7,7 +7,7 @@ export const container: BlockProps = {
         position: "fixed",
         top: "0ch",
         width: "80%",
-        zIndex: "100",
+        zIndex: 100,
         backgroundColor: "white",
         padding: "0.5rem",
       },
