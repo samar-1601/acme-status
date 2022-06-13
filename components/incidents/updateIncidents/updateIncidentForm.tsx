@@ -16,6 +16,7 @@ import {
 } from "../../../variableTypes";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import Router from "next/router";
+import { Block } from "baseui/block";
 
 let InitialData: (ComponentObject | never)[] = [];
 
@@ -58,6 +59,10 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
+        if ("error" in json) {
+          throw json.error;
+        }
+        // throw json;
         dequeue();
         enqueue(
           {
@@ -73,9 +78,10 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
       .catch((err) => {
         console.log(err);
         dequeue();
+        // console.log(err);
         enqueue(
           {
-            message: "Sorry not able to update incident",
+            message: err,
           },
           DURATION.long
         );
@@ -147,21 +153,58 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
                 setIncidentStatus(getIncidentStatusFromPost(json.status));
                 setPageID(npageID);
               })
-              .catch(() => setStateOfPage(2));
+              .catch(() => {
+                setStateOfPage(3);
+              });
           })
           .catch(() => setStateOfPage(2));
       })
       .catch(() => setStateOfPage(2));
   }, []);
-  return (
-    <CreateIncident
-      incidentName={incidentName}
-      incidentStatus={incidentStatus}
-      components={components}
-      currentStateOfPage={stateOfPage}
-      isSubmitClicked={isSubmitClicked}
-      handleSubmit={handleSubmit}
-      type={"Update"}
-    />
-  );
+  if (stateOfPage == 3) {
+    return (
+      <>
+        <Block
+          overrides={{
+            Block: {
+              style: {
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "20%",
+                paddingRight: "20%",
+                fontFamily: "Arial, Helvetica, sans-serif",
+              },
+            },
+          }}
+        >
+          <Block
+            overrides={{
+              Block: {
+                style: {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "80vh",
+                },
+              },
+            }}
+          >
+            <h1>Wrong Incident Update Request</h1>
+          </Block>
+        </Block>
+      </>
+    );
+  } else {
+    return (
+      <CreateIncident
+        incidentName={incidentName}
+        incidentStatus={incidentStatus}
+        components={components}
+        currentStateOfPage={stateOfPage}
+        isSubmitClicked={isSubmitClicked}
+        handleSubmit={handleSubmit}
+        type={"Update"}
+      />
+    );
+  }
 }
