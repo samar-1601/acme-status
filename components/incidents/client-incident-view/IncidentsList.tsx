@@ -1,9 +1,12 @@
 // lib
 import { useEffect, useState, useRef, useCallback } from "react";
+import * as React from "react";
+
+// helper functions
 import useLoadPageData from "./loadPageData";
-import { renderData } from "./helperFunctions";
 
 // components
+import { renderData } from "./helperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -23,18 +26,11 @@ interface Props {
 }
 
 /**
- * Previous API response's length
- * @type { number }
- * @global
- */
-let prevDataLength: number = 0;
-
-/**
  * List-view for the data as selected from the navigation bar
  * @param { enum.<PageType> } pageType Type of the page to be displayed
  * @returns A list of JSX Elements with data obtained from the API response
  */
-export const IncidentsList: React.FC<Props> = ({ pageType }) => {
+export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
   const cache = useRef(
@@ -52,36 +48,10 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
 
   /**
    * triggered when the data is loaded from the API
+   * sets pageLoaded for the current page
    */
   useEffect(() => {
-    /**
-     * Check if we need to fetch more data for the next page
-     * Conditions:  If the current data has loaded
-     *            + we need more data to call for next page
-     *            + the current items in the page are not 10
-     */
-    const fetchMore =
-      isLoaded &&
-      hasMore &&
-      (dataList.length === prevDataLength || dataList.length < 10);
-
-    console.log(pageType, dataList);
-
-    /**
-     * if more data needs to be loaded, fetch more from the API
-     */
-    if (fetchMore) {
-      return fetchMoreData();
-    }
-
-    /**
-     * Set the data for the current page
-     */
-    const setData =
-      (dataList.length > 0 && dataList.length !== prevDataLength) || !hasMore;
-
-    if (setData) {
-      prevDataLength = dataList.length;
+    if (dataList.length>0) {
       return setPageLoaded(true);
     }
   }, [isLoaded]);
@@ -93,7 +63,6 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   useEffect(() => {
     setPageLoaded(false);
     setPageNumber(1);
-    prevDataLength = 0;
   }, [pageType]);
 
   /**
@@ -102,7 +71,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
   const fetchMoreData = useCallback(() => {
     console.log("fetchMore Called, pageNo : ", pageNumber);
     setPageNumber((p) => p + 1);
-  }, []);
+  }, [pageNumber]);
 
   /**
    * Triggers more loading of data for infinite scrolling
@@ -157,7 +126,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
                       columnIndex={0}
                       rowIndex={index}
                     >
-                      <div style={style}>{renderData(element, pageType)}</div>
+                      <div style={style}>{renderData(element)}</div>
                     </CellMeasurer>
                   );
                 }}
@@ -172,7 +141,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       overrides={{
         Block: {
           style: {
-            marginTop: "calc((100vh - 160px)/2)",
+            marginTop: "35vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -183,4 +152,4 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       <Spinner />
     </Block>
   );
-};
+});
