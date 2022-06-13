@@ -1,8 +1,8 @@
 // lib
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
 
 /**
  * Loads data from API
@@ -12,32 +12,26 @@ import { NEXT_PUBLIC_AUTH_TOKEN, PageType } from "../../../constants";
  */
 
 // global variables
-let pageIDsList: string[] | undefined = []; // list of pageIDs from which we will be fetching data from
 const limit = 15; // determines the no. of rows of data in a page
 
 /**
  * Get data response from API for a given pageID
- * @param pageId ID of the page from which we need to fetch data from
  * @param pageNumber page number for pagination
  * @param pageType type of the page to be rendered
  */
-const getData = async (
-  pageId: string,
-  pageNumber: number,
-  pageType: string
-) => {
+const getData = async (pageNumber: number, pageType: string) => {
   /**
    * The URL value is changed according to the PageType to get the desired response.
    */
   try {
     let URL;
-    URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/?limit=${limit}&page=${pageNumber}`;
+    URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
     if (pageType == PageType.Maintenance) {
-      URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Active) {
-      URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
-      URL = `https://api.statuspage.io/v1/pages/${pageId}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
     }
 
     const response = await fetch(URL, {
@@ -48,16 +42,6 @@ const getData = async (
     });
     const dataItem = await response.json();
 
-    console.log(
-      "pageType:",
-      pageType,
-      "pageNo:",
-      pageNumber,
-      "hasMore",
-      dataItem.length > 0,
-      "API data:",
-      dataItem.length
-    );
     return dataItem;
   } catch (err) {
     console.log(err);
@@ -79,48 +63,41 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
   });
 
   /**
-   * Get the ID list from API and then call for data in each page
-   * @param pageNumber pageNumber for getting paginated data
-   * @param pageType type of page to be rendered
+   * reset every value if the pageType has changed
    */
-  const getIDData = useCallback(
-    async (pageNumber: number, pageType: string) => {
-      try {
-        const URL = "https://api.statuspage.io/v1/pages";
-        const response = await fetch(URL, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-          },
-        });
-        const myJson = await response.json();
-        pageIDsList = myJson.map((data: any) => data["id"]);
-      } catch (err) {
-        alert("Too many API calls");
-        console.log(err);
-      }
+  useEffect(() => {
+    setState({ hasLoaded: false, hasMore: true, dataList: [] });
+    LoadDataItems(1, pageType);
+  }, [pageType]);
 
-      // call getData for each pageID
-      if (pageIDsList !== undefined) {
-        for (let i = 0; i < pageIDsList.length; i++) {
-          const dataItem:any[] = await getData(pageIDsList[i], pageNumber, pageType);
-          /**
-           * state.dataList : concat data obtained in the current response to previous datalist
-           * state.hasLoaded : after all the above processes are done update the hasLoaded status
-           * state.hasMore : if we get data in the current page, set hasMore to true
-           */
-          setState({
-            ...state,
-            hasLoaded: true, //
-            hasMore: dataItem.length > 0, //
-            dataList:
-              pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
-          });
-        }
-      }
-    },
-    [pageType, pageNumber]
-  );
+  /**
+   * An asynchronous helper function which loads data from getData()
+   * @param pageNumber current page number we are accessing
+   * @param pageType current menu item/pageType selected
+   */
+  const LoadDataItems = async (pageNumber: number, pageType: string) => {
+    const dataItem = await getData(pageNumber, pageType);
+
+    console.log(
+      "pageNo:",
+      pageNumber,
+      "hasMore",
+      dataItem.length > 0,
+      "API data:",
+      dataItem.length
+    );
+    /**
+     * state.dataList : concat data obtained in the current response to previous datalist
+     * state.hasLoaded : after all the above processes are done update the hasLoaded status
+     * state.hasMore : if we get data in the current page, set hasMore to true
+     */
+    setState({
+      ...state,
+      hasLoaded: true,
+      hasMore: dataItem.length > 0,
+      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
+    });
+  };
 
   /**
    * triggered when the pageNumber changes i.e we scroll below
@@ -128,17 +105,9 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
   useEffect(() => {
     if (pageNumber !== 1) {
       setState({ ...state, hasLoaded: false });
-      getIDData(pageNumber, pageType);
+      LoadDataItems(pageNumber, pageType);
     }
   }, [pageNumber]);
-
-  /**
-   * reset every value if the pageType has changed
-   */
-  useEffect(() => {
-    setState({ hasLoaded: false, hasMore: true, dataList: [] });
-    getIDData(1, pageType);
-  }, [pageType]);
 
   return {
     dataList: state.dataList,

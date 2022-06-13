@@ -172,7 +172,7 @@ export const IncidentsList: React.FC<Props> = ({ pageType }) => {
       overrides={{
         Block: {
           style: {
-            marginTop: "35vh",
+            marginTop: "calc((100vh - 160px)/2)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
