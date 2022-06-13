@@ -1,0 +1,26 @@
+.header {
+  padding: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  padding-top: 5px;
+}
+
+.listItem {
+  padding: 10px;
+  font-size: 16px;
+  display: flex;
+}
+
+.itemDescription {
+  color: grey;
+  font-size: 14px;
+}
+
+.navigationBar {
+
+  justify-content: space-between;
+}
