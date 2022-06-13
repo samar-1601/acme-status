@@ -5,13 +5,6 @@ import { Textarea } from "baseui/textarea";
 
 import { IncidentMessageProps } from "../../../variableTypes";
 
-function propsAreEqual(
-  prevProps: IncidentMessageProps,
-  nextProps: IncidentMessageProps
-) {
-  return prevProps.value === nextProps.value;
-}
-
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
   return (
     <FormControl label={"Message"}>
@@ -24,4 +17,4 @@ export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
       />
     </FormControl>
   );
-}, propsAreEqual);
+});

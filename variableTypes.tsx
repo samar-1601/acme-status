@@ -50,8 +50,9 @@ export interface ComponentObject {
 
 export interface ComponentsAffectedProps {
   componentList: ComponentObject[];
-  toggleCheckBox: Function;
-  changeOption: Function;
+  // toggleCheckBox: Function;
+  // changeOption: Function;
+  handleComponentUpdate: Function;
 }
 
 export interface InputStatusprops {
@@ -68,9 +69,10 @@ export interface ImageProps {
 export interface statusComponentProps {
   selected: boolean;
   id: string;
-  toggleCheckBox: Function;
+  // toggleCheckBox: Function;
   name: string;
-  changeOption: Function;
+  handleChange: Function;
+  // changeOption: Function;
   type: number;
 }
 
