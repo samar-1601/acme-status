@@ -57,6 +57,9 @@ export default function IncidentCreationForm() {
     })
       .then((response) => response.json())
       .then((json) => {
+        if ("error" in json) {
+          throw json.error;
+        }
         console.log(json);
         dequeue();
         enqueue(
@@ -70,12 +73,12 @@ export default function IncidentCreationForm() {
       .then(() => {
         Router.push("/");
       })
-      .catch((err) => {
+      .catch((err = "Sorry not able to submit form") => {
         console.log(err);
         dequeue();
         enqueue(
           {
-            message: "Sorry not able to submit form",
+            message: err,
           },
           DURATION.long
         );
