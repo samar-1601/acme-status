@@ -6,11 +6,11 @@ import {
   NEXT_PUBLIC_AUTH_TOKEN,
   STATUS,
   getIncidentStatusFromPost,
+  PAGE_ID,
 } from "../../../constants";
 import {
   ComponentObject,
   JSONObject,
-  pageData,
   UpdateIncidentFormProps,
   IncidentFetchType,
 } from "../../../variableTypes";
@@ -26,9 +26,7 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
   const [incidentName, setIncidentName] = useState<string>("");
   const [incidentStatus, setIncidentStatus] = useState<string>("Investigating");
   const [stateOfPage, setStateOfPage] = useState(0);
-  const [pageID, setPageID] = useState([]);
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
-  const URL = "https://api.statuspage.io/v1/pages";
   const { enqueue, dequeue } = useSnackbar();
 
   const handleSubmit = (payload: any) => {
@@ -44,7 +42,7 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
     );
     fetch(
       "https://api.statuspage.io/v1/pages/" +
-        pageID[0] +
+        PAGE_ID +
         "/incidents/" +
         props.incidentId,
       {
@@ -90,7 +88,8 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
   };
 
   useEffect(() => {
-    fetch(URL, {
+    const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    fetch(compURL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -99,11 +98,23 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
     })
       .then((response) => response.json())
       .then((json) => {
-        const npageID = json.map((item: pageData) => {
-          return item.id;
+        console.log(json);
+        InitialData = json.map((item: JSONObject, index: Number) => {
+          return {
+            compName: item.name,
+            compType: STATUS[item.status],
+            id: index,
+            compId: item.id,
+            selected: false,
+          };
         });
-        const compURL = `https://api.statuspage.io/v1/pages/${npageID[0]}/components`;
-        fetch(compURL, {
+        // setComponents(InitialData);
+        // console.log("setting");
+      })
+      .then(() => {
+        const incidentURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/${props.incidentId}`;
+        console.log(incidentURL);
+        fetch(incidentURL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -113,51 +124,23 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
           .then((response) => response.json())
           .then((json) => {
             console.log(json);
-            InitialData = json.map((item: JSONObject, index: Number) => {
-              return {
-                compName: item.name,
-                compType: STATUS[item.status],
-                id: index,
-                compId: item.id,
-                selected: false,
-              };
+            console.log(InitialData);
+            json.components.forEach((item: IncidentFetchType) => {
+              let obj: ComponentObject = InitialData.find(
+                (o) => o.compId === item.id
+              )!;
+              InitialData[Number(obj.id)].selected = true;
+              InitialData[Number(obj.id)].compType = STATUS[item.status];
             });
-            // setComponents(InitialData);
-            // console.log("setting");
+            console.log(InitialData);
+            setComponents(InitialData);
+            setStateOfPage(1);
+            setIncidentName(json.name);
+            setIncidentStatus(getIncidentStatusFromPost(json.status));
           })
-          .then(() => {
-            const incidentURL = `https://api.statuspage.io/v1/pages/${npageID}/incidents/${props.incidentId}`;
-            console.log(incidentURL);
-            fetch(incidentURL, {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-              },
-            })
-              .then((response) => response.json())
-              .then((json) => {
-                console.log(json);
-                console.log(InitialData);
-                json.components.forEach((item: IncidentFetchType) => {
-                  let obj: ComponentObject = InitialData.find(
-                    (o) => o.compId === item.id
-                  )!;
-                  InitialData[Number(obj.id)].selected = true;
-                  InitialData[Number(obj.id)].compType = STATUS[item.status];
-                });
-                console.log(InitialData);
-                setComponents(InitialData);
-                setStateOfPage(1);
-                setIncidentName(json.name);
-                setIncidentStatus(getIncidentStatusFromPost(json.status));
-                setPageID(npageID);
-              })
-              .catch(() => {
-                setStateOfPage(3);
-              });
-          })
-          .catch(() => setStateOfPage(2));
+          .catch(() => {
+            setStateOfPage(3);
+          });
       })
       .catch(() => setStateOfPage(2));
   }, []);

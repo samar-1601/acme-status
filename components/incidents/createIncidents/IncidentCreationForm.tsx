@@ -10,7 +10,7 @@ import { ComponentObject, JSONObject, pageData } from "../../../variableTypes";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
-import { NEXT_PUBLIC_AUTH_TOKEN, STATUS } from "../../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, STATUS, PAGE_ID } from "../../../constants";
 
 //variable to load the initial data from api call
 let InitialData: (ComponentObject | never)[] = [];
@@ -26,9 +26,7 @@ let InitialData: (ComponentObject | never)[] = [];
 export default function IncidentCreationForm() {
   const [components, setComponents] = useState<ComponentObject[]>([]); // stores components fetched from API
   const [stateOfPage, setStateOfPage] = useState(0); //stores state of Page 0-->fetching data 1-->fetched data 2-->cannot fetch data
-  const [pageID, setPageID] = useState([]); //stores page id of site
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //stores if submit button is clicked or not. If clicked then loading state of cursor
-  const URL = "https://api.statuspage.io/v1/pages"; //URL for fetching page
   const { enqueue, dequeue } = useSnackbar(); //snackBar hook
 
   const handleSubmit = (payload: any) => {
@@ -47,7 +45,7 @@ export default function IncidentCreationForm() {
       },
       DURATION.infinite
     );
-    fetch("https://api.statuspage.io/v1/pages/" + pageID[0] + "/incidents", {
+    fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +86,8 @@ export default function IncidentCreationForm() {
 
   //will execute on component mounting gets data from API sets it and sends to CreateIncident
   useEffect(() => {
-    fetch(URL, {
+    const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    fetch(compURL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -97,35 +96,19 @@ export default function IncidentCreationForm() {
     })
       .then((response) => response.json())
       .then((json) => {
-        const npageID = json.map((item: pageData) => {
-          return item.id;
+        console.log(json);
+        InitialData = json.map((item: JSONObject, index: Number) => {
+          return {
+            compName: item.name,
+            compType: STATUS[item.status],
+            id: index,
+            compId: item.id,
+            selected: false,
+          };
         });
-        const compURL = `https://api.statuspage.io/v1/pages/${npageID[0]}/components`;
-        fetch(compURL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-          },
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-            InitialData = json.map((item: JSONObject, index: Number) => {
-              return {
-                compName: item.name,
-                compType: STATUS[item.status],
-                id: index,
-                compId: item.id,
-                selected: false,
-              };
-            });
-            setComponents(InitialData);
-            setStateOfPage(1);
-            setPageID(npageID);
-            // console.log("setting");
-          })
-          .catch(() => setStateOfPage(2));
+        setComponents(InitialData);
+        setStateOfPage(1);
+        // console.log("setting");
       })
       .catch(() => setStateOfPage(2));
   }, []);
