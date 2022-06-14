@@ -1,7 +1,15 @@
+//lib
 import * as React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import Router from "next/router";
+
+//components
 import CreateIncident from "../createIncidents/CreateIncident";
+import { useSnackbar, DURATION } from "baseui/snackbar";
+import { Block } from "baseui/block";
+
+//constants
 import {
   NEXT_PUBLIC_AUTH_TOKEN,
   STATUS,
@@ -14,21 +22,34 @@ import {
   UpdateIncidentFormProps,
   IncidentFetchType,
 } from "../../../variableTypes";
-import { useSnackbar, DURATION } from "baseui/snackbar";
-import Router from "next/router";
-import { Block } from "baseui/block";
 
+
+//global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
 
-export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
-  console.log(props.incidentId);
-  const [components, setComponents] = useState<ComponentObject[]>([]);
-  const [incidentName, setIncidentName] = useState<string>("");
-  const [incidentStatus, setIncidentStatus] = useState<string>("Investigating");
-  const [stateOfPage, setStateOfPage] = useState(0);
-  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false);
-  const { enqueue, dequeue } = useSnackbar();
 
+/**
+ * UpdateIncidentForm Component
+ * @param props contains:
+ * incidentId : ID of the incident to be updated 
+ */
+export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
+  const [components, setComponents] = useState<ComponentObject[]>([]); //components of incident
+
+  const [incidentName, setIncidentName] = useState<string>(""); //incidentName of incident
+
+  const [incidentStatus, setIncidentStatus] = useState<string>("Investigating"); //incidentStatus of incident
+
+  const [stateOfPage, setStateOfPage] = useState(0); //state of page 0-->loading data 1-->loaded data 2-->cannot load components 3--> wrong incidentUpdate request
+  
+  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //(true/false) --> isSubmitButton clicked 
+
+  const { enqueue, dequeue } = useSnackbar();//state for SnackBar
+
+  /**
+   * function handleSubmit submits data send by CreateIncident
+   * @param payload : data sent by submitForm
+   */
   const handleSubmit = (payload: any) => {
     setIsSubmitClicked(true);
     console.log("Updating Incident");
@@ -87,6 +108,8 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
       });
   };
 
+
+  //useEffect for fetching components and incidentDetails from API
   useEffect(() => {
     const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
     fetch(compURL, {
@@ -144,6 +167,8 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
       })
       .catch(() => setStateOfPage(2));
   }, []);
+
+  //If incidentUpdateRequest is wrong
   if (stateOfPage == 3) {
     return (
       <>
@@ -177,7 +202,10 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
         </Block>
       </>
     );
-  } else {
+  }
+  
+  //otherwise render the form
+  else {
     return (
       <CreateIncident
         incidentName={incidentName}
