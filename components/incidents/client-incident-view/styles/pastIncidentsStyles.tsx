@@ -44,7 +44,7 @@ export const incidentStatusBody: BlockProps = {
       style: {
         fontSize: "1rem",
         lineHeight: "1.5rem",
-        fontWeight : 300,
+        fontWeight : 400,
         display: "inline",
       },
     },
@@ -67,7 +67,7 @@ export const incidentStatusDate: BlockProps = {
         color: "rgb(175, 175, 175)",
         fontSize: "0.875rem",
         lineHeight: "1.334375rem",
-        margin: "10px 0px 0px 0px",
+        margin: "5px 0px 0px 0px",
       },
     },
   },
