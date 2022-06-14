@@ -1,24 +1,17 @@
+//lib
 import React, { useEffect } from "react";
-import { Select, SIZE, TYPE } from "baseui/select";
+
+//components
+import { Select } from "baseui/select";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { ParagraphSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
-import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
+import { Checkbox, LABEL_PLACEMENT } from "baseui/checkbox";
 import { Block } from "baseui/block";
+
+//constants
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
-
-function propsAreEqual(
-  prevProps: statusComponentProps,
-  nextProps: statusComponentProps
-) {
-  return (
-    prevProps.id === nextProps.id &&
-    prevProps.name === nextProps.name &&
-    prevProps.selected === nextProps.selected &&
-    prevProps.type === nextProps.type
-  );
-}
 
 function Image(props: ImageProps) {
   return (
@@ -31,10 +24,21 @@ function Image(props: ImageProps) {
     </Block>
   );
 }
+
+/**
+ * SelectStatusComponent component
+ * @params props contains:
+ * selected: component selected or not
+ * id: index of the component
+ * name: name of the component
+ * handleChange: Function
+ * type: Selected status type of the component
+ */
 export const SelectStatusComponent = React.memo(
   (props: statusComponentProps) => {
     const [css, theme] = useStyletron();
 
+    //contains list of individual statuses with their photos
     const options = ITEMS.map((item, idx) => {
       return {
         label: (
@@ -44,9 +48,7 @@ export const SelectStatusComponent = React.memo(
       };
     });
 
-    // useEffect(() => {
-    //   console.log("Hi this is ", props.name);
-    // });
+    //if component not selected show disabled status and statefulPopover on hover
     if (!props.selected) {
       return (
         <Block
@@ -65,7 +67,7 @@ export const SelectStatusComponent = React.memo(
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
             onChange={(event) => {
-              props.toggleCheckBox(event);
+              props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
             overrides={{
@@ -107,7 +109,11 @@ export const SelectStatusComponent = React.memo(
                 value={[options[props.type - 1]]}
                 placeholder="Select color"
                 onChange={(event) => {
-                  props.changeOption(event, props.id);
+                  props.handleChange(
+                    props.id,
+                    props.selected,
+                    Number(event.option!.id) + 1
+                  );
                 }}
                 overrides={{
                   DropdownOption: {
@@ -127,7 +133,9 @@ export const SelectStatusComponent = React.memo(
           </StatefulPopover>
         </Block>
       );
-    } else {
+    }
+    //if component selected then enable select
+    else {
       return (
         <Block
           overrides={{
@@ -144,8 +152,8 @@ export const SelectStatusComponent = React.memo(
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
-            onChange={(event) => {
-              props.toggleCheckBox(event);
+            onChange={() => {
+              props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
             overrides={{
@@ -176,7 +184,11 @@ export const SelectStatusComponent = React.memo(
             value={[options[props.type - 1]]}
             placeholder="Select color"
             onChange={(event) => {
-              props.changeOption(event, props.id);
+              props.handleChange(
+                props.id,
+                props.selected,
+                Number(event.option!.id) + 1
+              );
             }}
             overrides={{
               DropdownOption: {
