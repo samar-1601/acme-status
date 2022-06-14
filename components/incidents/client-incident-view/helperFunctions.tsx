@@ -21,12 +21,6 @@ import {
   maintenanceItemStatusStyle,
 } from "./styles/maintenanceList";
 
-import {
-  incidentDetailsWrapper,
-  incidentStatusBody,
-  incidentStatusDate,
-} from "./styles/pastIncidentsStyles";
-
 /**
  * Format date for display
  * @param date The date which needs to be formatted to display
