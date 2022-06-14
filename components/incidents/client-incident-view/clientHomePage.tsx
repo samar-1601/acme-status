@@ -19,13 +19,13 @@ export const ClientsIncidentsListViewHome: React.FC = () => {
   return (
     <Block {...incidentsListView}>
       <Block {...h1}> Client Incident List View </Block>
-      {/* <IncidentsList pageType={PageType.Active} /> */}
+      <IncidentsList pageType={PageType.Active} />
       <Block {...h3}> About This Site</Block>
-      {/* <AboutThisSite /> */}
+      <AboutThisSite />
       <Block {...h3}> Scheduled Maintenance</Block>
       <IncidentsList pageType={PageType.Scheduled} />
       <Block {...h3}> Past Incidents</Block>
-      {/* <PastIncidents/> */}
+      <PastIncidents/>
     </Block>
   );
 };
