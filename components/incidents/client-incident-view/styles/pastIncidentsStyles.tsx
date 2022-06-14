@@ -1,56 +1,57 @@
 // component prop type
 import { BlockProps } from "baseui/block";
 
-export const headerDateStyle: BlockProps = {
+export const pastIncidentHeaderDateStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
         fontSize: "1.25rem",
         lineHeight: "1.8125rem",
-        fontWeight: 900,
+        fontWeight: 500,
         paddingBottom: "10px",
         borderBottom: "0.1px grey solid",
       },
     },
   },
 };
-export const incidentNameStyle: BlockProps = {
+
+export const pastIncidentNameStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
         fontSize: "1.25rem",
         lineHeight: "1.8125rem",
-        fontWeight: 900,
+        fontWeight: 500,
       },
     },
   },
 };
-export const incidentStatusStyle: BlockProps = {
+export const pastIincidentStatusStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
         fontSize: "1rem",
         lineHeight: "1.5rem",
-        fontWeight: "900",
+        fontWeight: 700,
         textTransform: "capitalize",
         display: "inline",
       },
     },
   },
 };
-export const incidentStatusBody: BlockProps = {
+export const pastIncidentStatusBody: BlockProps = {
   overrides: {
     Block: {
       style: {
         fontSize: "1rem",
         lineHeight: "1.5rem",
-        fontWeight : 400,
+        fontWeight: 400,
         display: "inline",
       },
     },
   },
 };
-export const incidentWrapper: BlockProps = {
+export const pastIncidentWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
@@ -60,20 +61,20 @@ export const incidentWrapper: BlockProps = {
   },
 };
 
-export const incidentStatusDate: BlockProps = {
+export const pastIncidentStatusDate: BlockProps = {
   overrides: {
     Block: {
       style: {
         color: "rgb(175, 175, 175)",
         fontSize: "0.875rem",
         lineHeight: "1.334375rem",
-        margin: "5px 0px 0px 0px",
+        marginTop: "2px",
       },
     },
   },
 };
 
-export const incidentDetailsWrapper: BlockProps = {
+export const pastIncidentDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {

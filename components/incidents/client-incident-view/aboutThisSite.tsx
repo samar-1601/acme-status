@@ -97,7 +97,7 @@ const renderComponents = async () => {
             <Block {...componentTimelineRow}>
               <Block>90 Days Ago</Block>
               <Block {...horizontalLine}></Block>
-              <Block>{componentUptime}%</Block>
+              <Block>{componentUptime}% uptime</Block>
               <Block {...horizontalLine}></Block>
               <Block>Today</Block>
             </Block>

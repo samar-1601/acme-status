@@ -22,7 +22,7 @@ export const itemName: BlockProps = {
       style: {
         flex: "100%",
         fontSize: "1.3rem",
-        fontWeight: "bold",
+        fontWeight: 500,
         textTransform: "capitalize",
         backgroundColor: "rgb(51,51,51)",
         color: "white",
@@ -35,8 +35,9 @@ export const itemDate: BlockProps = {
   overrides: {
     Block: {
       style: {
-        color: "grey",
-        fontSize: "0.9rem",
+        color: "#AAAAAA",
+        fontSize: "0.875rem",
+        lineHeight: "1.334375rem",
         marginLeft : "25px",
         marginBottom : "25px",
       },
@@ -48,7 +49,7 @@ export const itemStatus: BlockProps = {
   overrides: {
     Block: {
       style: () => ({
-        fontWeight: "bold",
+        fontWeight: 700,
         borderRadius: "4px",
         fontSize: "1rem",
         textTransform: "capitalize",

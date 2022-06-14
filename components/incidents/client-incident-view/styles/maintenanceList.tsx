@@ -20,7 +20,7 @@ export const maintenanceItemName: BlockProps = {
       style: {
         flex: "100%",
         fontSize: "1.3rem",
-        fontWeight: "bold",
+        fontWeight: 500,
         textTransform: "capitalize",
         display: "inline",
       },
@@ -47,9 +47,9 @@ export const maintenanceItemStatusBody: BlockProps = {
       style: () => ({
         fontSize: "1rem",
         lineHeight: "1.5rem",
-        fontWeight : 400,
+        fontWeight: 400,
         marginBottom: "5px",
-        display : "inline",
+        display: "inline",
       }),
     },
   },
@@ -74,7 +74,7 @@ export const maintenanceItemStatusStyle: BlockProps = {
       style: {
         fontSize: "1rem",
         lineHeight: "1.5rem",
-        fontWeight: "900",
+        fontWeight: 700,
         textTransform: "capitalize",
         display: "inline",
       },

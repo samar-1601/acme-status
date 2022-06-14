@@ -5,7 +5,7 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "60%",
-        fontFamily: "'Lato', sans-serif",
+        fontFamily: "'proxima-nova', 'Helvetica Neue', Helvetica, Arial, Sans-Serif",
         margin: "auto",
       },
     },

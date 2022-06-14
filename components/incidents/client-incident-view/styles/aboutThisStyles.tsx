@@ -41,13 +41,13 @@ export const componentNameText: BlockProps = {
   overrides: {
     Block: {
       style: {
-        fontSize: "18px",
-        fontWeight: "900",
+        fontSize: "1rem",
+        lineHeight: "1.5rem",
+        fontWeight: 500,
       },
     },
   },
 };
-
 
 export const colorfullBarWrapper: BlockProps = {
   overrides: {
@@ -65,8 +65,8 @@ export const colorfullBar: BlockProps = {
     Block: {
       style: {
         width: "calc(100%/90)",
-        height: "42px",
-        backgroundColor: "rgb(211,211,211)",
+        height: "34px",
+        backgroundColor: "rgb(179, 186, 197)",
         margin: "12px 0px",
       },
     },
@@ -81,7 +81,7 @@ export const componentTimelineRow: BlockProps = {
         alignContent: "center",
         alignItems: "center",
         flexDirection: "row",
-        color: "grey",
+        color: "#aaa",
         fontSize: "14px",
       },
     },
@@ -113,29 +113,27 @@ const componentsStatusColor = (status: string) => {
     case ComponentStatusType.Operational:
       return {
         //green
-        color: "rgb(0,154,23)",
-        content : "Operational",
+        color: "#2fcc66",
       };
     case ComponentStatusType.DegradedPerformance:
       //yellow
       return {
-        color: "rgb(246,190,0)",
-        content : "Degraded Performance"
+        color: "#f1c40f",
       };
     case ComponentStatusType.MajorOutage:
       // red
       return {
-        color: "rgb(205,0,26)",
+        color: "#e74c3c",
       };
     case ComponentStatusType.PartialOutage:
       // orange
       return {
-        color: "rgb(255,153,19)",
+        color: "#e67e22",
       };
     case ComponentStatusType.UnderMaintenance:
       // pink
       return {
-        color: "pink",
+        color: "#3498DB",
       };
     default:
       return {
@@ -149,10 +147,10 @@ export const componentStatus: BlockProps = {
     Block: {
       style: ($value) => ({
         color: componentsStatusColor($value.children).color,
-        content : componentsStatusColor($value.children).content,
         textTransform: "capitalize",
-        fontSize: "17px",
-        fontWeight: "700",
+        fontSize: "0.875rem",
+        fontWeight: "400",
+        lineHeight: "1.5rem",
       }),
     },
   },
