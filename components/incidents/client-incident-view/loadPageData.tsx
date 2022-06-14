@@ -32,7 +32,7 @@ const getData = async (pageNumber: number, pageType: string) => {
       URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
       URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
-    }
+    } 
 
     const response = await fetch(URL, {
       headers: {

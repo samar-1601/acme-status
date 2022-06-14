@@ -11,12 +11,21 @@ import {
   itemDate,
   itemName,
 } from "./styles/FullIncidentsList";
+
 import {
   maintenanceListItem,
-  maintenanceItemStatus,
-  maintenanceItemDate,
   maintenanceItemName,
+  maintenanceItemDate,
+  maintenanceItemHeaderWrapper,
+  maintenanceItemStatusBody,
+  maintenanceItemStatusStyle,
 } from "./styles/maintenanceList";
+
+import {
+  incidentDetailsWrapper,
+  incidentStatusBody,
+  incidentStatusDate,
+} from "./styles/pastIncidentsStyles";
 
 /**
  * Format date for display
@@ -53,13 +62,31 @@ export const renderData: React.FC = (
   pageType: string
 ): JSX.Element => {
   if (pageType == PageType.Scheduled) {
+    const incidentUpdates = data["incident_updates"];
+    let renderIncidentUpdates: JSX.Element[] = [];
+    for (let i = 0; i < incidentUpdates.length; i++) {
+      const update = incidentUpdates[i];
+      const renderUpdate = (
+        <Block key={update["id"]}>
+          <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
+          <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
+          <Block {...maintenanceItemDate}>
+            {formatDate(update["updated_at"], pageType)}
+          </Block>
+        </Block>
+      );
+      renderIncidentUpdates.push(renderUpdate);
+    }
     return (
       <Block key={data["name"]} {...maintenanceListItem}>
-        <Block {...maintenanceItemName}>{data["name"]}</Block>
-        <Block {...maintenanceItemStatus}>{data["status"]}</Block>
-        <Block {...maintenanceItemDate}>
-          {formatDate(data["updated_at"], pageType)}
+        <Block {...maintenanceItemHeaderWrapper}>
+          <Block {...maintenanceItemName}>{data["name"]}</Block>
+          <Block {...maintenanceItemDate}>
+            Scheduled for {formatDate(data["scheduled_for"], PageType.All)} -{" "}
+            {formatDate(data["scheduled_until"], PageType.All)}
+          </Block>
         </Block>
+        {renderIncidentUpdates}
       </Block>
     );
   }

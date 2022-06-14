@@ -12,6 +12,7 @@ export enum PageType {
   Active = "Active",
   Maintenance = "Maintenance",
   Scheduled = "Scheduled",
+  Completed = "Completed",
 }
 
 /**

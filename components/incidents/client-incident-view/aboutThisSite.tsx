@@ -66,6 +66,7 @@ const getColorFullBars = (count: number) => {
   for (let i = 0; i < count; i++) {
     barsList.push(
       <StatefulPopover
+        key={`bar${i}`}
         content={() => (
           <Block padding={"20px"} backgroundColor={"white"}>
             Details of this day !!
@@ -79,6 +80,7 @@ const getColorFullBars = (count: number) => {
   }
   return barsList;
 };
+
 let componentList: any[] = [];
 const renderComponents = async () => {
   componentList = await getComponents();
