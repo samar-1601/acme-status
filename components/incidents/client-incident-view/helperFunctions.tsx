@@ -1,5 +1,6 @@
 // components
 import { Block } from "baseui/block";
+import { format } from "path";
 
 // constants
 import { PageType } from "../../../constants";
@@ -21,7 +22,6 @@ import {
   maintenanceItemStatusStyle,
 } from "./styles/maintenanceList";
 
-// styles
 import {
   pastIncidentNameStyle,
   pastIncidentHeaderDateStyle,
@@ -35,6 +35,7 @@ import {
 /**
  * Format date for display
  * @param date The date which needs to be formatted to display
+ * @param pageType The type in which we need the formatted date
  * @returns formatted data in x days ago format
  */
 const formatDate = (date: string | Date, pageType: string): string => {
@@ -47,6 +48,7 @@ const formatDate = (date: string | Date, pageType: string): string => {
   let timeMins: string = `${date.getUTCMinutes()}`;
   if (timeMins.length == 1) timeMins = `0${timeMins}`;
 
+  // returns formatted date if "Scheduled" pageType
   if (pageType == PageType.Scheduled)
     return `Posted on ${date.getUTCDate()} ${formatter.format(
       date
@@ -57,16 +59,16 @@ const formatDate = (date: string | Date, pageType: string): string => {
   )}, ${timeHour}:${timeMins} UTC`;
 };
 
-
-export const makePastIncidentComponents = (incidentList: any[]) => {
-  const formatter = new Intl.DateTimeFormat("en", { month: "short" });
+/**
+ * Helper function for PastIncidents List component
+ * @param incidentList the past/completed Incidents List
+ * @returns Formatted List of past/completed incidents grouped on basis of resolved dates for the PastIncidents.tsx page
+ */
+export const GetPastIncidentComponents = (incidentList: any[]) => {
   var map = new Map();
   for (let i = 0; i < incidentList.length; i++) {
     const incident: any = incidentList[i];
-    let date: string | Date = new Date(incident["updated_at"]);
-    date = `${date.getUTCDate()} ${formatter.format(
-      date
-    )}, ${date.getUTCFullYear()}`;
+    const date: string | Date = formatDate(incident["updated_at"], PageType.All);
     let previous = [];
     if (map.has(date)) previous = map.get(date);
 
@@ -113,51 +115,65 @@ export const makePastIncidentComponents = (incidentList: any[]) => {
   return renderList;
 };
 
-
 /**
  * list of data-items to display on screen
- * @param data filtered JSON data from API
+ * used inside Incidents List to render a data item fetched from an API
+ * @param incident filtered JSON data from API
+ * @param pageType the pageType for which wee need to format and render accordingly
  * @returns JSX component list
  */
 export const renderData: React.FC = (
-  data: any,
+  incident: any,
   pageType: string
 ): JSX.Element => {
-  if (pageType == PageType.Scheduled) {
-    const incidentUpdates = data["incident_updates"];
-    let renderIncidentUpdates: JSX.Element[] = [];
-    for (let i = 0; i < incidentUpdates.length; i++) {
-      const update = incidentUpdates[i];
-      const renderUpdate = (
-        <Block key={update["id"]}>
-          <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
-          <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
-          <Block {...maintenanceItemDate}>
-            {formatDate(update["updated_at"], PageType.All)}
+  switch (pageType) {
+    // If the pageType is Scheduled_Maintenance then we need to reender the Incident Updates and
+    // their respective statuses as well
+    case PageType.Scheduled:
+      const incidentUpdates = incident["incident_updates"]; // stores the list of incident_updates for an incident
+      let renderIncidentUpdates: JSX.Element[] = []; // JSX Elements list to store the formatted JSX list
+
+      // loop through all the updates and add them to renderIncidentUpdates
+      for (let i = 0; i < incidentUpdates.length; i++) {
+        const update = incidentUpdates[i];
+        const renderUpdate = (
+          <Block key={update["id"]}>
+            <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
+            <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
+            <Block {...maintenanceItemDate}>
+              {formatDate(update["updated_at"], PageType.All)}
+            </Block>
+          </Block>
+        );
+        renderIncidentUpdates.push(renderUpdate);
+      }
+
+      // finally return the formatted list of updates along with the incident name & incident schedule timings
+      return (
+        <Block key={incident["name"]} {...maintenanceListItem}>
+          <Block {...maintenanceItemHeaderWrapper}>
+            <Block {...maintenanceItemName}>{incident["name"]}</Block>
+            <Block {...maintenanceItemDate}>
+              Scheduled for{" "}
+              {formatDate(incident["scheduled_for"], PageType.All)} -{" "}
+              {formatDate(incident["scheduled_until"], PageType.All)}
+            </Block>
+          </Block>
+          {renderIncidentUpdates}
+        </Block>
+      );
+
+    case PageType.Active:
+      return (
+        <Block key={incident["name"]} {...listItem}>
+          <Block {...itemName}>{incident["name"]}</Block>
+          <Block {...itemStatus}>{incident["status"]}</Block>
+          <Block {...itemDate}>
+            {formatDate(incident["updated_at"], pageType)}
           </Block>
         </Block>
       );
-      renderIncidentUpdates.push(renderUpdate);
-    }
-    return (
-      <Block key={data["name"]} {...maintenanceListItem}>
-        <Block {...maintenanceItemHeaderWrapper}>
-          <Block {...maintenanceItemName}>{data["name"]}</Block>
-          <Block {...maintenanceItemDate}>
-            Scheduled for {formatDate(data["scheduled_for"], PageType.All)} -{" "}
-            {formatDate(data["scheduled_until"], PageType.All)}
-          </Block>
-        </Block>
-        {renderIncidentUpdates}
-      </Block>
-    );
+    default:
+      return <Block>Invalid PageType</Block>;
   }
-
-  return (
-    <Block key={data["name"]} {...listItem}>
-      <Block {...itemName}>{data["name"]}</Block>
-      <Block {...itemStatus}>{data["status"]}</Block>
-      <Block {...itemDate}>{formatDate(data["updated_at"], pageType)}</Block>
-    </Block>
-  );
 };
