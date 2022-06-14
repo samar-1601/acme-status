@@ -1,10 +1,19 @@
+//lib
 import * as React from "react";
+
+//components
 import { FormControl } from "baseui/form-control";
 import { Textarea } from "baseui/textarea";
-//not able to use value here as a prop of Textarea
 
+//constants
 import { IncidentMessageProps } from "../../../variableTypes";
 
+/**
+ * IncidentMessage Component
+ * @params props contains:
+ * value: string
+ * updateIncidentMessage: Function
+ */
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
   return (
     <FormControl label={"Message"}>

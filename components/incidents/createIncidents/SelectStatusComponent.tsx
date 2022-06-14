@@ -1,10 +1,15 @@
+//lib
 import React, { useEffect } from "react";
-import { Select, SIZE, TYPE } from "baseui/select";
+
+//components
+import { Select } from "baseui/select";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { ParagraphSmall } from "baseui/typography";
 import { useStyletron } from "baseui";
-import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
+import { Checkbox, LABEL_PLACEMENT } from "baseui/checkbox";
 import { Block } from "baseui/block";
+
+//constants
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
 
@@ -19,10 +24,21 @@ function Image(props: ImageProps) {
     </Block>
   );
 }
+
+/**
+ * SelectStatusComponent component
+ * @params props contains:
+ * selected: component selected or not
+ * id: index of the component
+ * name: name of the component
+ * handleChange: Function
+ * type: Selected status type of the component
+ */
 export const SelectStatusComponent = React.memo(
   (props: statusComponentProps) => {
     const [css, theme] = useStyletron();
 
+    //contains list of individual statuses with their photos
     const options = ITEMS.map((item, idx) => {
       return {
         label: (
@@ -31,6 +47,8 @@ export const SelectStatusComponent = React.memo(
         id: idx,
       };
     });
+
+    //if component not selected show disabled status and statefulPopover on hover
     if (!props.selected) {
       return (
         <Block
@@ -91,7 +109,6 @@ export const SelectStatusComponent = React.memo(
                 value={[options[props.type - 1]]}
                 placeholder="Select color"
                 onChange={(event) => {
-                  // props.changeOption(event, props.id);
                   props.handleChange(
                     props.id,
                     props.selected,
@@ -116,7 +133,9 @@ export const SelectStatusComponent = React.memo(
           </StatefulPopover>
         </Block>
       );
-    } else {
+    }
+    //if component selected then enable select
+    else {
       return (
         <Block
           overrides={{

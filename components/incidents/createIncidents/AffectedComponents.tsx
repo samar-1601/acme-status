@@ -1,34 +1,24 @@
-import React, { useCallback, useEffect } from "react";
-import { ComponentsAffectedProps } from "../../../variableTypes";
+//lib
+import React, { useCallback } from "react";
+
+//components
 import { SelectStatusComponent } from "./SelectStatusComponent";
 import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 
+//constants
+import { ComponentsAffectedProps } from "../../../variableTypes";
+
 const label = <Block>Components Affected</Block>;
 
+/**
+ * AffectedComponents Component
+ * @params props contains:
+ * componentList: list of components containing isSelected and type of choice
+ * handleComponentUpdate: Funtion
+ */
 export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
-    const handleChange = useCallback(
-      (idx: number, selected: boolean, optionType: number) => {
-        const newComponentsAffected = props.componentList.map(
-          (value, index) => {
-            if (index == idx) {
-              return {
-                compName: value.compName,
-                compType: optionType,
-                id: value.id,
-                compId: value.compId,
-                selected: selected,
-              };
-            } else {
-              return value;
-            }
-          }
-        );
-        props.handleComponentUpdate(newComponentsAffected);
-      },
-      [props.componentList]
-    );
     return (
       <FormControl
         label={label}
@@ -50,7 +40,7 @@ export const AffectedComponents = React.memo(
                 id={item.id}
                 type={item.compType}
                 selected={item.selected}
-                handleChange={handleChange}
+                handleChange={props.handleComponentUpdate}
               />
             );
           })}
