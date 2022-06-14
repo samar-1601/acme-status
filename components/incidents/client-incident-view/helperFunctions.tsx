@@ -53,6 +53,8 @@ const formatDate = (date: string | Date, pageType: string): string => {
     return `Posted on ${date.getUTCDate()} ${formatter.format(
       date
     )}, ${timeHour}:${timeMins} UTC`;
+  if (pageType == PageType.Completed)
+    return `${date.getUTCDate()} ${formatter.format(date)}, ${date.getUTCFullYear()}`;
 
   return `${date.getUTCDate()} ${formatter.format(
     date
@@ -68,7 +70,10 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
   var map = new Map();
   for (let i = 0; i < incidentList.length; i++) {
     const incident: any = incidentList[i];
-    const date: string | Date = formatDate(incident["updated_at"], PageType.All);
+    const date: string | Date = formatDate(
+      incident["updated_at"],
+      PageType.Completed
+    );
     let previous = [];
     if (map.has(date)) previous = map.get(date);
 
