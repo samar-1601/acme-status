@@ -1,8 +1,19 @@
+//lib
 import * as React from "react";
+
+//components
 import { FormControl } from "baseui/form-control";
-import { Input, SIZE } from "baseui/input";
+import { Input } from "baseui/input";
+
+//constants
 import { IncidentNameProps } from "../../../variableTypes";
 
+/**
+ * IncidentName Component
+ * @params props contains:
+ * updateIncident : Funtion
+ * incidentStatus : string
+ */
 export const IncidentName = React.memo((props: IncidentNameProps) => {
   return (
     <FormControl

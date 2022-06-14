@@ -34,17 +34,21 @@ import {
 
 export default function CreateIncident(props: CreateIncidentProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
-  const [incidentName, setIncidentName] = useState<string>(props.incidentName);
+  const [incidentName, setIncidentName] = useState<string>(props.incidentName); //state for incidentName
+
   const [incidentStatus, setIncidentStatus] = useState<String>(
     props.incidentStatus
-  );
+  ); //state for incident incidentStatus
+
   const [incidentMessage, setIncidentMessage] = useState<
     string | number | undefined
-  >("");
+  >(""); //state for incident message
+
   const [affectedComponents, setAffectedComponents] = useState<
     ComponentObject[]
-  >(props.components);
+  >(props.components); //state for storing checked and selected type of components
 
+  //Setting the states once data is fetched in parent using useEffects
   useEffect(() => {
     setAffectedComponents(props.components);
   }, [props.components]);
@@ -57,14 +61,53 @@ export default function CreateIncident(props: CreateIncidentProps) {
     setIncidentStatus(props.incidentStatus);
   }, [props.incidentStatus]);
 
+  //function for handing name change
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
   }, []);
 
+  //function for handling message change
   const updateIncidentMessage = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentMessage(e.target.value);
   }, []);
 
+  /**
+   * Function handleComponentUpdate
+   * @params idx, selected, optionType
+   * idx: index value of the component to be changed
+   * selected: selected value (true/false) of the changed Component
+   * optionType: selected status of the changed Component
+   */
+  const handleComponentUpdate = useCallback(
+    (idx: number, selected: boolean, optionType: number) => {
+      setAffectedComponents((prevAffectedComponents) => {
+        const newAffectedComponents = prevAffectedComponents.map(
+          (value, index) => {
+            if (index == idx) {
+              return {
+                compName: value.compName,
+                compType: optionType,
+                id: value.id,
+                compId: value.compId,
+                selected: selected,
+              };
+            } else {
+              return value;
+            }
+          }
+        );
+        return newAffectedComponents;
+      });
+    },
+    []
+  );
+
+  //function to handle IncidentStatus Update
+  const updateStatus = useCallback((e: string) => {
+    setIncidentStatus(e);
+  }, []);
+
+  //sends all the data of state to props.handleSubmit in the form payload
   const submitForm = () => {
     console.log(props.currentStateOfPage);
     console.log(incidentName);
@@ -117,20 +160,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
     };
     console.log(payload);
     props.handleSubmit(payload);
-    // console.log(props.pageID[0]);
   };
 
-  const handleComponentUpdate = useCallback(
-    (newComponent: ComponentObject[]) => {
-      setAffectedComponents(newComponent);
-    },
-    []
-  );
-
-  const updateStatus = useCallback((e: string) => {
-    setIncidentStatus(e);
-  }, []);
-
+  //part of form which will remain constant for both true and false values of props.isSubmitClicked
   const formConstant = (
     <>
       <h2>{props.type} Incident</h2>
@@ -149,8 +181,12 @@ export default function CreateIncident(props: CreateIncidentProps) {
       />
     </>
   );
+
+  //if no error in fetching data
   if (props.currentStateOfPage != 2) {
+    //if submitButton has not been clicked
     if (!props.isSubmitClicked) {
+      //if data has been fetched properly
       if (props.currentStateOfPage == 1) {
         return (
           <>
@@ -189,7 +225,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
             </Block>
           </>
         );
-      } else {
+      }
+      //if data is being fetched show Spinner
+      else {
         return (
           <>
             <Block
@@ -219,7 +257,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
           </>
         );
       }
-    } else {
+    }
+    //if submit button has been clicked show loadin cursor and show message in SnackBar
+    else {
       return (
         <>
           <Block
@@ -254,7 +294,9 @@ export default function CreateIncident(props: CreateIncidentProps) {
         </>
       );
     }
-  } else {
+  }
+  //If error in fetching data show error message: Unable to Fetch Components
+  else {
     return (
       <>
         <Block

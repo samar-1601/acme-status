@@ -1,11 +1,17 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+//lib
+import React, { useCallback, useMemo } from "react";
+
+//components
 import { FormControl } from "baseui/form-control";
 import { ProgressBar, SIZE } from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
+
+//constants
 import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
 import { STATUSNames } from "./../../../constants";
 
+//function to calculate percentage of progress bar to be filled from status
 function calculateStatus(status: String): number {
   if (status == "Investigating") {
     return 0;
@@ -20,7 +26,21 @@ function calculateStatus(status: String): number {
   }
 }
 
+/**
+ * InputStatus component
+ * @params props contains:
+ * updateStatus : Function
+ * incidentStatus: string
+ */
 export const InputStatus = React.memo((props: InputStatusprops) => {
+  /**
+   * Function for handling updateStatus on progress bar click
+   * @params e SpecialEvent Type only for click on inputStatus Bar
+   * Added bar className to blue region of progress bar. As offset is calculated from the start of the bar
+   * which is hidden so we substract the hidden part if click happens on the blue region.
+   * Otherwise if click happens on the white region then we directly get the offset and calculate status.
+   * Then we call props.updateStatus to update the state.
+   */
   const updateStatusBarOnClick = useCallback(
     (e: SpecialEvent) => {
       let percentage = 0;
@@ -53,6 +73,9 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
     [props.incidentStatus]
   );
 
+  /**
+   * Contains the four statuses --> Investigating, Identified, Monitoring and Resolved as FlexGridItems
+   */
   const flexItems = useMemo(
     () =>
       STATUSNames.map((item, index) => {
