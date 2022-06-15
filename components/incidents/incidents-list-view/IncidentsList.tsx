@@ -33,9 +33,10 @@ interface Props {
 export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
-  
+
   const cache = useRef(
-    new CellMeasurerCache({ // react-virtualized component to measure the size of component
+    new CellMeasurerCache({
+      // react-virtualized component to measure the size of component
       fixedWidth: true,
       defaultHeight: 50,
     })
@@ -54,7 +55,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * sets pageLoaded for the current page (for the loading spinner)
    */
   useEffect(() => {
-    if (dataList.length>0) {
+    if (dataList.length > 0) {
       return setPageLoaded(true);
     }
   }, [isLoaded]);
@@ -90,7 +91,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
         dataLoaded[i] = dataList[i];
       }
       fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
-      return Promise.resolve(dataLoaded); // typecasting the data as we have made dataLoaded 
+      return Promise.resolve(dataLoaded); // typecasting the data as we have made dataLoaded
       // array using pre-existing data and not calling more from API
     },
     [pageNumber]

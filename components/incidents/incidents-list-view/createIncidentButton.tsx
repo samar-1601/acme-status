@@ -14,7 +14,7 @@ import { createIncidentButton } from "./styles/navStyles";
  */
 export const CreateIncidentButton = React.memo(() => {
   return (
-    <Link href="/incident/new"> 
+    <Link href="/incident/new">
       <Block {...createIncidentButton}>Create incident</Block>
     </Link>
   );

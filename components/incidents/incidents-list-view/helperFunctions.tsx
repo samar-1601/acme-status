@@ -57,24 +57,24 @@ const getComponents = (incident: any): JSX.Element[] => {
   if (incident["components"]) {
     // iterate through the component list
     incident["components"].forEach((component: any) => {
-
-      const renderComponent: JSX.Element = ( // variable storing the formatted component ready to render
-        <Block key={component["name"]} {...componentItem}>
-          <Avatar // BaseUI component for rendering Icons
-            name={component["name"]}
-            src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
-            size="scale600"
-            overrides={{
-              Root: {
-                style: {
-                  paddingRight: "8px",
+      const renderComponent: JSX.Element = // variable storing the formatted component ready to render
+        (
+          <Block key={component["name"]} {...componentItem}>
+            <Avatar // BaseUI component for rendering Icons
+              name={component["name"]}
+              src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
+              size="scale600"
+              overrides={{
+                Root: {
+                  style: {
+                    paddingRight: "8px",
+                  },
                 },
-              },
-            }}
-          ></Avatar>
-          {component["name"]}
-        </Block>
-      );
+              }}
+            ></Avatar>
+            {component["name"]}
+          </Block>
+        );
       componentsList.push(renderComponent); // push the formatted component to the list
     });
   }
@@ -96,11 +96,11 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
           <Block {...itemDate}>{formatDate(incident["created_at"])}</Block>
         </Block>
         {/* get the components corressponding to the incident and append them for render */}
-        <Block {...component}>{getComponents(incident)}</Block> 
+        <Block {...component}>{getComponents(incident)}</Block>
       </Block>
       <Link
         href={{
-          pathname: `/incident/update/${incident["id"]}`, 
+          pathname: `/incident/update/${incident["id"]}`,
           query: incident["id"], // send the incident ID to the update page address
         }}
       >
