@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "./LoadPageData";
+import useLoadPageData from "./LoadIncidentsListData";
 
 // components
 import { renderData } from "./HelperFunctions";

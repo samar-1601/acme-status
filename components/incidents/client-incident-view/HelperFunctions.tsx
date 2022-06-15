@@ -30,7 +30,7 @@ import {
   pastIincidentStatusStyle,
   pastIncidentStatusBody,
   pastIncidentStatusDate,
-} from "./styles/pastIncidentsStyles";
+} from "./past-incidents-component/pastIncidentsStyles";
 
 /**
  * Format date for display

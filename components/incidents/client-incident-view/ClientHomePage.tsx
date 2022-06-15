@@ -1,8 +1,8 @@
 // components
 import { IncidentsList } from "./IncidentsList";
 import { Block } from "baseui/block";
-import { AboutThisSite } from "./AboutThisSite";
-import { PastIncidents } from "./PastIncidents";
+import { AboutThisSite } from "./about-this-page/AboutThisSite";
+import { PastIncidents } from "./past-incidents-component/PastIncidents";
 
 // constants
 import { PageType } from "../../../constants";

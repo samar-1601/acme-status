@@ -1,5 +1,5 @@
 // contstants
-import { ComponentStatusType } from "../../../../constants";
+import { ComponentStatusType } from "../../../../../constants";
 
 // component proptype
 import { BlockProps } from "baseui/block";
