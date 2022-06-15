@@ -11,13 +11,13 @@ import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
  * @returns API response and API loading status
  */
 
-// global variables
 const limit = 15; // determines the no. of rows of data in a page
 
 /**
  * Get data response from API for a given pageID
  * @param pageNumber page number for pagination
  * @param pageType type of the page to be rendered
+ * @returns the data fetched from the API
  */
 const getData = async (pageNumber: number, pageType: string) => {
   /**
@@ -50,24 +50,16 @@ const getData = async (pageNumber: number, pageType: string) => {
 };
 
 export default function useLoadPageData(pageNumber: number, pageType: string) {
-  /**
-   * A useState storing:
-   * dataList : stores data response from API
-   * hasLoaded : status of loading data from API
-   * hasMore : do we have to fetch more data
-   */
   const [state, setState] = useState({
-    dataList: Array(),
-    hasLoaded: false,
-    hasMore: true,
+    dataList: Array(), // dataList : stores data response from API
+    hasLoaded: false, // hasLoaded : status of loading data from API
+    hasMore: true, // hasMore : do we have to fetch more data
   });
 
-  /**
-   * reset every value if the pageType has changed
-   */
   useEffect(() => {
-    setState({ hasLoaded: false, hasMore: true, dataList: [] });
-    LoadDataItems(1, pageType);
+    setState({ hasLoaded: false, hasMore: true, dataList: [] }); // reset every value if the
+    // pageType(a different menu from navbar is selected) has changed
+    LoadDataItems(1, pageType); // load data for the first page
   }, [pageType]);
 
   /**
@@ -93,19 +85,17 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
      */
     setState({
       ...state,
-      hasLoaded: true,
-      hasMore: dataItem.length > 0,
+      hasLoaded: true, // loading completed
+      hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
       dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
     });
   };
 
-  /**
-   * triggered when the pageNumber changes i.e we scroll below
-   */
+  // triggered when the pageNumber changes i.e we scroll below
   useEffect(() => {
     if (pageNumber !== 1) {
-      setState({ ...state, hasLoaded: false });
-      LoadDataItems(pageNumber, pageType);
+      setState({ ...state, hasLoaded: false }); // if scrolled below, set hasLoaded as false for the future data to render
+      LoadDataItems(pageNumber, pageType); // proceed to load data for the current pageNumber
     }
   }, [pageNumber]);
 

@@ -1,7 +1,6 @@
 // components
 import { Block } from "baseui/block";
 import { Avatar } from "baseui/avatar";
-import { Button } from "baseui/button";
 import Link from "next/link";
 
 // constants
@@ -23,23 +22,23 @@ import {
 /**
  * Format date for display
  * @param date The date which needs to be formatted to display
- * @returns formatted data in x days ago format
+ * @returns {string} timeStatus : the formatted data in X days ago format
  */
 const formatDate = (date: string | Date): string => {
   date = new Date(date);
-  const timeElapsed = Date.now() - date.getTime();
+  const timeElapsed = Date.now() - date.getTime(); // total time elapsed
 
   // calculating X days ago
-  let seconds = timeElapsed / 1000;
-  let minutes = seconds / 60;
-  let hours = minutes / 60;
-  let days = Math.floor(hours / 24);
+  let seconds = timeElapsed / 1000; // time elapsed in seconds
+  let minutes = seconds / 60; // time elapsed in minutes
+  let hours = minutes / 60; // time elapsed in hours
+  let days = Math.floor(hours / 24); // time elapsed in days
 
-  // making h:m to hh:mm
+  // making h:m to hh:mm like 8:2 ro 08:02
   let timeHour: string = `${date.getUTCHours()}`;
-  if (timeHour.length == 1) timeHour = `0${timeHour}`;
+  if (timeHour.length == 1) timeHour = `0${timeHour}`; // prepend 0 if single digit hour
   let timeMins: string = `${date.getUTCMinutes()}`;
-  if (timeMins.length == 1) timeMins = `0${timeMins}`;
+  if (timeMins.length == 1) timeMins = `0${timeMins}`; // prepend 0 if single digit minute
 
   let timeStatus = `${days} DAYS AGO (${timeHour}:${timeMins} UTC)`;
 
@@ -48,18 +47,22 @@ const formatDate = (date: string | Date): string => {
 
 /**
  * getComponents
- * @param data the data from which the components list is made
+ * @param incident the incident for which the components list is made
  * @returns JSX containing the components in the current incident
  */
-const getComponents = (data: any): JSX.Element[] => {
-  let componentsList: JSX.Element[] = [];
-  if (data["components"]) {
-    data["components"].forEach((component: any, id: any) => {
-      componentsList.push(
+const getComponents = (incident: any): JSX.Element[] => {
+  let componentsList: JSX.Element[] = []; // List to store the formatted components list
+
+  // if there are components for the incident
+  if (incident["components"]) {
+    // iterate through the component list
+    incident["components"].forEach((component: any) => {
+
+      const renderComponent: JSX.Element = ( // variable storing the formatted component ready to render
         <Block key={component["name"]} {...componentItem}>
-          <Avatar
+          <Avatar // BaseUI component for rendering Icons
             name={component["name"]}
-            src={ComponentStatusIconUrls(component["status"])}
+            src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
             size="scale600"
             overrides={{
               Root: {
@@ -72,31 +75,33 @@ const getComponents = (data: any): JSX.Element[] => {
           {component["name"]}
         </Block>
       );
+      componentsList.push(renderComponent); // push the formatted component to the list
     });
   }
   return componentsList;
 };
 
 /**
- * list of data-items to display on screen
- * @param data filtered JSON data from API
+ * incident formatted for rendering in the incident list
+ * @param incident data recieved from the API
  * @returns JSX component list
  */
-export const renderData: React.FC = (data: any): JSX.Element => {
+export const renderData: React.FC = (incident: any): JSX.Element => {
   return (
-    <Block key={data["name"]} {...listItem}>
+    <Block key={incident["name"]} {...listItem}>
       <Block {...listDetails}>
-        <Block {...itemName}>{data["name"]}</Block>
+        <Block {...itemName}>{incident["name"]}</Block>
         <Block {...itemDetailsSecondLine}>
-          <Block {...itemStatus}>{data["status"]}</Block>
-          <Block {...itemDate}>{formatDate(data["created_at"])}</Block>
+          <Block {...itemStatus}>{incident["status"]}</Block>
+          <Block {...itemDate}>{formatDate(incident["created_at"])}</Block>
         </Block>
-        <Block {...component}>{getComponents(data)}</Block>
+        {/* get the components corressponding to the incident and append them for render */}
+        <Block {...component}>{getComponents(incident)}</Block> 
       </Block>
       <Link
         href={{
-          pathname: `/incident/update/${data["id"]}`,
-          query: data["id"],
+          pathname: `/incident/update/${incident["id"]}`, 
+          query: incident["id"], // send the incident ID to the update page address
         }}
       >
         <Block {...updateIncidentButton}>Update</Block>

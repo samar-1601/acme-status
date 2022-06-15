@@ -3,10 +3,10 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "./loadPageData";
+import useLoadPageData from "./LoadPageData";
 
 // components
-import { renderData } from "./helperFunctions";
+import { renderData } from "./HelperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -22,7 +22,7 @@ import "react-virtualized/styles.css";
 import { PageType } from "../../../constants";
 
 interface Props {
-  pageType: PageType;
+  pageType: PageType; // type of page(the selected navigation menu item) to be displayed
 }
 
 /**
@@ -33,8 +33,9 @@ interface Props {
 export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
+  
   const cache = useRef(
-    new CellMeasurerCache({
+    new CellMeasurerCache({ // react-virtualized component to measure the size of component
       fixedWidth: true,
       defaultHeight: 50,
     })
@@ -42,13 +43,15 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
 
   /**
    * API response
-   * dataList : JSON response for the 10 items the current pageNumber
+   * dataList : JSON response for the limit(currently 15) items in the current pageNumber
+   * isLoaded : whether the data has loaded or not from the API
+   * hasMore : is there more data to fetch when we scroll
    */
   const { dataList, isLoaded, hasMore } = useLoadPageData(pageNumber, pageType);
 
   /**
    * triggered when the data is loaded from the API
-   * sets pageLoaded for the current page
+   * sets pageLoaded for the current page (for the loading spinner)
    */
   useEffect(() => {
     if (dataList.length>0) {
@@ -69,9 +72,8 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * The functions triggers more data to load by changing the pageNumber's state and hence triggering the above useEffects
    */
   const fetchMoreData = useCallback(() => {
-    console.log("fetchMore Called, pageNo : ", pageNumber);
-    setPageNumber((p) => p + 1);
-  }, [pageNumber]);
+    setPageNumber((page) => page + 1);
+  }, []);
 
   /**
    * Triggers more loading of data for infinite scrolling
@@ -80,15 +82,16 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    */
   const loadMoreRows = useCallback(
     (param: any) => {
-      const startIndex = param.startIndex;
-      const stopIndex = param.stopIndex;
+      const startIndex = param.startIndex; // default from react-virtualised : the start index for the rendering datList
+      const stopIndex = param.stopIndex; // default from react-virtualised : the end index for the rendering datList
 
-      const dataLoaded = [];
+      const dataLoaded = []; // a list storing data to be displayed from the start to the end indices
       for (let i = startIndex; i < stopIndex; i++) {
         dataLoaded[i] = dataList[i];
       }
       fetchMoreData(); // call fetchMoreData to increase pageNumber by 1
-      return Promise.resolve(dataLoaded);
+      return Promise.resolve(dataLoaded); // typecasting the data as we have made dataLoaded 
+      // array using pre-existing data and not calling more from API
     },
     [pageNumber]
   );
@@ -100,9 +103,9 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    */
   return pageLoaded ? (
     <InfiniteLoader
-      isRowLoaded={({ index }) => !hasMore || index < dataList.length}
-      loadMoreRows={loadMoreRows}
-      rowCount={dataList.length + 1}
+      isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
+      loadMoreRows={loadMoreRows} // function triggered when we scroll and need more data to load
+      rowCount={dataList.length + 1} // total row count of the data to be displayed
     >
       {({ onRowsRendered, registerChild }) => (
         <div style={{ width: "100%", height: `calc(100vh - 160px)` }}>
