@@ -1,5 +1,5 @@
 // contstants
-import { ComponentStatusType } from "../../../../../constants";
+import { ComponentStatusType } from "../../../../constants";
 
 // component proptype
 import { BlockProps } from "baseui/block";
@@ -59,14 +59,6 @@ export const colorfullBarWrapper: BlockProps = {
       },
     },
   },
-};
-
-const barColorDeterminer = (value: number) => {
-  if (value < 20) return "rgb(179, 186, 197)"; // grey
-  if (value < 50) return "#2fcc66"; //green
-  if (value < 55) return "#f1c40f"; // yellow
-
-  return "#e74c3c"; // red
 };
 
 export const colorfullBar: BlockProps = {

@@ -16,7 +16,6 @@ export const getComponents = async () => {
     return componentList;
   } catch (err) {
     console.log(err);
-    alert("Too many API calls");
   }
 };
 
@@ -35,6 +34,5 @@ export const getComponentUptime = async (componentID: string) => {
     return uptimeResponse["uptime_percentage"];
   } catch (err) {
     console.log(err);
-    alert("Couldn't find uptime percentage for component");
   }
 };

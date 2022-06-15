@@ -3,7 +3,7 @@ import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
 
 // loading and helper functions
-import { getComponents, getComponentUptime } from "./LoadAboutPageData";
+import { getComponents } from "./LoadAboutPageData";
 import { renderComponents } from "./AboutPageHelperFunctions";
 
 // components
@@ -11,7 +11,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // styles
-import { componentListWrapper } from "./styles/aboutThisStyles";
+import { componentListWrapper } from "../styles/aboutThisStyles";
 
 export const AboutThisSite = React.memo(() => {
   const [state, setState] = useState({

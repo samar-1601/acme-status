@@ -38,7 +38,7 @@ import {
  * @param pageType The type in which we need the formatted date
  * @returns formatted data in x days ago format
  */
-const formatDate = (date: string | Date, pageType: string): string => {
+export const formatDate = (date: string | Date, pageType: string): string => {
   const formatter = new Intl.DateTimeFormat("en", { month: "short" });
   date = new Date(date);
 
