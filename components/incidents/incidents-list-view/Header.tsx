@@ -16,7 +16,7 @@ import { incidentsListView } from "./styles/listStyles";
 import { container, content, navbarWrapper, nav } from "./styles/navStyles";
 
 /**
- * IncidentsList View
+ * IncidentsList View Header
  * triggers when / is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
