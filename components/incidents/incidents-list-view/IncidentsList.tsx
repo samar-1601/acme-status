@@ -3,10 +3,10 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "./loadPageData";
+import useLoadPageData from "./LoadPageData";
 
 // components
-import { renderData } from "./helperFunctions";
+import { renderData } from "./HelperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
