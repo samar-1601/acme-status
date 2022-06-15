@@ -2,10 +2,10 @@
 import { useState } from "react";
 
 // components
-import { NavBarMenuItem } from "./navBarMenuItem";
-import { CreateIncidentButton } from "./createIncidentButton";
+import { NavBarMenuItem } from "./NavigationBarMenuItem";
+import { CreateIncidentButton } from "./CreateIncidentButton";
 import { IncidentsList } from "./IncidentsList";
-import { HeaderBarText } from "./headerBarText";
+import { HeaderBarText } from "./HeaderBarText";
 import { Block } from "baseui/block";
 
 // constants
