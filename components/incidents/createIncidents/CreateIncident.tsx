@@ -83,6 +83,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
       setAffectedComponents((prevAffectedComponents) => {
         const newAffectedComponents = prevAffectedComponents.map(
           (value, index) => {
+            //change only the idx th array item
             if (index == idx) {
               return {
                 compName: value.compName,
@@ -125,6 +126,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         return item.compId;
       });
     let components: SendComponentObject = {};
+    //get those components changed their status from initial value
     affectedComponents.forEach((item) => {
       if (
         item.selected &&
@@ -137,7 +139,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
     const payload = {
       incident: {
         name: incidentName,
-        status: getIncidentStatus(incidentStatus),
+        status: getIncidentStatus(incidentStatus), //changed status components
         impact_override: "none",
         scheduled_for: "2022-09-12T06:00:00.007Z",
         scheduled_until: "2022-10-12T06:00:00.007Z",
@@ -154,7 +156,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         backfilled: false,
         body: incidentMessage,
         components: components,
-        component_ids: componentIDs,
+        component_ids: componentIDs, //all the component ids which were selected
         scheduled_auto_transition: true,
       },
     };

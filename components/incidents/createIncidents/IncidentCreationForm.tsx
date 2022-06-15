@@ -55,8 +55,9 @@ export default function IncidentCreationForm() {
     })
       .then((response) => response.json())
       .then((json) => {
+        //if successful POST show Successfully submitted form details in SnackBar
         if ("error" in json) {
-          throw json.error;
+          throw json.error; //if 422 error in POST throw error to catch section
         }
         console.log(json);
         dequeue();
@@ -69,10 +70,13 @@ export default function IncidentCreationForm() {
         setIsSubmitClicked(false);
       })
       .then(() => {
+        //After successful POST redirect to home route
         Router.push("/");
       })
+      //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
       .catch((err = "Sorry not able to submit form") => {
         console.log(err);
+        //display error in snackBar and set loading state of cursor to false
         dequeue();
         enqueue(
           {
@@ -97,6 +101,7 @@ export default function IncidentCreationForm() {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
+        //convert the data fetched from API to ComponentObject[] and store in global variable InitialData
         InitialData = json.map((item: JSONObject, index: Number) => {
           return {
             compName: item.name,
@@ -106,11 +111,11 @@ export default function IncidentCreationForm() {
             selected: false,
           };
         });
-        setComponents(InitialData);
-        setStateOfPage(1);
+        setComponents(InitialData); //set state of components to InitialData
+        setStateOfPage(1); //set state of page to succesfully fetched data
         // console.log("setting");
       })
-      .catch(() => setStateOfPage(2));
+      .catch(() => setStateOfPage(2)); //if error in fetching set state of page to 2 ("Sorry not able to fetch components")
   }, []);
   return (
     <CreateIncident
@@ -120,7 +125,7 @@ export default function IncidentCreationForm() {
       handleSubmit={handleSubmit}
       incidentName={""}
       incidentStatus={"Investigating"}
-      type={"Create"}
+      type={"Create"} //sets formType to createIncident
     />
   );
 }
