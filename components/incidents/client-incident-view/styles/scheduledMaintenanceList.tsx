@@ -32,7 +32,6 @@ export const maintenanceItemDate: BlockProps = {
       style: {
         color: "rgb(175, 175, 175)",
         fontSize: "0.875rem",
-        lineHeight: "1.334375rem",
         margin: "5px 0px 0px 0px",
         whiteSpace: "nowrap",
       },
@@ -43,13 +42,13 @@ export const maintenanceItemDate: BlockProps = {
 export const maintenanceItemStatusBody: BlockProps = {
   overrides: {
     Block: {
-      style: () => ({
+      style: {
         fontSize: "1rem",
         lineHeight: "1.5rem",
         fontWeight: 400,
         marginBottom: "5px",
         display: "inline",
-      }),
+      },
     },
   },
 };
@@ -59,7 +58,7 @@ export const maintenanceItemHeaderWrapper: BlockProps = {
       style: () => ({
         display: "flex",
         flexDirection: "row",
-        padding: "15px 0px",
+        padding: "5px 0px",
         borderBottom: "0.1px grey solid",
         flexWrap: "nowrap",
       }),

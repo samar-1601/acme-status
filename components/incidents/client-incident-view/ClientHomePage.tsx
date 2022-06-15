@@ -2,13 +2,13 @@
 import { IncidentsList } from "./IncidentsList";
 import { Block } from "baseui/block";
 import { AboutThisSite } from "./AboutThisSite";
-import { PastIncidents } from "./pastIncidents";
+import { PastIncidents } from "./PastIncidents";
 
 // constants
 import { PageType } from "../../../constants";
 
 // styles
-import { incidentsListView, h1, h3 } from "./styles/container";
+import { incidentsListView, h1, h3 } from "./styles/containerStyles";
 
 /**
  * IncidentsList View

@@ -11,7 +11,7 @@ import {
   itemStatus,
   itemDate,
   itemName,
-} from "./styles/FullIncidentsList";
+} from "./styles/fullIncidentsListStyles";
 
 import {
   maintenanceListItem,

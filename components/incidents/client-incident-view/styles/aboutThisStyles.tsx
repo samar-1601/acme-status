@@ -60,13 +60,21 @@ export const colorfullBarWrapper: BlockProps = {
     },
   },
 };
+
+const barColorDeterminer = (value: number) => {
+  if (value < 20) return "rgb(179, 186, 197)"; // grey
+  if (value < 50) return "#2fcc66"; //green
+  if (value < 55) return "#f1c40f"; // yellow
+
+  return "#e74c3c"; // red
+};
+
 export const colorfullBar: BlockProps = {
   overrides: {
     Block: {
       style: {
         width: "calc(100%/90)",
         height: "34px",
-        backgroundColor: "rgb(179, 186, 197)",
         margin: "12px 0px",
       },
     },
@@ -94,7 +102,7 @@ export const horizontalLine: BlockProps = {
       style: {
         border: "0.5px solid rgb(211,211,211)",
         width: "1px",
-        flexGrow: "1",
+        flexGrow: 1,
         margin: "0px 15px",
       },
     },
@@ -149,7 +157,7 @@ export const componentStatus: BlockProps = {
         color: componentsStatusColor($value.children).color,
         textTransform: "capitalize",
         fontSize: "0.875rem",
-        fontWeight: "400",
+        fontWeight: 400,
         lineHeight: "1.5rem",
       }),
     },

@@ -20,7 +20,7 @@ import "react-virtualized/styles.css";
 
 // constants
 import { PageType } from "../../../constants";
-import { hasListLoadedStyle } from "./styles/FullIncidentsList";
+import { hasListLoadedStyle } from "./styles/fullIncidentsListStyles";
 
 interface Props {
   /**
@@ -112,7 +112,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                         columnIndex={0}
                         rowIndex={index}
                       >
-                        <div style={style}>{renderData(element)}</div>
+                        <div style={style}>{renderData(element, pageType)}</div>
                       </CellMeasurer>
                     );
                   }}

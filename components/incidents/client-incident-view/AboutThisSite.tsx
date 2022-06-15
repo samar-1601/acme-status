@@ -22,6 +22,7 @@ import {
   componentListWrapper,
   componentNameText,
 } from "./styles/aboutThisStyles";
+import { GenerateBarsData } from "./BarsDataGenerator";
 
 const getComponents = async () => {
   try {
@@ -61,8 +62,20 @@ const getComponentUptime = async (componentID: string) => {
   }
 };
 
+const barColorDeterminer = (value: number) => {
+  if (value < 20) return "rgb(179, 186, 197)"; // grey
+  if (value < 60) return "#2fcc66"; //green
+  if (value < 65) return "#f1c40f"; // yellow
+
+  return "#e74c3c"; // red
+};
+const getDateforBar = ()=>{
+  
+}
+
 const getColorFullBars = (count: number) => {
   let barsList = [];
+  const barValues = GenerateBarsData(count);
   for (let i = 0; i < count; i++) {
     barsList.push(
       <StatefulPopover
@@ -74,7 +87,10 @@ const getColorFullBars = (count: number) => {
         )}
         triggerType={TRIGGER_TYPE.hover}
       >
-        <Block {...colorfullBar}></Block>
+        <Block
+          {...colorfullBar}
+          backgroundColor={barColorDeterminer(barValues[i])}
+        ></Block>
       </StatefulPopover>
     );
   }
