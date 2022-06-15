@@ -1,6 +1,5 @@
 import React from "react";
-import { Header } from "../../components/components/header";
-import { NavigationBar } from "../../components/components/navigation_bar";
+import { Header, NavigationBar } from "../../components/components/Component";
 
 class components extends React.Component {
   render() {
