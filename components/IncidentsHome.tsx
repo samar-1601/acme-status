@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { IncidentsListViewHeader } from "./incidents/incidents-list-view/Header";
 
+/**
+ * Incidents List View Home
+ * @returns the parent component returning the incident lists component
+ */
 const IncidentsHome = () => {
   return (
     <>
