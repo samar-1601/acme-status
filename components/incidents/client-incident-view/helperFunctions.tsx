@@ -20,7 +20,7 @@ import {
   maintenanceItemHeaderWrapper,
   maintenanceItemStatusBody,
   maintenanceItemStatusStyle,
-} from "./styles/maintenanceList";
+} from "./styles/scheduledMaintenanceList";
 
 import {
   pastIncidentNameStyle,
