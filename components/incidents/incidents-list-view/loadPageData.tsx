@@ -1,5 +1,5 @@
 // lib
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
@@ -40,27 +40,22 @@ const getData = async (pageNumber: number, pageType: string) => {
         Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
+
     const dataItem = await response.json();
 
     return dataItem;
   } catch (err) {
     console.log(err);
-    alert("Too many API calls");
   }
 };
 
-export default function useLoadPageData(pageNumber: number, pageType: string) {
+export default function useLoadPageData(pageType: PageType) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API
     hasLoaded: false, // hasLoaded : status of loading data from API
     hasMore: true, // hasMore : do we have to fetch more data
+    pageNumber: 1, // pageNumber : page number for pagination
   });
-
-  useEffect(() => {
-    setState({ hasLoaded: false, hasMore: true, dataList: [] }); // reset every value if the
-    // pageType(a different menu from navbar is selected) has changed
-    LoadDataItems(1, pageType); // load data for the first page
-  }, [pageType]);
 
   /**
    * An asynchronous helper function which loads data from getData()
@@ -78,30 +73,35 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
       "API data:",
       dataItem.length
     );
-    /**
-     * state.dataList : concat data obtained in the current response to previous datalist
-     * state.hasLoaded : after all the above processes are done update the hasLoaded status
-     * state.hasMore : if we get data in the current page, set hasMore to true
-     */
+
     setState({
       ...state,
+      pageNumber: pageNumber,
       hasLoaded: true, // loading completed
       hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
-      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
+      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
     });
   };
 
-  // triggered when the pageNumber changes i.e we scroll below
-  useEffect(() => {
-    if (pageNumber !== 1) {
-      setState({ ...state, hasLoaded: false }); // if scrolled below, set hasLoaded as false for the future data to render
-      LoadDataItems(pageNumber, pageType); // proceed to load data for the current pageNumber
+  /**
+   * function to be called when more data is needed to be fetched
+   */
+  const fetchMore = async () => {
+    if (state.hasMore) {
+      await LoadDataItems(state.pageNumber + 1, pageType); // fetch data for the next page (currentPage + 1)
     }
-  }, [pageNumber]);
+  };
+
+  useEffect(() => {
+    setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
+    LoadDataItems(1, pageType);
+  }, [pageType]);
+
 
   return {
     dataList: state.dataList,
     isLoaded: state.hasLoaded,
     hasMore: state.hasMore,
+    fetchMore: fetchMore,
   };
 }

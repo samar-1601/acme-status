@@ -102,6 +102,18 @@ export const componentItem: BlockProps = {
     },
   },
 };
+export const hasListLoadedStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginTop: "35vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      },
+    },
+  },
+};
 
 /**
  * Status' style
