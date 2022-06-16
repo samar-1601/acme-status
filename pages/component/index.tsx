@@ -1,6 +1,6 @@
 import React from "react";
-import { Header, NavigationBar } from "../../components/components/Component";
-import styles from "../../components/components/styles.module.css"
+import { Header, NavigationBar } from "../../components/component/Component";
+import styles from "../../components/component/styles.module.css"
 
 class components extends React.Component {
   render() {
