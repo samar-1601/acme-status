@@ -11,11 +11,10 @@ import { IncidentMessage } from "./IncidentMessage";
 import { AffectedComponents } from "./AffectedComponents";
 
 //constants
-import { getIncidentStatus, getStatus } from "./../../../constants";
+import { getIncidentStatus, getStatus } from "../../../constants";
 import {
   SendComponentObject,
-  optionType,
-  CreateIncidentProps,
+  IncidentCreationProps,
   ComponentObject,
 } from "../../../variableTypes";
 
@@ -32,7 +31,7 @@ import {
  * @returns
  */
 
-export default function CreateIncident(props: CreateIncidentProps) {
+export default function IncidentForm(props: IncidentCreationProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
   const [incidentName, setIncidentName] = useState<string>(props.incidentName); //state for incidentName
 

@@ -1,8 +1,6 @@
 import * as React from "react";
-import IncidentCreationForm from "../../components/incidents/createIncidents/IncidentCreationForm";
+import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 
 export default () => {
-  return (
-    <IncidentCreationForm/>
-  );
-}
+  return <IncidentCreation />;
+};

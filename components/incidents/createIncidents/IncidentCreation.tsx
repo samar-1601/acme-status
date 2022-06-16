@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 //components
-import CreateIncident from "./CreateIncident";
+import IncidentForm from "./IncidentForm";
 import { ComponentObject, JSONObject, pageData } from "../../../variableTypes";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
@@ -16,14 +16,14 @@ import { NEXT_PUBLIC_AUTH_TOKEN, STATUS, PAGE_ID } from "../../../constants";
 let InitialData: (ComponentObject | never)[] = [];
 
 /**
- * Incident Creation Form
- * Parent component of Incident Creation Form. Wraps the Form.
+ * Incident Creation
+ * Has IncidentForm as child component. Wraps the Form.
  * Sends components, currentStateofPage, isSubmitClicked, incidentName, incidentStatus and type as props to CreateIncident
- * As this is IncidentCreationForm incidentName, incidentStatus and components will be the default values
+ * As this is IncidentCreation incidentName, incidentStatus and components will be the default values
  * Responsible for fetching data from API.
  */
 
-export default function IncidentCreationForm() {
+export default function IncidentCreation() {
   const [components, setComponents] = useState<ComponentObject[]>([]); // stores components fetched from API
   const [stateOfPage, setStateOfPage] = useState(0); //stores state of Page 0-->fetching data 1-->fetched data 2-->cannot fetch data
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //stores if submit button is clicked or not. If clicked then loading state of cursor
@@ -118,7 +118,7 @@ export default function IncidentCreationForm() {
       .catch(() => setStateOfPage(2)); //if error in fetching set state of page to 2 ("Sorry not able to fetch components")
   }, []);
   return (
-    <CreateIncident
+    <IncidentForm
       components={components}
       currentStateOfPage={stateOfPage}
       isSubmitClicked={isSubmitClicked}
