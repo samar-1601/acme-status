@@ -26,7 +26,7 @@ export const Header = function () {
               }
             }
           }}
-          onClick = {() => Router.push("/add_component")}  
+          onClick = {() => Router.push("/component/new")}  
           >Add Component
         </Button>
       </div>

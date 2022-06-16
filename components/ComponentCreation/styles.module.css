@@ -1,7 +1,14 @@
-.header {
+.header {  
+    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
     font-size: 20px;
+}
+
+.heading {
+  padding-top: 5px;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .goback {
@@ -12,4 +19,5 @@
     padding: 40px;
     width: 1000px;    
     margin: auto;
+    background-color: #F8F8FA;
 }

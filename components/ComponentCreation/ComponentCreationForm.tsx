@@ -24,7 +24,7 @@ const Header = function () {
         Add component
       </div>
       <div className={styles.goback}>
-        <a href="/components">Back to components</a>
+        <a href="/component">Back to components</a>
       </div>
     </div>
   );
@@ -125,6 +125,7 @@ const Uptime =  function () {
           Display the historical data of this component on my status page
         </Checkbox>
       </FormControl>
+      {checked && 
       <FormControl label="Select date">
         <DatePicker
           value={date}
@@ -135,8 +136,9 @@ const Uptime =  function () {
           }
           clearable
         />
-      </FormControl>
-      {checked &&<Block overrides={{
+      </FormControl>}
+      {checked &&
+      <Block overrides={{
         Block : {
           style: () => ({
             paddingTop: "30px",

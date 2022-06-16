@@ -1,10 +1,11 @@
 import React from "react";
-import { Header, NavigationBar } from "../components/components/Component";
+import { Header, NavigationBar } from "../../components/component/Component";
+import styles from "../../components/component/styles.module.css"
 
 class components extends React.Component {
   render() {
     return (
-      <div>
+      <div className={styles.page}>
         <Header />
         <NavigationBar />
       </div>
