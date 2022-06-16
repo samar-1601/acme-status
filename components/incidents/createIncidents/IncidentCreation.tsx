@@ -37,55 +37,57 @@ export default function IncidentCreation() {
      * Second case --> post unsuccessful show error message in snackbar
      */
     setIsSubmitClicked(true);
-    // dequeue();
-    enqueue(
-      {
-        message: "Submitting Form Details",
-        progress: true,
-      },
-      DURATION.infinite
-    );
-    fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-      body: JSON.stringify(payload),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        //if successful POST show Successfully submitted form details in SnackBar
-        if ("error" in json) {
-          throw json.error; //if 422 error in POST throw error to catch section
-        }
-        console.log(json);
-        dequeue();
-        enqueue(
-          {
-            message: "Successfully submitted form details",
-          },
-          DURATION.short
-        );
-        setIsSubmitClicked(false);
+    if (payload.incident.name == "") {
+      dequeue();
+      enqueue(
+        {
+          message: "Incident Name can't be Blank!",
+        },
+        DURATION.long
+      );
+      setIsSubmitClicked(false);
+    } else {
+      fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        },
+        body: JSON.stringify(payload),
       })
-      .then(() => {
-        //After successful POST redirect to home route
-        Router.push("/");
-      })
-      //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
-      .catch((err = "Sorry not able to submit form") => {
-        console.log(err);
-        //display error in snackBar and set loading state of cursor to false
-        dequeue();
-        enqueue(
-          {
-            message: err,
-          },
-          DURATION.long
-        );
-        setIsSubmitClicked(false);
-      });
+        .then((response) => response.json())
+        .then((json) => {
+          //if successful POST show Successfully submitted form details in SnackBar
+          if ("error" in json) {
+            throw json.error; //if 422 error in POST throw error to catch section
+          }
+          console.log(json);
+          dequeue();
+          enqueue(
+            {
+              message: "Successfully submitted form details",
+            },
+            DURATION.medium
+          );
+          setIsSubmitClicked(false);
+        })
+        .then(() => {
+          //After successful POST redirect to home route
+          Router.push("/");
+        })
+        //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
+        .catch(() => {
+          //display error in snackBar and set loading state of cursor to false
+          dequeue();
+          enqueue(
+            {
+              message: "Failed to Submit Form. Please Try Again!",
+            },
+            DURATION.long
+          );
+          setIsSubmitClicked(false);
+        });
+    }
   };
 
   //will execute on component mounting gets data from API sets it and sends to CreateIncident
