@@ -17,6 +17,8 @@ import {
   IncidentCreationProps,
   ComponentObject,
 } from "../../../variableTypes";
+import Router from "next/router";
+import IncidentErrorPage from "./IncidentErrorPage";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -205,24 +207,49 @@ export default function IncidentForm(props: IncidentCreationProps) {
               }}
             >
               {formConstant}
-
-              <Button
-                onClick={() => {
-                  submitForm();
-                  // dequeue();
-                }}
+              <Block
                 overrides={{
-                  BaseButton: {
-                    style: ({ $theme }) => ({
-                      backgroundColor: $theme.colors.accent,
-                      width: "80px",
-                      alignSelf: "end",
-                    }),
+                  Block: {
+                    style: { display: "flex", flexDirection: "row-reverse" },
                   },
                 }}
               >
-                {props.type}
-              </Button>
+                <Button
+                  onClick={() => {
+                    submitForm();
+                    // dequeue();
+                  }}
+                  overrides={{
+                    BaseButton: {
+                      style: ({ $theme }) => ({
+                        backgroundColor: $theme.colors.accent,
+                        width: "80px",
+                        alignSelf: "end",
+                      }),
+                    },
+                  }}
+                >
+                  {props.type}
+                </Button>
+                <Button
+                  onClick={() => {
+                    Router.push("/");
+                    // dequeue();
+                  }}
+                  overrides={{
+                    BaseButton: {
+                      style: ({ $theme }) => ({
+                        backgroundColor: $theme.colors.accent,
+                        width: "80px",
+                        alignSelf: "end",
+                        marginRight: "50px",
+                      }),
+                    },
+                  }}
+                >
+                  Cancel
+                </Button>
+              </Block>
             </Block>
           </>
         );
@@ -259,7 +286,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
         );
       }
     }
-    //if submit button has been clicked show loadin cursor and show message in SnackBar
+    //if submit button has been clicked show loading button and show message in SnackBar
     else {
       return (
         <>
@@ -277,20 +304,51 @@ export default function IncidentForm(props: IncidentCreationProps) {
             }}
           >
             {formConstant}
-            <Button
+            <Block
               overrides={{
-                BaseButton: {
-                  style: ({ $theme }) => ({
-                    backgroundColor: $theme.colors.accent,
-                    width: "80px",
-                    alignSelf: "end",
-                    cursor: "wait",
-                  }),
+                Block: {
+                  style: { display: "flex", flexDirection: "row-reverse" },
                 },
               }}
             >
-              {props.type}
-            </Button>
+              <Button
+                isLoading
+                onClick={() => {
+                  submitForm();
+                  // dequeue();
+                }}
+                overrides={{
+                  BaseButton: {
+                    style: ({ $theme }) => ({
+                      backgroundColor: $theme.colors.accent,
+                      width: "80px",
+                      alignSelf: "end",
+                      cursor: "not-allowed",
+                    }),
+                  },
+                }}
+              >
+                {props.type}
+              </Button>
+              <Button
+                onClick={() => {
+                  Router.push("/");
+                  // dequeue();
+                }}
+                overrides={{
+                  BaseButton: {
+                    style: ({ $theme }) => ({
+                      backgroundColor: $theme.colors.accent,
+                      width: "80px",
+                      alignSelf: "end",
+                      marginRight: "50px",
+                    }),
+                  },
+                }}
+              >
+                Cancel
+              </Button>
+            </Block>
           </Block>
         </>
       );
@@ -299,36 +357,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
   //If error in fetching data show error message: Unable to Fetch Components
   else {
     return (
-      <>
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                paddingLeft: "20%",
-                paddingRight: "20%",
-                fontFamily: "Arial, Helvetica, sans-serif",
-              },
-            },
-          }}
-        >
-          <Block
-            overrides={{
-              Block: {
-                style: {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "80vh",
-                },
-              },
-            }}
-          >
-            <h1>Sorry Unable to Fetch Components. Please Try Again</h1>
-          </Block>
-        </Block>
-      </>
+      <IncidentErrorPage message="Sorry Unable to Fetch Components. Please Try Again!" />
     );
   }
 }

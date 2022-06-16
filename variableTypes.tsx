@@ -93,3 +93,7 @@ export interface IncidentFetchType {
   id: string;
   status: string;
 }
+
+export interface IncidentErrorPageProps {
+  message: string;
+}
