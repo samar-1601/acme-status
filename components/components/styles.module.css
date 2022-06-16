@@ -7,6 +7,8 @@
 
 .heading {
   padding-top: 5px;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .listItem {
@@ -21,6 +23,11 @@
 }
 
 .navigationBar {
-
   justify-content: space-between;
+}
+
+.page {
+  width: 1000px;
+  margin: auto;
+  background-color: #F8F8FA;
 }

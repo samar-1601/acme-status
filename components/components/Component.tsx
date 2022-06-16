@@ -17,8 +17,7 @@ export const Header = function () {
             BaseButton : {
               style : {
                 backgroundColor: "blue",
-                alignSelf: "right",
-                justifyContent: "right",
+                float: "right",
               },
               props : {
                 className: "add-button"
