@@ -246,7 +246,7 @@ export const ComponentCreationForm = function () {
               postData(url,data).then(res => console.log(res))
               
             }
-            Router.push("/components")
+            Router.push("/component")
           }}
           >Save Component
         </Button>
