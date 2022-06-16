@@ -1,22 +1,13 @@
-import { Block } from "baseui/block";
 import React from "react";
-import { Header } from "../components/components/header";
-import { NavigationBar } from "../components/components/navigation_bar";
+import { Header, NavigationBar } from "../components/components/Component";
 
 class components extends React.Component {
   render() {
     return (
-      <Block overrides={{
-        Block : {
-          style : {
-            paddingLeft: "25%",
-            paddingRight: "25%"
-          }
-        }
-      }}>
+      <div>
         <Header />
         <NavigationBar />
-      </Block>
+      </div>
     );
   }
 }
