@@ -20,26 +20,11 @@ interface Props {
 }
 
 /**
- * Check function for React.memo on the NavBarMenuItem to reduce unnecesary renders for unchanged menu items
- * @param prevMenu The previous selected menu item
- * @param currentMenu The current selected menu item
- * @returns true if the previous or the current item was untouched
- */
-function menuItemChanged(prevMenu: Props, currentMenu: Props) {
-  return (
-    prevMenu.currentPage !== prevMenu.pageType &&
-    currentMenu.currentPage !== currentMenu.pageType
-  );
-}
-
-/**
  * Returns a NavbarMenu item based on the Props passed
- * Memoized to reduced unnecessary renders
- * now only the changed menu items(cuurent + previous menu items) are rendered and not the unchanegd ones
+ * React.Memo to reduced unnecessary renders
  */
 export const NavBarMenuItem: React.FC<Props> = React.memo(
   ({ currentPage, pageType, onClick }) => {
-    console.log("menu");
     return (
       <Block {...divInsideNav} onClick={onClick}>
         <Block
@@ -47,7 +32,7 @@ export const NavBarMenuItem: React.FC<Props> = React.memo(
           overrides={{
             Block: {
               style:
-                currentPage === pageType ? navActiveItem : navNonActiveItem,
+                currentPage === pageType ? navActiveItem : navNonActiveItem, // toggle the style based on the active page
             },
           }}
         >
@@ -55,6 +40,5 @@ export const NavBarMenuItem: React.FC<Props> = React.memo(
         </Block>
       </Block>
     );
-  },
-  menuItemChanged
+  }
 );

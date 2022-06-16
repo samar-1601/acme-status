@@ -1,5 +1,5 @@
 // lib
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
@@ -11,13 +11,13 @@ import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
  * @returns API response and API loading status
  */
 
-// global variables
 const limit = 15; // determines the no. of rows of data in a page
 
 /**
  * Get data response from API for a given pageID
  * @param pageNumber page number for pagination
  * @param pageType type of the page to be rendered
+ * @returns the data fetched from the API
  */
 const getData = async (pageNumber: number, pageType: string) => {
   /**
@@ -40,35 +40,22 @@ const getData = async (pageNumber: number, pageType: string) => {
         Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
+
     const dataItem = await response.json();
 
     return dataItem;
   } catch (err) {
     console.log(err);
-    alert("Too many API calls");
   }
 };
 
-export default function useLoadPageData(pageNumber: number, pageType: string) {
-  /**
-   * A useState storing:
-   * dataList : stores data response from API
-   * hasLoaded : status of loading data from API
-   * hasMore : do we have to fetch more data
-   */
+export default function useLoadPageData(pageType: PageType) {
   const [state, setState] = useState({
-    dataList: Array(),
-    hasLoaded: false,
-    hasMore: true,
+    dataList: Array(), // dataList : stores data response from API
+    hasLoaded: false, // hasLoaded : status of loading data from API
+    hasMore: true, // hasMore : do we have to fetch more data
+    pageNumber: 1, // pageNumber : page number for pagination
   });
-
-  /**
-   * reset every value if the pageType has changed
-   */
-  useEffect(() => {
-    setState({ hasLoaded: false, hasMore: true, dataList: [] });
-    LoadDataItems(1, pageType);
-  }, [pageType]);
 
   /**
    * An asynchronous helper function which loads data from getData()
@@ -76,7 +63,8 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
    * @param pageType current menu item/pageType selected
    */
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
-    const dataItem = await getData(pageNumber, pageType);
+    let dataItem = []; 
+    dataItem = await getData(pageNumber, pageType);
 
     console.log(
       "pageNo:",
@@ -86,32 +74,35 @@ export default function useLoadPageData(pageNumber: number, pageType: string) {
       "API data:",
       dataItem.length
     );
-    /**
-     * state.dataList : concat data obtained in the current response to previous datalist
-     * state.hasLoaded : after all the above processes are done update the hasLoaded status
-     * state.hasMore : if we get data in the current page, set hasMore to true
-     */
+
     setState({
       ...state,
-      hasLoaded: true,
-      hasMore: dataItem.length > 0,
-      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem],
+      pageNumber: pageNumber,
+      hasLoaded: true, // loading completed
+      hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
+      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
     });
   };
 
   /**
-   * triggered when the pageNumber changes i.e we scroll below
+   * function to be called when more data is needed to be fetched
    */
-  useEffect(() => {
-    if (pageNumber !== 1) {
-      setState({ ...state, hasLoaded: false });
-      LoadDataItems(pageNumber, pageType);
+  const fetchMore = async () => {
+    if (state.hasMore) {
+      await LoadDataItems(state.pageNumber + 1, pageType); // fetch data for the next page (currentPage + 1)
     }
-  }, [pageNumber]);
+  };
+
+  useEffect(() => {
+    setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
+    LoadDataItems(1, pageType);
+  }, [pageType]);
+
 
   return {
     dataList: state.dataList,
     isLoaded: state.hasLoaded,
     hasMore: state.hasMore,
+    fetchMore: fetchMore,
   };
 }

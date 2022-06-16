@@ -10,6 +10,7 @@ import { createIncidentButton } from "./styles/navStyles";
 
 /**
  * Button component for create incident
+ * redirects to the create incident page
  */
 export const CreateIncidentButton = React.memo(() => {
   return (

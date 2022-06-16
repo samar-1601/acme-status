@@ -1,28 +1,24 @@
-import React, { useEffect } from "react";
-import { ComponentsAffectedProps } from "../../../variableTypes";
+//lib
+import React, { useCallback } from "react";
+
+//components
 import { SelectStatusComponent } from "./SelectStatusComponent";
 import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 
-function propsAreEqual(
-  prevProps: ComponentsAffectedProps,
-  nextProps: ComponentsAffectedProps
-) {
-  return (
-    prevProps.componentList.length === prevProps.componentList.length &&
-    prevProps.componentList.every(
-      (value, index) => value === nextProps.componentList[index]
-    )
-  );
-}
+//constants
+import { ComponentsAffectedProps } from "../../../variableTypes";
 
 const label = <Block>Components Affected</Block>;
 
+/**
+ * AffectedComponents Component
+ * @params props contains:
+ * componentList: list of components containing isSelected and type of choice
+ * handleComponentUpdate: Funtion
+ */
 export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
-    // useEffect(() => {
-    //   console.log("Here is a problem!!!");
-    // }, [props.toggleCheckBox]);
     return (
       <FormControl
         label={label}
@@ -44,14 +40,12 @@ export const AffectedComponents = React.memo(
                 id={item.id}
                 type={item.compType}
                 selected={item.selected}
-                toggleCheckBox={props.toggleCheckBox}
-                changeOption={props.changeOption}
+                handleChange={props.handleComponentUpdate}
               />
             );
           })}
         </div>
       </FormControl>
     );
-  },
-  propsAreEqual
+  }
 );

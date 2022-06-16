@@ -29,8 +29,7 @@ export interface optionType {
   };
 }
 
-export interface CreateIncidentProps {
-  // pageID: String[];
+export interface IncidentCreationProps {
   components: ComponentObject[];
   currentStateOfPage: number;
   isSubmitClicked: boolean;
@@ -50,14 +49,12 @@ export interface ComponentObject {
 
 export interface ComponentsAffectedProps {
   componentList: ComponentObject[];
-  toggleCheckBox: Function;
-  changeOption: Function;
+  handleComponentUpdate: Function;
 }
 
 export interface InputStatusprops {
   updateStatus: Function;
   incidentStatus: String;
-  // updateStatusBarOnClick: Function
 }
 
 export interface ImageProps {
@@ -68,9 +65,8 @@ export interface ImageProps {
 export interface statusComponentProps {
   selected: boolean;
   id: string;
-  toggleCheckBox: Function;
   name: string;
-  changeOption: Function;
+  handleChange: Function;
   type: number;
 }
 
@@ -89,7 +85,7 @@ export interface pageData {
   id: String;
 }
 
-export interface UpdateIncidentFormProps {
+export interface UpdateIncidentProps {
   incidentId: string | string[] | undefined;
 }
 
