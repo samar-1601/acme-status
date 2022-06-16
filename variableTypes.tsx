@@ -29,7 +29,7 @@ export interface optionType {
   };
 }
 
-export interface CreateIncidentProps {
+export interface IncidentCreationProps {
   components: ComponentObject[];
   currentStateOfPage: number;
   isSubmitClicked: boolean;
