@@ -13,6 +13,9 @@ import { Block } from "baseui/block";
 import { DatePicker } from "baseui/datepicker";
 
 import styles from "./styles.module.css"
+import Router from "next/router";
+
+let componentName: string, componentDescription: string, componentGroup: any, startDate: Date | Date[]
 
 const Header = function () {
   return (
@@ -35,6 +38,7 @@ const NameForm =  function () {
         id="input-id"
         value={name}
         onChange={event => {
+          componentName=event.currentTarget.value
           setName(event.currentTarget.value)
         }}
         placeholder="Component name"
@@ -50,7 +54,11 @@ const Description  = function () {
       <Textarea
         id="textarea-id"
         value={description}
-        onChange={event => setDescription(event.currentTarget.value)}
+        onChange={event => {
+            componentDescription=event.currentTarget.value
+            setDescription(event.currentTarget.value)
+          }
+        }
         placeholder="Frontend application and API servers"
       />
     </FormControl>
@@ -79,7 +87,6 @@ const ComponentGroup = function () {
       };
     }
     setGroups(options)
-    console.log(options, xjson)
   }
 
   React.useEffect(()=>{
@@ -93,7 +100,11 @@ const ComponentGroup = function () {
       options={groups}
       labelKey="label"
       valueKey="id"
-      onChange={({value}) => setActive(value)}
+      onChange={({value}) => {
+          componentGroup=value
+          setActive(value)
+        }
+      }
       value={active}
       placeholder="This component does not belong to a group"
     />
@@ -117,8 +128,10 @@ const Uptime =  function () {
       <FormControl label="Select date">
         <DatePicker
           value={date}
-          onChange={({ date }) =>
-            setDate(Array.isArray(date) ? date : [date])
+          onChange={({ date }) => {
+              startDate=date
+              setDate(Array.isArray(date) ? date : [date])
+            }
           }
           clearable
         />
@@ -148,6 +161,20 @@ const Uptime =  function () {
   );
 }
 
+const postData = async function (url = "", data = {}) {
+  const response = await fetch(url, {
+    method: 'POST', 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+    },
+    body: JSON.stringify(data) 
+  });
+  let xjson = await response.json(); 
+  console.log(xjson)
+  return xjson;
+}
+
 export const ComponentCreationForm = function () {
   return (
     <div>
@@ -171,7 +198,53 @@ export const ComponentCreationForm = function () {
             }
           }}
           onClick = {()=>{
+            console.log(componentGroup)
+            if(componentGroup.isCreatable) {
+              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
+              let data:any ={
+                "component": {
+                  "description": componentDescription,
+                  "status": "operational",
+                  "name": componentName,
+                  "start_date": startDate
+                }
+              }
 
+              let comp:any;
+              postData(url, data).then(res => () => {
+                  comp=res.id;
+                }
+              )
+              console.log(comp)
+              
+              url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`
+              data = {
+                "description": "",
+                "component_group": {
+                  "components": [
+                    comp
+                  ],
+                "name": componentGroup
+                }
+              }
+              postData(url, data)
+
+            } else {
+              console.log(componentGroup)
+              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
+              let data:any ={
+                "component": {
+                  "description": componentDescription,
+                  "status": "operational",
+                  "name": componentName,
+                  "start_date": startDate,
+                  "group_id": componentGroup.id
+                }
+              }
+              postData(url,data).then(res => console.log(res))
+              
+            }
+            Router.push("/components")
           }}
           >Save Component
         </Button>
