@@ -61,6 +61,17 @@ export const formatDate = (date: string | Date, pageType: string): string => {
   )}, ${timeHour}:${timeMins} UTC`;
 };
 
+function formattedDateInSlashFormat(d = new Date) {
+  let month = String(d.getMonth() + 1);
+  let day = String(d.getDate());
+  const year = String(d.getFullYear());
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return `${day}/${month}/${year}`;
+}
+
 /**
  * Helper function for PastIncidents List component
  * @param incidentList the past/completed Incidents List
@@ -70,15 +81,16 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
   var map = new Map();
   for (let i = 0; i < incidentList.length; i++) {
     const incident: any = incidentList[i];
-    const date: string | Date = formatDate(
-      incident["updated_at"],
-      PageType.Completed
+    const date: string | Date = formattedDateInSlashFormat(
+      new Date(incident["updated_at"])
     );
     let previous = [];
     if (map.has(date)) previous = map.get(date);
 
     map.set(date, previous.concat(incident));
   }
+  map = new Map([...map].sort().reverse());
+  
   console.log("map", map);
   let renderList: JSX.Element[] = [];
   map.forEach(function (value, key) {

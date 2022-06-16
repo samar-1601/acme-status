@@ -29,7 +29,6 @@ const getCompletedIncidents = async () => {
     return completedList;
   } catch (err) {
     console.log(err);
-    alert("Couldn't fetch completed incidents.");
   }
 };
 
