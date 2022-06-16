@@ -5,6 +5,7 @@ import { Tabs, Tab } from "baseui/tabs-motion";
 import { Button, SIZE } from "baseui/button";
 
 import { ComponentList } from "./ComponentList";
+import Router from "next/router";
 
 export const Header = function () {
   return (
@@ -24,7 +25,8 @@ export const Header = function () {
                 className: "add-button"
               }
             }
-          }} 
+          }}
+          onClick = {() => Router.push("/add_component")}  
           >Add Component
         </Button>
       </div>
