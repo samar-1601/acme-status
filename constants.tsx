@@ -129,3 +129,4 @@ export const ICON_URL = {
   "under_maintenance": "/under_maintenance.png",
   "operational": "/operational2.webp"
 }
+
