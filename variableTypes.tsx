@@ -85,7 +85,7 @@ export interface pageData {
   id: String;
 }
 
-export interface UpdateIncidentFormProps {
+export interface UpdateIncidentProps {
   incidentId: string | string[] | undefined;
 }
 

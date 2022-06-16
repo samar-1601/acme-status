@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import * as React from "react";
-import UpdateIncidentForm from "../../../components/incidents/updateIncidents/updateIncidentForm";
+import UpdateIncident from "../../../components/incidents/updateIncidents/updateIncident";
 
 export default () => {
   const router = useRouter();
   console.log(router.query.id);
-  return <UpdateIncidentForm incidentId={router.query.id} />;
+  return <UpdateIncident incidentId={router.query.id} />;
 };

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 //components
-import CreateIncident from "../createIncidents/CreateIncident";
+import IncidentForm from "../createIncidents/IncidentForm";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { Block } from "baseui/block";
 
@@ -19,7 +19,7 @@ import {
 import {
   ComponentObject,
   JSONObject,
-  UpdateIncidentFormProps,
+  UpdateIncidentProps,
   IncidentFetchType,
 } from "../../../variableTypes";
 
@@ -29,11 +29,11 @@ let InitialData: (ComponentObject | never)[] = [];
 
 
 /**
- * UpdateIncidentForm Component
+ * UpdateIncident Component
  * @param props contains:
  * incidentId : ID of the incident to be updated 
  */
-export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
+export default function UpdateIncident(props: UpdateIncidentProps) {
   const [components, setComponents] = useState<ComponentObject[]>([]); //components of incident
 
   const [incidentName, setIncidentName] = useState<string>(""); //incidentName of incident
@@ -207,7 +207,7 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
   //otherwise render the form
   else {
     return (
-      <CreateIncident
+      <IncidentForm
         incidentName={incidentName}
         incidentStatus={incidentStatus}
         components={components}
