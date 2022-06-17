@@ -73,7 +73,7 @@ export default function IncidentCreation() {
         })
         .then(() => {
           //After successful POST redirect to home route
-          Router.push("/");
+          Router.push("/incidents");
         })
         //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
         .catch(() => {
