@@ -32,7 +32,7 @@ export default function IncidentErrorPage(props: IncidentErrorPageProps) {
       >
         <h1>{props.message}</h1>
         <Block>
-          <Link href={"/"}>
+          <Link href={"/incidents"}>
             <a>Go back to Incidents Home Page</a>
           </Link>
         </Block>
