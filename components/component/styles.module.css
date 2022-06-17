@@ -9,6 +9,8 @@
   padding-top: 5px;
   font-size: 24px;
   font-weight: 400;
+  display: flex;
+  font-family: "Lato', sans-serif";
 }
 
 .listItem {
@@ -27,7 +29,6 @@
 }
 
 .page {
-  width: 1000px;
+  width: 80%;
   margin: auto;
-  background-color: #F8F8FA;
 }

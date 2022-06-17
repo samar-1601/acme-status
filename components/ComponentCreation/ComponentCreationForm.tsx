@@ -15,7 +15,7 @@ import { DatePicker } from "baseui/datepicker";
 import styles from "./styles.module.css"
 import Router from "next/router";
 
-let componentName: string, componentDescription: string, componentGroup: any, startDate: Date | Date[]
+let componentName: string, componentDescription: string, componentGroup: any = {}, startDate: Date | Date[]
 
 const Header = function () {
   return (
@@ -186,13 +186,30 @@ export const ComponentCreationForm = function () {
       <ComponentGroup />
       <Uptime />
       <br /><br />
+      <div className={styles.buttons}>
       <Button 
           size={SIZE.compact}
           overrides ={{
             BaseButton : {
               style : {
                 backgroundColor: "blue",
-                float: "right"
+              },
+              props : {
+                className: "add-button"
+              }
+            }
+          }}
+          onClick = {()=>{
+            Router.push("/component")
+          }}
+      >Cancel</Button>
+      <Button 
+          size={SIZE.compact}
+          overrides ={{
+            BaseButton : {
+              style : {
+                backgroundColor: "blue",                
+                marginLeft: "20px"
               },
               props : {
                 className: "add-button"
@@ -201,7 +218,9 @@ export const ComponentCreationForm = function () {
           }}
           onClick = {()=>{
             console.log(componentGroup)
-            if(componentGroup.isCreatable) {
+            if(!componentName)  {
+              alert("Cannot have empty component name")
+            } else if(componentGroup.isCreatable) {
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
@@ -230,7 +249,6 @@ export const ComponentCreationForm = function () {
                 }
               }
               postData(url, data)
-
             } else {
               console.log(componentGroup)
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
@@ -244,12 +262,11 @@ export const ComponentCreationForm = function () {
                 }
               }
               postData(url,data).then(res => console.log(res))
-              
+              Router.push("/component")
             }
-            Router.push("/component")
           }}
-          >Save Component
-        </Button>
+          >Save Component </Button>
+      </div>
     </div>)
 }
 
