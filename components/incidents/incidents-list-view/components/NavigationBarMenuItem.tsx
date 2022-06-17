@@ -7,7 +7,7 @@ import {
   spanInsideNav,
   navActiveItem,
   navNonActiveItem,
-} from "./styles/navStyles";
+} from "../styles/navStyles";
 
 // components
 import { Block } from "baseui/block";

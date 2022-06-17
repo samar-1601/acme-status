@@ -3,10 +3,10 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "./LoadPageData";
+import useLoadPageData from "../HelperFunctions/LoadPageData";
 
 // components
-import { renderData } from "./HelperFunctions";
+import { renderData } from "../HelperFunctions/HelperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -19,8 +19,8 @@ import {
 import "react-virtualized/styles.css";
 
 // constants
-import { PageType } from "../../../constants";
-import { hasListLoadedStyle } from "./styles/listStyles";
+import { PageType } from "../../../../constants";
+import { hasListLoadedStyle } from "../styles/listStyles";
 
 interface Props {
   /**

@@ -4,7 +4,7 @@ import { Avatar } from "baseui/avatar";
 import Link from "next/link";
 
 // constants
-import { ComponentStatusIconUrls } from "../../../constants";
+import { ComponentStatusIconUrls } from "../../../../constants";
 
 // styles
 import {
@@ -17,7 +17,7 @@ import {
   itemName,
   componentItem,
   updateIncidentButton,
-} from "./styles/listStyles";
+} from "../styles/listStyles";
 
 /**
  * Format date for display

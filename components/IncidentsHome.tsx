@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { IncidentsListViewHeader } from "./incidents/incidents-list-view/Header";
+import { HomePage } from "./incidents/incidents-list-view/HomePage";
 
 /**
  * Incidents List View Home
@@ -16,7 +16,7 @@ const IncidentsHome = () => {
           rel="stylesheet"
         />
       </Head>
-      <IncidentsListViewHeader />
+      <HomePage />
     </>
   );
 };

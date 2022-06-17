@@ -5,7 +5,7 @@ import * as React from "react";
 import { Block } from "baseui/block";
 
 // styles
-import { headerBar } from "./styles/navStyles";
+import { headerBar } from "../styles/navStyles";
 
 interface Props {
   headerText: string; // text to render in the header
