@@ -100,8 +100,7 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
       </Block>
       <Link
         href={{
-          pathname: `/incident/update/${incident["id"]}`,
-          query: incident["id"], // send the incident ID to the update page address
+          pathname: `/incident/update/${incident["id"]}`, // send the incident ID to the update page address
         }}
       >
         <Block {...editIncidentButton}>Edit</Block>
