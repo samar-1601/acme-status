@@ -26,6 +26,36 @@ function calculateStatus(status: String): number {
   }
 }
 
+//function to get color code of status text
+function getColor(status: String): string {
+  if (status == "Investigating") {
+    return "#C38A31";
+  }
+  if (status == "Identified") {
+    return "#8B8000";
+  }
+  if (status == "Monitoring") {
+    return "#FF8C00";
+  } else {
+    return "#006400";
+  }
+}
+
+//funtion to get color code of progress bar
+function getStatusBarColor(status: String): string {
+  if (status == "Investigating") {
+    return "E8E0BE";
+  }
+  if (status == "Identified") {
+    return "yellow";
+  }
+  if (status == "Monitoring") {
+    return "orange";
+  } else {
+    return "green";
+  }
+}
+
 /**
  * InputStatus component
  * @params props contains:
@@ -86,7 +116,11 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            color={item != props.incidentStatus ? "black" : "blue"}
+            color={
+              item != props.incidentStatus
+                ? "black"
+                : getColor(props.incidentStatus)
+            }
             onClick={(e: Event) => {
               const target = e.target as Element;
               props.updateStatus(target.innerHTML);
@@ -144,6 +178,11 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                 BarContainer: {
                   props: {
                     className: "root",
+                  },
+                },
+                BarProgress: {
+                  style: {
+                    backgroundColor: getStatusBarColor(props.incidentStatus),
                   },
                 },
               }}
