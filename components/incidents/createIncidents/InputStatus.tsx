@@ -47,12 +47,12 @@ function getStatusBarColor(status: String): string {
     return "E8E0BE";
   }
   if (status == "Identified") {
-    return "yellow";
+    return "#FFD04F";
   }
   if (status == "Monitoring") {
-    return "orange";
+    return "#F08C1A";
   } else {
-    return "green";
+    return "#33CC99";
   }
 }
 
