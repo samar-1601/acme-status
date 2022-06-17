@@ -30,5 +30,6 @@
 
 .page {
   width: 80%;
-  margin: auto;
+  margin: auto;    
+  font-family: "Lato', sans-serif";
 }

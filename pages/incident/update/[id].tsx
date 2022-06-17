@@ -4,6 +4,7 @@ import UpdateIncident from "../../../components/incidents/updateIncidents/update
 
 export default () => {
   const router = useRouter();
-  console.log(router.query.id);
-  return <UpdateIncident incidentId={router.query.id} />;
+  console.log(router.asPath);
+  let param = router.asPath.split("/")[3];
+  return <UpdateIncident incidentId={param} />;
 };
