@@ -85,44 +85,55 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
       <Block {...hasListLoadedStyle}> This Page has no Incidents !!</Block>
     ) : (
       // If the page has loaded and has data to display
-
-      <InfiniteLoader
-        isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
-        loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-        rowCount={dataList.length + 1} // total row count of the data to be displayed
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              borderTop: "1px solid #E6E6E9",
+            },
+          },
+        }}
       >
-        {({ onRowsRendered, registerChild }) => (
-          <div style={{ width: "100%", height: `56vh` }}>
-            <AutoSizer>
-              {({ width, height }) => (
-                <List
-                  width={width}
-                  height={height}
-                  onRowsRendered={onRowsRendered}
-                  ref={registerChild}
-                  rowHeight={cache.current.rowHeight}
-                  deferredMeasurementCache={cache.current}
-                  rowCount={dataList.length}
-                  rowRenderer={({ key, index, style, parent }) => {
-                    const element = dataList[index];
-                    return (
-                      <CellMeasurer
-                        key={key}
-                        cache={cache.current}
-                        parent={parent}
-                        columnIndex={0}
-                        rowIndex={index}
-                      >
-                        <div style={style}>{renderData(element, pageType)}</div>
-                      </CellMeasurer>
-                    );
-                  }}
-                ></List>
-              )}
-            </AutoSizer>
-          </div>
-        )}
-      </InfiniteLoader>
+        <InfiniteLoader
+          isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
+          loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
+          rowCount={dataList.length + 1} // total row count of the data to be displayed
+        >
+          {({ onRowsRendered, registerChild }) => (
+            <div style={{ width: "100%", height: `56vh` }}>
+              <AutoSizer>
+                {({ width, height }) => (
+                  <List
+                    width={width}
+                    height={height}
+                    onRowsRendered={onRowsRendered}
+                    ref={registerChild}
+                    rowHeight={cache.current.rowHeight}
+                    deferredMeasurementCache={cache.current}
+                    rowCount={dataList.length}
+                    rowRenderer={({ key, index, style, parent }) => {
+                      const element = dataList[index];
+                      return (
+                        <CellMeasurer
+                          key={key}
+                          cache={cache.current}
+                          parent={parent}
+                          columnIndex={0}
+                          rowIndex={index}
+                        >
+                          <div style={style}>
+                            {renderData(element, pageType)}
+                          </div>
+                        </CellMeasurer>
+                      );
+                    }}
+                  ></List>
+                )}
+              </AutoSizer>
+            </div>
+          )}
+        </InfiniteLoader>
+      </Block>
     )
   ) : (
     // if page has not loaded

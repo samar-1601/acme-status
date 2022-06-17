@@ -36,7 +36,6 @@ export const clientsCommonComponentsWrapper: BlockProps = {
         backgroundColor: "white",
         borderRadius: "8px",
         padding: "1.6rem",
-        borderTop: "1px solid #E6E6E9",
       },
     },
   },
