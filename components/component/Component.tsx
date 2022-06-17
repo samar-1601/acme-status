@@ -16,7 +16,7 @@ const headerBarBackIcon: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginRight: "5px",
+        marginRight: "15px",
         cursor: "pointer",
       },
     },
