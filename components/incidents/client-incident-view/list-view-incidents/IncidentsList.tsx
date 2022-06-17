@@ -85,6 +85,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
       <Block {...hasListLoadedStyle}> This Page has no Incidents !!</Block>
     ) : (
       // If the page has loaded and has data to display
+
       <InfiniteLoader
         isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
         loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load

@@ -4,14 +4,17 @@ export const pageContainer: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "65%",
+        width: "80%",
         fontFamily:
           "'proxima-nova', 'Helvetica Neue', Helvetica, Arial, Sans-Serif",
         margin: "auto",
+        backgroundColor: "#F8F8FA",
       },
     },
   },
 };
+//Top border for each section - 1px , border-color :#E6E6E9
+
 export const homepageHeader: BlockProps = {
   overrides: {
     Block: {
@@ -31,9 +34,9 @@ export const clientsCommonComponentsWrapper: BlockProps = {
       style: {
         margin: "2rem",
         backgroundColor: "white",
-        borderRadius: "20px",
-        padding: "3rem 3rem",
-        boxShadow: "0 0 20px #ccc",
+        borderRadius: "8px",
+        padding: "1.6rem",
+        borderTop: "1px solid #E6E6E9",
       },
     },
   },
