@@ -233,7 +233,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
                 </Button>
                 <Button
                   onClick={() => {
-                    Router.push("/");
+                    Router.push("/incidents");
                     // dequeue();
                   }}
                   overrides={{
@@ -332,7 +332,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
               </Button>
               <Button
                 onClick={() => {
-                  Router.push("/");
+                  Router.push("/incidents");
                   // dequeue();
                 }}
                 overrides={{
