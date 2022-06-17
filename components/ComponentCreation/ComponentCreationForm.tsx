@@ -173,7 +173,6 @@ const postData = async function (url = "", data = {}) {
     body: JSON.stringify(data) 
   });
   let xjson = await response.json(); 
-  console.log(xjson)
   return xjson;
 }
 
@@ -186,13 +185,13 @@ export const ComponentCreationForm = function () {
       <ComponentGroup />
       <Uptime />
       <br /><br />
+      <div className={styles.buttons}>
       <Button 
           size={SIZE.compact}
           overrides ={{
             BaseButton : {
               style : {
                 backgroundColor: "blue",
-                float: "right"
               },
               props : {
                 className: "add-button"
@@ -200,8 +199,26 @@ export const ComponentCreationForm = function () {
             }
           }}
           onClick = {()=>{
-            console.log(componentGroup)
-            if(componentGroup.isCreatable) {
+            Router.push("/component")
+          }}
+      >Cancel</Button>
+      <Button 
+          size={SIZE.compact}
+          overrides ={{
+            BaseButton : {
+              style : {
+                backgroundColor: "blue",
+                marginLeft: "20px"
+              },
+              props : {
+                className: "add-button"
+              }
+            }
+          }}
+          onClick = {()=>{
+            if(!componentName) {
+              alert("Cannot have empty component name")
+            } else if(false) {
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
@@ -214,11 +231,9 @@ export const ComponentCreationForm = function () {
 
               let comp:any;
               postData(url, data).then(res => () => {
-                  comp=res.id;
+                console.log(res)
                 }
               )
-              console.log(comp)
-              
               url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`
               data = {
                 "description": "",
@@ -226,13 +241,12 @@ export const ComponentCreationForm = function () {
                   "components": [
                     comp
                   ],
-                "name": componentGroup
+                "name": componentGroup.name
                 }
               }
               postData(url, data)
-
+              Router.push("/component")
             } else {
-              console.log(componentGroup)
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
@@ -243,17 +257,11 @@ export const ComponentCreationForm = function () {
                   "group_id": componentGroup.id
                 }
               }
-              postData(url,data).then(res => console.log(res))
-              
+              postData(url,data).then(res => console.log(res))              
+              Router.push("/component")
             }
-            Router.push("/components")
           }}
-          >Save Component
-        </Button>
+          >Save Component</Button>
+        </div>
     </div>)
 }
-
-
-
-
-
