@@ -16,7 +16,7 @@ export const homepageHeader: BlockProps = {
   overrides: {
     Block: {
       style: {
-        fontSize: "3rem",
+        fontSize: "2.7rem",
         margin: "auto",
         fontWeight: 700,
         padding: "1rem 3rem",
