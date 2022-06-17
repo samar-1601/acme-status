@@ -4,7 +4,6 @@ import * as React from "react";
 // components
 import { Block } from "baseui/block";
 import { Avatar } from "baseui/avatar";
-import Link from "next/dist/client/link";
 
 // styles
 import {
