@@ -1,6 +1,6 @@
 import { BlockProps } from "baseui/block";
 
-export const incidentsListView: BlockProps = {
+export const pageContainer: BlockProps = {
   overrides: {
     Block: {
       style: {
@@ -8,6 +8,18 @@ export const incidentsListView: BlockProps = {
         fontFamily:
           "'proxima-nova', 'Helvetica Neue', Helvetica, Arial, Sans-Serif",
         margin: "auto",
+      },
+    },
+  },
+};
+export const homepageHeader: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        fontSize: "3rem",
+        margin: "auto",
+        fontWeight: 700,
+        padding: "1rem 3rem",
       },
     },
   },
@@ -20,7 +32,7 @@ export const clientsCommonComponentsWrapper: BlockProps = {
         backgroundColor: "white",
         borderRadius: "20px",
         padding: "3rem 3rem",
-        boxShadow: "0 0 20px #ccc"
+        boxShadow: "0 0 20px #ccc",
       },
     },
   },

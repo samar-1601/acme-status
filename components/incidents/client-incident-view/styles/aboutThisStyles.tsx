@@ -1,8 +1,12 @@
 // contstants
-import { ComponentStatusType } from "../../../../constants";
+import {
+  ComponentStatusType,
+  getComponentStatusText,
+} from "../../../../constants";
 
 // component proptype
 import { BlockProps } from "baseui/block";
+import { get } from "https";
 
 export const componentListWrapper: BlockProps = {
   overrides: {
@@ -108,29 +112,28 @@ export const horizontalLine: BlockProps = {
  * @global
  */
 const componentsStatusColor = (status: string) => {
-  status = status.toLowerCase();
   switch (status) {
-    case ComponentStatusType.Operational:
+    case getComponentStatusText(ComponentStatusType.Operational):
       return {
         //green
         color: "#2fcc66",
       };
-    case ComponentStatusType.DegradedPerformance:
+    case getComponentStatusText(ComponentStatusType.DegradedPerformance):
       //yellow
       return {
         color: "#f1c40f",
       };
-    case ComponentStatusType.MajorOutage:
+    case getComponentStatusText(ComponentStatusType.MajorOutage):
       // red
       return {
         color: "#e74c3c",
       };
-    case ComponentStatusType.PartialOutage:
+    case getComponentStatusText(ComponentStatusType.PartialOutage):
       // orange
       return {
         color: "#e67e22",
       };
-    case ComponentStatusType.UnderMaintenance:
+    case getComponentStatusText(ComponentStatusType.UnderMaintenance):
       // pink
       return {
         color: "#3498DB",
@@ -147,7 +150,6 @@ export const componentStatus: BlockProps = {
     Block: {
       style: ($value) => ({
         color: componentsStatusColor($value.children).color,
-        textTransform: "capitalize",
         fontSize: "0.875rem",
         fontWeight: 400,
         lineHeight: "1.5rem",

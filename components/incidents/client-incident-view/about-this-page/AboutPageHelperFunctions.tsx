@@ -19,7 +19,7 @@ import { getComponentUptime } from "./LoadAboutPageData";
 import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
 
 // constants
-import { PageType } from "../../../../constants";
+import { getComponentStatusText , PageType } from "../../../../constants";
 import {
   hoverBox,
   hoverDateStyle,
@@ -126,7 +126,7 @@ export const renderComponents = async (componentList: any[]) => {
         <Block {...componentDetailsWrapper} key={component["id"]}>
           <Block {...componentHeader}>
             <Block {...componentNameText}>{component["name"]}</Block>
-            <Block {...componentStatus}>{component["status"]}</Block>
+            <Block {...componentStatus}>{getComponentStatusText(component["status"])}</Block>
           </Block>
           {bars}
         </Block>

@@ -60,3 +60,20 @@ export const ComponentStatusIconUrls = (status : string) => {
   MajorOutage = "major_outage",
   PartialOutage= "partial_outage",
 }
+
+/**
+ * function to format status text
+ * @param status status of a component
+ * @returns User friendly formatted status text
+ */
+ export const getComponentStatusText = (status:string)=>{
+  switch(status)
+  {
+    case ComponentStatusType.Operational: return "Operational";
+    case ComponentStatusType.DegradedPerformance : return "Degraded Performance";
+    case ComponentStatusType.MajorOutage : return "Major Outage";
+    case ComponentStatusType.PartialOutage : return "Partial Outage";
+    case ComponentStatusType.UnderMaintenance : return "Under Maintenance"
+    default: return "";
+  }
+}

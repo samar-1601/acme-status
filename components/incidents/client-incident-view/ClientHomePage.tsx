@@ -5,14 +5,15 @@ import { AboutThisSite } from "./about-this-page/AboutThisSite";
 import { PastIncidents } from "./past-incidents-component/PastIncidents";
 
 // constants
-import { PageType } from "../../../constants";
+import { PageType, PAGE_NAME } from "../../../constants";
 
 // styles
 import {
-  incidentsListView,
+  pageContainer,
   h1,
   h3,
   clientsCommonComponentsWrapper,
+  homepageHeader,
 } from "./styles/containerStyles";
 
 /**
@@ -22,7 +23,8 @@ import {
  */
 export const ClientsHomePage: React.FC = () => {
   return (
-    <Block {...incidentsListView}>
+    <Block {...pageContainer}>
+      <Block {...homepageHeader}>{PAGE_NAME}</Block>
       <Block {...clientsCommonComponentsWrapper}>
         <Block {...h1}> Active Incidents </Block>
         <IncidentsList pageType={PageType.Active} />
