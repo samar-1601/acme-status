@@ -4,7 +4,7 @@ import { Avatar } from "baseui/avatar";
 import Link from "next/link";
 
 // constants
-import { ComponentStatusIconUrls } from "../../../constants";
+import { ComponentStatusIconUrls } from "../../../../constants";
 
 // styles
 import {
@@ -16,8 +16,8 @@ import {
   itemDetailsSecondLine,
   itemName,
   componentItem,
-  updateIncidentButton,
-} from "./styles/listStyles";
+  editIncidentButton,
+} from "../styles/listStyles";
 
 /**
  * Format date for display
@@ -104,7 +104,7 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
           query: incident["id"], // send the incident ID to the update page address
         }}
       >
-        <Block {...updateIncidentButton}>Update</Block>
+        <Block {...editIncidentButton}>Edit</Block>
       </Link>
     </Block>
   );

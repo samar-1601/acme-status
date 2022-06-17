@@ -2,10 +2,10 @@
 import { useState } from "react";
 
 // components
-import { NavBarMenuItem } from "./NavigationBarMenuItem";
-import { CreateIncidentButton } from "./CreateIncidentButton";
-import { IncidentsList } from "./IncidentsList";
-import { HeaderBarText } from "./HeaderBarText";
+import { NavBarMenuItem } from "./components/NavigationBarMenuItem";
+import { CreateIncidentButton } from "./components/CreateIncidentButton";
+import { IncidentsList } from "./components/IncidentsList";
+import { HeaderBarContents } from "./components/HeaderBarContents";
 import { Block } from "baseui/block";
 
 // constants
@@ -20,13 +20,13 @@ import { container, content, navbarWrapper, nav } from "./styles/navStyles";
  * triggers when / is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
-export const IncidentsListViewHeader: React.FC = () => {
+export const HomePage: React.FC = () => {
   const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
 
   return (
     <Block {...incidentsListView}>
       <Block {...container}>
-        <HeaderBarText headerText="Incidents" />
+        <HeaderBarContents headerText="Incidents" />
         <Block {...navbarWrapper}>
           <Block {...nav}>
             <NavBarMenuItem

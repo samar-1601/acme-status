@@ -33,8 +33,30 @@ export const headerBar: BlockProps = {
       style: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         flexDirection: "row",
+        padding: "20px 0px",
+        gap: "25px",
+      },
+    },
+  },
+};
+export const headerBarText: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        fontSize: "2rem",
+        fontWeight: 900,
+      },
+    },
+  },
+};
+export const headerBarBackIcon: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginTop: "10px",
+        cursor: "pointer",
       },
     },
   },

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Block } from "baseui/block";
 
 // styles
-import { createIncidentButton } from "./styles/navStyles";
+import { createIncidentButton } from "../styles/navStyles";
 
 /**
  * Button component for create incident
