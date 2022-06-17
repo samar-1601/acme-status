@@ -1,4 +1,5 @@
 import { BlockProps } from "baseui/block";
+import Router from "next/router";
 
 export const container: BlockProps = {
   overrides: {
@@ -52,6 +53,9 @@ export const headerBarText: BlockProps = {
   },
 };
 export const headerBarBackIcon: BlockProps = {
+  onClick: () => {
+    Router.push("/");
+  },
   overrides: {
     Block: {
       style: {

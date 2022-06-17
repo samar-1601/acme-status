@@ -24,16 +24,14 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
   ({ headerText }) => {
     return (
       <Block {...headerBar}>
-        <Link href="">
-          <Block {...headerBarBackIcon}>
-            <Avatar
-              name="Back"
-              size="scale900"
-              src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
-            />
-          </Block>
-        </Link>
-        <Block {...headerBarText}>{headerText}</Block>
+        <Block {...headerBarBackIcon}>
+          <Avatar
+            name="Back"
+            size="scale900"
+            src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
+          />
+        </Block>
+        \ <Block {...headerBarText}>{headerText}</Block>
       </Block>
     );
   }
