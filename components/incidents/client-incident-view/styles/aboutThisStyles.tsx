@@ -6,7 +6,6 @@ import {
 
 // component proptype
 import { BlockProps } from "baseui/block";
-import { get } from "https";
 
 export const componentListWrapper: BlockProps = {
   overrides: {

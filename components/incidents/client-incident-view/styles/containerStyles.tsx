@@ -20,6 +20,7 @@ export const homepageHeader: BlockProps = {
         margin: "auto",
         fontWeight: 700,
         padding: "1rem 3rem",
+        color: "rgb(51,51,51)",
       },
     },
   },
