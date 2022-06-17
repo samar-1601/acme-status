@@ -12,7 +12,7 @@ export const incidentsListView: BlockProps = {
     },
   },
 };
-export const clientsActiveIncidentsViewWrapper: BlockProps = {
+export const clientsCommonComponentsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
@@ -20,42 +20,7 @@ export const clientsActiveIncidentsViewWrapper: BlockProps = {
         backgroundColor: "white",
         borderRadius: "20px",
         padding: "3rem 3rem",
-      },
-    },
-  },
-};
-export const aboutThisPageWrapper: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        margin: "2rem",
-        backgroundColor: "white",
-        borderRadius: "20px",
-        padding: "3rem 3rem",
-      },
-    },
-  },
-};
-export const scheduledMaintenanceWrapper: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        margin: "2rem",
-        backgroundColor: "white",
-        borderRadius: "20px",
-        padding: "3rem 3rem",
-      },
-    },
-  },
-};
-export const pastIncidentsWrapper: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        margin: "2rem",
-        backgroundColor: "white",
-        borderRadius: "20px",
-        padding: "3rem 3rem",
+        boxShadow: "0 0 20px #ccc"
       },
     },
   },

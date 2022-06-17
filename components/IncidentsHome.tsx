@@ -13,15 +13,7 @@ const IncidentsHome = () => {
           rel="stylesheet"
         />
       </Head>
-      <Block
-        overrides={{
-          Block: {
-            style: {
-              backgroundColor: "#DCDCDC",
-            },
-          },
-        }}
-      >
+      <Block>
         <ClientsPageHome />
       </Block>
     </>

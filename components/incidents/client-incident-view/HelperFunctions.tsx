@@ -20,23 +20,16 @@ import {
   maintenanceItemStatusStyle,
 } from "./styles/scheduledMaintenanceList";
 
-import {
-  pastIncidentNameStyle,
-  pastIncidentHeaderDateStyle,
-  pastIncidentDetailsWrapper,
-  pastIncidentWrapper,
-  pastIncidentStatusStyle,
-  pastIncidentStatusBody,
-  pastIncidentStatusDate,
-} from "./styles/pastIncidentsStyles";
-
 /**
  * Format date for display
  * @param date The date which needs to be formatted to display
  * @param pageType The type in which we need the formatted date
- * @returns formatted data in x days ago format
+ * @returns formatted data in the required format
  */
-export const formatDate = (date: string | Date, pageType: string): string => {
+export const formatDate = (
+  date: string | Date,
+  pageType: string = PageType.All
+): string => {
   const formatter = new Intl.DateTimeFormat("en", { month: "short" });
   date = new Date(date);
 
@@ -51,6 +44,8 @@ export const formatDate = (date: string | Date, pageType: string): string => {
     return `Posted on ${date.getUTCDate()} ${formatter.format(
       date
     )}, ${timeHour}:${timeMins} UTC`;
+
+  // return formatted date for "Completed" pageType
   if (pageType == PageType.Completed)
     return `${date.getUTCDate()} ${formatter.format(
       date
@@ -59,78 +54,6 @@ export const formatDate = (date: string | Date, pageType: string): string => {
   return `${date.getUTCDate()} ${formatter.format(
     date
   )}, ${timeHour}:${timeMins} UTC`;
-};
-
-function formattedDateInSlashFormat(d = new Date()) {
-  let month = String(d.getMonth() + 1);
-  let day = String(d.getDate());
-  const year = String(d.getFullYear());
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return `${day}/${month}/${year}`;
-}
-
-/**
- * Helper function for PastIncidents List component
- * @param incidentList the past/completed Incidents List
- * @returns Formatted List of past/completed incidents grouped on basis of resolved dates for the PastIncidents.tsx page
- */
-export const GetPastIncidentComponents = (incidentList: any[]) => {
-  var map = new Map();
-  for (let i = 0; i < incidentList.length; i++) {
-    const incident: any = incidentList[i];
-    const date: string | Date = formattedDateInSlashFormat(
-      new Date(incident["updated_at"])
-    );
-    let previous = [];
-    if (map.has(date)) previous = map.get(date);
-
-    map.set(date, previous.concat(incident));
-  }
-  map = new Map([...map].sort().reverse());
-
-  console.log("map", map);
-  let renderList: JSX.Element[] = [];
-  let index = 0;
-  map.forEach(function (value, key) {
-    const headerDate = key;
-    const incidents = value;
-    let incidentsForDate = [];
-    for (const incident of incidents) {
-      const incidentName = incident["name"];
-      const incidentUpdates = incident["incident_updates"];
-      let renderIncidentUpdates: JSX.Element[] = [];
-      for (let i = 0; i < incidentUpdates.length; i++) {
-        const update = incidentUpdates[i];
-        const renderUpdate = (
-          <Block key={update["id"]} {...pastIncidentDetailsWrapper}>
-            <Block {...pastIncidentStatusStyle}>{update["status"]}</Block>
-            <Block {...pastIncidentStatusBody}> - {update["body"]} </Block>
-            <Block {...pastIncidentStatusDate}>
-              {formatDate(update["updated_at"], PageType.All)}
-            </Block>
-          </Block>
-        );
-        renderIncidentUpdates.push(renderUpdate);
-      }
-      incidentsForDate.push(
-        <Block key={incident["id"]} {...pastIncidentWrapper}>
-          <Block {...pastIncidentNameStyle}> {incidentName}</Block>
-          <Block>{renderIncidentUpdates}</Block>
-        </Block>
-      );
-    }
-    renderList.push(
-      <Block key={index++}>
-        <Block {...pastIncidentHeaderDateStyle}>{headerDate}</Block>
-        <Block>{incidentsForDate}</Block>
-      </Block>
-    );
-  });
-
-  return renderList;
 };
 
 /**
@@ -147,7 +70,7 @@ export const renderData: React.FC = (
   const incidentUpdates = incident["incident_updates"]; // stores the list of incident_updates for an incident
   let renderIncidentUpdates: JSX.Element[] = []; // JSX Elements list to store the formatted JSX list
 
-  // loop through all the updates and add them to renderIncidentUpdates
+  // loop through all the updates for the incident and add them to renderIncidentUpdates
   for (let i = 0; i < incidentUpdates.length; i++) {
     const update = incidentUpdates[i];
     const renderUpdate = (

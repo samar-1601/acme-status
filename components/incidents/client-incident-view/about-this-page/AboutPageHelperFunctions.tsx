@@ -61,7 +61,7 @@ const getDateforBar = (day: number) => {
   const daysAgo = totalDays - day;
   let date = new Date();
   date.setDate(date.getDate() - daysAgo);
-  return formatDate(date, PageType.Completed);
+  return formatDate(date, PageType.Completed); // get formatted date in "08 June 2022" format
 };
 
 /**

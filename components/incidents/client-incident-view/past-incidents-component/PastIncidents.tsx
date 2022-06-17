@@ -5,14 +5,13 @@ import * as React from "react";
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { GetPastIncidentComponents } from "../HelperFunctions";
+import { GetPastIncidentComponents } from "./PastIncidentsHelperFunctions";
 
 // constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../constants";
 
 /**
- * Fetch components from API
- * @returns list of components in the given PAGE_ID
+ * @returns list of completed incidents in the given PAGE_ID
  */
 const getCompletedIncidents = async () => {
   try {

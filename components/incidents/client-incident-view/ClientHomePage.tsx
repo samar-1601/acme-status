@@ -12,10 +12,7 @@ import {
   incidentsListView,
   h1,
   h3,
-  clientsActiveIncidentsViewWrapper,
-  aboutThisPageWrapper,
-  scheduledMaintenanceWrapper,
-  pastIncidentsWrapper,
+  clientsCommonComponentsWrapper,
 } from "./styles/containerStyles";
 
 /**
@@ -26,19 +23,19 @@ import {
 export const ClientsPageHome: React.FC = () => {
   return (
     <Block {...incidentsListView}>
-      <Block {...clientsActiveIncidentsViewWrapper}>
-        <Block {...h1}> Active Incidents </Block> 
+      <Block {...clientsCommonComponentsWrapper}>
+        <Block {...h1}> Active Incidents </Block>
         <IncidentsList pageType={PageType.Active} />
       </Block>
-      <Block {...aboutThisPageWrapper}>
-        <Block {...h3}> About This Site</Block>
-        <AboutThisSite />
-      </Block>
-      <Block {...scheduledMaintenanceWrapper}>
+      <Block {...clientsCommonComponentsWrapper}>
         <Block {...h3}> Scheduled Maintenance</Block>
         <IncidentsList pageType={PageType.Scheduled} />
       </Block>
-      <Block {...pastIncidentsWrapper}>
+      <Block {...clientsCommonComponentsWrapper}>
+        <Block {...h3}> About This Site</Block>
+        <AboutThisSite />
+      </Block>
+      <Block {...clientsCommonComponentsWrapper}>
         <Block {...h3}> Past Incidents</Block>
         <PastIncidents />
       </Block>
