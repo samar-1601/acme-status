@@ -29,7 +29,7 @@ function calculateStatus(status: String): number {
 //function to get color code of status text
 function getColor(status: String): string {
   if (status == "Investigating") {
-    return "#C38A31";
+    return "red";
   }
   if (status == "Identified") {
     return "#8B8000";
