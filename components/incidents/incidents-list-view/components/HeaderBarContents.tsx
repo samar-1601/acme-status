@@ -31,7 +31,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
             src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
           />
         </Block>
-        \ <Block {...headerBarText}>{headerText}</Block>
+        <Block {...headerBarText}>{headerText}</Block>
       </Block>
     );
   }
