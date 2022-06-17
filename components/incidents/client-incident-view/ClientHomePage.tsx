@@ -1,5 +1,5 @@
 // components
-import { IncidentsList } from "./IncidentsList";
+import { IncidentsList } from "./list-view-incidents/IncidentsList";
 import { Block } from "baseui/block";
 import { AboutThisSite } from "./about-this-page/AboutThisSite";
 import { PastIncidents } from "./past-incidents-component/PastIncidents";
@@ -20,7 +20,7 @@ import {
  * triggers when / is accessed
  * @returns various components placed columnwise
  */
-export const ClientsPageHome: React.FC = () => {
+export const ClientsHomePage: React.FC = () => {
   return (
     <Block {...incidentsListView}>
       <Block {...clientsCommonComponentsWrapper}>

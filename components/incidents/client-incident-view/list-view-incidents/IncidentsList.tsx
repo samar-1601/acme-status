@@ -6,7 +6,7 @@ import * as React from "react";
 import useLoadPageData from "./LoadIncidentsListData";
 
 // components
-import { renderData } from "./HelperFunctions";
+import { renderData } from "./IncidentsListViewHelperFunctions";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -19,8 +19,8 @@ import {
 import "react-virtualized/styles.css";
 
 // constants
-import { PageType } from "../../../constants";
-import { hasListLoadedStyle } from "./styles/fullIncidentsListStyles";
+import { PageType } from "../../../../constants";
+import { hasListLoadedStyle } from "../styles/fullIncidentsListStyles";
 
 interface Props {
   /**

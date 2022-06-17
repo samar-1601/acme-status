@@ -1,9 +1,9 @@
-import IncidentsHome  from "../components/IncidentsHome"
+import ClientsIndex from "../components/ClientsIndex";
 
 const Home = () => {
   return (
     <>
-      <IncidentsHome/>
+      <ClientsIndex />
     </>
   );
 };

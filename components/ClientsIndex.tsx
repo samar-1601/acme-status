@@ -1,8 +1,8 @@
 import { Block } from "baseui/block";
 import Head from "next/head";
-import { ClientsPageHome } from "./incidents/client-incident-view/ClientHomePage";
+import { ClientsHomePage } from "./incidents/client-incident-view/ClientHomePage";
 
-const IncidentsHome = () => {
+const ClientsIndex = () => {
   return (
     <>
       <Head>
@@ -14,10 +14,10 @@ const IncidentsHome = () => {
         />
       </Head>
       <Block>
-        <ClientsPageHome />
+        <ClientsHomePage />
       </Block>
     </>
   );
 };
 
-export default IncidentsHome;
+export default ClientsIndex;

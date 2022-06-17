@@ -16,7 +16,7 @@ import {
 
 // loading and helper functions
 import { getComponentUptime } from "./LoadAboutPageData";
-import { formatDate } from "../HelperFunctions";
+import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
 
 // constants
 import { PageType } from "../../../../constants";

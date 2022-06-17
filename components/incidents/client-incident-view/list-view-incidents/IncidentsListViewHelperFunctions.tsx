@@ -2,14 +2,14 @@
 import { Block } from "baseui/block";
 
 // constants
-import { PageType } from "../../../constants";
+import { PageType } from "../../../../constants";
 
 // styles
 import {
   listItem,
   itemStatus,
   itemName,
-} from "./styles/fullIncidentsListStyles";
+} from "../styles/fullIncidentsListStyles";
 
 import {
   maintenanceListItem,
@@ -18,7 +18,7 @@ import {
   maintenanceItemHeaderWrapper,
   maintenanceItemStatusBody,
   maintenanceItemStatusStyle,
-} from "./styles/scheduledMaintenanceList";
+} from "../styles/scheduledMaintenanceList";
 
 /**
  * Format date for display

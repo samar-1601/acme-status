@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../../constants";
 
 /**
  * Loads data from API

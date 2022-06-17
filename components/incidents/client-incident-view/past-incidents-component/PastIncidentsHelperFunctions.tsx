@@ -2,7 +2,7 @@
 import { Block } from "baseui/block";
 
 //helper function
-import { formatDate } from "../HelperFunctions";
+import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
 
 // styles
 import {
@@ -62,6 +62,8 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
       const incidentName = incident["name"];
       const incidentUpdates = incident["incident_updates"];
       let renderIncidentUpdates: JSX.Element[] = [];
+
+      // iterate through an incidents' updates and style them
       for (let i = 0; i < incidentUpdates.length; i++) {
         const update = incidentUpdates[i];
         const renderUpdate = (
@@ -73,15 +75,18 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
             </Block>
           </Block>
         );
-        renderIncidentUpdates.push(renderUpdate);
+        renderIncidentUpdates.push(renderUpdate); // push all updates together in a list
       }
+      // push all incidents with their updates together
       incidentsForDate.push(
         <Block key={incident["id"]} {...pastIncidentWrapper}>
           <Block {...pastIncidentNameStyle}> {incidentName}</Block>
           <Block>{renderIncidentUpdates}</Block>
         </Block>
-      );
+      ); 
     }
+
+    // couple the date and the incidents for this day
     renderList.push(
       <Block key={index++}>
         <Block {...pastIncidentHeaderDateStyle}>{headerDate}</Block>
