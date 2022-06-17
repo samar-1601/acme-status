@@ -81,8 +81,7 @@ export const pastIncidentDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "15px 0",
-        marginLeft: "2rem",
+        margin: "15px 0px 15px 2rem",
       },
     },
   },

@@ -17,9 +17,9 @@ import {
 
 // get the formatted date in dd/mm/yy format
 function formattedDateInSlashFormat(d = new Date()) {
-  let month = String(d.getMonth() + 1);
-  let day = String(d.getDate());
-  const year = String(d.getFullYear());
+  let month = String(d.getUTCMonth() + 1);
+  let day = String(d.getUTCDate());
+  const year = String(d.getUTCFullYear());
 
   if (month.length < 2) month = "0" + month;
   if (day.length < 2) day = "0" + day;
@@ -47,7 +47,7 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
     map.set(date, previous.concat(incident)); // concat the new incidents to the previous ones on the same day
   }
   map = new Map([...map].sort().reverse()); // sort the groups in decreasing order of dates
-
+  console.log(map);
   let renderList: JSX.Element[] = []; // list to store formatted data
   let index = 0;
 
