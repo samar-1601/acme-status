@@ -91,7 +91,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           setIsSubmitClicked(false);
         })
         .then(() => {
-          Router.push("/");
+          Router.push("/incidents");
         })
         .catch((err) => {
           console.log(err);
