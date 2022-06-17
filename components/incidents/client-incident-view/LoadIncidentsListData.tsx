@@ -63,7 +63,8 @@ export default function useLoadPageData(pageType: PageType) {
    * @param pageType current menu item/pageType selected
    */
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
-    const dataItem = await getData(pageNumber, pageType);
+    let dataItem = [];
+    dataItem = await getData(pageNumber, pageType);
 
     console.log(
       "pageNo:",
@@ -96,7 +97,6 @@ export default function useLoadPageData(pageType: PageType) {
     setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
-
 
   return {
     dataList: state.dataList,

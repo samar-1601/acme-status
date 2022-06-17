@@ -22,11 +22,14 @@ export const pastIncidentNameStyle: BlockProps = {
         fontSize: "1.25rem",
         lineHeight: "1.8125rem",
         fontWeight: 500,
+        display: "list-item",
+        marginLeft: "1rem",
+        textTransform: "capitalize",
       },
     },
   },
 };
-export const pastIincidentStatusStyle: BlockProps = {
+export const pastIncidentStatusStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
@@ -79,6 +82,7 @@ export const pastIncidentDetailsWrapper: BlockProps = {
     Block: {
       style: {
         margin: "15px 0",
+        marginLeft: "2rem",
       },
     },
   },

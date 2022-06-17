@@ -8,24 +8,40 @@ import { PastIncidents } from "./past-incidents-component/PastIncidents";
 import { PageType } from "../../../constants";
 
 // styles
-import { incidentsListView, h1, h3 } from "./styles/containerStyles";
+import {
+  incidentsListView,
+  h1,
+  h3,
+  clientsActiveIncidentsViewWrapper,
+  aboutThisPageWrapper,
+  scheduledMaintenanceWrapper,
+  pastIncidentsWrapper,
+} from "./styles/containerStyles";
 
 /**
- * IncidentsList View
+ * Client Page View
  * triggers when / is accessed
- * @returns a custom made fixed navbar with menu items and infinite scrolling
+ * @returns various components placed columnwise
  */
-export const ClientsIncidentsListViewHome: React.FC = () => {
+export const ClientsPageHome: React.FC = () => {
   return (
     <Block {...incidentsListView}>
-      <Block {...h1}> Client Incident List View </Block>
-      <IncidentsList pageType={PageType.Active} />
-      <Block {...h3}> About This Site</Block>
-      <AboutThisSite />
-      <Block {...h3}> Scheduled Maintenance</Block>
-      <IncidentsList pageType={PageType.Scheduled} />
-      <Block {...h3}> Past Incidents</Block>
-      <PastIncidents/>
+      <Block {...clientsActiveIncidentsViewWrapper}>
+        <Block {...h1}> Active Incidents </Block> 
+        <IncidentsList pageType={PageType.Active} />
+      </Block>
+      <Block {...aboutThisPageWrapper}>
+        <Block {...h3}> About This Site</Block>
+        <AboutThisSite />
+      </Block>
+      <Block {...scheduledMaintenanceWrapper}>
+        <Block {...h3}> Scheduled Maintenance</Block>
+        <IncidentsList pageType={PageType.Scheduled} />
+      </Block>
+      <Block {...pastIncidentsWrapper}>
+        <Block {...h3}> Past Incidents</Block>
+        <PastIncidents />
+      </Block>
     </Block>
   );
 };

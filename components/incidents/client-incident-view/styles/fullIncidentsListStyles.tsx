@@ -49,13 +49,7 @@ export const itemStatus: BlockProps = {
   overrides: {
     Block: {
       style: () => ({
-        fontWeight: 700,
-        borderRadius: "4px",
-        fontSize: "1rem",
-        textTransform: "capitalize",
-        color : "rgb(51,51,51)",
-        marginLeft : "25px",
-        marginTop : "10px",
+        margin: "10px 0px 5px 25px",
       }),
     },
   },
@@ -65,7 +59,7 @@ export const hasListLoadedStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginTop: "35vh",
+        marginTop: "55vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

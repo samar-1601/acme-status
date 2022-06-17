@@ -16,7 +16,6 @@ import {
 
 // loading and helper functions
 import { getComponentUptime } from "./LoadAboutPageData";
-import { GenerateBarsData } from "./BarsDataGenerator";
 import { formatDate } from "../HelperFunctions";
 
 // constants
@@ -29,6 +28,21 @@ import {
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
 
+/**
+ * get random values for bars
+ * @param days size of list to generate
+ * @returns a list of random values for colored status bars
+ */
+export const GenerateBarsData = (days:number)=>{
+  let list:any[] = [];
+  for(let day = 0; day<days; day++)
+  {
+      const downTime = Math.floor(Math.random() * 70);
+      list.push(downTime);
+  }
+  return list;
+}
+
 // TODO: NEED TO HAVE AN API TO BUILD THE COLOR BAR VALUES
 const barColorDeterminer = (value: number) => {
   if (value < 20) return "rgb(179, 186, 197)"; // grey
@@ -38,6 +52,11 @@ const barColorDeterminer = (value: number) => {
   return "#e74c3c"; // red
 };
 
+/**
+ * get the date to show when we hover over a bar
+ * @param day the day number 
+ * @returns formatted date for a given bar's date
+ */
 const getDateforBar = (day: number) => {
   const daysAgo = totalDays - day;
   let date = new Date();
@@ -45,6 +64,11 @@ const getDateforBar = (day: number) => {
   return formatDate(date, PageType.Completed);
 };
 
+/**
+ * get the status bars for components
+ * @param count the number of bars tom render
+ * @returns List of render ready bars
+ */
 const getColorFullBars = (count: number) => {
   let barsList = [];
   const barValues = GenerateBarsData(count);
@@ -70,13 +94,19 @@ const getColorFullBars = (count: number) => {
   return barsList;
 };
 
+/**
+ * get render ready list for a given components list
+ * @param componentList List of components
+ * @returns formatted list with required styling
+ */
 export const renderComponents = async (componentList: any[]) => {
   let renderComponentList: JSX.Element[] = [];
   if (componentList != undefined) {
     for (const component of componentList) {
-      const componentUptime = await getComponentUptime(component["id"]);
+      const componentUptime = await getComponentUptime(component["id"]); // get the uptime percentage for the component
       let bars: JSX.Element = <></>;
       if (componentUptime) {
+        // if the component has uptime, then return 90 day colored status bars 
         bars = (
           <>
             <Block {...colorfullBarWrapper}>
@@ -93,7 +123,7 @@ export const renderComponents = async (componentList: any[]) => {
         );
       }
       renderComponentList.push(
-        <Block {...componentDetailsWrapper} key={component["name"]}>
+        <Block {...componentDetailsWrapper} key={component["id"]}>
           <Block {...componentHeader}>
             <Block {...componentNameText}>{component["name"]}</Block>
             <Block {...componentStatus}>{component["status"]}</Block>

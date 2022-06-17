@@ -88,10 +88,10 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
       <InfiniteLoader
         isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
         loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-        rowCount={dataList.length + 1} // total row count of the data to be displayed
+        rowCount={dataList.length ?? 0 + 1} // total row count of the data to be displayed
       >
         {({ onRowsRendered, registerChild }) => (
-          <div style={{ width: "100%", height: `calc(100vh - 160px)` }}>
+          <div style={{ width: "100%", height: `56vh` }}>
             <AutoSizer>
               {({ width, height }) => (
                 <List

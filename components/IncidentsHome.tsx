@@ -1,5 +1,6 @@
+import { Block } from "baseui/block";
 import Head from "next/head";
-import { ClientsIncidentsListViewHome } from "./incidents/client-incident-view/ClientHomePage";
+import { ClientsPageHome } from "./incidents/client-incident-view/ClientHomePage";
 
 const IncidentsHome = () => {
   return (
@@ -12,7 +13,17 @@ const IncidentsHome = () => {
           rel="stylesheet"
         />
       </Head>
-      <ClientsIncidentsListViewHome />
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              backgroundColor: "#DCDCDC",
+            },
+          },
+        }}
+      >
+        <ClientsPageHome />
+      </Block>
     </>
   );
 };

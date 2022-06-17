@@ -1,6 +1,5 @@
 // components
 import { Block } from "baseui/block";
-import { format } from "path";
 
 // constants
 import { PageType } from "../../../constants";
@@ -9,7 +8,6 @@ import { PageType } from "../../../constants";
 import {
   listItem,
   itemStatus,
-  itemDate,
   itemName,
 } from "./styles/fullIncidentsListStyles";
 
@@ -27,10 +25,10 @@ import {
   pastIncidentHeaderDateStyle,
   pastIncidentDetailsWrapper,
   pastIncidentWrapper,
-  pastIincidentStatusStyle,
+  pastIncidentStatusStyle,
   pastIncidentStatusBody,
   pastIncidentStatusDate,
-} from "./pastIncidentsStyles";
+} from "./styles/pastIncidentsStyles";
 
 /**
  * Format date for display
@@ -54,20 +52,22 @@ export const formatDate = (date: string | Date, pageType: string): string => {
       date
     )}, ${timeHour}:${timeMins} UTC`;
   if (pageType == PageType.Completed)
-    return `${date.getUTCDate()} ${formatter.format(date)}, ${date.getUTCFullYear()}`;
+    return `${date.getUTCDate()} ${formatter.format(
+      date
+    )}, ${date.getUTCFullYear()}`;
 
   return `${date.getUTCDate()} ${formatter.format(
     date
   )}, ${timeHour}:${timeMins} UTC`;
 };
 
-function formattedDateInSlashFormat(d = new Date) {
+function formattedDateInSlashFormat(d = new Date()) {
   let month = String(d.getMonth() + 1);
   let day = String(d.getDate());
   const year = String(d.getFullYear());
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
 
   return `${day}/${month}/${year}`;
 }
@@ -90,9 +90,10 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
     map.set(date, previous.concat(incident));
   }
   map = new Map([...map].sort().reverse());
-  
+
   console.log("map", map);
   let renderList: JSX.Element[] = [];
+  let index = 0;
   map.forEach(function (value, key) {
     const headerDate = key;
     const incidents = value;
@@ -105,7 +106,7 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
         const update = incidentUpdates[i];
         const renderUpdate = (
           <Block key={update["id"]} {...pastIncidentDetailsWrapper}>
-            <Block {...pastIincidentStatusStyle}>{update["status"]}</Block>
+            <Block {...pastIncidentStatusStyle}>{update["status"]}</Block>
             <Block {...pastIncidentStatusBody}> - {update["body"]} </Block>
             <Block {...pastIncidentStatusDate}>
               {formatDate(update["updated_at"], PageType.All)}
@@ -122,7 +123,7 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
       );
     }
     renderList.push(
-      <Block key={key}>
+      <Block key={index++}>
         <Block {...pastIncidentHeaderDateStyle}>{headerDate}</Block>
         <Block>{incidentsForDate}</Block>
       </Block>
@@ -143,31 +144,38 @@ export const renderData: React.FC = (
   incident: any,
   pageType: string
 ): JSX.Element => {
+  const incidentUpdates = incident["incident_updates"]; // stores the list of incident_updates for an incident
+  let renderIncidentUpdates: JSX.Element[] = []; // JSX Elements list to store the formatted JSX list
+
+  // loop through all the updates and add them to renderIncidentUpdates
+  for (let i = 0; i < incidentUpdates.length; i++) {
+    const update = incidentUpdates[i];
+    const renderUpdate = (
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              paddingBottom: "20px",
+            },
+          },
+        }}
+        key={update["id"]}
+      >
+        <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
+        <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
+        <Block {...maintenanceItemDate}>
+          {formatDate(update["updated_at"], PageType.All)}
+        </Block>
+      </Block>
+    );
+    renderIncidentUpdates.push(renderUpdate);
+  }
   switch (pageType) {
-    // If the pageType is Scheduled_Maintenance then we need to reender the Incident Updates and
-    // their respective statuses as well
+    // If the pageType is Scheduled_Maintenance
     case PageType.Scheduled:
-      const incidentUpdates = incident["incident_updates"]; // stores the list of incident_updates for an incident
-      let renderIncidentUpdates: JSX.Element[] = []; // JSX Elements list to store the formatted JSX list
-
-      // loop through all the updates and add them to renderIncidentUpdates
-      for (let i = 0; i < incidentUpdates.length; i++) {
-        const update = incidentUpdates[i];
-        const renderUpdate = (
-          <Block key={update["id"]}>
-            <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
-            <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
-            <Block {...maintenanceItemDate}>
-              {formatDate(update["updated_at"], PageType.All)}
-            </Block>
-          </Block>
-        );
-        renderIncidentUpdates.push(renderUpdate);
-      }
-
       // finally return the formatted list of updates along with the incident name & incident schedule timings
       return (
-        <Block key={incident["name"]} {...maintenanceListItem}>
+        <Block key={incident["id"]} {...maintenanceListItem}>
           <Block {...maintenanceItemHeaderWrapper}>
             <Block {...maintenanceItemName}>{incident["name"]}</Block>
             <Block {...maintenanceItemDate}>
@@ -182,12 +190,9 @@ export const renderData: React.FC = (
 
     case PageType.Active:
       return (
-        <Block key={incident["name"]} {...listItem}>
+        <Block key={incident["id"]} {...listItem}>
           <Block {...itemName}>{incident["name"]}</Block>
-          <Block {...itemStatus}>{incident["status"]}</Block>
-          <Block {...itemDate}>
-            {formatDate(incident["updated_at"], pageType)}
-          </Block>
+          <Block {...itemStatus}>{renderIncidentUpdates}</Block>
         </Block>
       );
     default:
