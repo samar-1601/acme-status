@@ -76,8 +76,19 @@ const Home = () => {
               items={[
                 { label: "Go to Incidents Home Page", url: "/incidents" },
                 { label: "Go to Components Home Page", url: "/component" },
+                {
+                  label: "Go to Client Incidents Page",
+                  url: "https://client-incident-list-view.netlify.app/",
+                },
               ]}
-              onItemSelect={(item) => Router.push(item.item.url)}
+              onItemSelect={(item) => {
+                if (
+                  item.item.url ==
+                  "https://client-incident-list-view.netlify.app/"
+                ) {
+                  window.open(item.item.url, "_blank");
+                } else Router.push(item.item.url);
+              }}
             />
           </Block>
         </Block>
