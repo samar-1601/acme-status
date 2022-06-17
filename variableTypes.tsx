@@ -29,7 +29,7 @@ export interface optionType {
   };
 }
 
-export interface CreateIncidentProps {
+export interface IncidentCreationProps {
   components: ComponentObject[];
   currentStateOfPage: number;
   isSubmitClicked: boolean;
@@ -85,11 +85,15 @@ export interface pageData {
   id: String;
 }
 
-export interface UpdateIncidentFormProps {
+export interface UpdateIncidentProps {
   incidentId: string | string[] | undefined;
 }
 
 export interface IncidentFetchType {
   id: string;
   status: string;
+}
+
+export interface IncidentErrorPageProps {
+  message: string;
 }

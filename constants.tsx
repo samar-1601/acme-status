@@ -122,9 +122,10 @@ export const getIncidentStatusFromPost = (id: string) => {
 };
 
 export const ICON_URL = {
-  partial_outage: "/paritial_outage.png",
-  major_outage: "/major_outage.png",
-  degraded_performance: "/degraded_performance.png",
-  under_maintenance: "/under_maintenance.png",
-  operational: "/operational2.webp",
-};
+  "partial_outage": "/paritial_outage.png",
+  "major_outage": "/major_outage.png",
+  "degraded_performance": "/degraded_performance.png",
+  "under_maintenance": "/under_maintenance.png",
+  "operational": "/operational2.webp"
+}
+

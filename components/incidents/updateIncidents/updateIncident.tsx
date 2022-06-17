@@ -5,9 +5,8 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 //components
-import CreateIncident from "../createIncidents/CreateIncident";
+import IncidentForm from "../createIncidents/IncidentForm";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { Block } from "baseui/block";
 
 //constants
 import {
@@ -19,21 +18,20 @@ import {
 import {
   ComponentObject,
   JSONObject,
-  UpdateIncidentFormProps,
+  UpdateIncidentProps,
   IncidentFetchType,
 } from "../../../variableTypes";
-
+import IncidentErrorPage from "../createIncidents/IncidentErrorPage";
 
 //global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
 
-
 /**
- * UpdateIncidentForm Component
+ * UpdateIncident Component
  * @param props contains:
- * incidentId : ID of the incident to be updated 
+ * incidentId : ID of the incident to be updated
  */
-export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
+export default function UpdateIncident(props: UpdateIncidentProps) {
   const [components, setComponents] = useState<ComponentObject[]>([]); //components of incident
 
   const [incidentName, setIncidentName] = useState<string>(""); //incidentName of incident
@@ -41,10 +39,10 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
   const [incidentStatus, setIncidentStatus] = useState<string>("Investigating"); //incidentStatus of incident
 
   const [stateOfPage, setStateOfPage] = useState(0); //state of page 0-->loading data 1-->loaded data 2-->cannot load components 3--> wrong incidentUpdate request
-  
-  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //(true/false) --> isSubmitButton clicked 
 
-  const { enqueue, dequeue } = useSnackbar();//state for SnackBar
+  const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //(true/false) --> isSubmitButton clicked
+
+  const { enqueue, dequeue } = useSnackbar(); //state for SnackBar
 
   /**
    * function handleSubmit submits data send by CreateIncident
@@ -52,62 +50,63 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
    */
   const handleSubmit = (payload: any) => {
     setIsSubmitClicked(true);
-    console.log("Updating Incident");
-    // dequeue();
-    enqueue(
-      {
-        message: "Updating Incident Details",
-        progress: true,
-      },
-      DURATION.infinite
-    );
-    fetch(
-      "https://api.statuspage.io/v1/pages/" +
-        PAGE_ID +
-        "/incidents/" +
-        props.incidentId,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+    if (payload.incident.name == "") {
+      dequeue();
+      enqueue(
+        {
+          message: "Incident Name can't be Blank!",
         },
-        body: JSON.stringify(payload),
-      }
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        if ("error" in json) {
-          throw json.error;
+        DURATION.short
+      );
+      setIsSubmitClicked(false);
+    } else {
+      fetch(
+        "https://api.statuspage.io/v1/pages/" +
+          PAGE_ID +
+          "/incidents/" +
+          props.incidentId,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          },
+          body: JSON.stringify(payload),
         }
-        // throw json;
-        dequeue();
-        enqueue(
-          {
-            message: "Successfully updated Incident",
-          },
-          DURATION.short
-        );
-        setIsSubmitClicked(false);
-      })
-      .then(() => {
-        Router.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        dequeue();
-        // console.log(err);
-        enqueue(
-          {
-            message: err,
-          },
-          DURATION.long
-        );
-        setIsSubmitClicked(false);
-      });
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          if ("error" in json) {
+            throw json.error;
+          }
+          // throw json;
+          dequeue();
+          enqueue(
+            {
+              message: "Successfully updated Incident",
+            },
+            DURATION.short
+          );
+          setIsSubmitClicked(false);
+        })
+        .then(() => {
+          Router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          dequeue();
+          // console.log(err);
+          enqueue(
+            {
+              message: err,
+            },
+            DURATION.long
+          );
+          setIsSubmitClicked(false);
+        });
+    }
   };
-
 
   //useEffect for fetching components and incidentDetails from API
   useEffect(() => {
@@ -171,43 +170,14 @@ export default function UpdateIncidentForm(props: UpdateIncidentFormProps) {
   //If incidentUpdateRequest is wrong
   if (stateOfPage == 3) {
     return (
-      <>
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                paddingLeft: "20%",
-                paddingRight: "20%",
-                fontFamily: "Arial, Helvetica, sans-serif",
-              },
-            },
-          }}
-        >
-          <Block
-            overrides={{
-              Block: {
-                style: {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "80vh",
-                },
-              },
-            }}
-          >
-            <h1>Wrong Incident Update Request</h1>
-          </Block>
-        </Block>
-      </>
+      <IncidentErrorPage message="Incident does not exist. Please Check Again!" />
     );
   }
-  
+
   //otherwise render the form
   else {
     return (
-      <CreateIncident
+      <IncidentForm
         incidentName={incidentName}
         incidentStatus={incidentStatus}
         components={components}

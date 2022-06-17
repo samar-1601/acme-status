@@ -11,13 +11,14 @@ import { IncidentMessage } from "./IncidentMessage";
 import { AffectedComponents } from "./AffectedComponents";
 
 //constants
-import { getIncidentStatus, getStatus } from "./../../../constants";
+import { getIncidentStatus, getStatus } from "../../../constants";
 import {
   SendComponentObject,
-  optionType,
-  CreateIncidentProps,
+  IncidentCreationProps,
   ComponentObject,
 } from "../../../variableTypes";
+import Router from "next/router";
+import IncidentErrorPage from "./IncidentErrorPage";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -32,7 +33,7 @@ import {
  * @returns
  */
 
-export default function CreateIncident(props: CreateIncidentProps) {
+export default function IncidentForm(props: IncidentCreationProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data
   const [incidentName, setIncidentName] = useState<string>(props.incidentName); //state for incidentName
 
@@ -83,6 +84,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
       setAffectedComponents((prevAffectedComponents) => {
         const newAffectedComponents = prevAffectedComponents.map(
           (value, index) => {
+            //change only the idx th array item
             if (index == idx) {
               return {
                 compName: value.compName,
@@ -125,6 +127,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         return item.compId;
       });
     let components: SendComponentObject = {};
+    //get those components changed their status from initial value
     affectedComponents.forEach((item) => {
       if (
         item.selected &&
@@ -137,7 +140,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
     const payload = {
       incident: {
         name: incidentName,
-        status: getIncidentStatus(incidentStatus),
+        status: getIncidentStatus(incidentStatus), //changed status components
         impact_override: "none",
         scheduled_for: "2022-09-12T06:00:00.007Z",
         scheduled_until: "2022-10-12T06:00:00.007Z",
@@ -154,7 +157,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         backfilled: false,
         body: incidentMessage,
         components: components,
-        component_ids: componentIDs,
+        component_ids: componentIDs, //all the component ids which were selected
         scheduled_auto_transition: true,
       },
     };
@@ -204,24 +207,49 @@ export default function CreateIncident(props: CreateIncidentProps) {
               }}
             >
               {formConstant}
-
-              <Button
-                onClick={() => {
-                  submitForm();
-                  // dequeue();
-                }}
+              <Block
                 overrides={{
-                  BaseButton: {
-                    style: ({ $theme }) => ({
-                      backgroundColor: $theme.colors.accent,
-                      width: "80px",
-                      alignSelf: "end",
-                    }),
+                  Block: {
+                    style: { display: "flex", flexDirection: "row-reverse" },
                   },
                 }}
               >
-                {props.type}
-              </Button>
+                <Button
+                  onClick={() => {
+                    submitForm();
+                    // dequeue();
+                  }}
+                  overrides={{
+                    BaseButton: {
+                      style: ({ $theme }) => ({
+                        backgroundColor: $theme.colors.accent,
+                        width: "80px",
+                        alignSelf: "end",
+                      }),
+                    },
+                  }}
+                >
+                  {props.type}
+                </Button>
+                <Button
+                  onClick={() => {
+                    Router.push("/");
+                    // dequeue();
+                  }}
+                  overrides={{
+                    BaseButton: {
+                      style: ({ $theme }) => ({
+                        backgroundColor: $theme.colors.accent,
+                        width: "80px",
+                        alignSelf: "end",
+                        marginRight: "50px",
+                      }),
+                    },
+                  }}
+                >
+                  Cancel
+                </Button>
+              </Block>
             </Block>
           </>
         );
@@ -258,7 +286,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
         );
       }
     }
-    //if submit button has been clicked show loadin cursor and show message in SnackBar
+    //if submit button has been clicked show loading button and show message in SnackBar
     else {
       return (
         <>
@@ -276,20 +304,51 @@ export default function CreateIncident(props: CreateIncidentProps) {
             }}
           >
             {formConstant}
-            <Button
+            <Block
               overrides={{
-                BaseButton: {
-                  style: ({ $theme }) => ({
-                    backgroundColor: $theme.colors.accent,
-                    width: "80px",
-                    alignSelf: "end",
-                    cursor: "wait",
-                  }),
+                Block: {
+                  style: { display: "flex", flexDirection: "row-reverse" },
                 },
               }}
             >
-              {props.type}
-            </Button>
+              <Button
+                isLoading
+                onClick={() => {
+                  submitForm();
+                  // dequeue();
+                }}
+                overrides={{
+                  BaseButton: {
+                    style: ({ $theme }) => ({
+                      backgroundColor: $theme.colors.accent,
+                      width: "80px",
+                      alignSelf: "end",
+                      cursor: "not-allowed",
+                    }),
+                  },
+                }}
+              >
+                {props.type}
+              </Button>
+              <Button
+                onClick={() => {
+                  Router.push("/");
+                  // dequeue();
+                }}
+                overrides={{
+                  BaseButton: {
+                    style: ({ $theme }) => ({
+                      backgroundColor: $theme.colors.accent,
+                      width: "80px",
+                      alignSelf: "end",
+                      marginRight: "50px",
+                    }),
+                  },
+                }}
+              >
+                Cancel
+              </Button>
+            </Block>
           </Block>
         </>
       );
@@ -298,36 +357,7 @@ export default function CreateIncident(props: CreateIncidentProps) {
   //If error in fetching data show error message: Unable to Fetch Components
   else {
     return (
-      <>
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                paddingLeft: "20%",
-                paddingRight: "20%",
-                fontFamily: "Arial, Helvetica, sans-serif",
-              },
-            },
-          }}
-        >
-          <Block
-            overrides={{
-              Block: {
-                style: {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "80vh",
-                },
-              },
-            }}
-          >
-            <h1>Sorry Unable to Fetch Components. Please Try Again</h1>
-          </Block>
-        </Block>
-      </>
+      <IncidentErrorPage message="Sorry Unable to Fetch Components. Please Try Again!" />
     );
   }
 }
