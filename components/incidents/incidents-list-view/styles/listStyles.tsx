@@ -186,7 +186,7 @@ export const itemStatus: BlockProps = {
   },
 };
 
-export const updateIncidentButton: BlockProps = {
+export const editIncidentButton: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
       (event.target as HTMLElement).style.boxShadow =
@@ -201,8 +201,8 @@ export const updateIncidentButton: BlockProps = {
   overrides: {
     Block: {
       style: {
-        alignSelf: "center",
         borderRadius: "4px",
+        marginBottom: "80px",
         padding: "10px",
         color: "grey",
         backgroundColor: "rgb(237,237,237)",

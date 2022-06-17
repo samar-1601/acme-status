@@ -16,7 +16,7 @@ import {
   itemDetailsSecondLine,
   itemName,
   componentItem,
-  updateIncidentButton,
+  editIncidentButton,
 } from "../styles/listStyles";
 
 /**
@@ -104,7 +104,7 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
           query: incident["id"], // send the incident ID to the update page address
         }}
       >
-        <Block {...updateIncidentButton}>Update</Block>
+        <Block {...editIncidentButton}>Edit</Block>
       </Link>
     </Block>
   );
