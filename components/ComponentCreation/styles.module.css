@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 20px;
+    font-family: "Lato', sans-serif";
 }
 
 .heading {
@@ -17,7 +18,10 @@
 
 .page {
     padding: 40px;
-    width: 1000px;    
+    width: 80%;    
     margin: auto;
-    background-color: #F8F8FA;
+}
+
+.buttons {
+    float: right;
 }
