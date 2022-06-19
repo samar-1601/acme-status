@@ -20,6 +20,19 @@ import {
 import Router from "next/router";
 import IncidentErrorPage from "./IncidentErrorPage";
 
+//styles
+import {
+  buttonAlignment,
+  mainStyle,
+  onLoadSpinnerStyle,
+  onLoadStyle,
+} from "./styles/BlockStyles";
+import {
+  cancelButtonStyle,
+  onSubmitButtonStyle,
+  submitButtonStyle,
+} from "./styles/ButtonStyles";
+
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
 /**
@@ -193,41 +206,15 @@ export default function IncidentForm(props: IncidentCreationProps) {
       if (props.currentStateOfPage == 1) {
         return (
           <>
-            <Block
-              overrides={{
-                Block: {
-                  style: {
-                    display: "flex",
-                    flexDirection: "column",
-                    paddingLeft: "20%",
-                    paddingRight: "20%",
-                    fontFamily: "Arial, Helvetica, sans-serif",
-                  },
-                },
-              }}
-            >
+            <Block {...mainStyle}>
               {formConstant}
-              <Block
-                overrides={{
-                  Block: {
-                    style: { display: "flex", flexDirection: "row-reverse" },
-                  },
-                }}
-              >
+              <Block {...buttonAlignment}>
                 <Button
                   onClick={() => {
                     submitForm();
                     // dequeue();
                   }}
-                  overrides={{
-                    BaseButton: {
-                      style: ({ $theme }) => ({
-                        backgroundColor: $theme.colors.accent,
-                        width: "80px",
-                        alignSelf: "end",
-                      }),
-                    },
-                  }}
+                  {...submitButtonStyle}
                 >
                   {props.type}
                 </Button>
@@ -236,16 +223,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
                     Router.push("/incidents");
                     // dequeue();
                   }}
-                  overrides={{
-                    BaseButton: {
-                      style: ({ $theme }) => ({
-                        backgroundColor: $theme.colors.accent,
-                        width: "80px",
-                        alignSelf: "end",
-                        marginRight: "50px",
-                      }),
-                    },
-                  }}
+                  {...cancelButtonStyle}
                 >
                   Cancel
                 </Button>
@@ -258,27 +236,8 @@ export default function IncidentForm(props: IncidentCreationProps) {
       else {
         return (
           <>
-            <Block
-              overrides={{
-                Block: {
-                  style: {
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "80vh",
-                  },
-                },
-              }}
-            >
-              <Block
-                overrides={{
-                  Block: {
-                    style: {
-                      alignSelf: "center",
-                    },
-                  },
-                }}
-              >
+            <Block {...onLoadStyle}>
+              <Block {...onLoadSpinnerStyle}>
                 <Spinner $size={SIZE.large} />
               </Block>
             </Block>
@@ -290,61 +249,23 @@ export default function IncidentForm(props: IncidentCreationProps) {
     else {
       return (
         <>
-          <Block
-            overrides={{
-              Block: {
-                style: {
-                  display: "flex",
-                  flexDirection: "column",
-                  paddingLeft: "20%",
-                  paddingRight: "20%",
-                  fontFamily: "Arial, Helvetica, sans-serif",
-                },
-              },
-            }}
-          >
+          <Block {...mainStyle}>
             {formConstant}
-            <Block
-              overrides={{
-                Block: {
-                  style: { display: "flex", flexDirection: "row-reverse" },
-                },
-              }}
-            >
+            <Block {...buttonAlignment}>
               <Button
                 isLoading
                 onClick={() => {
                   submitForm();
-                  // dequeue();
                 }}
-                overrides={{
-                  BaseButton: {
-                    style: ({ $theme }) => ({
-                      backgroundColor: $theme.colors.accent,
-                      width: "80px",
-                      alignSelf: "end",
-                      cursor: "not-allowed",
-                    }),
-                  },
-                }}
+                {...onSubmitButtonStyle}
               >
                 {props.type}
               </Button>
               <Button
                 onClick={() => {
                   Router.push("/incidents");
-                  // dequeue();
                 }}
-                overrides={{
-                  BaseButton: {
-                    style: ({ $theme }) => ({
-                      backgroundColor: $theme.colors.accent,
-                      width: "80px",
-                      alignSelf: "end",
-                      marginRight: "50px",
-                    }),
-                  },
-                }}
+                {...cancelButtonStyle}
               >
                 Cancel
               </Button>

@@ -13,6 +13,11 @@ import { Block } from "baseui/block";
 import { ITEMS } from "./../../../constants";
 import { ImageProps, statusComponentProps } from "./../../../variableTypes";
 
+//styles
+import { componentStyle } from "./styles/BlockStyles";
+import { checkBoxStyles } from "./styles/CheckBoxStyles";
+import { selectOptionStyle } from "./styles/SelectStyles";
+
 function Image(props: ImageProps) {
   return (
     <Block overrides={{ Block: { style: { display: "flex" } } }}>
@@ -51,18 +56,7 @@ export const SelectStatusComponent = React.memo(
     //if component not selected show disabled status and statefulPopover on hover
     if (!props.selected) {
       return (
-        <Block
-          id={props.id}
-          overrides={{
-            Block: {
-              style: {
-                margin: "20px 0px",
-                display: "flex",
-                justifyContent: "space-between",
-              },
-            },
-          }}
-        >
+        <Block id={props.id} {...componentStyle}>
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
@@ -70,22 +64,7 @@ export const SelectStatusComponent = React.memo(
               props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
-            overrides={{
-              Root: {
-                style: {
-                  paddingTop: "15px",
-                },
-              },
-              Checkmark: {
-                style: ({ $checked }) => ({
-                  borderLeftColor: "blue",
-                  borderRightColor: "blue",
-                  borderTopColor: "blue",
-                  borderBottomColor: "blue",
-                  backgroundColor: $checked ? "blue" : "white",
-                }),
-              },
-            }}
+            {...checkBoxStyles}
           >
             {props.name}
           </Checkbox>
@@ -115,19 +94,7 @@ export const SelectStatusComponent = React.memo(
                     Number(event.option!.id) + 1
                   );
                 }}
-                overrides={{
-                  DropdownOption: {
-                    style: ({ $theme }) => ({
-                      outline: `${$theme.colors.warning200} solid`,
-                      backgroundColor: $theme.colors.warning200,
-                    }),
-                  },
-                  Root: {
-                    style: {
-                      width: "300px",
-                    },
-                  },
-                }}
+                {...selectOptionStyle}
               />
             </span>
           </StatefulPopover>
@@ -137,18 +104,7 @@ export const SelectStatusComponent = React.memo(
     //if component selected then enable select
     else {
       return (
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                margin: "20px 0px",
-                display: "flex",
-                justifyContent: "space-between",
-              },
-            },
-          }}
-          id={props.id}
-        >
+        <Block id={props.id} {...componentStyle}>
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
@@ -156,22 +112,7 @@ export const SelectStatusComponent = React.memo(
               props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
-            overrides={{
-              Root: {
-                style: {
-                  paddingTop: "15px",
-                },
-              },
-              Checkmark: {
-                style: ({ $checked }) => ({
-                  borderLeftColor: "blue",
-                  borderRightColor: "blue",
-                  borderTopColor: "blue",
-                  borderBottomColor: "blue",
-                  backgroundColor: $checked ? "blue" : "white",
-                }),
-              },
-            }}
+            {...checkBoxStyles}
           >
             {props.name}
           </Checkbox>
@@ -190,19 +131,7 @@ export const SelectStatusComponent = React.memo(
                 Number(event.option!.id) + 1
               );
             }}
-            overrides={{
-              DropdownOption: {
-                style: ({ $theme }) => ({
-                  outline: `${$theme.colors.warning200} solid`,
-                  backgroundColor: $theme.colors.warning200,
-                }),
-              },
-              Root: {
-                style: {
-                  width: "300px",
-                },
-              },
-            }}
+            {...selectOptionStyle}
           />
         </Block>
       );
