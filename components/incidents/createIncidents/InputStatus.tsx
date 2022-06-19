@@ -44,7 +44,7 @@ function getColor(status: String): string {
 //funtion to get color code of progress bar
 function getStatusBarColor(status: String): string {
   if (status == "Investigating") {
-    return "E8E0BE";
+    return "red";
   }
   if (status == "Identified") {
     return "#FFD04F";
