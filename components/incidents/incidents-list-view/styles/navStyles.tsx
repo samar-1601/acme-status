@@ -142,7 +142,7 @@ export const navNonActiveItem = {
   paddingBottom: "16px",
   color: "rgb(82, 80, 80)",
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   display: "inline",
 };
 export const spanInsideNav: BlockProps = {
