@@ -56,3 +56,13 @@ export const componentStyle: BlockProps = {
     },
   },
 };
+
+export const blockBorder: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        border: "2px solid black",
+      },
+    },
+  },
+};
