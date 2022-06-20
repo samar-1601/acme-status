@@ -73,9 +73,9 @@ export const component: BlockProps = {
   overrides: {
     Block: {
       style: ($value) => ({
-        marginTop: $value ? "18px" : "0px",
+        marginTop: "18px",
         display: "inline",
-        paddingBottom: $value != "" ? "8px" : "0px",
+        paddingBottom: "8px",
       }),
     },
   },

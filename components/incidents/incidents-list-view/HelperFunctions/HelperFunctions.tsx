@@ -50,7 +50,7 @@ const formatDate = (date: string | Date): string => {
  * @param incident the incident for which the components list is made
  * @returns JSX containing the components in the current incident
  */
-const getComponents = (incident: any): JSX.Element[] => {
+const getComponents = (incident: any): JSX.Element => {
   let componentsList: JSX.Element[] = []; // List to store the formatted components list
 
   // if there are components for the incident
@@ -78,7 +78,25 @@ const getComponents = (incident: any): JSX.Element[] => {
       componentsList.push(renderComponent); // push the formatted component to the list
     });
   }
-  return componentsList;
+  if (componentsList.length > 0) {
+    return <Block {...component}>{componentsList}</Block>;
+  }
+  // handling the case when no component has been affected by the incident
+  return (
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            color: "#808080",
+            marginTop: "18px",
+            paddingBottom: "8px",
+          },
+        },
+      }}
+    >
+      No components affected
+    </Block>
+  );
 };
 
 /**
@@ -87,6 +105,9 @@ const getComponents = (incident: any): JSX.Element[] => {
  * @returns JSX component list
  */
 export const renderData: React.FC = (incident: any): JSX.Element => {
+  /* get the components corressponding to the incident and append them for render */
+  const renderComponents = getComponents(incident);
+
   return (
     <Block key={incident["name"]} {...listItem}>
       <Block {...listDetails}>
@@ -95,8 +116,7 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
           <Block {...itemStatus}>{incident["status"]}</Block>
           <Block {...itemDate}>{formatDate(incident["created_at"])}</Block>
         </Block>
-        {/* get the components corressponding to the incident and append them for render */}
-        <Block {...component}>{getComponents(incident)}</Block>
+        {renderComponents}
       </Block>
       <Link
         href={{
