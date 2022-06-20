@@ -1,3 +1,4 @@
+import { Block } from "baseui/block";
 import Head from "next/head";
 import { HomePage } from "./incidents/incidents-list-view/HomePage";
 
@@ -14,6 +15,10 @@ const IncidentsHome = () => {
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap"
           rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
         />
       </Head>
       <HomePage />

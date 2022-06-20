@@ -1,10 +1,19 @@
-import IncidentsHome  from "../components/IncidentsHome"
+import { Block } from "baseui/block";
+import IncidentsHome from "../components/IncidentsHome";
 
 const Home = () => {
   return (
-    <>
-      <IncidentsHome/>
-    </>
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            backgroundColor: "#F8F8FA",
+          },
+        },
+      }}
+    >
+      <IncidentsHome />
+    </Block>
   );
 };
 
