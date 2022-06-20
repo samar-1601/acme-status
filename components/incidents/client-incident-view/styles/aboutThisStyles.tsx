@@ -75,6 +75,32 @@ export const colorfullBar: BlockProps = {
     },
   },
 };
+export const legendBoxStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        width: "18px",
+        height: "18px",
+        border: "1px solid rgba(0, 0, 0, .2)",
+        borderRadius: "5px",
+        margin: "0px 10px 0px 25px",
+      },
+    },
+  },
+};
+export const legendBoxWrapperStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+       display: "flex",
+       margin: "25px 0px",
+       justifyContent:"center",
+       alignItems: "center",
+       fontSize: "1rem",
+      },
+    },
+  },
+};
 export const componentTimelineRow: BlockProps = {
   overrides: {
     Block: {

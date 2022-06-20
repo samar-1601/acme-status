@@ -19,7 +19,7 @@ import { getComponentUptime } from "./LoadAboutPageData";
 import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
 
 // constants
-import { getComponentStatusText , PageType } from "../../../../constants";
+import { ComponentStatusType, getComponentStatusText , PageType } from "../../../../constants";
 import {
   hoverBox,
   hoverDateStyle,
@@ -27,6 +27,14 @@ import {
 } from "../styles/barHoverStyles";
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
+
+export const legendColorDeterminer = (value: ComponentStatusType) => {
+  if (value== ComponentStatusType.MajorOutage) return "#e74c3c"; // red
+  if (value == ComponentStatusType.Operational) return "#2fcc66"; //green
+  if (value == ComponentStatusType.PartialOutage) return "#f1c40f"; // yellow
+
+  return "rgb(179, 186, 197)"; // grey
+};
 
 /**
  * get random values for bars

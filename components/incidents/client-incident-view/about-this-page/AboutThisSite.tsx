@@ -4,14 +4,22 @@ import { useState, useEffect, useCallback } from "react";
 
 // loading and helper functions
 import { getComponents } from "./LoadAboutPageData";
-import { renderComponents } from "./AboutPageHelperFunctions";
+import {
+  renderComponents,
+  legendColorDeterminer,
+} from "./AboutPageHelperFunctions";
 
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // styles
-import { componentListWrapper } from "../styles/aboutThisStyles";
+import {
+  componentListWrapper,
+  legendBoxStyle,
+  legendBoxWrapperStyle,
+} from "../styles/aboutThisStyles";
+import { ComponentStatusType } from "../../../../constants";
 
 /**
  * About this page component
@@ -36,9 +44,50 @@ export const AboutThisSite = React.memo(() => {
     loadComponentsList();
   }, []);
 
+  /**
+   * if (value < 20) return "rgb(179, 186, 197)"; // grey
+  if (value < 60) return "#2fcc66"; //green
+  if (value < 65) return "#f1c40f"; // yellow
+
+  return "#e74c3c"; // red
+   */
   return state.isLoaded ? (
     // render components if data has loaded
-    <Block {...componentListWrapper}>{state.componentsList}</Block>
+    <>
+      <Block
+        {...legendBoxWrapperStyle}
+      >
+        <Block
+          {...legendBoxStyle}
+          backgroundColor={legendColorDeterminer(
+            ComponentStatusType.MajorOutage
+          )}
+        ></Block>
+        <Block>Major Outage</Block>
+        <Block
+          {...legendBoxStyle}
+          backgroundColor={legendColorDeterminer(
+            ComponentStatusType.PartialOutage
+          )}
+        ></Block>
+        <Block>Partial Outage</Block>
+        <Block
+          backgroundColor={legendColorDeterminer(
+            ComponentStatusType.Operational
+          )}
+          {...legendBoxStyle}
+        ></Block>
+        <Block>Operational</Block>
+        <Block
+          {...legendBoxStyle}
+          backgroundColor={legendColorDeterminer(
+            ComponentStatusType.UnderMaintenance
+          )}
+        ></Block>
+        <Block>No Incidents Reported</Block>
+      </Block>
+      <Block {...componentListWrapper}>{state.componentsList}</Block>
+    </>
   ) : (
     // show spinner if data has not loaded
     <Block
