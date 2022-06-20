@@ -22,8 +22,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
   ({ headerText }) => {
     return (
       <Block {...headerBar}>
-        <Block {...headerBarBackIcon}>
-          <span className="material-symbols-outlined">arrow_back</span>
+        <Block {...headerBarBackIcon} className="material-symbols-outlined">arrow_back
         </Block>
         <Block {...headerBarText}>{headerText}</Block>
       </Block>
