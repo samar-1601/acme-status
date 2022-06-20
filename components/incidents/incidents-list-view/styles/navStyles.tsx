@@ -152,7 +152,7 @@ export const navActiveItem = {
   paddingLeft: "14px",
   paddingBottom: "16.5px",
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   display: "inline",
 };
 
