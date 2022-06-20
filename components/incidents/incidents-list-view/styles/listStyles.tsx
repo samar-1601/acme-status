@@ -11,6 +11,7 @@ export const listItem: BlockProps = {
         display: "flex",
         justifyContent: "space-between",
         padding: "20px 30px 15px 30px",
+        backgroundColor: "white",
         margin: "10px 8px 20px 8px",
         borderTop: "4px rgb(243, 214, 54) solid",
         boxShadow:
@@ -26,6 +27,7 @@ export const incidentsListView: BlockProps = {
         width: "80%",
         fontFamily: "'Lato', sans-serif",
         margin: "auto",
+        backgroundColor: "#F8F8FA",
       },
     },
   },
@@ -73,9 +75,9 @@ export const component: BlockProps = {
   overrides: {
     Block: {
       style: ($value) => ({
-        marginTop: $value ? "18px" : "0px",
+        marginTop: "18px",
         display: "inline",
-        paddingBottom: $value != "" ? "8px" : "0px",
+        paddingBottom: "8px",
       }),
     },
   },
@@ -189,13 +191,12 @@ export const itemStatus: BlockProps = {
 export const editIncidentButton: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.boxShadow =
-        "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
     }
   },
   onMouseLeave: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.boxShadow = "";
+      (event.target as HTMLElement).style.backgroundColor = "white";
     }
   },
   overrides: {
@@ -204,8 +205,8 @@ export const editIncidentButton: BlockProps = {
         borderRadius: "4px",
         marginBottom: "80px",
         padding: "10px 25px",
-        color: "grey",
-        backgroundColor: "rgb(237,237,237)",
+        backgroundColor: "white",
+        border: "1px solid #E6E6E9",
         cursor: "pointer",
       },
     },

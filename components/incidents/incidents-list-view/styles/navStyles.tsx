@@ -9,7 +9,6 @@ export const container: BlockProps = {
         top: "0ch",
         width: "80%",
         zIndex: 100,
-        backgroundColor: "white",
         padding: "0.5rem",
       },
     },
@@ -56,11 +55,29 @@ export const headerBarBackIcon: BlockProps = {
   onClick: () => {
     Router.push("/");
   },
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.backgroundColor = "white";
+      (event.target as HTMLElement).style.boxShadow = "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
+
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
+      (event.target as HTMLElement).style.boxShadow = "";
+    }
+  },
   overrides: {
     Block: {
       style: {
-        marginTop: "10px",
         cursor: "pointer",
+        borderRadius: "6000px",
+        backgroundColor: "#F8F8FA",
+        padding: "10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       },
     },
   },
@@ -104,24 +121,23 @@ export const divInsideNav: BlockProps = {
 export const createIncidentButton: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.boxShadow =
-        "0 2px 2px 0 rgba(0, 0, 0, 0.2), 2px 2px 4px 0 rgba(0, 0, 0, 0.19)";
+      (event.target as HTMLElement).style.backgroundColor = "#1858CE";
     }
   },
   onMouseLeave: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.boxShadow = "";
+      (event.target as HTMLElement).style.backgroundColor = "#0E61F6";
     }
   },
   overrides: {
     Block: {
       style: {
         alignSelf: "flex-end",
-        borderRadiusWidth: "4px",
-        marginBottom: "8px",
-        padding: "8px",
+        borderRadius: "4px",
+        marginBottom: "6px",
+        padding: "10px",
         color: "white",
-        backgroundColor: "rgb(32, 65, 230)",
+        backgroundColor: "#0E61F6",
         cursor: "pointer",
       },
     },
@@ -146,7 +162,7 @@ export const navNonActiveItem = {
   paddingBottom: "16px",
   color: "rgb(82, 80, 80)",
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   display: "inline",
 };
 export const spanInsideNav: BlockProps = {

@@ -1,6 +1,5 @@
-import { Block, BlockProps } from "baseui/block";
+import { Block } from "baseui/block";
 import { StatefulMenu } from "baseui/menu";
-import type { NextPage } from "next";
 import Head from "next/head";
 import Router from "next/router";
 import { Avatar } from "baseui/avatar";

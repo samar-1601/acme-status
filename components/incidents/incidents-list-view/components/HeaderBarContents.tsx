@@ -3,7 +3,6 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
-import { Avatar } from "baseui/avatar";
 
 // styles
 import {
@@ -24,11 +23,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
     return (
       <Block {...headerBar}>
         <Block {...headerBarBackIcon}>
-          <Avatar
-            name="Back"
-            size="scale900"
-            src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
-          />
+          <span className="material-symbols-outlined">arrow_back</span>
         </Block>
         <Block {...headerBarText}>{headerText}</Block>
       </Block>
