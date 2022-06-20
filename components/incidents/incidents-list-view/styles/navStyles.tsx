@@ -5,11 +5,11 @@ export const container: BlockProps = {
   overrides: {
     Block: {
       style: {
-        position: "fixed",
+        // position: "fixed",
         top: "0ch",
-        width: "80%",
-        zIndex: 100,
-        padding: "0.5rem",
+        width: "100%",
+        // zIndex: 100,
+        // padding: "0.5rem",
       },
     },
   },
@@ -20,7 +20,7 @@ export const content: BlockProps = {
     Block: {
       style: {
         position: "relative",
-        top: "150px",
+        marginTop: "10px",
         width: "100%",
         paddingLeft: "10px",
       },

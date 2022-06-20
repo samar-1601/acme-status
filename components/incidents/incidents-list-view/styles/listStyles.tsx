@@ -27,7 +27,6 @@ export const incidentsListView: BlockProps = {
         width: "80%",
         fontFamily: "'Lato', sans-serif",
         margin: "auto",
-        backgroundColor: "#F8F8FA",
       },
     },
   },

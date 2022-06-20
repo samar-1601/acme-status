@@ -91,7 +91,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
         rowCount={dataList.length + 1} // total row count of the data to be displayed
       >
         {({ onRowsRendered, registerChild }) => (
-          <div style={{ width: "100%", height: `calc(100vh - 160px)` }}>
+          <div style={{ width: "100%", height: `calc(100vh)` }}>
             <AutoSizer>
               {({ width, height }) => (
                 <List
