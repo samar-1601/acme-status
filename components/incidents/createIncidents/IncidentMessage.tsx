@@ -8,6 +8,9 @@ import { Textarea } from "baseui/textarea";
 //constants
 import { IncidentMessageProps } from "../../../variableTypes";
 
+//styles
+import { messageFormControlStyle } from "./styles/FormControlStyles";
+
 /**
  * IncidentMessage Component
  * @params props contains:
@@ -16,7 +19,7 @@ import { IncidentMessageProps } from "../../../variableTypes";
  */
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
   return (
-    <FormControl label={"Message"}>
+    <FormControl label={"Message"} overrides={{ ...messageFormControlStyle }}>
       <Textarea
         value={props.value}
         onChange={(event) => {

@@ -8,6 +8,9 @@ import { Input } from "baseui/input";
 //constants
 import { IncidentNameProps } from "../../../variableTypes";
 
+//styles
+import { inputBorder } from "./styles/InputStyles";
+
 /**
  * IncidentName Component
  * @params props contains:
@@ -26,6 +29,7 @@ export const IncidentName = React.memo((props: IncidentNameProps) => {
         }}
         value={props.value}
         placeholder={"Incident Name"}
+        {...inputBorder}
       />
     </FormControl>
   );
