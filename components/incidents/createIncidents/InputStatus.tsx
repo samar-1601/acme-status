@@ -11,6 +11,9 @@ import { Block } from "baseui/block";
 import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
 import { STATUSNames } from "./../../../constants";
 
+//styles
+import { inputStatusFormControlStyle } from "./styles/FormControlStyles";
+
 //function to calculate percentage of progress bar to be filled from status
 function calculateStatus(status: String): number {
   if (status == "Investigating") {
@@ -135,20 +138,10 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
   );
 
   return (
-    <Block
-    // overrides={{
-    //   Block: { style: { backgroundColor: "rbg(118, 118, 118)" } },
-    // }}
-    >
+    <Block>
       <FormControl
         label={"Incident Status"}
-        overrides={{
-          ControlContainer: {
-            style: ({ $theme }) => ({
-              backgroundColor: $theme.colors.backgroundTertiary,
-            }),
-          },
-        }}
+        overrides={{ ...inputStatusFormControlStyle }}
       >
         <>
           <Block
