@@ -176,6 +176,8 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                 BarProgress: {
                   style: {
                     backgroundColor: getStatusBarColor(props.incidentStatus),
+                    transition:
+                      "transform ease 0.5s, background-color ease 0.5s",
                   },
                 },
               }}
