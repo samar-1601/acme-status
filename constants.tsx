@@ -1,0 +1,78 @@
+import { STATUSType } from "./variableTypes";
+
+export const NEXT_PUBLIC_AUTH_TOKEN = "c12226f5-9156-47cd-bf7c-a36379785a25";
+export const PAGE_ID = "7dwwybj29fy8";
+
+export const STATUS: STATUSType = {
+  operational: 1,
+  degraded_performance: 2,
+  partial_outage: 3,
+  major_outage: 4,
+  under_maintenance: 5,
+};
+
+export const STATUSNames = [
+  "Investigating",
+  "Identified",
+  "Monitoring",
+  "Resolved",
+];
+
+export const ITEMS = [
+  { title: "Operational", imgUrl: "/operational2.webp", id: "0" },
+  {
+    title: "Degraded Performance",
+    imgUrl: "/degraded_performance.png",
+    id: "1",
+  },
+  { title: "Partial Outage", imgUrl: "/paritial_outage.png", id: "2" },
+  { title: "Major Outage", imgUrl: "/major_outage.png", id: "3" },
+  { title: "Under Maintainence", imgUrl: "/under_maintenance.png", id: "4" },
+];
+
+export const getStatus = (id: number): string => {
+  switch (id) {
+    case 1:
+      return "operational";
+    case 2:
+      return "degraded_performance";
+    case 3:
+      return "partial_outage";
+    case 4:
+      return "major_outage";
+    case 5:
+      return "under_maintenance";
+    default:
+      return "";
+  }
+};
+
+export const getIncidentStatus = (id: String): string => {
+  switch (id) {
+    case "Investigating":
+      return "scheduled";
+    case "Identified":
+      return "in_progress";
+    case "Monitoring":
+      return "verifying";
+    case "Resolved":
+      return "completed";
+    default:
+      return "";
+  }
+};
+
+export const getIncidentStatusFromPost = (id: string) => {
+  switch (id) {
+    case "scheduled":
+      return "Investigating";
+    case "in_progress":
+      return "Identified";
+    case "verifying":
+      return "Monitoring";
+    case "completed":
+      return "Resolved";
+    default:
+      return "";
+  }
+};
