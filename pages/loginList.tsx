@@ -1,9 +1,19 @@
-import { useSession, signIn, signOut } from "next-auth/react";
+// lib
+import { useSession, signIn} from "next-auth/react";
 import { useRouter } from "next/router";
+
+// components and icons
 import { BsGithub, BsGoogle } from "react-icons/bs";
 import { Block } from "baseui/block";
-import { loginListItem, loginListView, loginProviderName } from "../styles/loginStyles";
+import { Spinner } from "baseui/spinner";
 
+// styles
+import { loginListItem, loginListView, loginProviderName } from "../styles/loginStyles";
+import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
+
+/**
+ * store the list of providers with their respective icons
+ */
 const providers = [
   {
     name: "github",
@@ -20,7 +30,9 @@ const LoginProvidersList: React.FC = () => {
   const { push } = useRouter();
 
   console.log(session);
-  if (status === "loading") return <Block>Checking Authentication...</Block>;
+  if (status === "loading") return <Block {...hasListLoadedStyle}>
+  Checking Authentication Status... <Spinner />
+</Block>;
 
   if (session) {
     setTimeout(() => {
