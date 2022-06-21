@@ -1,5 +1,6 @@
 import React from "react";
 import App from "next/app";
+import '../styles/global.css'
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, BaseProvider } from "baseui";
 import { styletron } from "../styletron";

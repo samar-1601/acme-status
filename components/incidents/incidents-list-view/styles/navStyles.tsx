@@ -23,7 +23,7 @@ export const content: BlockProps = {
     },
   },
 };
-export const headerBar: BlockProps = {
+export const headerBarLeftWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
@@ -33,6 +33,18 @@ export const headerBar: BlockProps = {
         flexDirection: "row",
         padding: "20px 0px",
         gap: "25px",
+      },
+    },
+  },
+};
+export const headerBar: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexDirection: "row",
       },
     },
   },

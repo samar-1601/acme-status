@@ -3,15 +3,17 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
-import { Avatar } from "baseui/avatar";
 import Link from "next/dist/client/link";
 
 // styles
 import {
-  headerBar,
+  headerBarLeftWrapper,
   headerBarBackIcon,
   headerBarText,
+  headerBar,
 } from "../styles/navStyles";
+import { signOutButton } from "../styles/listStyles";
+import { signOut } from "next-auth/react";
 
 interface Props {
   headerText: string; // text to render in the header
@@ -24,12 +26,17 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
   ({ headerText }) => {
     return (
       <Block {...headerBar}>
-        <Link href="">
-          <Block {...headerBarBackIcon}>
-            <span className="material-symbols-outlined">arrow_back</span>
-          </Block>
-        </Link>
-        <Block {...headerBarText}>{headerText}</Block>
+        <Block {...headerBarLeftWrapper}>
+          <Link href="">
+            <Block {...headerBarBackIcon} className="material-symbols-outlined">
+              arrow_back
+            </Block>
+          </Link>
+          <Block {...headerBarText}>{headerText}</Block>
+        </Block>
+        <Block onClick={() => signOut()} {...signOutButton}>
+          Sign Out
+        </Block>
       </Block>
     );
   }

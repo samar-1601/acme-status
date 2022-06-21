@@ -1,29 +1,25 @@
 import { Block } from "baseui/block";
 import { Button } from "baseui/button";
+import { Spinner } from "baseui/spinner";
+import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import IncidentsHome from "../components/IncidentsHome";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import LoginPage from "./WelcomePage";
 
 const Home = () => {
   const { data: session, status } = useSession();
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <Block {...hasListLoadedStyle}>
+        <Spinner />
+      </Block>
+    );
   }
-
   if (!session) {
-    return <Button onClick={() => signIn()}>Sign In</Button>;
+    return <LoginPage />;
   }
   return (
-    <Block
-      overrides={{
-        Block: {
-          style: {
-            backgroundColor: "#F8F8FA",
-          },
-        },
-      }}
-    >
       <IncidentsHome />
-    </Block>
   );
 };
 
