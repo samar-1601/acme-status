@@ -212,3 +212,27 @@ export const editIncidentButton: BlockProps = {
     },
   },
 };
+export const signOutButton: BlockProps = {
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.target as HTMLElement).style.backgroundColor = "white";
+    }
+  },
+  overrides: {
+    Block: {
+      style: {
+        borderRadius: "4px",
+        padding: "10px 25px",
+        backgroundColor: "white",
+        border: "1px solid #E6E6E9",
+        cursor: "pointer",
+        display: "inline",
+      },
+    },
+  },
+};

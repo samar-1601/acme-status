@@ -5,11 +5,8 @@ export const container: BlockProps = {
   overrides: {
     Block: {
       style: {
-        // position: "fixed",
         top: "0ch",
         width: "100%",
-        // zIndex: 100,
-        // padding: "0.5rem",
       },
     },
   },
@@ -22,7 +19,20 @@ export const content: BlockProps = {
         position: "relative",
         marginTop: "10px",
         width: "100%",
-        paddingLeft: "10px",
+      },
+    },
+  },
+};
+export const headerBarLeftWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        flexDirection: "row",
+        padding: "20px 0px",
+        gap: "25px",
       },
     },
   },
@@ -33,10 +43,8 @@ export const headerBar: BlockProps = {
       style: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
         flexDirection: "row",
-        padding: "20px 0px",
-        gap: "25px",
       },
     },
   },
