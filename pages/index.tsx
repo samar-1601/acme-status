@@ -1,5 +1,4 @@
 import { Block } from "baseui/block";
-import { Button } from "baseui/button";
 import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import IncidentsHome from "../components/IncidentsHome";
