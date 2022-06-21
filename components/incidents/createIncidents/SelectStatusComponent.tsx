@@ -22,10 +22,7 @@ import { popoverMessageStyle } from "./styles/PopoverStyles";
 function Image(props: ImageProps) {
   return (
     <Block overrides={{ Block: { style: { display: "flex" } } }}>
-      <img
-        style={{ paddingRight: "5px", height: "24px", width: "24px" }}
-        src={props.imgUrl}
-      />{" "}
+      <img className="h-6 w-6 mr-1.5" src={props.imgUrl} />{" "}
       <Block>{props.title}</Block>
     </Block>
   );

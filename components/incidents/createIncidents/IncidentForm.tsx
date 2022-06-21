@@ -181,7 +181,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
   //part of form which will remain constant for both true and false values of props.isSubmitClicked
   const formConstant = (
     <>
-      <h2>{props.type} Incident</h2>
+      <h2 className="header my-3.5">{props.type} Incident</h2>
       <IncidentName value={incidentName} handleNameChange={handleNameChange} />
       <InputStatus
         updateStatus={updateStatus}

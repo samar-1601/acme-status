@@ -24,10 +24,10 @@ export const buttonAlignment: BlockProps = {
         left: "0",
         bottom: "0",
         width: "100%",
-        height: "5%",
-        paddingBottom: "10px",
+        height: "7%",
+        paddingBottom: "20px",
         backgroundColor: "white",
-        marginTop: "50px",
+        alignItems: "center",
       },
     },
   },
@@ -78,21 +78,11 @@ export const blockBorder: BlockProps = {
   },
 };
 
-export const pageStyle: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        backgroundColor: "#F8F8FA",
-      },
-    },
-  },
-};
-
 export const affectedComponenetsStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginBottom: "50px",
+        marginBottom: "70px",
       },
     },
   },

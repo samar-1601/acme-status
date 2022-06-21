@@ -27,8 +27,8 @@ export const AffectedComponents = React.memo(
           overrides={{
             ControlContainer: {
               style: ({ $theme }) => ({
-                borderStyle: "solid none",
-                borderColor: $theme.colors.borderOpaque,
+                borderTop: "solid 1.5px rgb(226,226,226)",
+                borderBottom: "solid 1.5px rgb(226,226,226)",
               }),
             },
           }}
