@@ -1,7 +1,5 @@
 import { InputProps } from "baseui/input";
 
-const name = ".hover";
-
 export const inputNameStyle: InputProps = {
   overrides: {
     Root: {
