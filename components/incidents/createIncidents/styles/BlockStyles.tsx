@@ -17,7 +17,18 @@ export const mainStyle: BlockProps = {
 export const buttonAlignment: BlockProps = {
   overrides: {
     Block: {
-      style: { display: "flex", flexDirection: "row-reverse" },
+      style: {
+        display: "flex",
+        flexDirection: "row-reverse",
+        position: "fixed",
+        left: "0",
+        bottom: "0",
+        width: "100%",
+        height: "5%",
+        paddingBottom: "10px",
+        backgroundColor: "white",
+        marginTop: "50px",
+      },
     },
   },
 };
@@ -62,6 +73,26 @@ export const blockBorder: BlockProps = {
     Block: {
       style: {
         border: "2px solid black",
+      },
+    },
+  },
+};
+
+export const pageStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        backgroundColor: "#F8F8FA",
+      },
+    },
+  },
+};
+
+export const affectedComponenetsStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginBottom: "50px",
       },
     },
   },

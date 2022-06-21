@@ -10,6 +10,7 @@ import { IncidentMessageProps } from "../../../variableTypes";
 
 //styles
 import { messageFormControlStyle } from "./styles/FormControlStyles";
+import { inputNameStyle } from "./styles/InputStyles";
 
 /**
  * IncidentMessage Component
@@ -17,6 +18,7 @@ import { messageFormControlStyle } from "./styles/FormControlStyles";
  * value: string
  * updateIncidentMessage: Function
  */
+
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
   return (
     <FormControl label={"Message"} overrides={{ ...messageFormControlStyle }}>
@@ -26,6 +28,29 @@ export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
           props.updateIncidentMessage(event);
         }}
         placeholder={"We are currently investigating this issue."}
+        overrides={{
+          InputContainer: {
+            style: ({ $isFocused }) => ({
+              backgroundColor: "white ",
+              // borderColor: $isFocused ? "#1858CE" : "red",
+              // border: "1px solid #E6E6E9",
+            }),
+            props: {
+              overrides: {
+                Root: {
+                  style: {
+                    borderRadius: "8px",
+                  },
+                },
+              },
+            },
+          },
+          Input: {
+            style: ({ $isFocused }) => ({
+              border: $isFocused ? "1px blue" : "1px  #E6E6E9",
+            }),
+          },
+        }}
       />
     </FormControl>
   );

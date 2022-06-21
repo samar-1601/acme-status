@@ -238,7 +238,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
           <>
             <Block {...onLoadStyle}>
               <Block {...onLoadSpinnerStyle}>
-                <Spinner $size={SIZE.large} />
+                <Spinner />
               </Block>
             </Block>
           </>
