@@ -1,14 +1,12 @@
 import { BlockProps } from "baseui/block";
+import Router from "next/router";
 
 export const container: BlockProps = {
   overrides: {
     Block: {
       style: {
-        position: "fixed",
         top: "0ch",
-        width: "80%",
-        zIndex: 100,
-        padding: "0.5rem",
+        width: "100%",
       },
     },
   },
@@ -19,9 +17,8 @@ export const content: BlockProps = {
     Block: {
       style: {
         position: "relative",
-        top: "150px",
+        marginTop: "10px",
         width: "100%",
-        paddingLeft: "10px",
       },
     },
   },
@@ -51,6 +48,9 @@ export const headerBarText: BlockProps = {
   },
 };
 export const headerBarBackIcon: BlockProps = {
+  onClick: () => {
+    Router.push("/");
+  },
   onMouseEnter: (event) => {
     if (event.target) {
       (event.target as HTMLElement).style.backgroundColor = "white";
@@ -148,7 +148,7 @@ export const navActiveItem = {
   paddingLeft: "14px",
   paddingBottom: "16.5px",
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   display: "inline",
 };
 
