@@ -1,35 +1,12 @@
 import { Block } from "baseui/block";
 import Link from "next/link";
 import { IncidentErrorPageProps } from "../../../variableTypes";
+import { errorPageStyle, mainStyle } from "./styles/BlockStyles";
 
 export default function IncidentErrorPage(props: IncidentErrorPageProps) {
   return (
-    <Block
-      overrides={{
-        Block: {
-          style: {
-            display: "flex",
-            flexDirection: "column",
-            paddingLeft: "20%",
-            paddingRight: "20%",
-            fontFamily: "Arial, Helvetica, sans-serif",
-          },
-        },
-      }}
-    >
-      <Block
-        overrides={{
-          Block: {
-            style: {
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "80vh",
-            },
-          },
-        }}
-      >
+    <Block {...mainStyle}>
+      <Block {...errorPageStyle}>
         <h1>{props.message}</h1>
         <Block>
           <Link href={"/incidents"}>

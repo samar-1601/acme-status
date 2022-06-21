@@ -3,14 +3,12 @@ import * as React from "react";
 
 //components
 import { FormControl } from "baseui/form-control";
-import { Textarea } from "baseui/textarea";
 
 //constants
 import { IncidentMessageProps } from "../../../variableTypes";
 
 //styles
-import { messageFormControlStyle } from "./styles/FormControlStyles";
-import { inputNameStyle } from "./styles/InputStyles";
+import { useStyletron } from "styletron-react";
 
 /**
  * IncidentMessage Component
@@ -20,37 +18,35 @@ import { inputNameStyle } from "./styles/InputStyles";
  */
 
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
+  const [css] = useStyletron();
+
   return (
-    <FormControl label={"Message"} overrides={{ ...messageFormControlStyle }}>
-      <Textarea
+    <FormControl label={"Message"}>
+      <textarea
         value={props.value}
         onChange={(event) => {
           props.updateIncidentMessage(event);
         }}
         placeholder={"We are currently investigating this issue."}
-        overrides={{
-          InputContainer: {
-            style: ({ $isFocused }) => ({
-              backgroundColor: "white ",
-              // borderColor: $isFocused ? "#1858CE" : "red",
-              // border: "1px solid #E6E6E9",
-            }),
-            props: {
-              overrides: {
-                Root: {
-                  style: {
-                    borderRadius: "8px",
-                  },
-                },
-              },
-            },
+        className={css({
+          resize: "none",
+          width: "100%",
+          height: "96px",
+          font: "inherit",
+          borderRadius: "8px",
+          backgroundColor: "white",
+          borderColor: "#E6E6E9",
+          fontSize: "inhertit",
+          padding: "10px 14px 10px 14px",
+          boxSizing: "border-box",
+          borderWidth: "2px",
+          ":hover": {
+            borderColor: "#0E61F6",
           },
-          Input: {
-            style: ({ $isFocused }) => ({
-              border: $isFocused ? "1px blue" : "1px  #E6E6E9",
-            }),
+          ".focus": {
+            borderColor: "#0E61F6",
           },
-        }}
+        })}
       />
     </FormControl>
   );

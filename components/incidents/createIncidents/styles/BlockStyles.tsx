@@ -97,3 +97,18 @@ export const affectedComponenetsStyle: BlockProps = {
     },
   },
 };
+
+export const errorPageStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "80vh",
+        flexDirection: "column",
+        textAlign: "center",
+      },
+    },
+  },
+};
