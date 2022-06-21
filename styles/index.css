@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    html,
+    body {
+        padding: 0;
+        margin: 0 !important;
+        @apply text-base;
+        background-color: #F8F8FA;
+    }
+
+    @font-face{
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    }
+
+    * {
+    box-sizing: border-box;
+    margin: 0ch;
+    }
+
+}
+
+@layer components {
+    .header{
+        @apply text-3xl;
+        @apply font-extrabold;
+    }
+
+    .link{
+        @apply underline;
+        @apply my-2;
+        @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+    }
+}
