@@ -17,6 +17,7 @@ import { ImageProps, statusComponentProps } from "./../../../variableTypes";
 import { componentStyle } from "./styles/BlockStyles";
 import { checkBoxStyles } from "./styles/CheckBoxStyles";
 import { selectOptionStyle } from "./styles/SelectStyles";
+import { popoverMessageStyle } from "./styles/PopoverStyles";
 
 function Image(props: ImageProps) {
   return (
@@ -70,6 +71,7 @@ export const SelectStatusComponent = React.memo(
           </Checkbox>
 
           <StatefulPopover
+            {...popoverMessageStyle}
             content={
               <ParagraphSmall padding="scale500">
                 Select Component to enable options

@@ -13,5 +13,11 @@ export const selectOptionStyle: SelectProps = {
         width: "300px",
       },
     },
+    ControlContainer: {
+      style: {
+        backgroundColor: "white",
+        borderRadius: "8px",
+      },
+    },
   },
 };

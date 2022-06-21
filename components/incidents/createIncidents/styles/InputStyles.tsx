@@ -1,22 +1,20 @@
 import { InputProps } from "baseui/input";
 
-export const inputBorder: InputProps = {
+const name = ".hover";
+
+export const inputNameStyle: InputProps = {
   overrides: {
     Root: {
-      style: ({ $theme, $isFocused }) => ({
-        borderLeftColor: $isFocused
-          ? $theme.colors.borderSelected
-          : $theme.colors.borderOpaque,
-        borderRightColor: $isFocused
-          ? $theme.colors.borderSelected
-          : $theme.colors.borderOpaque,
-        borderTopColor: $isFocused
-          ? $theme.colors.borderSelected
-          : $theme.colors.borderOpaque,
-        borderBottomColor: $isFocused
-          ? $theme.colors.borderSelected
-          : $theme.colors.borderOpaque,
+      style: ({ $isFocused }) => ({
+        borderRadius: "8px",
+        borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
+        ":hover": {
+          borderColor: "#0E61F6",
+        },
       }),
+    },
+    InputContainer: {
+      style: { backgroundColor: "white" },
     },
   },
 };
