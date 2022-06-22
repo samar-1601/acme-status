@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 import styles from "./styles.module.css";
 import { Tabs, Tab } from "baseui/tabs-motion";
@@ -26,40 +26,40 @@ const headerBarBackIcon: BlockProps = {
 export const Header = function () {
   return (
     <div className={styles.header}>
-      
-      <div className={styles.heading}>        
+      <div className={styles.heading}>
         <div>
           <Block {...headerBarBackIcon}>
-          <Avatar
-            name="Back"
-            size="scale900"
-            src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
-          />
+            <Avatar
+              name="Back"
+              size="scale900"
+              src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
+            />
           </Block>
         </div>
-        <div>Components</div>
+        <div className="header">Components</div>
       </div>
       <div>
-        <Button 
+        <Button
           size={SIZE.compact}
-          overrides ={{
-            BaseButton : {
-              style : {
+          overrides={{
+            BaseButton: {
+              style: {
                 backgroundColor: "blue",
                 alignSelf: "right",
                 justifyContent: "right",
               },
-              props : {
-                className: "add-button"
-              }
-            }
+              props: {
+                className: "add-button",
+              },
+            },
           }}
-          onClick = {() => Router.push("/component/new")}  
-          >Add Component
+          onClick={() => Router.push("/component/new")}
+        >
+          Add Component
         </Button>
       </div>
     </div>
-  )
+  );
 };
 
 export const NavigationBar = function () {
