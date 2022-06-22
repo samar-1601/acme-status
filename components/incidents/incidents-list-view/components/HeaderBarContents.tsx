@@ -36,7 +36,10 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
         </Block>
         <Block
           className="secondary-button"
-          onClick={() => signOut()}
+          onClick={() => {
+            localStorage.removeItem("loadingCount");
+            signOut();
+          }}
           {...signOutButton}
         >
           Sign Out
