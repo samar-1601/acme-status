@@ -28,7 +28,7 @@ export const signInButton: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
       (event.currentTarget as HTMLElement).style.backgroundColor = "white";
-      (event.currentTarget as HTMLElement).style.color = "black";
+      (event.currentTarget as HTMLElement).style.color = "rgb(20,47,93)";
     }
   },
   onMouseLeave: (event) => {
@@ -107,7 +107,7 @@ export const headerImageWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        borderRadius: "8px",
+        // borderRadius: "8px",
       },
     },
   },
