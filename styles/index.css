@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 
 @layer base {
@@ -10,11 +13,7 @@
         margin: 0 !important;
         @apply text-base;
         background-color: #F8F8FA;
-    }
-
-    @font-face{
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+       
     }
 
     * {
@@ -25,14 +24,24 @@
 }
 
 @layer components {
+    /*to be used for heading */
     .header{
         @apply text-3xl;
-        @apply font-extrabold;
+        @apply font-black;
     }
 
+    /*to be used to link or url*/
     .link{
         @apply underline;
         @apply my-2;
         @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+    }
+
+    /**/
+    .primary-button{
+        backgroundColor: "#0E61F6",
+        borderRadius: "8px",
+        border: "2px solid #E6E6E9",
+        :hover: bg-primary-hover
     }
 }
