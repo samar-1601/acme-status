@@ -57,15 +57,15 @@ const LoginProvidersList: React.FC = () => {
       </Head>
       <Block {...loginListView}>
         {providers.map(({ name, Icon }) => (
-          <Block key={name} {...loginListItem}>
+          <Block
+            key={name}
+            {...loginListItem}
+            onClick={handleOAuthSignIn(name)}
+          >
             <Icon size={32} color="grey">
               {Icon}
             </Icon>
-            <Block
-              {...loginProviderName}
-              key={name}
-              onClick={handleOAuthSignIn(name)}
-            >
+            <Block {...loginProviderName} key={name}>
               Sign in with {name}
             </Block>
           </Block>
