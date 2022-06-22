@@ -37,11 +37,33 @@
         @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
     }
 
-    /**/
+    /*to be used for primary button*/
     .primary-button{
-        backgroundColor: "#0E61F6",
-        borderRadius: "8px",
-        border: "2px solid #E6E6E9",
-        :hover: bg-primary-hover
+        @apply bg-primary-not-hover;
+        @apply rounded-lg;
+        @apply hover:bg-primary-hover;
+        @apply text-white;
+        @apply cursor-pointer;
+        @apply flex justify-center items-center;
+    }
+
+    /*to be used for secondary button*/
+    .secondary-button{
+        @apply bg-secondary-not-hover;
+        @apply rounded-lg;
+        @apply hover:bg-secondary-hover;
+        @apply text-black;
+        @apply cursor-pointer;
+        @apply border-2;
+        @apply border-border-color;
+        @apply flex justify-center items-center;
+    }
+
+    /*to be used for applying footer bar in form*/
+    .footer-bar{
+        @apply fixed left-0 bottom-0;
+        @apply bg-white;
+        @apply h-footer-height w-full pr-4;
+
     }
 }
