@@ -9,8 +9,16 @@ import {
   rowContent,
   headerStyle,
 } from "./welcomePageStyles";
-import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { text } from "stream/consumers";
+import {
+  welcomeHeaderTextWrapper,
+  welcomeHeaderBigText,
+  welcomeHeaderMediumText,
+  signInButton,
+  welcomeHeaderSiteName,
+  welcomeHeaderSecondHalfStyle,
+  welcomeHeaderWrapper,
+} from "./welcomePageStyles";
 
 {
   /* <Block {...loginListItem} onClick={() => signIn()}> */
@@ -22,6 +30,28 @@ const WelcomePage: React.FC = () => {
         <title>Status App</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
+      <Block {...welcomeHeaderWrapper}>
+        {/* samar */}
+        <Block {...welcomeHeaderSiteName}>statusapp</Block>
+        <Block {...welcomeHeaderSecondHalfStyle}>
+          <Block {...welcomeHeaderTextWrapper}>
+            <Block {...welcomeHeaderBigText}>
+              You run your websites <br /> We will handle your tech-management
+            </Block>
+            <Block {...welcomeHeaderMediumText}>
+              We build a developer-platforms for company's internal team to
+              handle incidents and client-side platforms to keep customers
+              informed about the app's status.
+            </Block>
+            <Block {...signInButton} onClick={() => signIn()}>
+              SignIn
+            </Block>
+          </Block>
+          <Block>
+            <Image src="/headerImage.png" height={300} width={570}></Image>
+          </Block>
+        </Block>
+      </Block>
       <Block {...contentBlock}>
         {/*souvik*/}
         <Block
