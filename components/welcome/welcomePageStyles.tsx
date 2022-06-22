@@ -1,39 +1,47 @@
-// component prop type
 import { BlockProps } from "baseui/block";
 
-export const incidentsListView: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        width: "80%",
-        fontFamily: "'Lato', sans-serif",
-        margin: "auto",
-      },
-    },
-  },
+export const contentBlock: BlockProps = {
+  display: "flex",
+  flexDirection: "column",
+  // justifyContent: "center",
+  // alignItems: "center",
+  backgroundColor: "white",
+
+  // color: "white",
 };
 
-export const signOutButton: BlockProps = {
-  onMouseEnter: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
-    }
-  },
-  onMouseLeave: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "white";
-    }
-  },
+export const imageProps: BlockProps = {
+  width: "600px",
+  alignSelf: "center",
   overrides: {
     Block: {
       style: {
-        borderRadius: "4px",
-        padding: "10px 25px",
-        backgroundColor: "white",
-        border: "1px solid #E6E6E9",
-        cursor: "pointer",
-        display: "inline",
+        objectFit: "contain",
       },
     },
   },
+  height: "250px",
+};
+
+export const textProps: BlockProps = {
+  alignSelf: "center",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "400px",
+  position: "relative",
+};
+
+export const rowContent: BlockProps = {
+  display: "flex",
+  justifyContent: "space-around",
+  marginTop: "25px",
+  marginBottom: "25px",
+  paddingLeft: "15px",
+  paddingRight: "15px",
+  // font: "16px",
+  flexWrap: true,
+};
+
+export const headerStyle: BlockProps = {
+  margin: "10px",
 };
