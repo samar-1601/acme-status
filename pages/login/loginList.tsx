@@ -6,9 +6,14 @@ import { useRouter } from "next/router";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
+import Head from "next/head";
 
 // styles
-import { loginListItem, loginListView, loginProviderName } from "../../styles/loginStyles";
+import {
+  loginListItem,
+  loginListView,
+  loginProviderName,
+} from "../../styles/loginStyles";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 
 /**
@@ -45,22 +50,28 @@ const LoginProvidersList: React.FC = () => {
   const handleOAuthSignIn = (provider: any) => () => signIn(provider);
 
   return (
-    <Block {...loginListView}>
-      {providers.map(({ name, Icon }) => (
-        <Block key={name} {...loginListItem}>
-          <Icon size={32} color="grey">
-            {Icon}
-          </Icon>
-          <Block
-            {...loginProviderName}
-            key={name}
-            onClick={handleOAuthSignIn(name)}
-          >
-            Sign in with {name}
+    <>
+      <Head>
+        <title>Status App</title>
+        <link rel="icon" href="/Status_icon.png" />
+      </Head>
+      <Block {...loginListView}>
+        {providers.map(({ name, Icon }) => (
+          <Block key={name} {...loginListItem}>
+            <Icon size={32} color="grey">
+              {Icon}
+            </Icon>
+            <Block
+              {...loginProviderName}
+              key={name}
+              onClick={handleOAuthSignIn(name)}
+            >
+              Sign in with {name}
+            </Block>
           </Block>
-        </Block>
-      ))}
-    </Block>
+        ))}
+      </Block>
+    </>
   );
 };
 

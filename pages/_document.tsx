@@ -1,5 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps } from "next/document";
-import { Head, Main, NextScript, Html } from "next/document";
+import { Head, Main, NextScript, Html} from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -48,7 +48,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
           />
-
           <style dangerouslySetInnerHTML={{ __html: sheet.collectStyles }} />
         </Head>
         <body>
