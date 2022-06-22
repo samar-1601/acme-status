@@ -26,10 +26,12 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
     return (
       <Block {...headerBar}>
         <Block {...headerBarLeftWrapper}>
-            <Block {...headerBarBackIcon} className="material-symbols-outlined">
-              arrow_back
-            </Block>
-          <Block {...headerBarText}>{headerText}</Block>
+          <Block {...headerBarBackIcon} className="material-symbols-outlined">
+            arrow_back
+          </Block>
+          <Block {...headerBarText}>
+            <h1 className="header">{headerText}</h1>
+          </Block>
         </Block>
         <Block onClick={() => signOut()} {...signOutButton}>
           Sign Out

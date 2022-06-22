@@ -25,7 +25,6 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "80%",
-        fontFamily: "'Lato', sans-serif",
         margin: "auto",
       },
     },
