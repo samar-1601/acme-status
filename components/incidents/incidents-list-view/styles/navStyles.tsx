@@ -19,6 +19,7 @@ export const content: BlockProps = {
         position: "relative",
         marginTop: "10px",
         width: "100%",
+        margin: "10px 10px 0px 0px",
       },
     },
   },
@@ -66,8 +67,8 @@ export const headerBarBackIcon: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
       (event.target as HTMLElement).style.backgroundColor = "white";
-      (event.target as HTMLElement).style.boxShadow = "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
-
+      (event.target as HTMLElement).style.boxShadow =
+        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
     }
   },
   onMouseLeave: (event) => {
@@ -120,8 +121,6 @@ export const divInsideNav: BlockProps = {
       style: {
         cursor: "pointer",
         marginRight: "20px",
-        marginLeft: "1px",
-        paddingBottom: "6px",
       },
     },
   },
@@ -142,7 +141,7 @@ export const createIncidentButton: BlockProps = {
       style: {
         alignSelf: "flex-end",
         borderRadius: "4px",
-        marginBottom: "6px",
+        marginBottom: "8px",
         padding: "10px",
         color: "white",
         backgroundColor: "#0E61F6",
@@ -158,7 +157,7 @@ export const navActiveItem = {
   fontWeight: "600",
   paddingRight: "14px",
   paddingLeft: "14px",
-  paddingBottom: "16.5px",
+  paddingBottom: "16px",
   textDecoration: "none",
   fontSize: "16px",
   display: "inline",
