@@ -1,6 +1,7 @@
 //lib
 import React, { useEffect, useState, useCallback } from "react";
 import { Button } from "baseui/button";
+import Link from "next/link";
 
 //components
 import { Spinner, SIZE } from "baseui/spinner";
@@ -17,7 +18,6 @@ import {
   IncidentCreationProps,
   ComponentObject,
 } from "../../../variableTypes";
-import Router from "next/router";
 import IncidentErrorPage from "./IncidentErrorPage";
 
 //styles
@@ -26,12 +26,10 @@ import {
   mainStyle,
   onLoadSpinnerStyle,
   onLoadStyle,
-} from "./styles/BlockStyles";
-import {
   cancelButtonStyle,
-  onSubmitButtonStyle,
   submitButtonStyle,
-} from "./styles/ButtonStyles";
+  onSubmitButtonStyle,
+} from "./styles/BlockStyles";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -208,25 +206,21 @@ export default function IncidentForm(props: IncidentCreationProps) {
           <>
             <Block {...mainStyle}>
               {formConstant}
-              <Block {...buttonAlignment}>
-                <Button
+              <Block {...buttonAlignment} className="footer-bar">
+                <Block
+                  className="primary-button"
                   onClick={() => {
                     submitForm();
-                    // dequeue();
                   }}
                   {...submitButtonStyle}
                 >
                   {props.type}
-                </Button>
-                <Button
-                  onClick={() => {
-                    Router.push("/incidents");
-                    // dequeue();
-                  }}
-                  {...cancelButtonStyle}
-                >
-                  Cancel
-                </Button>
+                </Block>
+                <Link href={{ pathname: "/incidents" }}>
+                  <Block className="secondary-button" {...cancelButtonStyle}>
+                    Cancel
+                  </Block>
+                </Link>
               </Block>
             </Block>
           </>
@@ -251,24 +245,21 @@ export default function IncidentForm(props: IncidentCreationProps) {
         <>
           <Block {...mainStyle}>
             {formConstant}
-            <Block {...buttonAlignment}>
-              <Button
-                isLoading
+            <Block {...buttonAlignment} className="footer-bar">
+              <Block
+                className="primary-button"
                 onClick={() => {
                   submitForm();
                 }}
                 {...onSubmitButtonStyle}
               >
-                {props.type}
-              </Button>
-              <Button
-                onClick={() => {
-                  Router.push("/incidents");
-                }}
-                {...cancelButtonStyle}
-              >
-                Cancel
-              </Button>
+                <Spinner $size={SIZE.small} />
+              </Block>
+              <Link href={{ pathname: "/incidents" }}>
+                <Block className="secondary-button" {...cancelButtonStyle}>
+                  Cancel
+                </Block>
+              </Link>
             </Block>
           </Block>
         </>

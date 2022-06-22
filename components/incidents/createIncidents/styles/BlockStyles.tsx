@@ -8,8 +8,6 @@ export const mainStyle: BlockProps = {
         flexDirection: "column",
         paddingLeft: "20%",
         paddingRight: "20%",
-        // fontFamily: "Arial, Helvetica, sans-serif",
-        className: "font-Lato",
       },
     },
   },
@@ -21,13 +19,13 @@ export const buttonAlignment: BlockProps = {
       style: {
         display: "flex",
         flexDirection: "row-reverse",
-        position: "fixed",
-        left: "0",
-        bottom: "0",
-        width: "100%",
-        height: "7%",
+        // position: "fixed",
+        // left: "0",
+        // bottom: "0",
+        // width: "100%",
+        // height: "7%",
         paddingBottom: "20px",
-        backgroundColor: "white",
+        // backgroundColor: "white",
         alignItems: "center",
       },
     },
@@ -100,6 +98,44 @@ export const errorPageStyle: BlockProps = {
         flexDirection: "column",
         textAlign: "center",
       },
+    },
+  },
+};
+
+export const cancelButtonStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: () => ({
+        width: "92px",
+        height: "34px",
+        alignSelf: "end",
+        marginRight: "16px",
+      }),
+    },
+  },
+};
+
+export const submitButtonStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: () => ({
+        width: "92px",
+        alignSelf: "end",
+        height: "34px",
+      }),
+    },
+  },
+};
+
+export const onSubmitButtonStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: () => ({
+        width: "92px",
+        alignSelf: "end",
+        height: "34px",
+        cursor: "not-allowed",
+      }),
     },
   },
 };
