@@ -38,11 +38,8 @@ const LoginProvidersList: React.FC = () => {
     );
 
   if (session) {
-    setTimeout(() => {
-      push("/");
-    }, 3000);
-
-    return <Block>You are already Signed In !!</Block>;
+    push("/");
+    console.log("already signed in");
   }
 
   const handleOAuthSignIn = (provider: any) => () => signIn(provider);

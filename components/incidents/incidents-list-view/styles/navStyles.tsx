@@ -18,7 +18,7 @@ export const content: BlockProps = {
       style: {
         position: "relative",
         width: "100%",
-        margin: "10px 2px"
+        margin: "10px 1px"
       },
     },
   },
