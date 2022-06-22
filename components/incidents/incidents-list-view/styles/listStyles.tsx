@@ -12,7 +12,7 @@ export const listItem: BlockProps = {
         justifyContent: "space-between",
         padding: "20px 30px 15px 30px",
         backgroundColor: "white",
-        margin: "10px 8px 20px 8px",
+        margin: "10px 8px 20px 4px",
         borderTop: "4px rgb(243, 214, 54) solid",
         boxShadow:
           "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
