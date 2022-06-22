@@ -127,26 +127,12 @@ export const divInsideNav: BlockProps = {
   },
 };
 export const createIncidentButton: BlockProps = {
-  onMouseEnter: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "#1858CE";
-    }
-  },
-  onMouseLeave: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "#0E61F6";
-    }
-  },
   overrides: {
     Block: {
       style: {
         alignSelf: "flex-end",
-        borderRadius: "4px",
         marginBottom: "8px",
         padding: "10px",
-        color: "white",
-        backgroundColor: "#0E61F6",
-        cursor: "pointer",
       },
     },
   },

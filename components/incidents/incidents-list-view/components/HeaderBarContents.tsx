@@ -33,7 +33,11 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
             <h1 className="header">{headerText}</h1>
           </Block>
         </Block>
-        <Block onClick={() => signOut()} {...signOutButton}>
+        <Block
+          className="secondary-button"
+          onClick={() => signOut()}
+          {...signOutButton}
+        >
           Sign Out
         </Block>
       </Block>

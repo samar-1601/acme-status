@@ -123,7 +123,9 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
           pathname: `/incident/update/${incident["id"]}`, // send the incident ID to the update page address
         }}
       >
-        <Block {...editIncidentButton}>Edit</Block>
+        <Block {...editIncidentButton} className="secondary-button">
+          Edit
+        </Block>
       </Link>
     </Block>
   );
