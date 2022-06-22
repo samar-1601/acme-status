@@ -52,6 +52,7 @@
     "react-virtualized": "^9.21.1",
     "react-window": "^1.8.7",
     "react-window-infinite-loader": "^1.0.8",
+    "styled-components": "^5.3.5",
     "styletron-engine-atomic": "^1.4.8",
     "styletron-react": "^6.0.2",
     "ts-jest": "^27.0.7",

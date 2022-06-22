@@ -5,9 +5,8 @@ import Router from "next/router";
 import { Avatar } from "baseui/avatar";
 import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
-import IncidentsHome from "../components/IncidentsHome";
 import { useSession } from "next-auth/react";
-import LoginPage from "./WelcomePage";
+import WelcomePage from "../components/welcome/WelcomePage";
 
 const Home = () => {
   const { data: session, status } = useSession();
@@ -19,12 +18,12 @@ const Home = () => {
     );
   }
   if (!session) {
-    return <LoginPage />;
+    return <WelcomePage />;
   }
   return (
     <>
       <Head>
-        <title>Sprinklr Status App</title>
+        <title>Status App</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -45,8 +44,7 @@ const Home = () => {
                 justifyContent: "space-around",
                 backgroundColor: "rgb(1,73,176)",
                 width: "50vh",
-                margin: "auto",
-                marginTop: "20vh",
+                margin: "20vh auto",
                 borderRadius: "30px",
                 boxShadow: "0 0 40px 	#A9A9A9",
               },

@@ -14,7 +14,7 @@ const AddComponents: React.FC = () => {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated: () => {
-      push("/loginList");
+      push("/login/loginList");
     },
   });
 

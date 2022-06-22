@@ -17,9 +17,8 @@ export const content: BlockProps = {
     Block: {
       style: {
         position: "relative",
-        marginTop: "10px",
         width: "100%",
-        margin: "10px 10px 0px 0px",
+        margin: "10px 1px"
       },
     },
   },
@@ -68,8 +67,8 @@ export const headerBarBackIcon: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
       (event.target as HTMLElement).style.backgroundColor = "white";
-      (event.target as HTMLElement).style.boxShadow =
-        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
+      (event.target as HTMLElement).style.boxShadow = "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
+
     }
   },
   onMouseLeave: (event) => {
@@ -84,7 +83,6 @@ export const headerBarBackIcon: BlockProps = {
         cursor: "pointer",
         borderRadius: "6000px",
         backgroundColor: "#F8F8FA",
-        padding: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

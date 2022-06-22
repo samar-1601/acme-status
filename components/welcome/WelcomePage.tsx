@@ -1,11 +1,8 @@
 import { Block } from "baseui/block";
 import { signIn } from "next-auth/react";
-import {
-  loginListItem,
-  loginListView,
-} from "../styles/loginStyles";
+import { loginListItem, loginListView } from "../../styles/loginStyles";
 
-const LoginPage: React.FC = () => {
+const WelcomePage: React.FC = () => {
   return (
     <Block {...loginListView}>
       <Block {...loginListItem} onClick={() => signIn()}>
@@ -15,4 +12,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default WelcomePage;
