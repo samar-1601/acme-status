@@ -1,6 +1,6 @@
 import { Block } from "baseui/block";
 import { signIn } from "next-auth/react";
-import { loginListItem, loginListView } from "../login/loginStyles";
+import { loginListItem, loginListView } from "../../styles/loginStyles";
 
 const WelcomePage: React.FC = () => {
   return (

@@ -5,8 +5,8 @@ import Router from "next/router";
 import { Avatar } from "baseui/avatar";
 import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
- import { useSession } from "next-auth/react";
-import WelcomePage from "./welcome/WelcomePage";
+import { useSession } from "next-auth/react";
+import WelcomePage from "../components/welcome/WelcomePage";
 
 const Home = () => {
   const { data: session, status } = useSession();
