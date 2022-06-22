@@ -18,7 +18,7 @@ export const content: BlockProps = {
       style: {
         position: "relative",
         width: "100%",
-        margin: "10px 1px"
+        margin: "10px 1px",
       },
     },
   },
@@ -67,8 +67,8 @@ export const headerBarBackIcon: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
       (event.target as HTMLElement).style.backgroundColor = "white";
-      (event.target as HTMLElement).style.boxShadow = "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
-
+      (event.target as HTMLElement).style.boxShadow =
+        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
     }
   },
   onMouseLeave: (event) => {
