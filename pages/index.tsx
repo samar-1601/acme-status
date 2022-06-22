@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Sprinklr Status App</title>
+        <title>Status App</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

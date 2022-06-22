@@ -82,7 +82,6 @@ export const headerBarBackIcon: BlockProps = {
         cursor: "pointer",
         borderRadius: "6000px",
         backgroundColor: "#F8F8FA",
-        padding: "10px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
