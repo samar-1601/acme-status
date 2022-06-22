@@ -24,17 +24,7 @@ const IncidentsHome = () => {
         />
         <title>Incidents List</title>
       </Head>
-      <Block
-      overrides={{
-        Block:{
-          style:{
-            backgroundColor: "#F8F8FA",
-          }
-        }
-      }}
-      >
-        <HomePage />
-      </Block>
+      <HomePage />
     </>
   );
 };
