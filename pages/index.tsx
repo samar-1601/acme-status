@@ -7,8 +7,11 @@ import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import { useSession } from "next-auth/react";
 import WelcomePage from "../components/welcome/WelcomePage";
+import { DURATION, useSnackbar } from "baseui/snackbar";
 
 const Home = () => {
+  const { enqueue, dequeue } = useSnackbar();
+
   const { data: session, status } = useSession();
   if (status === "loading") {
     return (
@@ -20,6 +23,13 @@ const Home = () => {
   if (!session) {
     return <WelcomePage />;
   }
+  // dequeue();
+  // enqueue(
+  //   {
+  //     message: "Login Successful!",
+  //   },
+  //   DURATION.long
+  // );
   return (
     <>
       <Head>

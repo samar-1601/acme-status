@@ -1,5 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps } from "next/document";
-import { Head, Main, NextScript } from "next/document";
+import { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
   render() {
     const sheet = new ServerStyleSheet();
     return (
-      <html>
+      <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -48,7 +48,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
           />
-          <title>Status App</title>
 
           <style dangerouslySetInnerHTML={{ __html: sheet.collectStyles }} />
         </Head>
@@ -56,7 +55,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
