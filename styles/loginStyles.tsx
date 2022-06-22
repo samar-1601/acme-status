@@ -19,12 +19,12 @@ export const loginListView: BlockProps = {
 export const loginListItem: BlockProps = {
   onMouseEnter: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
+      (event.currentTarget as HTMLElement).style.backgroundColor = "#F8F8FA";
     }
   },
   onMouseLeave: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "white";
+      (event.currentTarget as HTMLElement).style.backgroundColor = "white";
     }
   },
   overrides: {
@@ -32,7 +32,7 @@ export const loginListItem: BlockProps = {
       style: {
         backgroundColor: "white",
         minWidth: "300px",
-        border: "1px solid #E6E6E9",
+        border: "2px solid #E6E6E9",
         cursor: "pointer",
         display: "flex",
         justifyContent: "space-around",

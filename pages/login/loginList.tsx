@@ -8,7 +8,11 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // styles
-import { loginListItem, loginListView, loginProviderName } from "../../styles/loginStyles";
+import {
+  loginListItem,
+  loginListView,
+  loginProviderName,
+} from "../../styles/loginStyles";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 
 /**
