@@ -37,7 +37,7 @@ const AddComponents: React.FC = () => {
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block className={styles.page}>
-          <ComponentCreationForm />
+          <ComponentCreationForm id="" />
         </Block>
       </PageSlot.Slot>
     </PageSlot>
