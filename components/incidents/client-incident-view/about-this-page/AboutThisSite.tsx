@@ -35,28 +35,26 @@ export const AboutThisSite = React.memo(() => {
    * helper function to load the components list by calling API functions
    */
   const loadComponentsList = useCallback(async () => {
-    const componentList = await getComponents(); // get components from API
-    const components = await renderComponents(componentList); // get formatted list ready to render from the API
-    setState({ ...state, componentsList: components, isLoaded: true }); // set the componentsList to returned render ready list and isLoaded to true
+    try {
+      let componentList = [];
+      componentList = await getComponents(); // get components from API
+      let components = [];
+      components = await renderComponents(componentList); // get formatted list ready to render from the API
+
+      setState({ ...state, componentsList: components, isLoaded: true }); // set the componentsList to returned render ready list and isLoaded to true
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   useEffect(() => {
     loadComponentsList();
   }, []);
 
-  /**
-   * if (value < 20) return "rgb(179, 186, 197)"; // grey
-  if (value < 60) return "#2fcc66"; //green
-  if (value < 65) return "#f1c40f"; // yellow
-
-  return "#e74c3c"; // red
-   */
   return state.isLoaded ? (
     // render components if data has loaded
     <>
-      <Block
-        {...legendBoxWrapperStyle}
-      >
+      <Block {...legendBoxWrapperStyle}>
         <Block
           {...legendBoxStyle}
           backgroundColor={legendColorDeterminer(

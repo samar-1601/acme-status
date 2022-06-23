@@ -45,17 +45,22 @@ export const PastIncidents: React.FC = React.memo(() => {
    * @returns a JSX componentList ready to render after styling the API response
    */
   const loadComponentsList = useCallback(async () => {
-    const components = await getCompletedIncidents();
+    let components = [];
+    try {
+      components = await getCompletedIncidents();
 
-    /**
-     * isLoaded : To notify the loading spinner whether data has loaded
-     * pastIncidentsList : List storing the JSX components to render when data has loaded.
-     */
-    setState({
-      ...state,
-      pastIncidentsList: GetPastIncidentComponents(components),
-      isLoaded: true,
-    });
+      /**
+       * isLoaded : To notify the loading spinner whether data has loaded
+       * pastIncidentsList : List storing the JSX components to render when data has loaded.
+       */
+      setState({
+        ...state,
+        pastIncidentsList: GetPastIncidentComponents(components),
+        isLoaded: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   // Load data for the when the page loads for the first time
