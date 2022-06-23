@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 import { Spinner } from "baseui/spinner";
+import { PageSlot } from "../../components/PageSlot/PageSlot";
+import SideBar from "../../components/SideBar/SideBar";
 
 export default () => {
   const { push } = useRouter();
@@ -26,8 +28,13 @@ export default () => {
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
   return (
-    <Block>
-      <IncidentCreation />
-    </Block>
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <IncidentCreation />
+      </PageSlot.Slot>
+    </PageSlot>
   );
 };

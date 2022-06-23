@@ -6,6 +6,8 @@ import { Block } from "baseui/block";
 import styles from "../../components/component/styles.module.css";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 import { Spinner } from "baseui/spinner";
+import { PageSlot } from "../../components/PageSlot/PageSlot";
+import SideBar from "../../components/SideBar/SideBar";
 
 const components: React.FC = () => {
   const { push } = useRouter();
@@ -26,11 +28,19 @@ const components: React.FC = () => {
 
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
+
   return (
-    <div className={styles.page}>
-      <Header />
-      <NavigationBar />
-    </div>
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <div className={styles.page}>
+          <Header />
+          <NavigationBar />
+        </div>
+      </PageSlot.Slot>
+    </PageSlot>
   );
 };
 

@@ -5,6 +5,8 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
+import { PageSlot } from "../components/PageSlot/PageSlot";
+import SideBar from "../components/SideBar/SideBar";
 
 export default () => {
   const { push } = useRouter();
@@ -26,5 +28,14 @@ export default () => {
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
 
-  return <IncidentsHome />;
+  return (
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <IncidentsHome />
+      </PageSlot.Slot>
+    </PageSlot>
+  );
 };

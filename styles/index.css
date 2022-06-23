@@ -65,4 +65,9 @@
         @apply h-footer-height w-full pr-4;
 
     }
+
+    .sideBarOption{
+        @apply hover:bg-secondary-hover;
+        @apply cursor-pointer;
+    }
 }

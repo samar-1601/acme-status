@@ -5,6 +5,8 @@ import UpdateIncident from "../../../components/incidents/updateIncidents/update
 import { useSession } from "next-auth/react";
 import { hasListLoadedStyle } from "../../../components/incidents/incidents-list-view/styles/listStyles";
 import { Spinner } from "baseui/spinner";
+import { PageSlot } from "../../../components/PageSlot/PageSlot";
+import SideBar from "../../../components/SideBar/SideBar";
 
 export default () => {
   const router = useRouter();
@@ -30,8 +32,13 @@ export default () => {
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
   return (
-    <Block>
-      <UpdateIncident incidentId={param} />
-    </Block>
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <UpdateIncident incidentId={param} />
+      </PageSlot.Slot>
+    </PageSlot>
   );
 };

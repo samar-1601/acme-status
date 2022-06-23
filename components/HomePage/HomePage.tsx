@@ -4,6 +4,9 @@ import Router from "next/router";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { useEffect } from "react";
 import Image from "next/image";
+import { PageSlot } from "../PageSlot/PageSlot";
+import IncidentsHome from "../IncidentsHome";
+import SideBar from "../SideBar/SideBar";
 
 const LandingPage = () => {
   const { enqueue, dequeue } = useSnackbar();
@@ -15,72 +18,14 @@ const LandingPage = () => {
     }
   }, []);
   return (
-    <main>
-      <Block
-        overrides={{
-          Block: {
-            style: {
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-around",
-              backgroundColor: "rgb(1,73,176)",
-              width: "50vh",
-              margin: "20vh auto",
-              borderRadius: "30px",
-              boxShadow: "0 0 40px 	#A9A9A9",
-            },
-          },
-        }}
-      >
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                fontFamily: "Arial, Helvetica, sans-serif",
-                color: "white",
-                fontWeight: 900,
-                fontSize: "32px",
-                padding: "50px",
-              },
-            },
-          }}
-        >
-          <Image src="/Status_icon.png" height="40px" width="52px" />
-          StatusPage
-        </Block>
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                paddingBottom: "50px",
-              },
-            },
-          }}
-        >
-          <StatefulMenu
-            items={[
-              { label: "Go to Incidents Home Page", url: "/incidents" },
-              { label: "Go to Components Home Page", url: "/component" },
-              {
-                label: "Go to Client Incidents Page",
-                url: "https://client-incident-list-view.netlify.app/",
-              },
-            ]}
-            onItemSelect={(item) => {
-              if (
-                item.item.url ==
-                "https://client-incident-list-view.netlify.app/"
-              ) {
-                window.open(item.item.url, "_blank");
-              } else Router.push(item.item.url);
-            }}
-          />
-        </Block>
-      </Block>
-    </main>
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <IncidentsHome />
+      </PageSlot.Slot>
+    </PageSlot>
   );
 };
 

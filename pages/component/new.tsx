@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
+import { PageSlot } from "../../components/PageSlot/PageSlot";
+import SideBar from "../../components/SideBar/SideBar";
 
 const AddComponents: React.FC = () => {
   const { push } = useRouter();
@@ -29,9 +31,16 @@ const AddComponents: React.FC = () => {
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
   return (
-    <div className={styles.page}>
-      <ComponentCreationForm />
-    </div>
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <Block className={styles.page}>
+          <ComponentCreationForm />
+        </Block>
+      </PageSlot.Slot>
+    </PageSlot>
   );
 };
 
