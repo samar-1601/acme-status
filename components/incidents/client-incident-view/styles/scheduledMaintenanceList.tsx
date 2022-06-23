@@ -8,7 +8,7 @@ export const maintenanceListItem: BlockProps = {
         display: "flex",
         flexDirection: "column",
         gap: "10px",
-        margin: "10px 15px",
+        margin: "10px 15px 10px 0px",
       },
     },
   },

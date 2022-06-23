@@ -12,7 +12,6 @@ export const listItem: BlockProps = {
         gap: "10px",
         marginBottom : "30px",
         marginRight: "10px",
-        marginLeft: "10px",
       },
     },
   },
