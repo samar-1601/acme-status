@@ -1,11 +1,19 @@
 import * as React from "react";
+
 import { ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
 
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { Button, SIZE } from "baseui/button";
 import { Spinner } from "baseui/spinner";
 import { Avatar } from "baseui/avatar";
 import styles from "./styles.module.css"
 
+import Link from "next/link";
+
+import { useRouter } from "next/router";
+
 export const ComponentList = function () {
+  const router = useRouter()
   const [dataList, setDataList] = React.useState([]);
   const [loaded, setLoaded] = React.useState(false);
   
@@ -36,29 +44,65 @@ export const ComponentList = function () {
     },[]);
 
     let details: any;
-    if(msg) details = (<><span className={styles.itemName}>{props.comp.name}</span><br />
-                        <span className={styles.itemDescription}>{msg}</span></>);
-    else  details = <Spinner />
+    details = (<>
+                <span className={styles.itemName}>{props.comp.name}</span><br />
+                <span className={styles.itemDescription}>{msg}</span>
+              </>);
 
     return (
-      <div className={styles.listItem}>
-        <div>
-          <Avatar 
-            name = {props.comp.status}
-            src = {ICON_URL[props.comp.status]}
-            size="scale600"
-            overrides = {{
-              Root: {
-                style: {
-                  paddingTop: "9px",
-                  paddingRight: "8px"
+      <div className={styles.element}>
+        <div className={styles.listItem}>
+          <StatefulPopover
+            content={<>{props.comp.status}</>}
+            accessibilityType={'tooltip'}
+            triggerType={TRIGGER_TYPE.hover}
+          >
+          <span>
+            <Avatar 
+              name = {props.comp.status}
+              src = {ICON_URL[props.comp.status]}
+              size="scale600"
+              overrides = {{
+                Root: {
+                  style: {
+                    paddingTop: "9px",
+                    paddingRight: "8px",
+                  }
                 }
-              }
+              }}
+            >
+            </Avatar>
+          </span>
+          </StatefulPopover>
+          <div>{details}</div>
+        </div>
+        <div>
+          <Link
+            href={{
+              pathname: `/component/edit`,
+              query: {id: props.comp.id}
             }}
           >
-          </Avatar>
+            <Button 
+              size={SIZE.compact}
+              overrides ={{
+                BaseButton : {
+                  style : {
+                    backgroundColor: "white",
+                    color: "black",
+                    alignSelf: "right",
+                    justifyContent: "right",
+                    borderBlock: "#E6E6E9"
+                  },
+                  props : {
+                    className: "add-button"
+                  }
+                }
+              }} 
+              >Edit
+            </Button>
+          </Link>
         </div>
-        <div>{details}</div>
       </div>)
   };
 
@@ -93,5 +137,5 @@ export const ComponentList = function () {
   },[]);
 
   if(loaded)  return <GenerateList dataList={dataList} />;
-  else return <Spinner />;
+  else return <div className={styles.loader}><Spinner /></div>;
 };

@@ -8,7 +8,7 @@ class AddComponents extends React.Component {
   render() {
     return (
       <div className={styles.page}>
-        <ComponentCreationForm />
+        <ComponentCreationForm id=""/>
       </div>
     );
   }

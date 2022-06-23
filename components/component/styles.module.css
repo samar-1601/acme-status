@@ -9,6 +9,8 @@
   padding-top: 5px;
   font-size: 24px;
   font-weight: 400;
+  display: flex;
+  font-family: "Lato', sans-serif";
 }
 
 .listItem {
@@ -26,8 +28,24 @@
   justify-content: space-between;
 }
 
-.page {
-  width: 1000px;
-  margin: auto;
+.fullPage {
   background-color: #F8F8FA;
+}
+
+.page {
+  width: 80%;
+  margin: auto;    
+  font-family: "Lato', sans-serif";
+  background-color: white;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 300px;
+}
+
+.element {
+  display: flex;
+  justify-content: space-between;
 }

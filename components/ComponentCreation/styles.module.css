@@ -17,11 +17,16 @@
 
 .page {
     padding: 40px;
-    width: 1000px;    
+    width: 80%;    
     margin: auto;
-    background-color: #F8F8FA;
+    font-family: "Lato', sans-serif";
 }
 
 .buttons {
     float: right;
+}
+
+.form {
+    width: 70%;
+    margin: auto;
 }

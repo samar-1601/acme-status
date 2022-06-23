@@ -14,14 +14,17 @@ import { DatePicker } from "baseui/datepicker";
 
 import styles from "./styles.module.css"
 import Router from "next/router";
+import { Spinner } from "baseui/spinner";
 
-let componentName: string, componentDescription: string, componentGroup: any, startDate: Date | Date[]
+let componentName: string, componentDescription: string, componentGroup: any = {}, startDate: Date | Date[], componentStatus: any, component: any
 
-const Header = function () {
+const Header = function (props: any) {
+  let heading="Add Component";
+  if(props.id)  heading="Edit Component"
   return (
     <div className={styles.header}>
       <div className={styles.heading}>
-        Add component
+        {heading}
       </div>
       <div className={styles.goback}>
         <a href="/component">Back to components</a>
@@ -30,16 +33,15 @@ const Header = function () {
   );
 }
 
-const NameForm =  function () {
-  const [name, setName] = React.useState("");
+const NameForm =  function (props: any) {
+  componentName=props.def;
   return (
     <FormControl label="Component name">
       <Input
         id="input-id"
-        value={name}
+        value={props.def}
         onChange={event => {
-          componentName=event.currentTarget.value
-          setName(event.currentTarget.value)
+          props.setName(event.currentTarget.value)
         }}
         placeholder="Component name"
       />
@@ -47,16 +49,15 @@ const NameForm =  function () {
   );
 }
 
-const Description  = function () {
-  const [description, setDescription] = React.useState("");
+const Description  = function (props: any) {
+  componentDescription=props.def;
   return (
     <FormControl label="Description (optional)" caption="Give a helpful description of what this component does">
       <Textarea
         id="textarea-id"
-        value={description}
+        value={props.def}
         onChange={event => {
-            componentDescription=event.currentTarget.value
-            setDescription(event.currentTarget.value)
+            props.setDesc(event.currentTarget.value)
           }
         }
         placeholder="Frontend application and API servers"
@@ -65,9 +66,8 @@ const Description  = function () {
   );
 }
 
-const ComponentGroup = function () {
+const ComponentGroup = function (props: any) {
   const [groups, setGroups] = React.useState([]);
-  const [active, setActive] = React.useState<Value>([]);
 
   const getComponentGroups = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`
@@ -94,21 +94,21 @@ const ComponentGroup = function () {
   },[]);
 
   return (
-  <FormControl label="Component group">
-    <Select 
-      creatable
-      options={groups}
-      labelKey="label"
-      valueKey="id"
-      onChange={({value}) => {
-          componentGroup=value
-          setActive(value)
+    <FormControl label="Component group">
+      <Select 
+        creatable
+        options={groups}
+        labelKey="label"
+        valueKey="id"
+        onChange={({value}) => {
+            componentGroup=value
+            props.setGrp(value)
+          }
         }
-      }
-      value={active}
-      placeholder="This component does not belong to a group"
-    />
-  </FormControl>
+        value={props.def}
+        placeholder="This component does not belong to a group"
+      />
+    </FormControl>
   );
 }
 
@@ -163,9 +163,34 @@ const Uptime =  function () {
   );
 }
 
+const ComponentStatusBar = function (props: any) {
+  console.log(props.def)
+  return (
+    <FormControl label="Component Status">
+      <Select
+        options={[
+          {id: "operational", label: "Operational"},
+          {id: "degraded_performance", label: "Degraded Performance"},
+          {id: "partial_outage", label: "Partial Outage"},
+          {id: "major_outage", label: "Major Outage"},
+          {id: "under_maintenance", label: "Under Maintenance"},
+        ]}
+        labelKey="label"
+        valueKey="id"
+        onChange={({value}) => {
+          console.log(value)
+          props.setStat(value)
+        }}
+        value={props.def}
+        placeholder=""
+      />
+    </FormControl>
+  );
+}
+
 const postData = async function (url = "", data = {}) {
   const response = await fetch(url, {
-    method: 'POST', 
+    method: "POST", 
     headers: {
       "Content-Type": "application/json",
       Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
@@ -173,16 +198,71 @@ const postData = async function (url = "", data = {}) {
     body: JSON.stringify(data) 
   });
   let xjson = await response.json(); 
+  console.log(xjson)
   return xjson;
 }
 
-export const ComponentCreationForm = function () {
-  return (
-    <div>
-      <Header />
-      <NameForm />
-      <Description />
-      <ComponentGroup />
+const putData = async function (url = "", data = {}) {
+  const response = await fetch(url, {
+    method: "PUT", 
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+    },
+    body: JSON.stringify(data) 
+  });
+  let xjson = await response.json(); 
+  console.log(xjson)
+  return xjson;
+}
+
+
+const getComponent = async (id: any) => {
+  const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}`
+  const response = await fetch(URL, {
+    headers : {
+      "Content-Type": "application/json",
+      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+    }
+  })
+  let xjson = await response.json();
+  return xjson;
+}
+
+export const ComponentCreationForm = function (props) {
+  const [loaded, setLoaded] = React.useState(true);
+  const [name, setName] = React.useState("");
+  const [desc, setDesc] = React.useState("");
+  const [stat, setStat] = React.useState({
+    id: "",
+    label: ""
+  });
+  const [grp, setGrp] = React.useState("");
+
+  React.useEffect(() => {
+    setLoaded(false);
+    component = getComponent(props.id)
+    .then(x => {
+      console.log(x)
+      setName(x.name)
+      setDesc(x.description)
+      setStat({
+        id: x.status,
+        label: x.status
+      })
+      setGrp(x.group_id)
+      setLoaded(true)
+    })
+  },[]);
+
+  if(loaded)
+    return (
+    <div className={styles.form}>
+      <Header id={props.id}/>
+      <NameForm def={name} setName={setName}/>
+      <Description def={desc} setDesc={setDesc}/>
+      <ComponentStatusBar def={stat} setStat={setStat}/>
+      <ComponentGroup def={grp} setGrp={setGrp}/>
       <Uptime />
       <br /><br />
       <div className={styles.buttons}>
@@ -207,7 +287,7 @@ export const ComponentCreationForm = function () {
           overrides ={{
             BaseButton : {
               style : {
-                backgroundColor: "blue",
+                backgroundColor: "blue",                
                 marginLeft: "20px"
               },
               props : {
@@ -216,22 +296,37 @@ export const ComponentCreationForm = function () {
             }
           }}
           onClick = {()=>{
-            if(!componentName) {
+            if(props.id) {
+              console.log(stat)
+              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${props.id}`
+              let data:any ={
+                "component": {
+                  "description": desc,
+                  "status": stat[0].id,
+                  "name": name,
+                  "start_date": startDate
+                }
+              }
+              console.log(data)
+              putData(url,data);
+              Router.push("/component")
+            }
+            else if(!componentName)  {
               alert("Cannot have empty component name")
-            } else if(false) {
+            } else if(componentGroup.isCreatable) {
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
-                  "description": componentDescription,
-                  "status": "operational",
-                  "name": componentName,
+                  "description": desc,
+                  "status": stat[0].id,
+                  "name": name,
                   "start_date": startDate
                 }
               }
 
               let comp:any;
               postData(url, data).then(res => () => {
-                console.log(res)
+                  comp=res.id;
                 }
               )
               url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`
@@ -241,27 +336,28 @@ export const ComponentCreationForm = function () {
                   "components": [
                     comp
                   ],
-                "name": componentGroup.name
+                "name": componentGroup
                 }
               }
               postData(url, data)
-              Router.push("/component")
             } else {
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
-                  "description": componentDescription,
-                  "status": "operational",
-                  "name": componentName,
+                  "description": desc,
+                  "status": stat[0].id,
+                  "name": name,
                   "start_date": startDate,
-                  "group_id": componentGroup.id
+                  "group_id": grp
                 }
               }
-              postData(url,data).then(res => console.log(res))              
+              postData(url,data).then(res => console.log(res))
               Router.push("/component")
             }
           }}
-          >Save Component</Button>
-        </div>
-    </div>)
+          >Save </Button>
+      </div>
+      </div>)
+  else
+    return <Spinner />
 }
