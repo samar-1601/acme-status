@@ -45,8 +45,8 @@ export const ComponentList = function () {
 
     let details: any;
     details = (<>
-                <span className={styles.itemName}>{props.comp.name}</span><br />
-                <span className={styles.itemDescription}>{msg}</span>
+                <div className={styles.itemName}>{props.comp.name}</div><br />
+                <div className={styles.itemDescription}>{msg}</div>
               </>);
 
     return (
@@ -65,8 +65,8 @@ export const ComponentList = function () {
               overrides = {{
                 Root: {
                   style: {
-                    paddingTop: "9px",
-                    paddingRight: "8px",
+                    paddingTop: "2px",
+                    paddingRight: "12px",
                   }
                 }
               }}

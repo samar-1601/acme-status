@@ -16,7 +16,7 @@ import styles from "./styles.module.css"
 import Router from "next/router";
 import { Spinner } from "baseui/spinner";
 
-let componentName: string, componentDescription: string, componentGroup: any = {}, startDate: Date | Date[], componentStatus: any, component: any
+let startDate: Date | Date[], componentStatus: any, component: any
 
 const Header = function (props: any) {
   let heading="Add Component";
@@ -34,7 +34,6 @@ const Header = function (props: any) {
 }
 
 const NameForm =  function (props: any) {
-  componentName=props.def;
   return (
     <FormControl label="Component name">
       <Input
@@ -50,7 +49,6 @@ const NameForm =  function (props: any) {
 }
 
 const Description  = function (props: any) {
-  componentDescription=props.def;
   return (
     <FormControl label="Description (optional)" caption="Give a helpful description of what this component does">
       <Textarea
@@ -101,7 +99,6 @@ const ComponentGroup = function (props: any) {
         labelKey="label"
         valueKey="id"
         onChange={({value}) => {
-            componentGroup=value
             props.setGrp(value)
           }
         }
@@ -311,9 +308,9 @@ export const ComponentCreationForm = function (props) {
               putData(url,data);
               Router.push("/component")
             }
-            else if(!componentName)  {
+            else if(!name)  {
               alert("Cannot have empty component name")
-            } else if(componentGroup.isCreatable) {
+            } else if(grp) {
               let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
               let data:any ={
                 "component": {
@@ -336,7 +333,7 @@ export const ComponentCreationForm = function (props) {
                   "components": [
                     comp
                   ],
-                "name": componentGroup
+                "name": grp
                 }
               }
               postData(url, data)

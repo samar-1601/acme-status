@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, NavigationBar } from "../../components/Component/Component";
+import { Header, NavigationBar } from "../../components/component/Component";
 import styles from "../../components/Component/styles.module.css"
 
 class components extends React.Component {

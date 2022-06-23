@@ -8,6 +8,7 @@ import { Block, BlockProps } from "baseui/block";
 import { Avatar } from "baseui/avatar";
 
 import { ComponentList } from "./ComponentList";
+import { createTheme, lightThemePrimitives, ThemeProvider } from "baseui";
 
 const headerBarBackIcon: BlockProps = {
   onClick: () => {
@@ -63,6 +64,11 @@ export const NavigationBar = function () {
   const [activeKey, setActiveKey] = React.useState<number>(0);
   return (
     <div className={styles.navigationBar}>
+      <ThemeProvider
+        theme={createTheme(lightThemePrimitives, {
+          colors: { backgroundPrimary: "#F8F8FA" }
+        })}
+      >
       <Tabs
         activeKey={activeKey}
         onChange={({ activeKey }) => {
@@ -80,6 +86,11 @@ export const NavigationBar = function () {
               backgroundColor: "blue",
             }),
           },
+          TabList: {
+            style: () => ({
+              backgroundColor: "#F8F8FA",
+            })
+          }
         }}
       >
         <Tab title="Active">
@@ -87,6 +98,7 @@ export const NavigationBar = function () {
         </Tab>
         <Tab title="Third-party" disabled></Tab>
       </Tabs>
+      </ThemeProvider>
     </div>
   );
 };
