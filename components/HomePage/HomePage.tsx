@@ -1,9 +1,5 @@
-import { Block } from "baseui/block";
-import { StatefulMenu } from "baseui/menu";
-import Router from "next/router";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { useEffect } from "react";
-import Image from "next/image";
 import { PageSlot } from "../PageSlot/PageSlot";
 import IncidentsHome from "../IncidentsHome";
 import SideBar from "../SideBar/SideBar";
@@ -20,7 +16,7 @@ const LandingPage = () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar />
+        <SideBar activeItemID={0} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <IncidentsHome />
