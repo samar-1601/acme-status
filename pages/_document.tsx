@@ -48,7 +48,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
           />
-          <style dangerouslySetInnerHTML={{ __html: sheet.collectStyles }} />
+          <style dangerouslySetInnerHTML={{ __html: sheet.collectStyles.toString() }} />
         </Head>
         <body>
           <Main />
