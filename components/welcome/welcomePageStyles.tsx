@@ -3,11 +3,7 @@ import { BlockProps } from "baseui/block";
 export const contentBlock: BlockProps = {
   display: "flex",
   flexDirection: "column",
-  // justifyContent: "center",
-  // alignItems: "center",
-  backgroundColor: "white",
-
-  // color: "white",
+  marginTop: "50px", 
 };
 
 export const imageProps: BlockProps = {
@@ -35,15 +31,35 @@ export const rowContent: BlockProps = {
   display: "flex",
   justifyContent: "space-around",
   marginTop: "25px",
-  marginBottom: "25px",
-  paddingLeft: "15px",
+  marginBottom: "60px",
   paddingRight: "15px",
-  // font: "16px",
+  paddingLeft: "100px",
   flexWrap: true,
 };
 
 export const headerStyle: BlockProps = {
-  margin: "10px",
+  overrides: {
+    Block: {
+      style: {
+        marginBottom: "10px",
+        lineHeight: "2.5rem",
+        fontSize: "2rem",
+        fontWeight: 700,
+      },
+    },
+  },
+};
+export const descriptionContentStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        lineHeight: "1.5rem",
+        fontSize: "1rem",
+        fontWeight: 500,
+        color: "rgb(74, 75, 78)",
+      },
+    },
+  },
 };
 export const welcomeHeaderSecondHalfStyle: BlockProps = {
   overrides: {

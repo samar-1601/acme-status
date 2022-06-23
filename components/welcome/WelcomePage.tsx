@@ -8,6 +8,7 @@ import {
   imageProps,
   rowContent,
   headerStyle,
+  descriptionContentStyle,
 } from "./welcomePageStyles";
 import { text } from "stream/consumers";
 import {
@@ -56,24 +57,17 @@ const WelcomePage: React.FC = () => {
         {/*souvik*/}
         <Block
           {...rowContent}
-          overrides={{
-            Block: {
-              style: { paddingLeft: "100px" },
-            },
-          }}
         >
           <Block {...textProps}>
-            <Block {...headerStyle}>
-              <h2 className="header">Incidents</h2>
-            </Block>
-            <p>
+            <Block {...headerStyle}>Incidents</Block>
+            <Block {...descriptionContentStyle}>
               Our app provides the facility to properly manage incidents. We can
               create and update incidents as we wish. Implemented using React
               Window infinite scrolling.
-            </p>
+            </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/components.png" />
+            <img src="/incidentsView.png" />
           </Block>
         </Block>
         <Block
@@ -85,14 +79,12 @@ const WelcomePage: React.FC = () => {
           }}
         >
           <Block {...textProps}>
-            <Block {...headerStyle}>
-              <h2 className="header">Components</h2>
-            </Block>
-            <p>
+            <Block {...headerStyle}>Components</Block>
+            <Block {...descriptionContentStyle}>
               We can update status of components in incident. Also provided
               facility for creating incidents and changing status of incidents
               and components.
-            </p>
+            </Block>
           </Block>
           <Block {...imageProps}>
             <img src="/components.png" />
@@ -100,21 +92,14 @@ const WelcomePage: React.FC = () => {
         </Block>
         <Block
           {...rowContent}
-          overrides={{
-            Block: {
-              style: { paddingLeft: "100px" },
-            },
-          }}
         >
           <Block {...textProps}>
-            <Block {...headerStyle}>
-              <h2 className="header">Client Side view</h2>
-            </Block>
-            <p>
+            <Block {...headerStyle}>Client Side view</Block>
+            <Block {...descriptionContentStyle}>
               We provide a client side view of incidents where users will be
               able to see the current status of incidents and also uptime of
               components.
-            </p>
+            </Block>
           </Block>
           <Block {...imageProps}>
             <img src="/components.png" />
