@@ -1,4 +1,5 @@
-import * as React from "react";
+import * as React from "react"
+import Router from "next/router";
 
 import styles from "./styles.module.css";
 import { Tabs, Tab } from "baseui/tabs-motion";
@@ -7,58 +8,45 @@ import { Block, BlockProps } from "baseui/block";
 import { Avatar } from "baseui/avatar";
 
 import { ComponentList } from "./ComponentList";
-import Router from "next/router";
+import { createTheme, lightThemePrimitives, ThemeProvider } from "baseui";
+import { header, headerBarBackIcon, heading } from "./componentStyles";
 
-const headerBarBackIcon: BlockProps = {
-  onClick: () => {
-    Router.push("/");
-  },
-  overrides: {
-    Block: {
-      style: {
-        marginRight: "15px",
-        cursor: "pointer",
-      },
-    },
-  },
-};
+
 
 export const Header = function () {
   return (
-    <div className={styles.header}>
-      <div className={styles.heading}>
+    <Block {...header}>    
+      <Block {...heading}>        
         <div>
           <Block {...headerBarBackIcon}>
-            <Avatar
-              name="Back"
-              size="scale900"
-              src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
-            />
+          <Avatar
+            name="Back"
+            size="scale900"
+            src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
+          />
           </Block>
         </div>
-        <div className="header">Components</div>
-      </div>
-      <div>
-        <Button
-          size={SIZE.compact}
-          overrides={{
-            BaseButton: {
-              style: {
-                backgroundColor: "blue",
-                alignSelf: "right",
-                justifyContent: "right",
-              },
-              props: {
-                className: "add-button",
-              },
+        <div>Components</div>
+      </Block>
+      <Block 
+        overrides ={{
+          Block : {
+            style : {
+              backgroundColor: "blue",
+              alignSelf: "right",
+              justifyContent: "right",
+              fontSize: "14px",
+              padding: "0 12px"
             },
-          }}
-          onClick={() => Router.push("/component/new")}
-        >
-          Add Component
-        </Button>
-      </div>
-    </div>
+            props : {
+              className: "primary-button"
+            }
+          }
+        }}
+        onClick = {() => Router.push("/component/new")}  
+        >Add Component
+      </Block>
+    </Block>
   );
 };
 
@@ -66,6 +54,11 @@ export const NavigationBar = function () {
   const [activeKey, setActiveKey] = React.useState<number>(0);
   return (
     <div className={styles.navigationBar}>
+      <ThemeProvider
+        theme={createTheme(lightThemePrimitives, {
+          colors: { backgroundPrimary: "#F8F8FA" }
+        })}
+      >
       <Tabs
         activeKey={activeKey}
         onChange={({ activeKey }) => {
@@ -83,6 +76,11 @@ export const NavigationBar = function () {
               backgroundColor: "blue",
             }),
           },
+          TabList: {
+            style: () => ({
+              backgroundColor: "#F8F8FA",
+            })
+          }
         }}
       >
         <Tab title="Active">
@@ -90,6 +88,7 @@ export const NavigationBar = function () {
         </Tab>
         <Tab title="Third-party" disabled></Tab>
       </Tabs>
+      </ThemeProvider>
     </div>
   );
 };
