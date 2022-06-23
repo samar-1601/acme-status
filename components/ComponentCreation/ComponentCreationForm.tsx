@@ -27,11 +27,18 @@ const Header = function (props: any) {
   let heading="Add Component";
   if(props.id)  heading="Edit Component"
   return (
-    <div className={styles.header}>
-      <div className={styles.heading}>
+    <Block className="header"
+    overrides={{
+      Block: {
+        style: {
+          marginBottom: "25px",
+        }
+      }
+    }}>
+      <Block className={styles.heading}>
         {heading}
-      </div>
-    </div>
+      </Block>
+    </Block>
   );
 };
 
@@ -53,21 +60,29 @@ const NameForm =  function (props: any) {
 
 const Description  = function (props: any) {
   return (
-    <FormControl
-      label="Description (optional)"
-      caption="Give a helpful description of what this component does"
-    >
-      <Textarea
-        id="textarea-id"
-        value={props.def}
-        
-        onChange={event => {
-            props.setDesc(event.currentTarget.value)
-          }
+    <Block  overrides={{
+      Block: {
+        style: {
+          margin: "20px 0"
         }
-        placeholder="Frontend application and API servers"
-      />
-    </FormControl>
+      }
+    }}>
+      <FormControl
+        label="Description (optional)"
+        caption="Give a helpful description of what this component does"
+      >
+        <Textarea
+          id="textarea-id"
+          value={props.def}
+          
+          onChange={event => {
+              props.setDesc(event.currentTarget.value)
+            }
+          }
+          placeholder="Frontend application and API servers"
+        />
+      </FormControl>
+    </Block>
   );
 };
 
@@ -99,6 +114,13 @@ const ComponentGroup = function (props: any) {
   }, []);
 
   return (
+    <Block  overrides={{
+      Block: {
+        style: {
+          margin: "20px 0"
+        }
+      }
+    }}>
     <FormControl label="Component group">
       <Select 
         creatable
@@ -113,6 +135,7 @@ const ComponentGroup = function (props: any) {
         placeholder="This component does not belong to a group"
       />
     </FormControl>
+    </Block>
   );
 };
 
@@ -261,7 +284,7 @@ export const ComponentCreationForm = function (props) {
 
   if(loaded)
     return (
-    <div className={styles.form}>
+    <Block className={styles.form}>
       <Header id={props.id}/>
       <NameForm def={name} setName={setName}/>
       <Description def={desc} setDesc={setDesc}/>
@@ -375,7 +398,7 @@ export const ComponentCreationForm = function (props) {
           }}
       >Cancel</Block>
       </Block>
-      </div>)
+      </Block>)
   else
     return <Spinner />
 }
