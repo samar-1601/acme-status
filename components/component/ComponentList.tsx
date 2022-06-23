@@ -1,22 +1,23 @@
 import * as React from "react";
 
-import { ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
+import { ComponentStatusIconUrls, ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
-import { Button, SIZE } from "baseui/button";
 import { Spinner } from "baseui/spinner";
 import { Avatar } from "baseui/avatar";
 import styles from "./styles.module.css"
+import Image from "next/image";
 
 import Link from "next/link";
 
 import { useRouter } from "next/router";
 import { Block } from "baseui/block";
 import { element, listItem, loader } from "./componentStyles";
+import component from "../../pages/component";
 
 export const ComponentList = function () {
   const router = useRouter()
-  const [dataList, setDataList] = React.useState([]);
+  const [dataList, setDataList] = React.useState<any>([]);
   const [loaded, setLoaded] = React.useState(false);
   
   const Component = function (props: any) {
@@ -59,22 +60,20 @@ export const ComponentList = function () {
             accessibilityType={'tooltip'}
             triggerType={TRIGGER_TYPE.hover}
           >
-          <span>
-            <Avatar 
-              name = {props.comp.status}
-              src = {ICON_URL[props.comp.status]}
-              size="scale600"
-              overrides = {{
-                Root: {
-                  style: {
-                    paddingTop: "2px",
-                    paddingRight: "12px",
-                  }
-                }
-              }}
-            >
-            </Avatar>
-          </span>
+          <Block overrides={{
+            Block: {
+              style: {
+                marginRight: "8px",
+                marginTop: "2px",
+              }
+            }
+          }}>
+            <Image // NextJS component for rendering Image
+              src={ComponentStatusIconUrls(props.comp.status)} // get the src address for the component based on its status
+              height="16px"
+              width="16px"
+            ></Image>
+          </Block>
           </StatefulPopover>
           <div>{details}</div>
         </Block>

@@ -27,8 +27,8 @@ export const PageSlot = ({
   );
   return (
     <Block {...pageWrapperStyles}>
-      <Block {...leftNavBarStyles}>{leftNavBar.props.children}</Block>
-      <Block {...rightContentStyles}>{rightContent.props.children}</Block>
+      <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
+      <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>
     </Block>
   );
 };
