@@ -25,5 +25,6 @@ export default () => {
 
   if (status != "authenticated")
     return <Block> You are unauthenticated. this is a protected page.</Block>;
+
   return <IncidentsHome />;
 };

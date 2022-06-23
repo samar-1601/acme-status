@@ -6,6 +6,7 @@ import { LightTheme, BaseProvider } from "baseui";
 import { styletron } from "../styletron";
 import { SessionProvider } from "next-auth/react";
 import { SnackbarProvider } from "baseui/snackbar";
+import { Block } from "baseui/block";
 
 export default class MyApp extends App {
   render() {
@@ -15,7 +16,7 @@ export default class MyApp extends App {
         <StyletronProvider value={styletron}>
           <BaseProvider theme={LightTheme}>
             <SnackbarProvider placement="bottom">
-              <Component {...pageProps} />
+                <Component {...pageProps} />
             </SnackbarProvider>
           </BaseProvider>
         </StyletronProvider>

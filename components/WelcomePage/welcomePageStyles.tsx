@@ -7,7 +7,7 @@ export const contentBlock: BlockProps = {
 };
 
 export const imageProps: BlockProps = {
-  width: "600px",
+  maxWidth: "500px",
   alignSelf: "center",
   overrides: {
     Block: {
@@ -16,14 +16,13 @@ export const imageProps: BlockProps = {
       },
     },
   },
-  height: "250px",
 };
 
 export const textProps: BlockProps = {
   alignSelf: "center",
   alignItems: "center",
   justifyContent: "center",
-  width: "400px",
+  width: "300px",
   position: "relative",
 };
 

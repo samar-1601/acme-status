@@ -6,7 +6,7 @@ import { Avatar } from "baseui/avatar";
 import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import { useSession } from "next-auth/react";
-import WelcomePage from "../components/welcome/WelcomePage";
+import WelcomePage from "../components/WelcomePage/WelcomePage";
 import LandingPage from "../components/HomePage/HomePage";
 
 let numberofLoads: number = 0;

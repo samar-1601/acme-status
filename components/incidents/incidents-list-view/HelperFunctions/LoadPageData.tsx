@@ -2,7 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PageType, PAGE_ID } from "../../../../constants";
+import {
+  NEXT_PUBLIC_AUTH_TOKEN,
+  PageType,
+  PAGE_ID,
+} from "../../../../constants";
 
 /**
  * Loads data from API
@@ -63,25 +67,29 @@ export default function useLoadPageData(pageType: PageType) {
    * @param pageType current menu item/pageType selected
    */
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
-    let dataItem = []; 
-    dataItem = await getData(pageNumber, pageType);
+    let dataItem = [];
+    try {
+      dataItem = await getData(pageNumber, pageType);
 
-    console.log(
-      "pageNo:",
-      pageNumber,
-      "hasMore",
-      dataItem.length > 0,
-      "API data:",
-      dataItem.length
-    );
+      console.log(
+        "pageNo:",
+        pageNumber,
+        "hasMore",
+        dataItem.length > 0,
+        "API data:",
+        dataItem.length
+      );
 
-    setState({
-      ...state,
-      pageNumber: pageNumber,
-      hasLoaded: true, // loading completed
-      hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
-      dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
-    });
+      setState({
+        ...state,
+        pageNumber: pageNumber,
+        hasLoaded: true, // loading completed
+        hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
+        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   /**
@@ -97,7 +105,6 @@ export default function useLoadPageData(pageType: PageType) {
     setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
-
 
   return {
     dataList: state.dataList,
