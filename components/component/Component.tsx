@@ -3,30 +3,35 @@ import Router from "next/router";
 
 import styles from "./styles.module.css";
 import { Tabs, Tab } from "baseui/tabs-motion";
-import { Button, SIZE } from "baseui/button";
 import { Block, BlockProps } from "baseui/block";
-import { Avatar } from "baseui/avatar";
 
 import { ComponentList } from "./ComponentList";
 import { createTheme, lightThemePrimitives, ThemeProvider } from "baseui";
 import { header, headerBarBackIcon, heading } from "./componentStyles";
+import Link from "next/link";
 
 
 
 export const Header = function () {
   return (
     <Block {...header}>    
-      <Block {...heading}>        
-        <div>
-          <Block {...headerBarBackIcon}>
-          <Avatar
-            name="Back"
-            size="scale900"
-            src="https://img.icons8.com/flat-round/64/undefined/back--v1.png"
-          />
+      <Block {...heading}>
+        <Link href="/">
+          <Block {...headerBarBackIcon} className="material-symbols-outlined"
+            overrides={{
+              Block: {
+                style : {
+                  paddingTop: "7px",
+                  paddingRight: "8px",
+                  cursor: "pointer"
+                }
+              }
+            }}
+          >
+            arrow_back
           </Block>
-        </div>
-        <div>Components</div>
+        </Link>
+        <Block>Components</Block>
       </Block>
       <Block 
         overrides ={{
@@ -34,9 +39,8 @@ export const Header = function () {
             style : {
               backgroundColor: "blue",
               alignSelf: "right",
-              justifyContent: "right",
               fontSize: "14px",
-              padding: "0 12px"
+              padding: "0 12px",
             },
             props : {
               className: "primary-button"

@@ -12,7 +12,6 @@ import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 import { Textarea } from "baseui/textarea";
 import { Select, Value } from "baseui/select";
-import { Button, SIZE } from "baseui/button";
 import { Checkbox } from "baseui/checkbox";
 import { Block } from "baseui/block";
 import { DatePicker } from "baseui/datepicker";
@@ -20,8 +19,9 @@ import { DatePicker } from "baseui/datepicker";
 import styles from "./styles.module.css";
 import Router from "next/router";
 import { Spinner } from "baseui/spinner";
+import { inputNameStyle } from "../incidents/createIncidents/styles/InputStyles";
 
-let startDate: Date | Date[], componentStatus: any, component: any
+let startDate: Date | Date[]
 
 const Header = function (props: any) {
   let heading="Add Component";
@@ -30,9 +30,6 @@ const Header = function (props: any) {
     <div className={styles.header}>
       <div className={styles.heading}>
         {heading}
-      </div>
-      <div className={styles.goback}>
-        <a href="/component">Back to components</a>
       </div>
     </div>
   );
@@ -48,6 +45,7 @@ const NameForm =  function (props: any) {
           props.setName(event.currentTarget.value)
         }}
         placeholder="Component name"
+        {...inputNameStyle}
       />
     </FormControl>
   );
@@ -62,6 +60,7 @@ const Description  = function (props: any) {
       <Textarea
         id="textarea-id"
         value={props.def}
+        
         onChange={event => {
             props.setDesc(event.currentTarget.value)
           }
@@ -246,7 +245,7 @@ export const ComponentCreationForm = function (props) {
 
   React.useEffect(() => {
     setLoaded(false);
-    component = getComponent(props.id)
+    getComponent(props.id)
     .then(x => {
       console.log(x)
       setName(x.name)
@@ -270,52 +269,30 @@ export const ComponentCreationForm = function (props) {
       <ComponentGroup def={grp} setGrp={setGrp}/>
       <Uptime />
       <br /><br />
-      <div className={styles.buttons}>
-      <Button 
-          size={SIZE.compact}
-          overrides={{
-            BaseButton: {
-              style: {
-                backgroundColor: "blue",
-              },
-              props: {
-                className: "add-button",
-              },
-            },
-          }}
-          onClick={() => {
-            Router.push("/component");
-          }}
-        >
-          Cancel
-        </Button>
-        <Button
-          size={SIZE.compact}
-          overrides={{
-            BaseButton: {
-              style: {
-                backgroundColor: "blue",
-                marginLeft: "20px",
-              },
-              props: {
-                className: "add-button",
-              },
-            },
-          }}
-          onClick = {()=>{
-            Router.push("/component")
-          }}
-      >Cancel</Button>
-      <Button 
-          size={SIZE.compact}
+      <Block overrides={{
+        Block: {
+          style: {
+            display: "flex",
+            flexDirection: "row-reverse",
+            right: 0,
+            alignItems: "center"
+          },
+          props: {
+            className: "footer-bar"
+          }
+        }
+      }}>
+        
+        <Block 
           overrides ={{
-            BaseButton : {
-              style : {
-                backgroundColor: "blue",                
-                marginLeft: "20px"
+            Block : {
+              style : {               
+                marginLeft: "20px",
+                width: "92px",
+                height: "34px",
               },
               props : {
-                className: "add-button"
+                className: "primary-button"
               }
             }
           }}
@@ -379,8 +356,25 @@ export const ComponentCreationForm = function (props) {
               Router.push("/component")
             }
           }}
-          >Save </Button>
-      </div>
+          >Save </Block>
+          <Block
+          overrides={{
+            Block: {
+              style: {
+                marginLeft: "20px",
+                width: "92px",
+                height: "34px",
+              },
+              props: {
+                className: "secondary-button",
+              },
+            },
+          }}
+          onClick = {()=>{
+            Router.push("/component")
+          }}
+      >Cancel</Block>
+      </Block>
       </div>)
   else
     return <Spinner />
