@@ -13,7 +13,7 @@ const EditComponents = function () {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar />
+      <SideBar activeItemID={2} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <div className={styles.page}>

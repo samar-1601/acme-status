@@ -33,7 +33,7 @@ const AddComponents: React.FC = () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar />
+        <SideBar activeItemID={2} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block className={styles.page}>

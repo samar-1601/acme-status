@@ -13,7 +13,9 @@ module.exports = {
         'primary-not-hover': "#0E61F6",
         'secondary-hover': "#F8F8FA",
         'secondary-not-hover': "white",
-        'border-color': "#E6E6E9"
+        'border-color': "#E6E6E9",
+        'side-bar-option-hover-bg' : "rgb(16, 36, 71)",
+        'side-bar-option-hover-text' : "#F8F8FA",
       },
       height: {
         'footer-height': "7%",

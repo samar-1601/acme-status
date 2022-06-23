@@ -31,7 +31,7 @@ export default () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar />
+        <SideBar activeItemID={0} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <IncidentsHome />

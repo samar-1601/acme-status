@@ -7,37 +7,39 @@
 
 
 @layer base {
+
     html,
     body {
         padding: 0;
         margin: 0 !important;
         background-color: #F8F8FA;
-       
+
     }
 
     * {
-    box-sizing: border-box;
-    margin: 0ch;
+        box-sizing: border-box;
+        margin: 0ch;
     }
 
 }
 
 @layer components {
+
     /*to be used for heading */
-    .header{
+    .header {
         @apply text-3xl;
         @apply font-black;
     }
 
     /*to be used to link or url*/
-    .link{
+    .link {
         @apply underline;
         @apply my-2;
         @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
     }
 
     /*to be used for primary button*/
-    .primary-button{
+    .primary-button {
         @apply bg-primary-not-hover;
         @apply rounded-lg;
         @apply hover:bg-primary-hover;
@@ -47,7 +49,7 @@
     }
 
     /*to be used for secondary button*/
-    .secondary-button{
+    .secondary-button {
         @apply bg-secondary-not-hover;
         @apply rounded-lg;
         @apply hover:bg-secondary-hover;
@@ -59,15 +61,19 @@
     }
 
     /*to be used for applying footer bar in form*/
-    .footer-bar{
+    .footer-bar {
         @apply fixed left-0 bottom-0;
         @apply bg-white;
         @apply h-footer-height w-full pr-4;
 
     }
 
-    .sideBarOption{
+    .sideBarOption {
         @apply hover:bg-secondary-hover;
         @apply cursor-pointer;
+    }
+
+    .hoverSideBarOption {
+        @apply hover:bg-side-bar-option-hover-bg hover:text-side-bar-option-hover-text;
     }
 }

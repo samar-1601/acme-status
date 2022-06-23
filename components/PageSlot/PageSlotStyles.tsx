@@ -6,6 +6,7 @@ export const pageWrapperStyles: BlockProps = {
       style: {
         display: "flex",
         width: "100%",
+        justifyContent: "space-between",
       },
     },
   },
@@ -15,9 +16,11 @@ export const leftNavBarStyles: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "20%",
+        width: "300px",
         display: "flex",
-        justifyContent: "flex-end",
+        backgroundColor: "rgb(20,47,93)",
+        minHeight: "100vh",
+        zIndex: 10,
       },
     },
   },
