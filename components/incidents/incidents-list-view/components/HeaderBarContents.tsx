@@ -13,7 +13,7 @@ import {
 } from "../styles/navStyles";
 import { signOutButton } from "../styles/listStyles";
 import { signOut } from "next-auth/react";
-import { Avatar } from "baseui/avatar";
+import Image from "next/image";
 
 interface Props {
   headerText: string; // text to render in the header
@@ -28,7 +28,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
       <Block {...headerBar}>
         <Block {...headerBarLeftWrapper}>
           <Block {...headerBarBackIcon}>
-            <Avatar name={"backButton"} src="/backArrow.png"></Avatar>
+            <Image width="32px" height="32px" src="/backArrow.png"></Image>
           </Block>
           <Block {...headerBarText} className="header">
             {headerText}

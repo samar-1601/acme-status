@@ -1,9 +1,9 @@
-import { Avatar } from "baseui/avatar";
 import { Block } from "baseui/block";
 import { StatefulMenu } from "baseui/menu";
 import Router from "next/router";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { useEffect } from "react";
+import Image from "next/image";
 
 const LandingPage = () => {
   const { enqueue, dequeue } = useSnackbar();
@@ -46,13 +46,7 @@ const LandingPage = () => {
             },
           }}
         >
-          <Avatar
-            name="Status_Icon"
-            src="/Status_icon.png"
-            overrides={{
-              Root: { style: { paddingRight: "10px", paddingTop: "10px" } },
-            }}
-          />
+          <Image src="/Status_icon.png" height="40px" width="52px" />
           StatusPage
         </Block>
         <Block

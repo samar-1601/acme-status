@@ -99,6 +99,18 @@ export const componentItem: BlockProps = {
         paddingRight: "1.2rem",
         paddingTop: "2px",
         display: "inline",
+        alignContent:"center",
+        alignItems: "center",
+      },
+    },
+  },
+};
+export const componentItemIconWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginRight: "10px",
+        display: "inline",
       },
     },
   },

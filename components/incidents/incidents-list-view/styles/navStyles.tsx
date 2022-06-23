@@ -66,22 +66,22 @@ export const headerBarBackIcon: BlockProps = {
   },
   onMouseEnter: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "white";
       (event.target as HTMLElement).style.boxShadow =
         "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)";
+      (event.target as HTMLElement).style.border = "2px #F8F8FA solid";
     }
   },
   onMouseLeave: (event) => {
     if (event.target) {
-      (event.target as HTMLElement).style.backgroundColor = "#F8F8FA";
       (event.target as HTMLElement).style.boxShadow = "";
+      (event.target as HTMLElement).style.border = "";
     }
   },
   overrides: {
     Block: {
       style: {
         cursor: "pointer",
-        borderRadius: "6000px",
+        borderRadius: "60000px",
         backgroundColor: "#F8F8FA",
         display: "flex",
         alignItems: "center",

@@ -1,6 +1,5 @@
 // components
 import { Block } from "baseui/block";
-import { Avatar } from "baseui/avatar";
 import Link from "next/link";
 
 // constants
@@ -17,7 +16,9 @@ import {
   itemName,
   componentItem,
   editIncidentButton,
+  componentItemIconWrapper,
 } from "../styles/listStyles";
+import Image from "next/image";
 
 /**
  * Format date for display
@@ -60,18 +61,13 @@ const getComponents = (incident: any): JSX.Element => {
       const renderComponent: JSX.Element = // variable storing the formatted component ready to render
         (
           <Block key={component["name"]} {...componentItem}>
-            <Avatar // BaseUI component for rendering Icons
-              name={component["name"]}
+            <Block {...componentItemIconWrapper}>
+            <Image // NextJS component for rendering Image
               src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
-              size="scale600"
-              overrides={{
-                Root: {
-                  style: {
-                    paddingRight: "8px",
-                  },
-                },
-              }}
-            ></Avatar>
+              height="16px"
+              width="16px"
+            ></Image>
+            </Block>
             {component["name"]}
           </Block>
         );
