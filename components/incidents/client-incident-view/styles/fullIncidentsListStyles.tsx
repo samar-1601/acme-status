@@ -10,7 +10,9 @@ export const listItem: BlockProps = {
         flexDirection: "column",
         border: "0.5px solid grey",
         gap: "10px",
-        marginBottom : "30px"
+        marginBottom : "30px",
+        marginRight: "10px",
+        marginLeft: "10px",
       },
     },
   },
