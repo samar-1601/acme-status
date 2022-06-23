@@ -99,9 +99,9 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                   height={height}
                   onRowsRendered={onRowsRendered}
                   ref={registerChild}
-                  rowHeight={cache.current.rowHeight}
+                  rowHeight={cache.current.rowHeight??0}
                   deferredMeasurementCache={cache.current}
-                  rowCount={dataList.length}
+                  rowCount={dataList.length??0}
                   rowRenderer={({ key, index, style, parent }) => {
                     const element = dataList[index];
                     return (
@@ -110,7 +110,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                         cache={cache.current}
                         parent={parent}
                         columnIndex={0}
-                        rowIndex={index}
+                        rowIndex={index??0}
                       >
                         <div style={style}>{renderData(element)}</div>
                       </CellMeasurer>

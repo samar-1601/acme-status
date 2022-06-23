@@ -87,7 +87,7 @@ const Description  = function (props: any) {
 };
 
 const ComponentGroup = function (props: any) {
-  const [groups, setGroups] = React.useState([]);
+  const [groups, setGroups] = React.useState([{}]);
 
   const getComponentGroups = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`;
@@ -256,7 +256,7 @@ const getComponent = async (id: any) => {
   return xjson;
 }
 
-export const ComponentCreationForm = function (props) {
+export const ComponentCreationForm = function (props: { id: any; }) {
   const [loaded, setLoaded] = React.useState(true);
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
@@ -326,7 +326,7 @@ export const ComponentCreationForm = function (props) {
               let data:any ={
                 "component": {
                   "description": desc,
-                  "status": stat[0].id,
+                  "status": stat.id,
                   "name": name,
                   "start_date": startDate
                 }
@@ -342,7 +342,7 @@ export const ComponentCreationForm = function (props) {
               let data:any ={
                 "component": {
                   "description": desc,
-                  "status": stat[0].id,
+                  "status": stat.id,
                   "name": name,
                   "start_date": startDate
                 }
@@ -369,7 +369,7 @@ export const ComponentCreationForm = function (props) {
               let data:any ={
                 "component": {
                   "description": desc,
-                  "status": stat[0].id,
+                  "status": stat.id,
                   "name": name,
                   "start_date": startDate,
                   "group_id": grp

@@ -23,7 +23,7 @@ export const Header = function () {
                 style : {
                   paddingTop: "7px",
                   paddingRight: "8px",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }
               }
             }}
@@ -31,7 +31,13 @@ export const Header = function () {
             arrow_back
           </Block>
         </Link>
-        <Block>Components</Block>
+        <Block overrides={{
+          Block: {
+            style: {
+              marginLeft: "5px"
+            }
+          }
+        }}>Components</Block>
       </Block>
       <Block 
         overrides ={{
