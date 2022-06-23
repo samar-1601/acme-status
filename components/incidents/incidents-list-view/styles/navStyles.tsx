@@ -6,7 +6,8 @@ export const container: BlockProps = {
     Block: {
       style: {
         top: "0ch",
-        width: "100%",
+        width: "80%",
+        margin: "auto",
       },
     },
   },
@@ -17,8 +18,7 @@ export const content: BlockProps = {
     Block: {
       style: {
         position: "relative",
-        width: "100%",
-        margin: "10px 1px",
+        margin: "10px 0px",
       },
     },
   },

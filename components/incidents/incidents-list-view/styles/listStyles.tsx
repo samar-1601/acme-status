@@ -12,7 +12,8 @@ export const listItem: BlockProps = {
         justifyContent: "space-between",
         padding: "20px 30px 15px 30px",
         backgroundColor: "white",
-        margin: "10px 8px 20px 4px",
+        margin: "10px auto 20px auto",
+        width: "79%",
         borderTop: "4px rgb(243, 214, 54) solid",
         boxShadow:
           "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
@@ -24,7 +25,7 @@ export const incidentsListView: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "80%",
+        width: "100%",
         margin: "auto",
       },
     },
@@ -36,7 +37,7 @@ export const listDetails: BlockProps = {
     Block: {
       style: {
         display: "flex",
-        gap: "8px",
+        gap: "6px",
         flexDirection: "row",
         flexWrap: "wrap",
       },
@@ -50,7 +51,7 @@ export const itemName: BlockProps = {
         flex: "100%",
         fontSize: "1.2rem",
         fontWeight: 900,
-        marginBottom: "8px",
+        marginBottom: "6px",
         textTransform: "capitalize",
         display: "inline",
       },
@@ -73,7 +74,7 @@ export const component: BlockProps = {
   overrides: {
     Block: {
       style: ($value) => ({
-        marginTop: "16px",
+        marginTop: "12px",
         display: "inline",
         paddingBottom: "8px",
       }),
@@ -109,7 +110,7 @@ export const hasListLoadedStyle: BlockProps = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "90vh",
+        height: "80vh",
         width: "100%",
       },
     },
