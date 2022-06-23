@@ -19,8 +19,14 @@
     padding: 40px;
     width: 80%;    
     margin: auto;
+    font-family: "Lato', sans-serif";
 }
 
 .buttons {
     float: right;
+}
+
+.form {
+    width: 70%;
+    margin: auto;
 }

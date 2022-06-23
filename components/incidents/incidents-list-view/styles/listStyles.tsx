@@ -193,7 +193,9 @@ export const editIncidentButton: BlockProps = {
       style: {
         marginBottom: "80px",
         padding: "0px 16px",
-        border: "2px solid rgb(230 230 233)"
+        border: "2px solid rgb(230 230 233)",
+        height: "34px",
+        width: "92px",
       },
     },
   },

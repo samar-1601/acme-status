@@ -4,6 +4,7 @@ export const contentBlock: BlockProps = {
   display: "flex",
   flexDirection: "column",
   marginTop: "50px", 
+  backgroundColor: "#F6F6F7",
 };
 
 export const imageProps: BlockProps = {

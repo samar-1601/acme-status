@@ -1,11 +1,21 @@
 import * as React from "react";
+
 import { ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
 
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { Button, SIZE } from "baseui/button";
 import { Spinner } from "baseui/spinner";
 import { Avatar } from "baseui/avatar";
 import styles from "./styles.module.css"
 
+import Link from "next/link";
+
+import { useRouter } from "next/router";
+import { Block } from "baseui/block";
+import { element, listItem, loader } from "./componentStyles";
+
 export const ComponentList = function () {
+  const router = useRouter()
   const [dataList, setDataList] = React.useState([]);
   const [loaded, setLoaded] = React.useState(false);
   
@@ -36,30 +46,63 @@ export const ComponentList = function () {
     },[]);
 
     let details: any;
-    if(msg) details = (<><span className={styles.itemName}>{props.comp.name}</span><br />
-                        <span className={styles.itemDescription}>{msg}</span></>);
-    else  details = <Spinner />
+    details = (<>
+                <div className={styles.itemName}>{props.comp.name}</div><br />
+                <div className={styles.itemDescription}>{msg}</div>
+              </>);
 
     return (
-      <div className={styles.listItem}>
-        <div>
-          <Avatar 
-            name = {props.comp.status}
-            src = {ICON_URL[props.comp.status]}
-            size="scale600"
-            overrides = {{
-              Root: {
-                style: {
-                  paddingTop: "9px",
-                  paddingRight: "8px"
+      <Block {...element}>
+        <Block {...listItem}>
+          <StatefulPopover
+            content={<>{props.comp.status}</>}
+            accessibilityType={'tooltip'}
+            triggerType={TRIGGER_TYPE.hover}
+          >
+          <span>
+            <Avatar 
+              name = {props.comp.status}
+              src = {ICON_URL[props.comp.status]}
+              size="scale600"
+              overrides = {{
+                Root: {
+                  style: {
+                    paddingTop: "2px",
+                    paddingRight: "12px",
+                  }
                 }
-              }
+              }}
+            >
+            </Avatar>
+          </span>
+          </StatefulPopover>
+          <div>{details}</div>
+        </Block>
+        <div>
+          <Link
+            href={{
+              pathname: `/component/edit`,
+              query: {id: props.comp.id}
             }}
           >
-          </Avatar>
+            <Block 
+              overrides ={{
+                Block : {
+                  style : {
+                    padding: "0px 16px",
+                    width: "92px",
+                    height: "34px",
+                  },
+                  props : {
+                    className: "secondary-button"
+                  }
+                }
+              }} 
+              >Edit
+            </Block>
+          </Link>
         </div>
-        <div>{details}</div>
-      </div>)
+      </Block>)
   };
 
   const GenerateList = function (props: any) {
@@ -93,5 +136,5 @@ export const ComponentList = function () {
   },[]);
 
   if(loaded)  return <GenerateList dataList={dataList} />;
-  else return <Spinner />;
+  else return <Block {...loader}><Spinner /></Block>;
 };
