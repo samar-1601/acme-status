@@ -65,7 +65,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
         <Block {...userImageWrapper}>
           <Image
             alt="User Image"
-            src={session?.user?.image ?? "/blankProfileImage.png"}
+            src={session?.user?.image ?? "/blankProfileImage.webp"}
             height={100}
             width={100}
             className="userProfileImage"
