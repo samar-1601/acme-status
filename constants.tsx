@@ -34,7 +34,7 @@ export enum StatusType {
  * @type {enum}
  */
 export enum SideBarMenu {
-  IncidentsView = "Incidents List View",
+  IncidentsView = "Incidents",
   CreateIncidents = "Create Incidents",
   Components = "Components",
 }

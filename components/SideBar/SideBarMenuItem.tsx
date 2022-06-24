@@ -37,8 +37,8 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
               color: `${
                 activeMenuItem == menuItem ? "rgb(20,47,93)" : "#F8F8FA"
               }`, // toggle the style based on the active page
-              padding: "20px",
-              margin: "20px",
+              padding: "16px",
+              margin: "10px",
               cursor: "pointer",
               textAlign: "center",
               borderRadius: "16px",

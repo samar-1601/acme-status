@@ -30,7 +30,7 @@ export default NextAuth({
   },
   callbacks: {
     async redirect() {
-      return "/incidents";
+      return "/";
     },
   },
 });

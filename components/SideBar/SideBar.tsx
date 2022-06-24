@@ -59,7 +59,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
     <Block {...sideBarStyle}>
       <Block {...sideBarHeaderName}>
         {/* <Image src="/Status_icon.png" height={40} width={50}></Image> */}
-        statuspage
+        Acme
       </Block>
       <Block {...userDetailsWrapper}>
         <Block {...userImageWrapper}>

@@ -26,7 +26,7 @@ export const sideBarHeaderName: BlockProps = {
         fontWeight: 500,
         background: "linear-gradient(rgba(0, 0, 0, 0.5), rgb(20,47,93))",
         color: "white",
-        padding: "20px 0px 30px 0px",
+        padding: "24px 0px 30px 0px",
         textAlign: "center",
         display: "flex",
         gap:"10px",
@@ -54,7 +54,8 @@ export const userDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "10px 20px 40px 20px",
+        margin: "10px 20px 10px 20px",
+        padding: "30px",
         backgroundColor: "rgb(16, 36 ,71)",
         borderRadius: "16px",
         display: "flex",
@@ -70,7 +71,7 @@ export const userImageWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginTop: "24px",
+        // marginTop: "32px",
       },
     },
   },
@@ -80,7 +81,9 @@ export const userNameWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "25px auto",
+        marginTop: "15px",
+        marginLeft: "auto",
+        marginRight: "auto",
         textAlign: "center",
         textTransform: "uppercase",
         fontSize: "1.25rem",
