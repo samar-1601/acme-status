@@ -34,9 +34,11 @@ export enum StatusType {
  * @type {enum}
  */
 export enum SideBarMenu {
+  Home = "Home",
   IncidentsView = "Incidents",
   CreateIncidents = "Create Incidents",
   Components = "Components",
+  ClientsPage = "Clients Page",
 }
 
 export const STATUS: STATUSType = {

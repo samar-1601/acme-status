@@ -10,6 +10,7 @@ import SideBar from "../SideBar/SideBar";
 // constants
 import { SideBarMenu } from "../../constants";
 import { IncidentsViewHomePage } from "../incidents/incidents-list-view/IncidentsHomePage";
+import { Block } from "baseui/block";
 
 /**
  * The HomePage/Landing page opened after the user has logged in successfully
@@ -30,10 +31,10 @@ const LandingPage = React.memo(() => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.IncidentsView} />
+        <SideBar activeItemID={SideBarMenu.Home} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <IncidentsViewHomePage />
+        <Block>Welcome to StatusPage!!!</Block>
       </PageSlot.Slot>
     </PageSlot>
   );
