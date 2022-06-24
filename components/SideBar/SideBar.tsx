@@ -58,7 +58,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
 
   return (
     <Block {...sideBarStyle}>
-      <Block {...sideBarHeaderName}>
+      <Block {...sideBarHeaderName} onClick={() => Router.push("/")} >
         {/* <Image src="/Status_icon.png" height={40} width={50}></Image> */}
         Acme
       </Block>

@@ -32,6 +32,7 @@ export const sideBarHeaderName: BlockProps = {
         gap: "10px",
         alignItems: "center",
         justifyContent: "center",
+        cursor: "pointer",
       },
     },
   },
