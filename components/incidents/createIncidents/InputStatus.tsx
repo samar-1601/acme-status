@@ -162,7 +162,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                 Bar: {
                   style: ({ $theme }) => ({
                     cursor: "pointer",
-                    margin: "25px 110px 0px 110px",
+                    margin: "25px 10% 0px",
                   }),
                   props: {
                     className: "bar",
