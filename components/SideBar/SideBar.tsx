@@ -22,6 +22,7 @@ import {
   userDetailsWrapper,
   userImageWrapper,
   userNameWrapper,
+  emailWrapper,
 } from "./SideBarStyles";
 import { hasListLoadedStyle } from "../incidents/incidents-list-view/styles/listStyles";
 
@@ -72,6 +73,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
           ></Image>
         </Block>
         <Block {...userNameWrapper}>{session.user?.name ?? "User Name"}</Block>
+        <Block {...emailWrapper}>{session.user?.email ?? "User Name"}</Block>
       </Block>
       <Block>
         <Block>
@@ -85,20 +87,21 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
           />
           <SideBarMenuItem
             onClick={() => {
-              setActiveMenuItem(SideBarMenu.CreateIncidents);
-              Router.push("/incident/new");
-            }}
-            menuItem={SideBarMenu.CreateIncidents}
-            activeMenuItem={activeMenuItem}
-          />
-          <SideBarMenuItem
-            onClick={() => {
               setActiveMenuItem(SideBarMenu.Components);
               Router.push("/component");
             }}
             menuItem={SideBarMenu.Components}
             activeMenuItem={activeMenuItem}
           />
+          <a
+            href="https://client-incident-list-view.netlify.app/"
+            target="_blank"
+          >
+            <SideBarMenuItem
+              menuItem={SideBarMenu.ClientsPage}
+              activeMenuItem={activeMenuItem}
+            />
+          </a>
         </Block>
       </Block>
       <Block

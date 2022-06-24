@@ -16,7 +16,7 @@ import { SideBarMenu } from "../../constants";
 interface Props {
   activeMenuItem: SideBarMenu;
   menuItem: SideBarMenu;
-  onClick: any;
+  onClick?: any;
 }
 
 /**
@@ -31,9 +31,7 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
         overrides={{
           Block: {
             style: {
-              backgroundColor: `${
-                activeMenuItem == menuItem ? "white" : ""
-              }`, // toggle the style based on the active page
+              backgroundColor: `${activeMenuItem == menuItem ? "white" : ""}`, // toggle the style based on the active page
               color: `${
                 activeMenuItem == menuItem ? "rgb(20,47,93)" : "#F8F8FA"
               }`, // toggle the style based on the active page

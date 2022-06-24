@@ -29,7 +29,7 @@ export const sideBarHeaderName: BlockProps = {
         padding: "24px 0px 30px 0px",
         textAlign: "center",
         display: "flex",
-        gap:"10px",
+        gap: "10px",
         alignItems: "center",
         justifyContent: "center",
       },
@@ -87,6 +87,18 @@ export const userNameWrapper: BlockProps = {
         textAlign: "center",
         textTransform: "uppercase",
         fontSize: "1.25rem",
+      },
+    },
+  },
+};
+
+export const emailWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        fontSize: "0.85rem",
+        color: "rgb(66,78,100)",
+        // marginTop: "2px",
       },
     },
   },
