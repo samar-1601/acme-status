@@ -55,7 +55,7 @@
         @apply hover:bg-secondary-hover;
         @apply text-black;
         @apply cursor-pointer;
-        @apply border-2;
+        @apply border;
         @apply border-border-color;
         @apply flex justify-center items-center;
     }

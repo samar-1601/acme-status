@@ -19,13 +19,7 @@ export const buttonAlignment: BlockProps = {
       style: {
         display: "flex",
         flexDirection: "row-reverse",
-        // position: "fixed",
-        // left: "0",
-        // bottom: "0",
-        // width: "100%",
-        // height: "7%",
         paddingBottom: "20px",
-        // backgroundColor: "white",
         alignItems: "center",
       },
     },

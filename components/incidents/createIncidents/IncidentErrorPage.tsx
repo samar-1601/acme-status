@@ -1,7 +1,12 @@
-import { Block } from "baseui/block";
+//lib
 import Link from "next/link";
+
+//components
+import { Block } from "baseui/block";
 import { IncidentErrorPageProps } from "../../../variableTypes";
 import { errorPageStyle, mainStyle } from "./styles/BlockStyles";
+
+/*Will be displayed if error in processing incident update request or fetching components* */
 
 export default function IncidentErrorPage(props: IncidentErrorPageProps) {
   return (
