@@ -1,7 +1,15 @@
+// lib
+import { useState } from "react";
+
+// components
 import { Block } from "baseui/block";
 import Router from "next/router";
-import { useState } from "react";
+import { SideBarMenuItem } from "./SideBarMenuItem";
+
+// constants
 import { SideBarMenu } from "../../constants";
+
+// styles
 import { sideBarHeaderName, sideBarStyle } from "./SideBarStyles";
 
 interface Props {
@@ -11,85 +19,34 @@ interface Props {
 const SideBar: React.FC<Props> = ({ activeItemID }) => {
   const [activeMenuItem, setActiveMenuItem] =
     useState<SideBarMenu>(activeItemID);
-  const handleClick = (menuItem: SideBarMenu) => {
-    setActiveMenuItem(menuItem);
-    if (menuItem == SideBarMenu.IncidentsView) Router.push("/incidents");
-    else if (menuItem == SideBarMenu.CreateIncidents)
-      Router.push("/incident/new");
-    else if (menuItem == SideBarMenu.Components) Router.push("/component");
-  };
+
   return (
     <Block {...sideBarStyle}>
       <Block {...sideBarHeaderName}>statuspage</Block>
-      <Block
-        onClick={() => handleClick(SideBarMenu.IncidentsView)}
-        overrides={{
-          Block: {
-            style: {
-              backgroundColor: `${
-                activeMenuItem == SideBarMenu.IncidentsView ? "lightblue" : ""
-              }`, // toggle the style based on the active page
-              color: `${
-                activeMenuItem == SideBarMenu.IncidentsView
-                  ? "rgb(20,47,93)"
-                  : "#F8F8FA"
-              }`, // toggle the style based on the active page
-              padding: "20px",
-              cursor: "pointer",
-              textAlign: "center",
-            },
-            props: { className: "hoverSideBarOption" },
-          },
+      <SideBarMenuItem
+        onClick={() => {
+          setActiveMenuItem(SideBarMenu.IncidentsView);
+          Router.push("/incidents");
         }}
-      >
-        Incidents List View
-      </Block>
-      <Block
-        onClick={() => handleClick(SideBarMenu.CreateIncidents)}
-        overrides={{
-          Block: {
-            style: {
-              backgroundColor: `${
-                activeMenuItem == SideBarMenu.CreateIncidents ? "lightblue" : ""
-              }`, // toggle the style based on the active page
-              color: `${
-                activeMenuItem == SideBarMenu.CreateIncidents
-                  ? "rgb(20,47,93)"
-                  : "#F8F8FA"
-              }`, // toggle the style based on the active page
-              padding: "20px",
-              cursor: "pointer",
-              textAlign: "center",
-            },
-            props: { className: "hoverSideBarOption" },
-          },
+        menuItem={SideBarMenu.IncidentsView}
+        activeMenuItem={activeMenuItem}
+      />
+      <SideBarMenuItem
+        onClick={() => {
+          setActiveMenuItem(SideBarMenu.CreateIncidents);
+          Router.push("/incident/new");
         }}
-      >
-        Incidents Form
-      </Block>
-      <Block
-        onClick={() => handleClick(SideBarMenu.Components)}
-        overrides={{
-          Block: {
-            style: {
-              backgroundColor: `${
-                activeMenuItem == SideBarMenu.Components ? "lightblue" : ""
-              }`, // toggle the style based on the active page
-              color: `${
-                activeMenuItem == SideBarMenu.Components
-                  ? "rgb(20,47,93)"
-                  : "#F8F8FA"
-              }`, // toggle the style based on the active page
-              padding: "20px",
-              cursor: "pointer",
-              textAlign: "center",
-            },
-            props: { className: "hoverSideBarOption" },
-          },
+        menuItem={SideBarMenu.CreateIncidents}
+        activeMenuItem={activeMenuItem}
+      />
+      <SideBarMenuItem
+        onClick={() => {
+          setActiveMenuItem(SideBarMenu.Components);
+          Router.push("/component");
         }}
-      >
-        Components
-      </Block>
+        menuItem={SideBarMenu.Components}
+        activeMenuItem={activeMenuItem}
+      />
     </Block>
   );
 };
