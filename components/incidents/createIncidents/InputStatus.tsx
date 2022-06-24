@@ -109,7 +109,12 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
               const target = e.target as Element;
               props.updateStatus(target.innerHTML);
             }}
-            overrides={{ Block: { style: { cursor: "pointer" } } }}
+            overrides={{
+              Block: {
+                style: { cursor: "pointer" },
+                props: { className: "block-hover-state" },
+              },
+            }}
           >
             {item}
           </FlexGridItem>
@@ -144,6 +149,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                   style: ({ $theme }) => ({
                     cursor: "pointer",
                     margin: "25px 10% 0px",
+                    height: "6px",
                   }),
                   props: {
                     className: "bar",

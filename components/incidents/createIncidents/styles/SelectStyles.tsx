@@ -11,13 +11,16 @@ export const selectOptionStyle: SelectProps = {
     Root: {
       style: {
         width: "300px",
+        borderRadius: "8px",
       },
     },
     ControlContainer: {
-      style: {
+      style: ({ $isFocused }) => ({
         backgroundColor: "white",
         borderRadius: "8px",
-      },
+        borderColor: $isFocused ? "blue" : "#E6E6E9",
+        borderWidth: "1px",
+      }),
     },
   },
 };

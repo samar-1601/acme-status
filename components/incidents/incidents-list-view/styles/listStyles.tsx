@@ -100,7 +100,7 @@ export const componentItem: BlockProps = {
         paddingRight: "1.2rem",
         paddingTop: "2px",
         display: "inline",
-        alignContent:"center",
+        alignContent: "center",
         alignItems: "center",
       },
     },
@@ -207,11 +207,9 @@ export const editIncidentButton: BlockProps = {
       style: {
         marginBottom: "80px",
         padding: "0px 16px",
-        border: "2px solid rgb(230 230 233)",
         height: "34px",
         width: "92px",
       },
     },
   },
 };
-

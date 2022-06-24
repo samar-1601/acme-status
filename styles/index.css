@@ -79,4 +79,8 @@
     .userProfileImage {
         @apply rounded-full;
     }
+
+    .block-hover-state{
+        @apply hover:text-hover-blue;
+    }
 }

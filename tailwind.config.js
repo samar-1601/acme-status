@@ -17,6 +17,7 @@ module.exports = {
         // 'side-bar-option-hover-bg' : "rgb(16, 36, 71)",
         'side-bar-option-hover-bg' : "rgba(0, 0 ,0, 0.2)",
         'side-bar-option-hover-text' : "#F8F8FA",
+        'hover-blue': 'blue',
       },
       height: {
         'footer-height': "7%",

@@ -40,7 +40,7 @@ export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
           fontSize: "inhertit",
           padding: "10px 14px 10px 14px",
           boxSizing: "border-box",
-          borderWidth: "2px",
+          borderWidth: "1px",
           ":hover": {
             borderColor: "#0E61F6",
           },

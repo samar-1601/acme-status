@@ -5,15 +5,15 @@ import { useSession } from "next-auth/react";
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { PageSlot } from "../components/PageSlot/PageSlot";
-import { IncidentsViewHomePage } from "../components/incidents/incidents-list-view/IncidentsHomePage";
-import SideBar from "../components/SideBar/SideBar";
+import { PageSlot } from "../../components/PageSlot/PageSlot";
+import { IncidentsViewHomePage } from "../../components/incidents/incidents-list-view/IncidentsHomePage";
+import SideBar from "../../components/SideBar/SideBar";
 
 // constants
-import { SideBarMenu } from "../constants";
+import { SideBarMenu } from "../../constants";
 
 // styles
-import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
+import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 
 export default () => {
   const { push } = useRouter();

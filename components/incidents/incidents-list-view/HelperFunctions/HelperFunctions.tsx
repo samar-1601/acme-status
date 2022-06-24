@@ -62,11 +62,11 @@ const getComponents = (incident: any): JSX.Element => {
         (
           <Block key={component["name"]} {...componentItem}>
             <Block {...componentItemIconWrapper}>
-            <Image // NextJS component for rendering Image
-              src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
-              height="16px"
-              width="16px"
-            ></Image>
+              <Image // NextJS component for rendering Image
+                src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
+                height="16px"
+                width="16px"
+              ></Image>
             </Block>
             {component["name"]}
           </Block>
@@ -116,7 +116,7 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
       </Block>
       <Link
         href={{
-          pathname: `/incident/update/${incident["id"]}`, // send the incident ID to the update page address
+          pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
         }}
       >
         <Block {...editIncidentButton} className="secondary-button">
