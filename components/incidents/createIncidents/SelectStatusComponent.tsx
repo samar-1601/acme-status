@@ -1,5 +1,5 @@
 //lib
-import React, { useEffect } from "react";
+import React from "react";
 
 //components
 import { Select } from "baseui/select";

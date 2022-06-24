@@ -51,7 +51,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
   const handleSubmit = (payload: any) => {
     setIsSubmitClicked(true);
     if (payload.incident.name == "") {
-      dequeue();
+      // dequeue();
       enqueue(
         {
           message: "Incident Name can't be Blank!",
@@ -81,7 +81,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
             throw json.error;
           }
           // throw json;
-          dequeue();
+          // dequeue();
           enqueue(
             {
               message: "Successfully updated Incident",
@@ -95,7 +95,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
         })
         .catch((err) => {
           console.log(err);
-          dequeue();
+          // dequeue();
           // console.log(err);
           enqueue(
             {
