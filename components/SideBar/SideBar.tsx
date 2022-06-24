@@ -1,5 +1,6 @@
 // lib
 import { useState } from "react";
+import * as React from "react"
 
 // components
 import { Block } from "baseui/block";
@@ -13,10 +14,18 @@ import { SideBarMenu } from "../../constants";
 import { sideBarHeaderName, sideBarStyle } from "./SideBarStyles";
 
 interface Props {
+  /**
+   * the active/selected item currently on the sidebar
+   */
   activeItemID: SideBarMenu;
 }
 
-const SideBar: React.FC<Props> = ({ activeItemID }) => {
+/**
+ * SideBar component
+ * @returns sidebar react component for the app
+ */
+const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
+  // state stroing the currently selected sidebar menu-item
   const [activeMenuItem, setActiveMenuItem] =
     useState<SideBarMenu>(activeItemID);
 
@@ -49,6 +58,6 @@ const SideBar: React.FC<Props> = ({ activeItemID }) => {
       />
     </Block>
   );
-};
+});
 
 export default SideBar;

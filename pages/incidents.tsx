@@ -1,4 +1,3 @@
-import IncidentsHome from "../components/IncidentsHome";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Block } from "baseui/block";
@@ -8,6 +7,7 @@ import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/
 import { PageSlot } from "../components/PageSlot/PageSlot";
 import SideBar from "../components/SideBar/SideBar";
 import { SideBarMenu } from "../constants";
+import { IncidentsViewHomePage } from "../components/incidents/incidents-list-view/IncidentsHomePage";
 
 export default () => {
   const { push } = useRouter();
@@ -35,7 +35,7 @@ export default () => {
         <SideBar activeItemID={SideBarMenu.IncidentsView} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <IncidentsHome />
+        <IncidentsViewHomePage />
       </PageSlot.Slot>
     </PageSlot>
   );

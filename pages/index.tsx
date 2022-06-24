@@ -7,7 +7,7 @@ import { Spinner } from "baseui/spinner";
 import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import { useSession } from "next-auth/react";
 import WelcomePage from "../components/WelcomePage/WelcomePage";
-import LandingPage from "../components/HomePage/HomePage";
+import LandingPage from "../components/LandingPage/LandingPage";
 
 let numberofLoads: number = 0;
 
@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Status App</title>
+        <title>statusapp</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

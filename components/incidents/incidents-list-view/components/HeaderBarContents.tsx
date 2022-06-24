@@ -37,6 +37,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
         <Block
           className="secondary-button"
           onClick={() => {
+            // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
             localStorage.removeItem("loadingCount");
             signOut();
           }}
