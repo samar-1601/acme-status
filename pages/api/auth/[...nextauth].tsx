@@ -29,14 +29,8 @@ export default NextAuth({
     secret: process.env.SECRET,
   },
   callbacks: {
-    // async jwt({ token, account}) {
-    //   if (account?.accessToken) {
-    //     token.accessToken = account.accessToken;
-    //   }
-    //   return token;
-    // },
     async redirect() {
-      return "/";
+      return "/incidents";
     },
   },
 });

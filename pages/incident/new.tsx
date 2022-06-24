@@ -7,6 +7,7 @@ import { hasListLoadedStyle } from "../../components/incidents/incidents-list-vi
 import { Spinner } from "baseui/spinner";
 import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
+import { SideBarMenu } from "../../constants";
 
 export default () => {
   const { push } = useRouter();
@@ -30,7 +31,7 @@ export default () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-      <SideBar activeItemID={1} />
+        <SideBar activeItemID={SideBarMenu.CreateIncidents} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <IncidentCreation />

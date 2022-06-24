@@ -27,6 +27,18 @@ export enum StatusType {
   Scheduled = "scheduled",
   InProgress = "in_progress",
 }
+
+/**
+ * SideBarMenuItems
+ * menu items for sidebar
+ * @type {enum}
+ */
+export enum SideBarMenu {
+  IncidentsView = "Incidents List View",
+  CreateIncidents = "Create Incidents",
+  Components = "Components",
+}
+
 export const STATUS: STATUSType = {
   operational: 1,
   degraded_performance: 2,
@@ -122,10 +134,9 @@ export const getIncidentStatusFromPost = (id: string) => {
 };
 
 export const ICON_URL = {
-  "partial_outage": "/paritial_outage.png",
-  "major_outage": "/major_outage.png",
-  "degraded_performance": "/degraded_performance.png",
-  "under_maintenance": "/under_maintenance.png",
-  "operational": "/operational2.webp"
-}
-
+  partial_outage: "/paritial_outage.png",
+  major_outage: "/major_outage.png",
+  degraded_performance: "/degraded_performance.png",
+  under_maintenance: "/under_maintenance.png",
+  operational: "/operational2.webp",
+};

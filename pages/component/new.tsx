@@ -10,6 +10,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
+import { SideBarMenu } from "../../constants";
 
 const AddComponents: React.FC = () => {
   const { push } = useRouter();
@@ -33,7 +34,7 @@ const AddComponents: React.FC = () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={2} />
+        <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block className={styles.page}>

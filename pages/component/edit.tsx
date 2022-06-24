@@ -6,6 +6,7 @@ import { ComponentCreationForm } from "../../components/ComponentCreation/Compon
 import { useRouter } from "next/router";
 import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
+import { SideBarMenu } from "../../constants";
 
 const EditComponents = function () {
   const router = useRouter();
@@ -13,7 +14,7 @@ const EditComponents = function () {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-      <SideBar activeItemID={2} />
+        <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <div className={styles.page}>

@@ -1,29 +1,39 @@
 import { Block } from "baseui/block";
 import Router from "next/router";
 import { useState } from "react";
+import { SideBarMenu } from "../../constants";
 import { sideBarHeaderName, sideBarStyle } from "./SideBarStyles";
 
 interface Props {
-  activeItemID: number;
+  activeItemID: SideBarMenu;
 }
+
 const SideBar: React.FC<Props> = ({ activeItemID }) => {
-  const [page, setPage] = useState(activeItemID);
-  const handleClick = (id: number) => {
-    setPage(id);
-    if (id == 0) Router.push("/incidents");
-    else if (id == 1) Router.push("/incident/new");
-    else if (id == 2) Router.push("/component");
+  const [activeMenuItem, setActiveMenuItem] =
+    useState<SideBarMenu>(activeItemID);
+  const handleClick = (menuItem: SideBarMenu) => {
+    setActiveMenuItem(menuItem);
+    if (menuItem == SideBarMenu.IncidentsView) Router.push("/incidents");
+    else if (menuItem == SideBarMenu.CreateIncidents)
+      Router.push("/incident/new");
+    else if (menuItem == SideBarMenu.Components) Router.push("/component");
   };
   return (
     <Block {...sideBarStyle}>
       <Block {...sideBarHeaderName}>statuspage</Block>
       <Block
-        onClick={() => handleClick(0)}
+        onClick={() => handleClick(SideBarMenu.IncidentsView)}
         overrides={{
           Block: {
             style: {
-              backgroundColor: `${page == 0 ? "lightblue" : ""}`, // toggle the style based on the active page
-              color: `${page == 0 ? "rgb(20,47,93)" : "#F8F8FA"}`, // toggle the style based on the active page
+              backgroundColor: `${
+                activeMenuItem == SideBarMenu.IncidentsView ? "lightblue" : ""
+              }`, // toggle the style based on the active page
+              color: `${
+                activeMenuItem == SideBarMenu.IncidentsView
+                  ? "rgb(20,47,93)"
+                  : "#F8F8FA"
+              }`, // toggle the style based on the active page
               padding: "20px",
               cursor: "pointer",
               textAlign: "center",
@@ -35,12 +45,18 @@ const SideBar: React.FC<Props> = ({ activeItemID }) => {
         Incidents List View
       </Block>
       <Block
-        onClick={() => handleClick(1)}
+        onClick={() => handleClick(SideBarMenu.CreateIncidents)}
         overrides={{
           Block: {
             style: {
-              backgroundColor: `${page == 1 ? "lightblue" : ""}`, // toggle the style based on the active page
-              color: `${page == 1 ? "rgb(20,47,93)" : "#F8F8FA"}`, // toggle the style based on the active page
+              backgroundColor: `${
+                activeMenuItem == SideBarMenu.CreateIncidents ? "lightblue" : ""
+              }`, // toggle the style based on the active page
+              color: `${
+                activeMenuItem == SideBarMenu.CreateIncidents
+                  ? "rgb(20,47,93)"
+                  : "#F8F8FA"
+              }`, // toggle the style based on the active page
               padding: "20px",
               cursor: "pointer",
               textAlign: "center",
@@ -52,12 +68,18 @@ const SideBar: React.FC<Props> = ({ activeItemID }) => {
         Incidents Form
       </Block>
       <Block
-        onClick={() => handleClick(2)}
+        onClick={() => handleClick(SideBarMenu.Components)}
         overrides={{
           Block: {
             style: {
-              backgroundColor: `${page == 2 ? "lightblue" : ""}`, // toggle the style based on the active page
-              color: `${page == 2 ? "rgb(20,47,93)" : "#F8F8FA"}`, // toggle the style based on the active page
+              backgroundColor: `${
+                activeMenuItem == SideBarMenu.Components ? "lightblue" : ""
+              }`, // toggle the style based on the active page
+              color: `${
+                activeMenuItem == SideBarMenu.Components
+                  ? "rgb(20,47,93)"
+                  : "#F8F8FA"
+              }`, // toggle the style based on the active page
               padding: "20px",
               cursor: "pointer",
               textAlign: "center",
