@@ -6,7 +6,6 @@ import { Block } from "baseui/block";
 
 // constants
 import { SideBarMenu } from "../../constants";
-import { BsBorderBottom } from "react-icons/bs";
 
 /**
  * Props for a SideBarMenuItem
@@ -43,7 +42,11 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
               borderRadius: "8px",
               border: "0.1px solid #F8F8FA",
             },
-            props: { className: `${activeMenuItem != menuItem?"hoverSideBarOption":""}` },
+            props: {
+              className: `${
+                activeMenuItem != menuItem ? "hoverSideBarOption" : ""
+              }`,
+            },
           },
         }}
       >

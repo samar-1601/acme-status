@@ -11,6 +11,8 @@ import SideBar from "../SideBar/SideBar";
 import { SideBarMenu } from "../../constants";
 import { IncidentsViewHomePage } from "../incidents/incidents-list-view/IncidentsHomePage";
 import { Block } from "baseui/block";
+import Image from "next/image";
+import { landingPageContainerStyle, landingPageDescriptionStyle, landingPageHeaderStyle } from "./LandingPageStyles";
 
 /**
  * The HomePage/Landing page opened after the user has logged in successfully
@@ -34,7 +36,11 @@ const LandingPage = React.memo(() => {
         <SideBar activeItemID={SideBarMenu.Home} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <Block>Welcome to StatusPage!!!</Block>
+        <Block {...landingPageContainerStyle}>
+          <Block {...landingPageHeaderStyle}>Welcome to StatusPage</Block>
+          <Image src="/landingPage.svg" height={600} width={600}></Image>
+          <Block {...landingPageDescriptionStyle}>Managing, Updating and Creating your Incidents & Components is now easy !!</Block>
+        </Block>
       </PageSlot.Slot>
     </PageSlot>
   );
