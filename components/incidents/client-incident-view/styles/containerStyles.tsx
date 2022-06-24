@@ -8,7 +8,6 @@ export const pageContainer: BlockProps = {
         fontFamily:
           "'proxima-nova', 'Helvetica Neue', Helvetica, Arial, Sans-Serif",
         margin: "auto",
-        backgroundColor: "#F8F8FA",
       },
     },
   },

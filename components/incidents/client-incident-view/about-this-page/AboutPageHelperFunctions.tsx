@@ -28,10 +28,15 @@ import {
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
 
-export const legendColorDeterminer = (value: ComponentStatusType) => {
-  if (value== ComponentStatusType.MajorOutage) return "#e74c3c"; // red
-  if (value == ComponentStatusType.Operational) return "#2fcc66"; //green
-  if (value == ComponentStatusType.PartialOutage) return "#f1c40f"; // yellow
+/**
+ * function for determining the color for a component-status-type
+ * @param componentStatusType Component Status type
+ * @returns corresonding color for the value
+ */
+export const legendColorDeterminer = (componentStatusType: ComponentStatusType) => {
+  if (componentStatusType== ComponentStatusType.MajorOutage) return "#e74c3c"; // red
+  if (componentStatusType == ComponentStatusType.Operational) return "#2fcc66"; //green
+  if (componentStatusType == ComponentStatusType.PartialOutage) return "#f1c40f"; // yellow
 
   return "rgb(179, 186, 197)"; // grey
 };
@@ -66,7 +71,7 @@ const barColorDeterminer = (value: number) => {
  * @returns formatted date for a given bar's date
  */
 const getDateforBar = (day: number) => {
-  const daysAgo = totalDays - day;
+  const daysAgo = totalDays - day - 1;
   let date = new Date();
   date.setDate(date.getDate() - daysAgo);
   return formatDate(date, PageType.Completed); // get formatted date in "08 June 2022" format
@@ -82,12 +87,11 @@ const getColorFullBars = (count: number) => {
   const barValues = GenerateBarsData(count);
   for (let i = 0; i < count; i++) {
     barsList.push(
-      <StatefulPopover
+      <StatefulPopover // BASE UI component to show values when the bar is hovered
         key={`bar${i}`}
         content={() => (
           <Block {...hoverBox}>
             <Block {...hoverDateStyle}>{getDateforBar(i)}</Block>
-            <Block {...hoverRelatedTextStyle}>Related</Block>
           </Block>
         )}
         triggerType={TRIGGER_TYPE.hover}
