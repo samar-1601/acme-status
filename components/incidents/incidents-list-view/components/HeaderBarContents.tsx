@@ -3,6 +3,7 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
+import Image from "next/image";
 
 // styles
 import {
@@ -11,9 +12,6 @@ import {
   headerBarText,
   headerBar,
 } from "../styles/navStyles";
-import { signOutButton } from "../styles/listStyles";
-import { signOut } from "next-auth/react";
-import Image from "next/image";
 
 interface Props {
   headerText: string; // text to render in the header
@@ -33,17 +31,6 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
           <Block {...headerBarText} className="header">
             {headerText}
           </Block>
-        </Block>
-        <Block
-          className="secondary-button"
-          onClick={() => {
-            // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
-            localStorage.removeItem("loadingCount");
-            signOut();
-          }}
-          {...signOutButton}
-        >
-          Sign Out
         </Block>
       </Block>
     );

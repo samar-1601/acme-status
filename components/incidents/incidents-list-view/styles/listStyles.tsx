@@ -214,13 +214,3 @@ export const editIncidentButton: BlockProps = {
   },
 };
 
-export const signOutButton: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        padding: "10px 25px",
-        display: "inline",
-      },
-    },
-  },
-};

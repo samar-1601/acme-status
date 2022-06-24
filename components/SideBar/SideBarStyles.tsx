@@ -30,4 +30,17 @@ export const sideBarHeaderName: BlockProps = {
     },
   },
 };
+export const signOutButton: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        padding: "4px 16px",
+        margin: "auto auto 40px auto",
+        width: "142px",
+        height: "42px",
+        textAlign: "center",
+      },
+    },
+  },
+};
 
