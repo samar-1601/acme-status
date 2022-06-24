@@ -1,29 +1,32 @@
-import { Block } from "baseui/block";
-import { StatefulMenu } from "baseui/menu";
-import Head from "next/head";
-import Router from "next/router";
-import { Avatar } from "baseui/avatar";
-import { Spinner } from "baseui/spinner";
-import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
+// lib
 import { useSession } from "next-auth/react";
+import Head from "next/head";
+
+// components
+import { Block } from "baseui/block";
+import { Spinner } from "baseui/spinner";
 import WelcomePage from "../components/WelcomePage/WelcomePage";
 import LandingPage from "../components/LandingPage/LandingPage";
 
-let numberofLoads: number = 0;
+// styles
+import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 
 const Home = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession(); // get user's session details
+
+  // if status not confirmed
   if (status === "loading") {
-    numberofLoads++;
     return (
       <Block {...hasListLoadedStyle}>
         <Spinner />
       </Block>
     );
   }
-  if (!session) {
-    return <WelcomePage />;
-  }
+
+  // is user not logged in redirect to welcome page
+  if (!session) return <WelcomePage />;
+
+  // if logged in, take to Landing Page
   return (
     <>
       <Head>

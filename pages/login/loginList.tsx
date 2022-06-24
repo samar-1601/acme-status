@@ -52,7 +52,7 @@ const LoginProvidersList: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Status App</title>
+        <title>statusapp</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block {...loginListView}>

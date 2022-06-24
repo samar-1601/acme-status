@@ -1,23 +1,31 @@
+// lib
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+
+// components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-
-import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 import { PageSlot } from "../components/PageSlot/PageSlot";
-import SideBar from "../components/SideBar/SideBar";
-import { SideBarMenu } from "../constants";
 import { IncidentsViewHomePage } from "../components/incidents/incidents-list-view/IncidentsHomePage";
+import SideBar from "../components/SideBar/SideBar";
+
+// constants
+import { SideBarMenu } from "../constants";
+
+// styles
+import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
 
 export default () => {
   const { push } = useRouter();
-  const { data: session, status } = useSession({
+  const { data: session, status } = useSession({ // get user's session details
     required: true,
     onUnauthenticated: () => {
+      // if user is unauthenticated take him to the login page
       push("/login/loginList");
     },
   });
 
+  // if status not confirmed
   if (status == "loading") {
     return (
       <Block {...hasListLoadedStyle}>
@@ -25,9 +33,6 @@ export default () => {
       </Block>
     );
   }
-
-  if (status != "authenticated")
-    return <Block> You are unauthenticated. this is a protected page.</Block>;
 
   return (
     <PageSlot>

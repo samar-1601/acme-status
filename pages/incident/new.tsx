@@ -11,13 +11,15 @@ import { SideBarMenu } from "../../constants";
 
 export default () => {
   const { push } = useRouter();
-  const { data: session, status } = useSession({
+  const { data: session, status } = useSession({ // get user's session details
     required: true,
     onUnauthenticated: () => {
+      // if user is unauthenticated take him to the login page
       push("/login/loginList");
     },
   });
 
+  // if status not confirmed
   if (status == "loading") {
     return (
       <Block {...hasListLoadedStyle}>
@@ -26,8 +28,6 @@ export default () => {
     );
   }
 
-  if (status != "authenticated")
-    return <Block> You are unauthenticated. this is a protected page.</Block>;
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
