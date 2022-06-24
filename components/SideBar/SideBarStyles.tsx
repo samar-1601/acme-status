@@ -1,6 +1,5 @@
 import { BlockProps } from "baseui/block";
 
-
 export const sideBarStyle: BlockProps = {
   overrides: {
     Block: {
@@ -11,6 +10,9 @@ export const sideBarStyle: BlockProps = {
         backgroundColor: "rgb(20,47,93)",
         color: "white",
         width: "100%",
+        height: "100vh",
+        top: 0,
+        position: "sticky",
       },
     },
   },
@@ -43,4 +45,3 @@ export const signOutButton: BlockProps = {
     },
   },
 };
-
