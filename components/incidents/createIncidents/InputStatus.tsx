@@ -29,21 +29,6 @@ function calculateStatus(status: String): number {
   }
 }
 
-//function to get color code of status text
-function getColor(status: String): string {
-  if (status == "Investigating") {
-    return "red";
-  }
-  if (status == "Identified") {
-    return "#8B8000";
-  }
-  if (status == "Monitoring") {
-    return "#FF8C00";
-  } else {
-    return "#006400";
-  }
-}
-
 //funtion to get color code of progress bar
 function getStatusBarColor(status: String): string {
   if (status == "Investigating") {
@@ -119,11 +104,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            color={
-              item != props.incidentStatus
-                ? "black"
-                : getColor(props.incidentStatus)
-            }
+            color={item != props.incidentStatus ? "black" : "blue"}
             onClick={(e: Event) => {
               const target = e.target as Element;
               props.updateStatus(target.innerHTML);

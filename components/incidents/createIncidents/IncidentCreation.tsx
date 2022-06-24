@@ -38,7 +38,7 @@ export default function IncidentCreation() {
      */
     setIsSubmitClicked(true);
     if (payload.incident.name == "") {
-      dequeue();
+      // dequeue();
       enqueue(
         {
           message: "Incident Name can't be Blank!",
@@ -62,7 +62,7 @@ export default function IncidentCreation() {
             throw json.error; //if 422 error in POST throw error to catch section
           }
           console.log(json);
-          dequeue();
+          // dequeue();
           enqueue(
             {
               message: "Successfully submitted form details",
@@ -78,7 +78,7 @@ export default function IncidentCreation() {
         //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
         .catch(() => {
           //display error in snackBar and set loading state of cursor to false
-          dequeue();
+          // dequeue();
           enqueue(
             {
               message: "Failed to Submit Form. Please Try Again!",
