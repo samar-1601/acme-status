@@ -96,7 +96,7 @@ export const navbarWrapper: BlockProps = {
       style: {
         display: "flex",
         justifyContent: "space-between",
-        borderBottom: "5px rgb(205, 203, 203) solid",
+        borderBottom: "2px rgb(205, 203, 203) solid",
       },
     },
   },
@@ -137,7 +137,7 @@ export const createIncidentButton: BlockProps = {
 };
 
 export const navActiveItem = {
-  borderBottom: "rgb(32, 65, 230) solid 5px",
+  borderBottom: "rgb(32, 65, 230) solid 2px",
   color: "rgb(32, 65, 230) !important",
   fontWeight: "600",
   paddingRight: "14px",

@@ -41,7 +41,7 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
               margin: "10px",
               cursor: "pointer",
               textAlign: "center",
-              borderRadius: "16px",
+              borderRadius: "8px",
             },
             props: { className: "hoverSideBarOption" },
           },

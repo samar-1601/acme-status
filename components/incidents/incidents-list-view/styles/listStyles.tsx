@@ -15,6 +15,7 @@ export const listItem: BlockProps = {
         margin: "10px auto 20px auto",
         width: "79%",
         borderTop: "4px rgb(243, 214, 54) solid",
+        borderRadius: "8px",
         boxShadow:
           "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
       },
