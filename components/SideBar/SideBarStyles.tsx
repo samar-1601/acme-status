@@ -26,7 +26,7 @@ export const sideBarHeaderName: BlockProps = {
         fontWeight: 500,
         background: "linear-gradient(rgba(0, 0, 0, 0.5), rgb(20,47,93))",
         color: "white",
-        padding: "24px 0px 30px 0px",
+        padding: "24px 0px",
         textAlign: "center",
         display: "flex",
         gap: "10px",
@@ -54,7 +54,7 @@ export const userDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "10px 20px 10px 20px",
+        margin: "10px 20px 20px 20px",
         padding: "30px",
         backgroundColor: "rgb(16, 36 ,71)",
         borderRadius: "8px",
