@@ -86,7 +86,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     ) : (
       // If the page has loaded and has data to display
       <InfiniteLoader
-        isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
+        isRowLoaded={({ index }) => !hasMore || index < (dataList.length??0)} // whether the current row is loaded
         loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
         rowCount={dataList.length + 1} // total row count of the data to be displayed
       >

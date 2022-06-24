@@ -22,7 +22,7 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signIn: "/login/loginList",
+    signIn: "/login/loginList", // page used for signIn redirect (a list of login providers)
   },
   secret: process.env.SECRET,
   jwt: {

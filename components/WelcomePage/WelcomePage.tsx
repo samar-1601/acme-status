@@ -28,7 +28,7 @@ const WelcomePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Status App</title>
+        <title>statusapp</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block {...welcomeHeaderWrapper}>
@@ -55,9 +55,7 @@ const WelcomePage: React.FC = () => {
       </Block>
       <Block {...contentBlock}>
         {/*souvik*/}
-        <Block
-          {...rowContent}
-        >
+        <Block {...rowContent}>
           <Block {...textProps}>
             <Block {...headerStyle}>Incidents</Block>
             <Block {...descriptionContentStyle}>
@@ -90,9 +88,7 @@ const WelcomePage: React.FC = () => {
             <img src="/components.png" />
           </Block>
         </Block>
-        <Block
-          {...rowContent}
-        >
+        <Block {...rowContent}>
           <Block {...textProps}>
             <Block {...headerStyle}>Client Side view</Block>
             <Block {...descriptionContentStyle}>

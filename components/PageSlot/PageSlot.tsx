@@ -1,6 +1,11 @@
+// lib
 import * as React from "react";
 import { Children } from "react";
+
+// components
 import { Block } from "baseui/block";
+
+// styles
 import {
   leftNavBarStyles,
   pageWrapperStyles,

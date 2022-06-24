@@ -20,7 +20,7 @@ import { container, content, navbarWrapper, nav } from "./styles/navStyles";
  * triggers when / is accessed
  * @returns a custom made fixed navbar with menu items and infinite scrolling
  */
-export const HomePage: React.FC = () => {
+export const IncidentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
 
   return (
