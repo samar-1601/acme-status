@@ -28,6 +28,10 @@ export const sideBarHeaderName: BlockProps = {
         color: "white",
         padding: "20px 0px 30px 0px",
         textAlign: "center",
+        display: "flex",
+        gap:"10px",
+        alignItems: "center",
+        justifyContent: "center",
       },
     },
   },
@@ -41,6 +45,45 @@ export const signOutButton: BlockProps = {
         width: "142px",
         height: "42px",
         textAlign: "center",
+      },
+    },
+  },
+};
+
+export const userDetailsWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        margin: "10px 20px 40px 20px",
+        backgroundColor: "rgb(16, 36 ,71)",
+        borderRadius: "16px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      },
+    },
+  },
+};
+
+export const userImageWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginTop: "24px",
+      },
+    },
+  },
+};
+
+export const userNameWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        margin: "25px auto",
+        textAlign: "center",
+        textTransform: "uppercase",
+        fontSize: "1.25rem",
       },
     },
   },

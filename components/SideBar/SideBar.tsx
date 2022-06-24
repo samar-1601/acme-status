@@ -1,18 +1,29 @@
 // lib
 import { useState } from "react";
 import * as React from "react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 // components
 import { Block } from "baseui/block";
+import { Spinner } from "baseui/spinner";
 import Router from "next/router";
 import { SideBarMenuItem } from "./SideBarMenuItem";
+import WelcomePage from "../WelcomePage/WelcomePage";
+import Image from "next/image";
 
 // constants
 import { SideBarMenu } from "../../constants";
 
 // styles
-import { sideBarHeaderName, sideBarStyle, signOutButton } from "./SideBarStyles";
+import {
+  sideBarHeaderName,
+  sideBarStyle,
+  signOutButton,
+  userDetailsWrapper,
+  userImageWrapper,
+  userNameWrapper,
+} from "./SideBarStyles";
+import { hasListLoadedStyle } from "../incidents/incidents-list-view/styles/listStyles";
 
 interface Props {
   /**
@@ -30,34 +41,65 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
   const [activeMenuItem, setActiveMenuItem] =
     useState<SideBarMenu>(activeItemID);
 
+  const { data: session, status } = useSession(); // get user's session details
+
+  // if status not confirmed
+  if (status === "loading") {
+    return (
+      <Block {...hasListLoadedStyle}>
+        <Spinner />
+      </Block>
+    );
+  }
+
+  // is user not logged in redirect to welcome page
+  if (!session) return <WelcomePage />;
+
   return (
     <Block {...sideBarStyle}>
-      <Block {...sideBarHeaderName}>statuspage</Block>
+      <Block {...sideBarHeaderName}>
+        {/* <Image src="/Status_icon.png" height={40} width={50}></Image> */}
+        statuspage
+      </Block>
+      <Block {...userDetailsWrapper}>
+        <Block {...userImageWrapper}>
+          <Image
+            alt="User Image"
+            src={session?.user?.image ?? "/blankProfileImage.png"}
+            height={100}
+            width={100}
+            className="userProfileImage"
+          ></Image>
+        </Block>
+        <Block {...userNameWrapper}>{session.user?.name ?? "User Name"}</Block>
+      </Block>
       <Block>
-        <SideBarMenuItem
-          onClick={() => {
-            setActiveMenuItem(SideBarMenu.IncidentsView);
-            Router.push("/incidents");
-          }}
-          menuItem={SideBarMenu.IncidentsView}
-          activeMenuItem={activeMenuItem}
-        />
-        <SideBarMenuItem
-          onClick={() => {
-            setActiveMenuItem(SideBarMenu.CreateIncidents);
-            Router.push("/incident/new");
-          }}
-          menuItem={SideBarMenu.CreateIncidents}
-          activeMenuItem={activeMenuItem}
-        />
-        <SideBarMenuItem
-          onClick={() => {
-            setActiveMenuItem(SideBarMenu.Components);
-            Router.push("/component");
-          }}
-          menuItem={SideBarMenu.Components}
-          activeMenuItem={activeMenuItem}
-        />
+        <Block>
+          <SideBarMenuItem
+            onClick={() => {
+              setActiveMenuItem(SideBarMenu.IncidentsView);
+              Router.push("/incidents");
+            }}
+            menuItem={SideBarMenu.IncidentsView}
+            activeMenuItem={activeMenuItem}
+          />
+          <SideBarMenuItem
+            onClick={() => {
+              setActiveMenuItem(SideBarMenu.CreateIncidents);
+              Router.push("/incident/new");
+            }}
+            menuItem={SideBarMenu.CreateIncidents}
+            activeMenuItem={activeMenuItem}
+          />
+          <SideBarMenuItem
+            onClick={() => {
+              setActiveMenuItem(SideBarMenu.Components);
+              Router.push("/component");
+            }}
+            menuItem={SideBarMenu.Components}
+            activeMenuItem={activeMenuItem}
+          />
+        </Block>
       </Block>
       <Block
         className="secondary-button"

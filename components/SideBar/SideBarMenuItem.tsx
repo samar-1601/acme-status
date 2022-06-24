@@ -32,14 +32,16 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
           Block: {
             style: {
               backgroundColor: `${
-                activeMenuItem == menuItem ? "lightblue" : ""
+                activeMenuItem == menuItem ? "white" : ""
               }`, // toggle the style based on the active page
               color: `${
                 activeMenuItem == menuItem ? "rgb(20,47,93)" : "#F8F8FA"
               }`, // toggle the style based on the active page
               padding: "20px",
+              margin: "20px",
               cursor: "pointer",
               textAlign: "center",
+              borderRadius: "16px",
             },
             props: { className: "hoverSideBarOption" },
           },

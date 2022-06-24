@@ -17,7 +17,8 @@ import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/
 
 export default () => {
   const { push } = useRouter();
-  const { data: session, status } = useSession({ // get user's session details
+  const { data: session, status } = useSession({
+    // get user's session details
     required: true,
     onUnauthenticated: () => {
       // if user is unauthenticated take him to the login page

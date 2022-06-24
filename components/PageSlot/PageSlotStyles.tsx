@@ -16,7 +16,7 @@ export const leftNavBarStyles: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "300px",
+        width: "325px",
         display: "flex",
         backgroundColor: "rgb(20,47,93)",
         minHeight: "100vh",

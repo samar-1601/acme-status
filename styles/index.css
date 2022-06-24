@@ -76,4 +76,7 @@
     .hoverSideBarOption {
         @apply hover:bg-side-bar-option-hover-bg hover:text-side-bar-option-hover-text;
     }
+    .userProfileImage {
+        @apply rounded-full;
+    }
 }
