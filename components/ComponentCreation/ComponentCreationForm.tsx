@@ -19,7 +19,10 @@ import { DatePicker } from "baseui/datepicker";
 import styles from "./styles.module.css";
 import Router from "next/router";
 import { Spinner } from "baseui/spinner";
-import { inputNameStyle } from "../incidents/createIncidents/styles/InputStyles";
+import { checkBoxStyles, dateStyles, inputDescriptionStyle, inputNameStyle, inputStatusStyle } from "./componentCreationStyles";
+import { SelectStatusComponent } from "../incidents/createIncidents/SelectStatusComponent";
+import { useStyletron } from "styletron-react";
+
 
 let startDate: Date | Date[]
 
@@ -59,11 +62,11 @@ const NameForm =  function (props: any) {
 };
 
 const Description  = function (props: any) {
+    const [css] = useStyletron();
   return (
     <Block  overrides={{
       Block: {
         style: {
-          margin: "20px 0"
         }
       }
     }}>
@@ -71,16 +74,32 @@ const Description  = function (props: any) {
         label="Description (optional)"
         caption="Give a helpful description of what this component does"
       >
-        <Textarea
-          id="textarea-id"
-          value={props.def}
-          
-          onChange={event => {
-              props.setDesc(event.currentTarget.value)
-            }
-          }
-          placeholder="Frontend application and API servers"
-        />
+        <textarea
+        value={props.value}
+        onChange={(event) => {
+          props.setDesc(event.target.value)
+        }}
+        placeholder={"Frontend application and API servers"}
+        className={css({
+          resize: "none",
+          width: "100%",
+          height: "96px",
+          font: "inherit",
+          borderRadius: "8px",
+          backgroundColor: "white",
+          borderColor: "#E6E6E9",
+          fontSize: "inhertit",
+          padding: "10px 14px 10px 14px",
+          boxSizing: "border-box",
+          borderWidth: "1px",
+          ":hover": {
+            borderColor: "#0E61F6",
+          },
+          ".focus": {
+            borderColor: "#0E61F6",
+          },
+        })}
+      />
       </FormControl>
     </Block>
   );
@@ -133,6 +152,7 @@ const ComponentGroup = function (props: any) {
         }
         value={props.def}
         placeholder="This component does not belong to a group"
+        {...inputStatusStyle}
       />
     </FormControl>
     </Block>
@@ -145,7 +165,11 @@ const Uptime = function () {
   return (
     <>
       <FormControl label="Display uptime">
-        <Checkbox checked={checked} onChange={() => setChecked(!checked)}>
+        <Checkbox 
+          checked={checked} 
+          onChange={() => setChecked(!checked)}
+          {...checkBoxStyles}
+        >
           Display the historical data of this component on my status page
         </Checkbox>
       </FormControl>
@@ -158,6 +182,7 @@ const Uptime = function () {
               setDate(Array.isArray(date) ? date : [date]);
             }}
             clearable
+            {...dateStyles}
           />
         </FormControl>
       )}
@@ -210,6 +235,7 @@ const ComponentStatusBar = function (props: any) {
         }}
         value={props.def}
         placeholder=""
+        {...inputStatusStyle}
       />
     </FormControl>
   );
@@ -398,7 +424,7 @@ export const ComponentCreationForm = function (props: { id: any; }) {
           }}
       >Cancel</Block>
       </Block>
-      </Block>)
+    </Block>)
   else
     return <Spinner />
 }
