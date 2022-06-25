@@ -1,40 +1,68 @@
+// lib
+import React from "react";
+import router, { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
+// components
+import { PageSlot } from "../../components/PageSlot/PageSlot";
+import SideBar from "../../components/SideBar/SideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
+import { Header, NavigationBar } from "../../components/component/Component";
+
+// styles
+import styles from "../../components/ComponentCreation/styles.module.css";
 import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/createIncidents/styles/BlockStyles";
-import { IncidentsViewHomePage } from "../../components/incidents/incidents-list-view/IncidentsHomePage";
+import { ComponentCreationForm } from "../../components/ComponentCreation/ComponentCreationForm";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
-import UpdateIncident from "../../components/incidents/updateIncidents/updateIncident";
-import { PageSlot } from "../../components/PageSlot/PageSlot";
-import SideBar from "../../components/SideBar/SideBar";
+
+// constants
 import { SideBarMenu } from "../../constants";
 
-const IncidentsHomePage = () => {
+const AddComponents: React.FC = () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.IncidentsView} />
+        <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <IncidentsViewHomePage />
+        <Block className={styles.page}>
+          <ComponentCreationForm id="" />
+        </Block>
       </PageSlot.Slot>
     </PageSlot>
   );
 };
 
-const CreateIncidentPage = () => {
+const Components: React.FC = () => {
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.CreateIncidents} />
+        <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <IncidentCreation />
+        <div className={styles.page}>
+          <Header />
+          <NavigationBar />
+        </div>
+      </PageSlot.Slot>
+    </PageSlot>
+  );
+};
+
+const EditComponents = function () {
+  return (
+    <PageSlot>
+      <PageSlot.Slot name="leftNavBar">
+        <SideBar activeItemID={SideBarMenu.Components} />
+      </PageSlot.Slot>
+      <PageSlot.Slot name="rightContent">
+        <div className={styles.page}>
+          <ComponentCreationForm id={router.query.id} />
+        </div>
       </PageSlot.Slot>
     </PageSlot>
   );
@@ -53,25 +81,9 @@ const WrongUrlPage = () => {
   );
 };
 
-const UpdateIncidentPage = () => {
-  const router = useRouter();
-  console.log(router.asPath);
-  let param = router.asPath.split("/")[3];
-
-  return (
-    <PageSlot>
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.CreateIncidents} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <UpdateIncident incidentId={param} />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
-};
-
 export default () => {
   const router = useRouter();
+
   const { push } = useRouter();
   const { data: session, status } = useSession({
     // get user's session details
@@ -92,11 +104,11 @@ export default () => {
   }
   const { params = [] } = router.query;
   if (params.length === 0) {
-    return <IncidentsHomePage />;
+    return <Components />;
   } else if (params.length === 1 && params[0] == "new") {
-    return <CreateIncidentPage />;
-  } else if (params.length === 2 && params[0] == "edit") {
-    return <UpdateIncidentPage />;
+    return <AddComponents />;
+  } else if (params.length === 1 && params[0] == "edit") {
+    return <EditComponents />;
   } else {
     return <WrongUrlPage />;
   }
