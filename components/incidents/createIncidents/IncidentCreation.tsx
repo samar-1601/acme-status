@@ -76,7 +76,7 @@ export default function IncidentCreation() {
           Router.push("/incidents");
         })
         //default value will be displayed in case of fetch error otherwise value passed in err will be displayed
-        .catch(() => {
+        .catch((err) => {
           //display error in snackBar and set loading state of cursor to false
           // dequeue();
           enqueue(
@@ -86,6 +86,7 @@ export default function IncidentCreation() {
             DURATION.long
           );
           setIsSubmitClicked(false);
+          console.log(err);
         });
     }
   };
