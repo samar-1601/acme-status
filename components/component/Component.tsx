@@ -3,7 +3,7 @@ import Router from "next/router";
 
 import styles from "./styles.module.css";
 import { Tabs, Tab } from "baseui/tabs-motion";
-import { Block, BlockProps } from "baseui/block";
+import { Block } from "baseui/block";
 
 import { ComponentList } from "./ComponentList";
 import { createTheme, lightThemePrimitives, ThemeProvider } from "baseui";

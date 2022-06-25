@@ -12,9 +12,13 @@ import Head from "next/head";
 import {
   loginListItem,
   loginListView,
+  loginPageDividerLine,
+  loginPageHeaderName,
+  loginPageWrapper,
   loginProviderName,
 } from "../../styles/loginStyles";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
+import Image from "next/image";
 
 /**
  * store the list of providers with their respective icons
@@ -55,21 +59,33 @@ const LoginProvidersList: React.FC = () => {
         <title>statusapp</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
-      <Block {...loginListView}>
-        {providers.map(({ name, Icon }) => (
-          <Block
-            key={name}
-            {...loginListItem}
-            onClick={handleOAuthSignIn(name)}
-          >
-            <Icon size={32} color="grey">
-              {Icon}
-            </Icon>
-            <Block {...loginProviderName} key={name}>
-              Sign in with {name}
-            </Block>
+      <Block {...loginPageWrapper}>
+        <Image
+          src="/loginImage1.svg"
+          height={550}
+          width={550}
+          alt="login page image"
+        ></Image>
+        <Block {...loginPageDividerLine} ></Block>
+        <Block {...loginListView}>
+          <Block {...loginPageHeaderName}>
+            One step away from <b>statusapp</b>
           </Block>
-        ))}
+          {providers.map(({ name, Icon }) => (
+            <Block
+              key={name}
+              {...loginListItem}
+              onClick={handleOAuthSignIn(name)}
+            >
+              <Icon size={32} color="white">
+                {Icon}
+              </Icon>
+              <Block {...loginProviderName} key={name}>
+                Sign in with {name}
+              </Block>
+            </Block>
+          ))}
+        </Block>
       </Block>
     </>
   );

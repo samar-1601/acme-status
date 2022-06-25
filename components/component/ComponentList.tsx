@@ -4,7 +4,6 @@ import { ComponentStatusIconUrls, ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } fr
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { Spinner } from "baseui/spinner";
-import { Avatar } from "baseui/avatar";
 import styles from "./styles.module.css"
 import Image from "next/image";
 
@@ -13,7 +12,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Block } from "baseui/block";
 import { element, listItem, loader } from "./componentStyles";
-import component from "../../pages/component";
 
 export const ComponentList = function () {
   const router = useRouter()
