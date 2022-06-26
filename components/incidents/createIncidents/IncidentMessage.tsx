@@ -9,6 +9,7 @@ import { IncidentMessageProps } from "../../../variableTypes";
 
 //styles
 import { useStyletron } from "styletron-react";
+import { StyledTextArea } from "./styles/StyledTextArea";
 
 /**
  * IncidentMessage Component
@@ -23,31 +24,9 @@ export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
 
   return (
     <FormControl label={"Message"}>
-      <textarea
+      <StyledTextArea
         value={props.value}
-        onChange={(event) => {
-          props.updateIncidentMessage(event);
-        }}
-        placeholder={"We are currently investigating this issue."}
-        className={css({
-          resize: "none",
-          width: "100%",
-          height: "96px",
-          font: "inherit",
-          borderRadius: "8px",
-          backgroundColor: "white",
-          borderColor: "#E6E6E9",
-          fontSize: "inhertit",
-          padding: "10px 14px 10px 14px",
-          boxSizing: "border-box",
-          borderWidth: "1px",
-          ":hover": {
-            borderColor: "#0E61F6",
-          },
-          ".focus": {
-            borderColor: "#0E61F6",
-          },
-        })}
+        updateIncidentMessage={props.updateIncidentMessage}
       />
     </FormControl>
   );
