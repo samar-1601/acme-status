@@ -118,8 +118,7 @@ export const emailWrapper: BlockProps = {
     Block: {
       style: {
         fontSize: "0.85rem",
-        color: "rgb(66,78,100)",
-        // marginTop: "2px",
+        color: "lightslategrey",
       },
     },
   },
