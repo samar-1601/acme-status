@@ -8,7 +8,6 @@ import { FormControl } from "baseui/form-control";
 import { IncidentMessageProps } from "../../../variableTypes";
 
 //styles
-import { useStyletron } from "styletron-react";
 import { StyledTextArea } from "./styles/StyledTextArea";
 
 /**
@@ -20,7 +19,6 @@ import { StyledTextArea } from "./styles/StyledTextArea";
 
 export const IncidentMessage = React.memo((props: IncidentMessageProps) => {
   //as we cannot overload directly the root of Textarea we create a custom component and display it
-  const [css] = useStyletron();
 
   return (
     <FormControl label={"Message"}>
