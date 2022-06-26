@@ -38,14 +38,34 @@ export const sideBarHeaderName: BlockProps = {
   },
 };
 export const signOutButton: BlockProps = {
+  onMouseEnter: (event) => {
+    if (event.target) {
+      (event.currentTarget as HTMLElement).style.backgroundColor = "white";
+      (event.currentTarget as HTMLElement).style.color = "rgb(20,47,93)";
+    }
+  },
+  onMouseLeave: (event) => {
+    if (event.target) {
+      (event.currentTarget as HTMLElement).style.backgroundColor =
+        "rgb(20,47,93)";
+      (event.currentTarget as HTMLElement).style.color = "white";
+    }
+  },
   overrides: {
     Block: {
       style: {
-        padding: "4px 16px",
+        backgroundColor: "rgb(20,47,93)",
+        border: "1px solid white",
+        cursor: "pointer",
+        padding: "8px 36px",
+        borderRadius: "8px",
+        marginTop: "20px",
+        alignSelf: "flex-start",
         margin: "auto auto 40px auto",
-        width: "142px",
-        height: "42px",
-        textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "10px",
       },
     },
   },
@@ -55,8 +75,8 @@ export const userDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "10px 20px 20px 20px",
-        padding: "30px",
+        margin: "10px 36px 50px 36px",
+        padding: "12px",
         backgroundColor: "rgb(16, 36 ,71)",
         borderRadius: "8px",
         display: "flex",
