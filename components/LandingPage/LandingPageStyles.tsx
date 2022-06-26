@@ -8,7 +8,7 @@ export const landingPageContainerStyle: BlockProps = {
         padding: "2rem",
         display: "flex",
         flexDirection: "column",
-        gap:"20px",
+        gap:"28px",
         width: "80%",
         justifyContent: "space-between",
         borderRadius: "8px",
@@ -23,7 +23,7 @@ export const landingPageHeaderStyle: BlockProps = {
     Block: {
       style: {
         fontSize: "2rem",
-        fontWeight: 700,
+        fontWeight: 300,
         textAlign: "center",
       },
     },

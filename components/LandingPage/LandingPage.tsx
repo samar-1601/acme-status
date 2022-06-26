@@ -37,8 +37,8 @@ const LandingPage = React.memo(() => {
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block {...landingPageContainerStyle}>
-          <Block {...landingPageHeaderStyle}>Welcome to StatusPage</Block>
-          <Image src="/landingPage.svg" height={600} width={600}></Image>
+          <Block {...landingPageHeaderStyle}>Welcome to <b>statusapp</b></Block>
+          <Image src="/landingPage2.svg" height={600} width={600}></Image>
           <Block {...landingPageDescriptionStyle}>Managing, Updating and Creating your Incidents & Components is now easy !!</Block>
         </Block>
       </PageSlot.Slot>
