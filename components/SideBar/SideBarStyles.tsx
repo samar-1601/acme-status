@@ -59,7 +59,6 @@ export const signOutButton: BlockProps = {
         cursor: "pointer",
         padding: "8px 36px",
         borderRadius: "8px",
-        marginTop: "20px",
         alignSelf: "flex-start",
         margin: "auto auto 40px auto",
         display: "flex",
@@ -75,7 +74,7 @@ export const userDetailsWrapper: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "10px 36px 50px 36px",
+        margin: "10px 20px 50px 20px",
         padding: "12px",
         backgroundColor: "rgb(16, 36 ,71)",
         borderRadius: "8px",

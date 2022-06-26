@@ -74,7 +74,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
           ></Image>
         </Block>
         <Block {...userNameWrapper}>{session.user?.name ?? "User Name"}</Block>
-        <Block {...emailWrapper}>{session.user?.email ?? "User Name"}</Block>
+        <Block {...emailWrapper}>{session.user?.email ?? "User Email"}</Block>
       </Block>
       <Block>
         <Block>
