@@ -86,6 +86,7 @@ const WelcomePage: React.FC = () => {
               style: {
                 // border: "2px solid black",
                 borderRadius: "8px",
+                flexDirection: "row-reverse",
               },
               props: { className: "fadingEffect2" },
             },

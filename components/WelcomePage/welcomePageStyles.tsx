@@ -2,33 +2,38 @@ import { BlockProps } from "baseui/block";
 
 export const contentBlock: BlockProps = {
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   paddingTop: "50px",
-  backgroundColor: "#F96167",
+  backgroundColor: "#f2cfc9",
   paddingLeft: "100px",
   paddingRight: "100px",
+  overrides: {
+    Block: {
+      style: {
+        boxShadow:
+          "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+      },
+    },
+  },
 };
 
 export const imageProps: BlockProps = {
-  width: "300px",
-  minHeight: "300px",
+  width: "500px",
+  minHeight: "400px",
   paddingBottom: "70px",
   margin: "3px",
   padding: "3px",
   alignSelf: "center",
   alignItems: "flex-end",
   display: "flex",
-  // overrides: {
-  //   Block: {
-  //     style: {
-  //       objectFit: "contain",
-  //     },
-  //   },
-  // },
+  overrides: {
+    Block: {
+      style: {},
+    },
+  },
 };
 
 export const textProps: BlockProps = {
-  paddingTop: "40px",
   alignSelf: "center",
   alignItems: "center",
   justifyContent: "center",
@@ -41,9 +46,9 @@ export const rowContent: BlockProps = {
   justifyContent: "space-around",
   marginTop: "25px",
   marginBottom: "60px",
-  marginLeft: "50px",
-  marginRight: "50px",
-  backgroundColor: "#FCE77D",
+  marginLeft: "150px",
+  marginRight: "150px",
+  backgroundColor: "#c9ecf2",
   flexWrap: true,
 };
 
