@@ -21,35 +21,35 @@ import Router from "next/router";
 import { Spinner } from "baseui/spinner";
 import { inputNameStyle } from "../incidents/createIncidents/styles/InputStyles";
 
-let startDate: Date | Date[]
+let startDate: Date | Date[];
 
 const Header = function (props: any) {
-  let heading="Add Component";
-  if(props.id)  heading="Edit Component"
+  let heading = "Add Component";
+  if (props.id) heading = "Edit Component";
   return (
-    <Block className="header"
-    overrides={{
-      Block: {
-        style: {
-          marginBottom: "25px",
-        }
-      }
-    }}>
-      <Block className={styles.heading}>
-        {heading}
-      </Block>
+    <Block
+      className="header"
+      overrides={{
+        Block: {
+          style: {
+            marginBottom: "25px",
+          },
+        },
+      }}
+    >
+      <Block className={styles.heading}>{heading}</Block>
     </Block>
   );
 };
 
-const NameForm =  function (props: any) {
+const NameForm = function (props: any) {
   return (
     <FormControl label="Component name">
       <Input
         id="input-id"
         value={props.def}
-        onChange={event => {
-          props.setName(event.currentTarget.value)
+        onChange={(event) => {
+          props.setName(event.currentTarget.value);
         }}
         placeholder="Component name"
         {...inputNameStyle}
@@ -58,15 +58,17 @@ const NameForm =  function (props: any) {
   );
 };
 
-const Description  = function (props: any) {
+const Description = function (props: any) {
   return (
-    <Block  overrides={{
-      Block: {
-        style: {
-          margin: "20px 0"
-        }
-      }
-    }}>
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            margin: "20px 0",
+          },
+        },
+      }}
+    >
       <FormControl
         label="Description (optional)"
         caption="Give a helpful description of what this component does"
@@ -74,11 +76,9 @@ const Description  = function (props: any) {
         <Textarea
           id="textarea-id"
           value={props.def}
-          
-          onChange={event => {
-              props.setDesc(event.currentTarget.value)
-            }
-          }
+          onChange={(event) => {
+            props.setDesc(event.currentTarget.value);
+          }}
           placeholder="Frontend application and API servers"
         />
       </FormControl>
@@ -114,27 +114,28 @@ const ComponentGroup = function (props: any) {
   }, []);
 
   return (
-    <Block  overrides={{
-      Block: {
-        style: {
-          margin: "20px 0"
-        }
-      }
-    }}>
-    <FormControl label="Component group">
-      <Select 
-        creatable
-        options={groups}
-        labelKey="label"
-        valueKey="id"
-        onChange={({value}) => {
-            props.setGrp(value)
-          }
-        }
-        value={props.def}
-        placeholder="This component does not belong to a group"
-      />
-    </FormControl>
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            margin: "20px 0",
+          },
+        },
+      }}
+    >
+      <FormControl label="Component group">
+        <Select
+          creatable
+          options={groups}
+          labelKey="label"
+          valueKey="id"
+          onChange={({ value }) => {
+            props.setGrp(value);
+          }}
+          value={props.def}
+          placeholder="This component does not belong to a group"
+        />
+      </FormControl>
     </Block>
   );
 };
@@ -191,33 +192,33 @@ const Uptime = function () {
 };
 
 const ComponentStatusBar = function (props: any) {
-  console.log(props.def)
+  console.log(props.def);
   return (
     <FormControl label="Component Status">
       <Select
         options={[
-          {id: "operational", label: "Operational"},
-          {id: "degraded_performance", label: "Degraded Performance"},
-          {id: "partial_outage", label: "Partial Outage"},
-          {id: "major_outage", label: "Major Outage"},
-          {id: "under_maintenance", label: "Under Maintenance"},
+          { id: "operational", label: "Operational" },
+          { id: "degraded_performance", label: "Degraded Performance" },
+          { id: "partial_outage", label: "Partial Outage" },
+          { id: "major_outage", label: "Major Outage" },
+          { id: "under_maintenance", label: "Under Maintenance" },
         ]}
         labelKey="label"
         valueKey="id"
-        onChange={({value}) => {
-          console.log(value)
-          props.setStat(value)
+        onChange={({ value }) => {
+          console.log(value);
+          props.setStat(value);
         }}
         value={props.def}
         placeholder=""
       />
     </FormControl>
   );
-}
+};
 
 const postData = async function (url = "", data = {}) {
   const response = await fetch(url, {
-    method: "POST", 
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
@@ -231,174 +232,175 @@ const postData = async function (url = "", data = {}) {
 
 const putData = async function (url = "", data = {}) {
   const response = await fetch(url, {
-    method: "PUT", 
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
     },
-    body: JSON.stringify(data) 
+    body: JSON.stringify(data),
   });
-  let xjson = await response.json(); 
-  console.log(xjson)
+  let xjson = await response.json();
+  console.log(xjson);
   return xjson;
-}
-
+};
 
 const getComponent = async (id: any) => {
-  const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}`
+  const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}`;
   const response = await fetch(URL, {
-    headers : {
+    headers: {
       "Content-Type": "application/json",
-      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
-    }
-  })
+      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+    },
+  });
   let xjson = await response.json();
   return xjson;
-}
+};
 
-export const ComponentCreationForm = function (props: { id: any; }) {
+export const ComponentCreationForm = function (props: { id: any }) {
   const [loaded, setLoaded] = React.useState(true);
   const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [stat, setStat] = React.useState({
     id: "",
-    label: ""
+    label: "",
   });
   const [grp, setGrp] = React.useState("");
 
   React.useEffect(() => {
     setLoaded(false);
-    getComponent(props.id)
-    .then(x => {
-      console.log(x)
-      setName(x.name)
-      setDesc(x.description)
+    getComponent(props.id).then((x) => {
+      console.log(x);
+      setName(x.name);
+      setDesc(x.description);
       setStat({
         id: x.status,
-        label: x.status
-      })
-      setGrp(x.group_id)
-      setLoaded(true)
-    })
-  },[]);
+        label: x.status,
+      });
+      setGrp(x.group_id);
+      setLoaded(true);
+    });
+  }, []);
 
-  if(loaded)
+  if (loaded)
     return (
-    <Block className={styles.form}>
-      <Header id={props.id}/>
-      <NameForm def={name} setName={setName}/>
-      <Description def={desc} setDesc={setDesc}/>
-      <ComponentStatusBar def={stat} setStat={setStat}/>
-      <ComponentGroup def={grp} setGrp={setGrp}/>
-      <Uptime />
-      <br /><br />
-      <Block overrides={{
-        Block: {
-          style: {
-            display: "flex",
-            flexDirection: "row-reverse",
-            right: 0,
-            alignItems: "center"
-          },
-          props: {
-            className: "footer-bar"
-          }
-        }
-      }}>
-        
-        <Block 
-          overrides ={{
-            Block : {
-              style : {               
-                marginLeft: "20px",
-                width: "92px",
-                height: "34px",
-              },
-              props : {
-                className: "primary-button"
-              }
-            }
-          }}
-          onClick = {()=>{
-            if(props.id) {
-              console.log(stat)
-              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${props.id}`
-              let data:any ={
-                "component": {
-                  "description": desc,
-                  "status": stat.id,
-                  "name": name,
-                  "start_date": startDate
-                }
-              }
-              console.log(data)
-              putData(url,data);
-              Router.push("/component")
-            }
-            else if(!name)  {
-              alert("Cannot have empty component name")
-            } else if(grp) {
-              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
-              let data:any ={
-                "component": {
-                  "description": desc,
-                  "status": stat.id,
-                  "name": name,
-                  "start_date": startDate
-                }
-              }
-
-              let comp:any;
-              postData(url, data).then(res => () => {
-                  comp=res.id;
-                }
-              )
-              url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`
-              data = {
-                "description": "",
-                "component_group": {
-                  "components": [
-                    comp
-                  ],
-                "name": grp
-                }
-              }
-              postData(url, data)
-            } else {
-              let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
-              let data:any ={
-                "component": {
-                  "description": desc,
-                  "status": stat.id,
-                  "name": name,
-                  "start_date": startDate,
-                  "group_id": grp
-                }
-              }
-              postData(url,data).then(res => console.log(res))
-              Router.push("/component")
-            }
-          }}
-          >Save </Block>
-          <Block
+      <Block className={styles.form}>
+        <Header id={props.id} />
+        <NameForm def={name} setName={setName} />
+        <Description def={desc} setDesc={setDesc} />
+        <ComponentStatusBar def={stat} setStat={setStat} />
+        <ComponentGroup def={grp} setGrp={setGrp} />
+        <Uptime />
+        <br />
+        <br />
+        <Block
           overrides={{
             Block: {
               style: {
-                marginLeft: "20px",
-                width: "92px",
-                height: "34px",
+                display: "flex",
+                flexDirection: "row-reverse",
+                right: 0,
+                alignItems: "center",
+                paddingBottom: "15px",
               },
               props: {
-                className: "secondary-button",
+                className: "footer-bar",
               },
             },
           }}
-          onClick = {()=>{
-            Router.push("/component")
-          }}
-      >Cancel</Block>
+        >
+          <Block
+            overrides={{
+              Block: {
+                style: {
+                  marginLeft: "20px",
+                  width: "92px",
+                  height: "34px",
+                },
+                props: {
+                  className: "primary-button",
+                },
+              },
+            }}
+            onClick={() => {
+              if (props.id) {
+                console.log(stat);
+                let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${props.id}`;
+                let data: any = {
+                  component: {
+                    description: desc,
+                    status: stat.id,
+                    name: name,
+                    start_date: startDate,
+                  },
+                };
+                console.log(data);
+                putData(url, data);
+                Router.push("/component");
+              } else if (!name) {
+                alert("Cannot have empty component name");
+              } else if (grp) {
+                let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+                let data: any = {
+                  component: {
+                    description: desc,
+                    status: stat.id,
+                    name: name,
+                    start_date: startDate,
+                  },
+                };
+
+                let comp: any;
+                postData(url, data).then((res) => () => {
+                  comp = res.id;
+                });
+                url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`;
+                data = {
+                  description: "",
+                  component_group: {
+                    components: [comp],
+                    name: grp,
+                  },
+                };
+                postData(url, data);
+              } else {
+                let url = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+                let data: any = {
+                  component: {
+                    description: desc,
+                    status: stat.id,
+                    name: name,
+                    start_date: startDate,
+                    group_id: grp,
+                  },
+                };
+                postData(url, data).then((res) => console.log(res));
+                Router.push("/component");
+              }
+            }}
+          >
+            Save{" "}
+          </Block>
+          <Block
+            overrides={{
+              Block: {
+                style: {
+                  marginLeft: "20px",
+                  width: "92px",
+                  height: "34px",
+                },
+                props: {
+                  className: "secondary-button",
+                },
+              },
+            }}
+            onClick={() => {
+              Router.push("/component");
+            }}
+          >
+            Cancel
+          </Block>
+        </Block>
       </Block>
-      </Block>)
-  else
-    return <Spinner />
-}
+    );
+  else return <Spinner />;
+};

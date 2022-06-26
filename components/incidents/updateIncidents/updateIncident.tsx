@@ -101,7 +101,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
             {
               message: err,
             },
-            DURATION.long
+            DURATION.short
           );
           setIsSubmitClicked(false);
         });

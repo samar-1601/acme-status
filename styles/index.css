@@ -64,7 +64,7 @@
     .footer-bar {
         @apply fixed left-0 bottom-0;
         @apply bg-white;
-        @apply h-footer-height w-full pr-4;
+        @apply w-full pr-4 pt-4;
 
     }
 

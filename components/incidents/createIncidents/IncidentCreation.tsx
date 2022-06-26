@@ -43,7 +43,7 @@ export default function IncidentCreation() {
         {
           message: "Incident Name can't be Blank!",
         },
-        DURATION.long
+        DURATION.short
       );
       setIsSubmitClicked(false);
     } else {
@@ -67,7 +67,7 @@ export default function IncidentCreation() {
             {
               message: "Successfully submitted form details",
             },
-            DURATION.medium
+            DURATION.short
           );
           setIsSubmitClicked(false);
         })
@@ -83,7 +83,7 @@ export default function IncidentCreation() {
             {
               message: "Failed to Submit Form. Please Try Again!",
             },
-            DURATION.long
+            DURATION.short
           );
           setIsSubmitClicked(false);
           console.log(err);
