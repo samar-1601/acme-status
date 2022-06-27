@@ -1,5 +1,5 @@
 // lib
-import React from "react";
+import React, { useState } from "react";
 import router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -22,9 +22,15 @@ import EditComponent from "../../components/editComponent/editComponent";
 import { ComponentCreation } from "../../components/ComponentCreation/ComponentCreation";
 import { ComponentsViewHomePage } from "../../components/component/componentsHomePage";
 
-const AddComponents: React.FC = () => {
+const AddComponents: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = (props) => {
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
@@ -35,33 +41,43 @@ const AddComponents: React.FC = () => {
   );
 };
 
-const Components: React.FC = () => {
-  
+const Components: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = (props) => {
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <ComponentsViewHomePage />
-        
       </PageSlot.Slot>
     </PageSlot>
   );
 };
 
-const EditComponents = function () {
+const EditComponents: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = function (props) {
   const router = useRouter();
   console.log(router.asPath);
   let param = router.asPath.split("/")[3];
 
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <EditComponent componentId={param}/>
+        <EditComponent componentId={param} />
       </PageSlot.Slot>
     </PageSlot>
   );
@@ -81,6 +97,10 @@ const WrongUrlPage = () => {
 };
 
 export default () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const handleIsOpenChange = () => {
+    setIsOpen((prevState) => !prevState);
+  };
   const router = useRouter();
 
   const { push } = useRouter();
@@ -103,11 +123,17 @@ export default () => {
   }
   const { params = [] } = router.query;
   if (params.length === 0) {
-    return <Components />;
+    return (
+      <Components isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
+    );
   } else if (params.length === 1 && params[0] == "new") {
-    return <AddComponents />;
+    return (
+      <AddComponents isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
+    );
   } else if (params.length === 2 && params[0] == "edit") {
-    return <EditComponents />;
+    return (
+      <EditComponents isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
+    );
   } else {
     return <WrongUrlPage />;
   }

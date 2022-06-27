@@ -8,18 +8,33 @@ import Head from "next/head";
 
 // styles
 import {
+  constantPaneStyles,
   leftNavBarStyles,
   pageWrapperStyles,
   rightContentStyles,
+  leftNavBarStylesHidden,
 } from "./PageSlotStyles";
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 
 const Slot: React.FC<{
   name: "leftNavBar" | "rightContent";
 }> = () => null;
 
+interface Props {
+  rightContent: any;
+}
+
+const RightContent: React.FC<Props> = React.memo(({ rightContent }) => {
+  return <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>;
+});
+
 export const PageSlot = ({
+  isOpen,
+  handleIsOpenChange,
   children,
 }: {
+  isOpen: boolean;
+  handleIsOpenChange: Function;
   children: Array<React.ReactElement>;
 }) => {
   const childrenArray = Children.toArray(
@@ -38,8 +53,26 @@ export const PageSlot = ({
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block {...pageWrapperStyles}>
-        <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
-        <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>
+        <Block
+          {...constantPaneStyles}
+          onClick={() => {
+            handleIsOpenChange();
+          }}
+        >
+          {isOpen ? (
+            <AiOutlineDoubleLeft size={28} />
+          ) : (
+            <AiOutlineDoubleRight size={28} />
+          )}
+        </Block>
+        {isOpen ? (
+          <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
+        ) : (
+          <Block {...leftNavBarStylesHidden}>
+            {leftNavBar?.props?.children}
+          </Block>
+        )}
+        <RightContent rightContent={rightContent} />
       </Block>
     </>
   );
