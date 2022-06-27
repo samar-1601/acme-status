@@ -53,27 +53,34 @@ const LoginProvidersList: React.FC = () => {
   }
 
   const handleOAuthSignIn = (provider: any) => async () => {
-    const data = (await signIn(provider, {
-      redirect: false,
-      callback: "/",
-    })) ?? { url: "", query: "" };
+    await signIn(provider);
+
+    // const data = (await signIn(provider, {
+    //   redirect: false,
+    //   callback: "/",
+    // })) ?? { url: "", query: "" };
+
+    // replace(data["url"], "/", { shallow: true });
+
     // replace(data["url"].split("?")[0], "/", { shallow: true });
+
     // console.log(data["url"]);
     // signIn(provider, {
     //   redirect: false,
     //   callback: "/",
     // }).then(() => replace("/", "/", { shallow: true }));
-    const params = new URLSearchParams(data["query"]);
-    params.delete("state"); //"code", "scope", "authuser", "hd", "prompt");
-    params.delete("code");
-    params.delete("scope");
-    params.delete("authuser");
-    params.delete("hd");
-    params.delete("prompt");
-    const queryString = params.toString();
-    const path = `/${queryString ? `?${queryString}` : ""}`;
 
-    replace(path, "/", { scroll: false });
+    // const params = new URLSearchParams(data["query"]);
+    // params.delete("state"); //"code", "scope", "authuser", "hd", "prompt");
+    // params.delete("code");
+    // params.delete("scope");
+    // params.delete("authuser");
+    // params.delete("hd");
+    // params.delete("prompt");
+    // const queryString = params.toString();
+    // const path = `/${queryString ? `?${queryString}` : ""}`;
+
+    // replace(path, "/", { scroll: false });
   };
 
   return (
