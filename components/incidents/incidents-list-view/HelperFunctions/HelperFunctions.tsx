@@ -3,7 +3,10 @@ import { Block } from "baseui/block";
 import Link from "next/link";
 
 // constants
-import { ComponentStatusIconUrls } from "../../../../constants";
+import {
+  ComponentStatusIconUrls,
+  getDisplayComponentStatusText,
+} from "../../../../constants";
 
 // styles
 import {
@@ -17,8 +20,10 @@ import {
   componentItem,
   editIncidentButton,
   componentItemIconWrapper,
+  componentIconHoverTextStyle,
 } from "../styles/listStyles";
 import Image from "next/image";
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
 /**
  * Format date for display
@@ -61,13 +66,22 @@ const getComponents = (incident: any): JSX.Element => {
       const renderComponent: JSX.Element = // variable storing the formatted component ready to render
         (
           <Block key={component["name"]} {...componentItem}>
-            <Block {...componentItemIconWrapper}>
-              <Image // NextJS component for rendering Image
-                src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
-                height="16px"
-                width="16px"
-              ></Image>
-            </Block>
+            <StatefulPopover
+              content={
+                <Block {...componentIconHoverTextStyle}>
+                  {getDisplayComponentStatusText(component["status"])}
+                </Block>
+              }
+              triggerType={TRIGGER_TYPE.hover}
+            >
+              <Block {...componentItemIconWrapper}>
+                <Image // NextJS component for rendering Image
+                  src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
+                  height="16px"
+                  width="16px"
+                ></Image>
+              </Block>
+            </StatefulPopover>
             {component["name"]}
           </Block>
         );

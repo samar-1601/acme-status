@@ -4,7 +4,7 @@ export const contentBlock: BlockProps = {
   display: "flex",
   flexDirection: "column",
   paddingTop: "50px",
-  backgroundColor: "#f2cfc9",
+  backgroundColor: "white",
   paddingLeft: "100px",
   paddingRight: "100px",
   overrides: {
@@ -18,45 +18,36 @@ export const contentBlock: BlockProps = {
 };
 
 export const imageProps: BlockProps = {
-  width: "500px",
+  minWidth: "500px",
   minHeight: "400px",
-  paddingBottom: "70px",
-  margin: "3px",
-  padding: "3px",
+  padding: "24px",
   alignSelf: "center",
-  alignItems: "flex-end",
-  display: "flex",
-  overrides: {
-    Block: {
-      style: {},
-    },
-  },
 };
 
 export const textProps: BlockProps = {
-  alignSelf: "center",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "300px",
-  position: "relative",
+  width: "350px",
+  padding: "24px",
 };
 
 export const rowContent: BlockProps = {
   display: "flex",
   justifyContent: "space-around",
+  alignItems: "center",
+  alignContent: "center",
   marginTop: "25px",
   marginBottom: "60px",
   marginLeft: "150px",
   marginRight: "150px",
-  backgroundColor: "#c9ecf2",
+  // backgroundColor: "rgb(20,47,93)",
   flexWrap: true,
+  // color: "white",
 };
 
 export const headerStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginBottom: "10px",
+        marginBottom: "24px",
         lineHeight: "2.5rem",
         fontSize: "2rem",
         fontWeight: 700,
@@ -71,7 +62,7 @@ export const descriptionContentStyle: BlockProps = {
         lineHeight: "1.5rem",
         fontSize: "1rem",
         fontWeight: 500,
-        color: "rgb(74, 75, 78)",
+        // color: "white",
       },
     },
   },
@@ -120,7 +111,7 @@ export const signInButton: BlockProps = {
         border: "1px solid white",
         cursor: "pointer",
         padding: "8px 36px",
-        borderRadius: "28px",
+        borderRadius: "16px",
         marginTop: "20px",
         alignSelf: "flex-start",
       },

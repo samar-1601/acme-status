@@ -51,7 +51,7 @@ const LoginProvidersList: React.FC = () => {
     console.log("already signed in");
   }
 
-  const handleOAuthSignIn = (provider: any) => () => signIn(provider, { callbackUrl: '/' });
+  const handleOAuthSignIn = (provider: any) => () => signIn(provider);
 
   return (
     <>

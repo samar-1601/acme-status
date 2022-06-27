@@ -82,6 +82,17 @@ export const component: BlockProps = {
     },
   },
 };
+export const componentIconHoverTextStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        padding: "8px",
+        fontSize: "14px",
+        borderRadius: "8px",
+      },
+    },
+  },
+};
 export const itemDetailsSecondLine: BlockProps = {
   overrides: {
     Block: {
