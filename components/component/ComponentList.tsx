@@ -20,33 +20,10 @@ export const ComponentList = function (props: any) {
   const Component = function (props: any) {
     const [msg, setMsg] = React.useState("");
 
-    const getUptime = async () => {
-      const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${props.comp.id}/uptime`;
-      const response = await fetch(URL, {
-        headers : { 
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
-        }
-      })
-      let xjson = await response.json();
-      if(!xjson.error) {
-        const date1 = new Date(xjson.range_end);
-        const date2 = new Date(xjson.range_start);
-        let days = Math.ceil(Math.abs(date1.valueOf()-date2.valueOf())/(1000*60*60*24));
-        setMsg(String(xjson.uptime_percentage)+"% uptime in the past "+String(days)+" days");
-      } else {
-        setMsg("Uptime Data unavailable!")
-      }
-    }
-
-    React.useEffect(()=>{
-      getUptime();
-    },[]);
-
     let details: any;
     details = (<>
                 <Block >{props.comp.name}</Block>
-                <Block {...detailStyles}>{msg}</Block>
+                <Block {...detailStyles}>{props.msg}</Block>
               </>);
 
     return (
@@ -104,10 +81,29 @@ export const ComponentList = function (props: any) {
     let dataList = props.dataList;
     let listItems = [];
     for (let i=0; i<dataList.length; i++) {
-      listItems[i] = <Component key={dataList[i].id} comp={dataList[i]} />
+      listItems[i] = <Component key={dataList[i].id} comp={dataList[i]} msg={dataList[i].msg}/>
     }
     return <Block >{listItems}</Block>;
   };
+
+  const getMsg = async (id: string) => {
+    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}/uptime`;
+    const response = await fetch(URL, {
+      headers : { 
+        "Content-Type": "application/json",
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+      }
+    })
+    let xjson = await response.json();
+    if(!xjson.error) {
+      const date1 = new Date(xjson.range_end);
+      const date2 = new Date(xjson.range_start);
+      let days = Math.ceil(Math.abs(date1.valueOf()-date2.valueOf())/(1000*60*60*24));
+      return (String(xjson.uptime_percentage)+"% uptime in the past "+String(days)+" days");
+    } else {
+      return "Uptime Data unavailable!"
+    }
+  }
 
   const getComponents = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`
@@ -121,6 +117,7 @@ export const ComponentList = function (props: any) {
     let tmp = [];
     for(let i=0; i<xjson.length; i++) {
       tmp[i] = xjson[i];
+      tmp[i].msg = await getMsg(xjson[i].id);
     }
     setLoaded(true);
     setDataList(tmp);
