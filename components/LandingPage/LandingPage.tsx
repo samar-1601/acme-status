@@ -1,5 +1,5 @@
 // lib
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as React from "react";
 
 // components
@@ -23,6 +23,11 @@ import {
  */
 const LandingPage = React.memo(() => {
   const { enqueue, dequeue } = useSnackbar(); // snackbar to show successfully signed in message.
+  const [isOpen, setIsOpen] = useState(true);
+  const handleIsOpenChange = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   useEffect(() => {
     if (localStorage.getItem("loadingCount") == undefined) {
       // if the page has loaded for the first time after logging in then only shoe the message.
@@ -35,15 +40,20 @@ const LandingPage = React.memo(() => {
 
   // slotted page with sidebar on left and IncidentsListView on the right
   return (
-    <PageSlot>
+    <PageSlot isOpen={isOpen} handleIsOpenChange={handleIsOpenChange}>
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Home} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block {...landingPageContainerStyle}>
-          <Block {...landingPageHeaderStyle}>Welcome to <b>statusapp</b></Block>
+          <Block {...landingPageHeaderStyle}>
+            Welcome to <b>statusapp</b>
+          </Block>
           <Image src="/landingPage2.svg" height={600} width={600}></Image>
-          <Block {...landingPageDescriptionStyle}>Managing, Updating and Creating your Incidents & Components is now easy !!</Block>
+          <Block {...landingPageDescriptionStyle}>
+            Managing, Updating and Creating your Incidents & Components is now
+            easy !!
+          </Block>
         </Block>
       </PageSlot.Slot>
     </PageSlot>
