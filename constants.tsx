@@ -110,6 +110,27 @@ export const getStatus = (id: number): string => {
   }
 };
 
+/**
+ * @param status component status text
+ * @returns Displayable/formatted text to show for component's status
+ */
+export const getDisplayComponentStatusText = (status: string): string => {
+  switch (status) {
+    case "operational":
+      return "Operational";
+    case "degraded_performance":
+      return "Degraded Performance";
+    case "partial_outage":
+      return "Partial Outage";
+    case "major_outage":
+      return "Major Outage";
+    case "under_maintenance":
+      return "Under Maintenance";
+    default:
+      return "";
+  }
+};
+
 export const getIncidentStatus = (id: String): string => {
   switch (id) {
     case "Investigating":

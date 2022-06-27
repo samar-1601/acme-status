@@ -45,7 +45,7 @@ const WelcomePage: React.FC = () => {
               informed about the app's status.
             </Block>
             <Block {...signInButton} onClick={() => signIn()}>
-              SignIn
+              Sign In
             </Block>
           </Block>
           <Block>
@@ -60,8 +60,8 @@ const WelcomePage: React.FC = () => {
           overrides={{
             Block: {
               style: {
-                // border: "2px solid black",
-                borderRadius: "8px",
+                borderRadius: "16px",
+                border: "1px solid rgb(20,47,93)",
               },
               props: { className: "fadingEffect1" },
             },
@@ -72,11 +72,11 @@ const WelcomePage: React.FC = () => {
             <Block {...descriptionContentStyle}>
               Our app provides the facility to properly manage incidents. We can
               create and update incidents as we wish. Implemented using React
-              Window infinite scrolling.
+              Virtualized Infinite scrolling with progressive loading.
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/incidentsView.png" className="welcome-page-image" />
+            <Image src="/incidentsView.png" className="welcome-page-image" height={350} width={650}/>
           </Block>
         </Block>
         <Block
@@ -84,9 +84,9 @@ const WelcomePage: React.FC = () => {
           overrides={{
             Block: {
               style: {
-                // border: "2px solid black",
-                borderRadius: "8px",
+                borderRadius: "16px",
                 flexDirection: "row-reverse",
+                border: "1px solid rgb(20,47,93)",
               },
               props: { className: "fadingEffect2" },
             },
@@ -101,7 +101,7 @@ const WelcomePage: React.FC = () => {
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/components.png" className="welcome-page-image" />
+            <Image src="/components.png" className="welcome-page-image" height={350} width={650}/>
           </Block>
         </Block>
         <Block
@@ -109,8 +109,8 @@ const WelcomePage: React.FC = () => {
           overrides={{
             Block: {
               style: {
-                // border: "2px solid black",
-                borderRadius: "8px",
+                borderRadius: "16px",
+                border: "1px solid rgb(20,47,93)",
               },
               props: { className: "fadingEffect3" },
             },
@@ -125,7 +125,7 @@ const WelcomePage: React.FC = () => {
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/components.png" className="welcome-page-image" />
+            <Image src="/components.png" className="welcome-page-image" height={350} width={650}/>
           </Block>
         </Block>
       </Block>
