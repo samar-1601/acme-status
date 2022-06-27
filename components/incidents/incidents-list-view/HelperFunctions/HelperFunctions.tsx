@@ -27,6 +27,8 @@ import {
 } from "../styles/listStyles";
 import Image from "next/image";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { DeleteIncident } from "../../deleteIncident/DeleteIncident";
+import { useSnackbar } from "baseui/snackbar";
 
 /**
  * Format date for display
@@ -117,7 +119,10 @@ const getComponents = (incident: any): JSX.Element => {
  * @param incident data recieved from the API
  * @returns JSX component list
  */
-export const renderData: React.FC = (incident: any): JSX.Element => {
+export const renderData: React.FC = (
+  incident: any,
+  enqueue: Function
+): JSX.Element => {
   /* get the components corressponding to the incident and append them for render */
   const renderComponents = getComponents(incident);
 
@@ -136,15 +141,14 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
                 <FaEdit size={22} />
               </Block>
             </Link>
-            <Link
-              href={{
-                pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
+            <Block
+              {...editIncidentButton}
+              onClick={() => {
+                DeleteIncident(incident["id"], enqueue);
               }}
             >
-              <Block {...editIncidentButton}>
-                <MdDelete size={22} />
-              </Block>
-            </Link>
+              <MdDelete size={22} />
+            </Block>
           </Block>
         </Block>
         <Block {...itemDetailsSecondLine}>

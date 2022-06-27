@@ -21,6 +21,7 @@ import "react-virtualized/styles.css";
 // constants
 import { PageType } from "../../../../constants";
 import { hasListLoadedStyle } from "../styles/listStyles";
+import { useSnackbar } from "baseui/snackbar";
 
 interface Props {
   /**
@@ -37,7 +38,7 @@ interface Props {
 export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   // const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
-
+  const { enqueue, dequeue } = useSnackbar();
   const cache = useRef(
     new CellMeasurerCache({
       // react-virtualized component to measure the size of component
@@ -86,7 +87,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     ) : (
       // If the page has loaded and has data to display
       <InfiniteLoader
-        isRowLoaded={({ index }) => !hasMore || index < (dataList.length??0)} // whether the current row is loaded
+        isRowLoaded={({ index }) => !hasMore || index < (dataList.length ?? 0)} // whether the current row is loaded
         loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
         rowCount={dataList.length + 1} // total row count of the data to be displayed
       >
@@ -99,9 +100,9 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                   height={height}
                   onRowsRendered={onRowsRendered}
                   ref={registerChild}
-                  rowHeight={cache.current.rowHeight??0}
+                  rowHeight={cache.current.rowHeight ?? 0}
                   deferredMeasurementCache={cache.current}
-                  rowCount={dataList.length??0}
+                  rowCount={dataList.length ?? 0}
                   rowRenderer={({ key, index, style, parent }) => {
                     const element = dataList[index];
                     return (
@@ -110,9 +111,9 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                         cache={cache.current}
                         parent={parent}
                         columnIndex={0}
-                        rowIndex={index??0}
+                        rowIndex={index ?? 0}
                       >
-                        <div style={style}>{renderData(element)}</div>
+                        <div style={style}>{renderData(element, enqueue)}</div>
                       </CellMeasurer>
                     );
                   }}
