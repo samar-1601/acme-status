@@ -10,7 +10,6 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
 import {
-  NEXT_PUBLIC_AUTH_TOKEN,
   STATUS,
   getIncidentStatusFromPost,
   PAGE_ID,
@@ -69,7 +68,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
           },
           body: JSON.stringify(payload),
         }
@@ -115,7 +114,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     })
       .then((response) => response.json())
@@ -140,7 +139,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
           },
         })
           .then((response) => response.json())

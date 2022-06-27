@@ -42,6 +42,7 @@ const LoginProvidersList: React.FC = () => {
   if (status === "loading")
     return (
       <Block {...hasListLoadedStyle}>
+        {"Checking authentication status ... "}
         <Spinner />
       </Block>
     );
@@ -51,7 +52,10 @@ const LoginProvidersList: React.FC = () => {
     console.log("already signed in");
   }
 
-  const handleOAuthSignIn = (provider: any) => () => signIn(provider);
+  const handleOAuthSignIn = (provider: any) => async () => {
+    const data = await signIn(provider, { redirect: false, callback: "/" });
+    push("/");
+  };
 
   return (
     <>
@@ -66,7 +70,7 @@ const LoginProvidersList: React.FC = () => {
           width={550}
           alt="login page image"
         ></Image>
-        <Block {...loginPageDividerLine} ></Block>
+        <Block {...loginPageDividerLine}></Block>
         <Block {...loginListView}>
           <Block {...loginPageHeaderName}>
             One step away from <b>statusapp</b>

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
+import { PAGE_ID } from "../../constants";
 import ComponentForm from "../ComponentCreation/ComponentForm";
 
 const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"];
@@ -16,7 +16,7 @@ export default function EditComponent(props: any) {
     const response = await fetch(URL, {
     headers : {
       "Content-Type": "application/json",
-      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+      Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
     }})
     let xjson = await response.json();
     console.log(xjson)

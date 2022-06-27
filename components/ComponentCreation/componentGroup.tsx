@@ -2,7 +2,7 @@ import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import * as React from "react";
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
+import { PAGE_ID } from "../../constants";
 import { inputStatusStyle } from "./componentCreationStyles";
 
 export const ComponentGroup = function (props: any) {
@@ -13,7 +13,7 @@ export const ComponentGroup = function (props: any) {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
     let xjson = await response.json();

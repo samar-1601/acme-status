@@ -1,4 +1,3 @@
-import { NEXT_PUBLIC_AUTH_TOKEN } from "../../../../constants";
 
 export function generateUsers() {
   const faker = require("faker");
@@ -42,7 +41,7 @@ export function generateUsers() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+      Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
     },
     body: JSON.stringify(newObj),
   });
