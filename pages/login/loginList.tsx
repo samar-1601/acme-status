@@ -52,8 +52,10 @@ const LoginProvidersList: React.FC = () => {
     console.log("already signed in");
   }
 
-  const handleOAuthSignIn = (provider: any) => () =>
-    signIn(provider, { redirect: false, callbackUrl: "/" });
+  const handleOAuthSignIn = (provider: any) => async () => {
+    const data = await signIn(provider);
+    push("/");
+  };
 
   return (
     <>
