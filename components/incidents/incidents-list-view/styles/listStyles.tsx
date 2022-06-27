@@ -89,6 +89,7 @@ export const componentIconHoverTextStyle: BlockProps = {
         padding: "8px",
         fontSize: "14px",
         borderRadius: "8px",
+        backgroundColor: "#F8F8FA",
       },
     },
   },
