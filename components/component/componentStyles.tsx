@@ -83,6 +83,18 @@ export const divInsideNav: BlockProps = {
   },
 };
 
+export const divInsideNavDisabled: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        cursor: "not-allowed",
+        marginRight: "20px",
+        fontSize: "14px",
+      },
+    },
+  },
+};
+
 export const nav: BlockProps = {
   overrides: {
     Block: {
