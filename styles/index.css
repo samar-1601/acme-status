@@ -91,6 +91,7 @@
     box-Shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
+
   @keyframes slideInFromLeft {
     0% {
       transform: translateX(-50%);
@@ -139,5 +140,14 @@
 
   .list-item:hover .button-area {
     visibility: visible;
+  }
+
+  .edit-icon {
+    fill: "black";
+  }
+  .edit-icon-wrapper :hover{
+    background-color: #EEEFF1;
+    cursor: pointer;
+    @apply rounded-full;
   }
 }

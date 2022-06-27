@@ -2,7 +2,9 @@ import { DURATION } from "baseui/snackbar";
 import Router from "next/router";
 import { PAGE_ID } from "../../../constants";
 
+
 export const DeleteIncident = (incidentId: string, enqueue: Function) => {
+
   fetch(
     "https://api.statuspage.io/v1/pages/" +
       PAGE_ID +
@@ -28,7 +30,7 @@ export const DeleteIncident = (incidentId: string, enqueue: Function) => {
         {
           message: "Successfully Deleted Incident",
         },
-        DURATION.short
+        DURATION.long
       );
     })
     .then(() => {
@@ -46,3 +48,7 @@ export const DeleteIncident = (incidentId: string, enqueue: Function) => {
       //   setIsSubmitClicked(false);
     });
 };
+function useHistory() {
+  throw new Error("Function not implemented.");
+}
+
