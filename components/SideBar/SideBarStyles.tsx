@@ -73,7 +73,7 @@ export const userDetailsWrapper: BlockProps = {
         margin: "10px 20px 50px 20px",
         padding: "12px",
         // backgroundColor: "rgb(16, 36 ,71)",
-        backgroundColor: "#EEEFF1",
+        backgroundColor: "#D9D9D9",
         borderRadius: "8px",
         display: "flex",
         flexDirection: "column",

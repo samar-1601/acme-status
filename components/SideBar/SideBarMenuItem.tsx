@@ -64,14 +64,14 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
           Block: {
             style: {
               backgroundColor: `${
-                activeMenuItem == menuItem ? "#EEEFF1" : "#F8F8FA"
+                activeMenuItem == menuItem ? "rgba(0,0,0,0.15)" : "#EEEEF1"
               }`, // toggle the style based on the active page
               color: "black",
               padding: "12px",
               margin: "12px 20px",
               cursor: "pointer",
               textAlign: "center",
-              borderRadius: "16px",
+              borderRadius: "8px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
