@@ -1,19 +1,18 @@
 import * as React from "react";
 
-import { ComponentStatusIconUrls, ICON_URL, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
+import { ComponentStatusIconUrls, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { Spinner } from "baseui/spinner";
-import styles from "./styles.module.css"
 import Image from "next/image";
 
 import Link from "next/link";
 
 import { useRouter } from "next/router";
 import { Block } from "baseui/block";
-import { element, listItem, loader } from "./componentStyles";
+import { detailStyles, element, listItem, loader } from "./componentStyles";
 
-export const ComponentList = function () {
+export const ComponentList = function (props: any) {
   const router = useRouter()
   const [dataList, setDataList] = React.useState<any>([]);
   const [loaded, setLoaded] = React.useState(false);
@@ -46,8 +45,8 @@ export const ComponentList = function () {
 
     let details: any;
     details = (<>
-                <div className={styles.itemName}>{props.comp.name}</div><br />
-                <div className={styles.itemDescription}>{msg}</div>
+                <Block >{props.comp.name}</Block>
+                <Block {...detailStyles}>{msg}</Block>
               </>);
 
     return (
@@ -77,11 +76,10 @@ export const ComponentList = function () {
         </Block>
         <div>
           <Link
-            href={{
-              pathname: `/component/edit`,
-              query: {id: props.comp.id}
-            }}
-          >
+        href={{
+          pathname: `/component/edit/${props.comp.id}`,
+        }}
+      >
             <Block 
               overrides ={{
                 Block : {
@@ -108,7 +106,7 @@ export const ComponentList = function () {
     for (let i=0; i<dataList.length; i++) {
       listItems[i] = <Component key={dataList[i].id} comp={dataList[i]} />
     }
-    return <div className={styles.itemList}>{listItems}</div>;
+    return <Block >{listItems}</Block>;
   };
 
   const getComponents = async () => {

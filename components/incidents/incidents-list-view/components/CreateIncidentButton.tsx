@@ -16,7 +16,7 @@ export const CreateIncidentButton = React.memo(() => {
   return (
     <Link href="/incidents/new">
       <Block {...createIncidentButton} className="primary-button">
-        Create incident
+        Create Incident
       </Block>
     </Link>
   );

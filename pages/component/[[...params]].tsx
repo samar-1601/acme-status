@@ -8,19 +8,19 @@ import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { Header, NavigationBar } from "../../components/component/Component";
 
 // styles
-import styles from "../../components/ComponentCreation/styles.module.css";
 import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/createIncidents/styles/BlockStyles";
-import { ComponentCreationForm } from "../../components/ComponentCreation/ComponentCreationForm";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 
 // constants
 import { SideBarMenu } from "../../constants";
+import EditComponent from "../../components/editComponent/editComponent";
+import { ComponentCreation } from "../../components/ComponentCreation/ComponentCreation";
+import { ComponentsViewHomePage } from "../../components/component/componentsHomePage";
 
 const AddComponents: React.FC = () => {
   return (
@@ -29,40 +29,39 @@ const AddComponents: React.FC = () => {
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <Block className={styles.page}>
-          <ComponentCreationForm id="" />
-        </Block>
+        <ComponentCreation />
       </PageSlot.Slot>
     </PageSlot>
   );
 };
 
 const Components: React.FC = () => {
+  
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <div className={styles.page}>
-          <Header />
-          <NavigationBar />
-        </div>
+        <ComponentsViewHomePage />
+        
       </PageSlot.Slot>
     </PageSlot>
   );
 };
 
 const EditComponents = function () {
+  const router = useRouter();
+  console.log(router.asPath);
+  let param = router.asPath.split("/")[3];
+
   return (
     <PageSlot>
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.Components} />
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
-        <div className={styles.page}>
-          <ComponentCreationForm id={router.query.id} />
-        </div>
+        <EditComponent componentId={param}/>
       </PageSlot.Slot>
     </PageSlot>
   );
@@ -107,7 +106,7 @@ export default () => {
     return <Components />;
   } else if (params.length === 1 && params[0] == "new") {
     return <AddComponents />;
-  } else if (params.length === 1 && params[0] == "edit") {
+  } else if (params.length === 2 && params[0] == "edit") {
     return <EditComponents />;
   } else {
     return <WrongUrlPage />;
