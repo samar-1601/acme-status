@@ -42,6 +42,7 @@ const LoginProvidersList: React.FC = () => {
   if (status === "loading")
     return (
       <Block {...hasListLoadedStyle}>
+        {"Checking authentication status ... "}
         <Spinner />
       </Block>
     );
