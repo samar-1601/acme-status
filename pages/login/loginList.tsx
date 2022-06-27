@@ -1,6 +1,6 @@
 // lib
 import { useSession, signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 
 // components and icons
 import { BsGithub, BsGoogle } from "react-icons/bs";
@@ -53,16 +53,27 @@ const LoginProvidersList: React.FC = () => {
   }
 
   const handleOAuthSignIn = (provider: any) => async () => {
-    // const data = (await signIn(provider, {
-    //   redirect: false,
-    //   callback: "/",
-    // })) ?? { url: "" };
-    // replace(data["url"].split("?")[0], "/", { shallow: true });
-    // console.log(data["url"]);
-    signIn(provider, {
+    const data = (await signIn(provider, {
       redirect: false,
       callback: "/",
-    }).then(() => replace("/", "/", { shallow: true }));
+    })) ?? { url: "", query: "" };
+    // replace(data["url"].split("?")[0], "/", { shallow: true });
+    // console.log(data["url"]);
+    // signIn(provider, {
+    //   redirect: false,
+    //   callback: "/",
+    // }).then(() => replace("/", "/", { shallow: true }));
+    const params = new URLSearchParams(data["query"]);
+    params.delete("state"); //"code", "scope", "authuser", "hd", "prompt");
+    params.delete("code");
+    params.delete("scope");
+    params.delete("authuser");
+    params.delete("hd");
+    params.delete("prompt");
+    const queryString = params.toString();
+    const path = `/${queryString ? `?${queryString}` : ""}`;
+
+    replace(path, "/", { scroll: false });
   };
 
   return (
