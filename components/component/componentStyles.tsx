@@ -216,9 +216,11 @@ export const loader: BlockProps = {
   overrides : {
     Block : {
       style : {
-        position: "absolute",
-        left: "50%",
-        top: "300px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "80vh",
+        width: "100%",
       }
     }
   }

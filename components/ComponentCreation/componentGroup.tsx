@@ -46,10 +46,7 @@ export const ComponentGroup = function (props: any) {
         options={groups}
         labelKey="label"
         valueKey="id"
-        onChange={({value}) => {
-            props.handleGroupChange(value)
-          }
-        }
+        onChange={()=>{}}
         value={props.value}
         placeholder="This component does not belong to a group"
         {...inputStatusStyle}

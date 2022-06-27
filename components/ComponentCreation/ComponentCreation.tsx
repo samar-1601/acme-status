@@ -10,6 +10,7 @@ export const ComponentCreation = React.memo(() => {
 
   return(
     <ComponentForm 
+      id={""}
       addComponent={true}
       componentName={componentName}
       componentDescription={componentDescription}

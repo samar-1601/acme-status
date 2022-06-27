@@ -30,7 +30,8 @@ export default function EditComponent(props: any) {
     getComponent();
   }, [])
   return (
-    <ComponentForm 
+    <ComponentForm
+      id={props.componentId}
       addComponent={false}
       componentName={componentName}
       componentDescription={componentDescription}

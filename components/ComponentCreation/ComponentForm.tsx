@@ -19,7 +19,7 @@ export default function ComponentForm(props: any) {
   const [componentName, setComponentName] = React.useState<String>(props.componentName);
   const [componentDescription, setComponentDescription] = React.useState<String>(props.componentDescription);
   const [componentStatus, setComponentStatus] = React.useState<number>(props.componentStatus);
-  const [componentGroup, setComponentGroup] = React.useState<String>(props.componentGroup);
+  const [componentGroup, setComponentGroup] = React.useState<any>(props.componentGroup);
   const [submit, setSubmit] = React.useState<Boolean>(false);
   const { enqueue, dequeue } = useSnackbar();
   
@@ -41,10 +41,6 @@ export default function ComponentForm(props: any) {
 
   const handleNameChange = React.useCallback((e)=>setComponentName(e.target.value),[]);
 
-  React.useEffect(()=>{
-    console.log("re-renderinng");
-  }, [addComponent])
-
   const handleDescriptionChange = React.useCallback((e)=>setComponentDescription(e.target.value),[]);
 
   const handleStatusChange = React.useCallback((e) => {
@@ -53,64 +49,113 @@ export default function ComponentForm(props: any) {
 
   const handleGroupChange = React.useCallback((e) => {
     console.log(e)
-    if(e[0].id != e[0].label)  setComponentGroup(e[0].id);
-    else setComponentGroup(e[0].label)
   }, [])
 
   const handleSubmit = () => {
     setSubmit(true)
-    const payload = {
-      "component" : {
-        "description": componentDescription,
-        "status": status[componentStatus],
-        "name": componentName,
-        "group_id": componentGroup,
+    let method="PUT";
+    if(addComponent)  { 
+      let payload = {
+        "component" : {
+          "description": componentDescription,
+          "status": status[componentStatus],
+          "name": componentName,
+        }
+      }
+      if (payload.component.name == "") {
+        enqueue({
+            message: "Component Name can't be Blank!",
+          },
+          DURATION.short
+        );
+        setSubmit(false);
+      } else {
+        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN)
+        fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          },
+          body: JSON.stringify(payload),
+        })
+        .then((response) => response.json())
+        .then((json) => {
+          if ("error" in json) {
+            throw json.error; 
+          }
+          enqueue({
+            message: "Successfully submitted form details",
+          },
+          DURATION.medium
+          );
+            setSubmit(false);
+          })
+          .then(() => {
+            Router.push("/component");
+          })
+          .catch((err) => {
+            enqueue({
+                message: "Failed to Submit Form. Please Try Again!",
+              },
+              DURATION.short
+            );
+            setSubmit(false);
+            console.log(err);
+          });
+      }
+    } else {
+      let payload = {
+        "component" : {
+          "description": componentDescription,
+          "status": status[componentStatus],
+          "name": componentName,
+        }
+      }
+      if (payload.component.name == "") {
+        enqueue({
+            message: "Component Name can't be Blank!",
+          },
+          DURATION.short
+        );
+        setSubmit(false);
+      } else {
+        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN)
+        fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          },
+          body: JSON.stringify(payload),
+        })
+        .then((response) => response.json())
+        .then((json) => {
+          if ("error" in json) {
+            throw json.error; 
+          }
+          enqueue({
+            message: "Successfully updated the component",
+          },
+          DURATION.medium
+          );
+            setSubmit(false);
+          })
+          .then(() => {
+            Router.push("/component");
+          })
+          .catch((err) => {
+            enqueue({
+                message: "Failed to Submit Form. Please Try Again!",
+              },
+              DURATION.short
+            );
+            setSubmit(false);
+            console.log(err);
+          });
       }
     }
-    console.log(payload)
-    if (payload.component.name == "") {
-      enqueue({
-          message: "Component Name can't be Blank!",
-        },
-        DURATION.long
-      );
-      setSubmit(false);
-    } else {
-      fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-        },
-        body: JSON.stringify(payload),
-      })
-      .then((response) => response.json())
-      .then((json) => {
-        if ("error" in json) {
-          throw json.error; 
-        }
-        enqueue({
-          message: "Successfully submitted form details",
-        },
-        DURATION.medium
-        );
-          setSubmit(false);
-        })
-        .then(() => {
-          Router.push("/component");
-        })
-        .catch((err) => {
-          enqueue({
-              message: "Failed to Submit Form. Please Try Again!",
-            },
-            DURATION.long
-          );
-          setSubmit(false);
-          console.log(err);
-        });
-    }
-
-  }
+  } 
 
   const handleCancel = () => {
     Router.push("/component")
