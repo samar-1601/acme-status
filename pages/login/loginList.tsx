@@ -53,8 +53,11 @@ const LoginProvidersList: React.FC = () => {
   }
 
   const handleOAuthSignIn = (provider: any) => async () => {
-    const data = await signIn(provider, { redirect: false, callback: "/" });
-    push("/");
+    const data = (await signIn(provider, {
+      redirect: false,
+      callback: "/",
+    })) ?? { url: "" };
+    push(data["url"]);
   };
 
   return (
