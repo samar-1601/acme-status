@@ -113,7 +113,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
         }}
         {...signOutButton}
       >
-        <FaSignOutAlt />
+        <FaSignOutAlt color="black" />
         Sign Out
       </Block>
     </Block>

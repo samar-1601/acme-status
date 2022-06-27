@@ -8,121 +8,136 @@
 
 @layer base {
 
-    html,
-    body {
-        padding: 0;
-        margin: 0 !important;
-        background-color: #F8F8FA;
+  html,
+  body {
+    padding: 0;
+    margin: 0 !important;
+    background-color: #F8F8FA;
 
-    }
+  }
 
-    * {
-        box-sizing: border-box;
-        margin: 0ch;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0ch;
+  }
 
 }
 
 @layer components {
 
-    /*to be used for heading */
-    .header {
-        @apply text-3xl;
-        @apply font-black;
+  /*to be used for heading */
+  .header {
+    @apply text-3xl;
+    @apply font-black;
+  }
+
+  /*to be used to link or url*/
+  .link {
+    @apply underline;
+    @apply my-2;
+    @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+  }
+
+  /*to be used for primary button*/
+  .primary-button {
+    @apply bg-primary-not-hover;
+    @apply rounded-lg;
+    @apply hover:bg-primary-hover;
+    @apply text-white;
+    @apply cursor-pointer;
+    @apply flex justify-center items-center;
+  }
+
+  /*to be used for secondary button*/
+  .secondary-button {
+    @apply bg-secondary-not-hover;
+    @apply rounded-lg;
+    @apply hover:bg-secondary-hover;
+    @apply text-black;
+    @apply cursor-pointer;
+    @apply border;
+    @apply border-border-color;
+    @apply flex justify-center items-center;
+  }
+
+  /*to be used for applying footer bar in form*/
+  .footer-bar {
+    @apply fixed left-0 bottom-0;
+    @apply bg-white;
+    @apply w-full pr-4 pt-4;
+
+  }
+
+  .sideBarOption {
+    @apply hover:bg-secondary-hover;
+    @apply cursor-pointer;
+  }
+
+  .hoverSideBarOption {
+    @apply hover:bg-side-bar-option-hover-bg hover:text-side-bar-option-hover-text;
+  }
+
+  .userProfileImage {
+    @apply rounded-full;
+  }
+
+  .block-hover-state {
+    @apply hover:text-hover-blue;
+  }
+
+  .welcome-page-image {
+    max-width: 100%;
+    height: auto;
+    box-Shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-50%);
     }
 
-    /*to be used to link or url*/
-    .link {
-        @apply underline;
-        @apply my-2;
-        @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(50%);
     }
 
-    /*to be used for primary button*/
-    .primary-button {
-        @apply bg-primary-not-hover;
-        @apply rounded-lg;
-        @apply hover:bg-primary-hover;
-        @apply text-white;
-        @apply cursor-pointer;
-        @apply flex justify-center items-center;
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(50%);
     }
 
-    /*to be used for secondary button*/
-    .secondary-button {
-        @apply bg-secondary-not-hover;
-        @apply rounded-lg;
-        @apply hover:bg-secondary-hover;
-        @apply text-black;
-        @apply cursor-pointer;
-        @apply border;
-        @apply border-border-color;
-        @apply flex justify-center items-center;
+    100% {
+      transform: translateY(0);
     }
+  }
 
-    /*to be used for applying footer bar in form*/
-    .footer-bar {
-        @apply fixed left-0 bottom-0;
-        @apply bg-white;
-        @apply w-full pr-4 pt-4;
+  .fadingEffect1 {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+  }
 
-    }
+  .fadingEffect2 {
+    animation: 1s ease-out 0s 1 slideInFromRight;
+  }
 
-    .sideBarOption {
-        @apply hover:bg-secondary-hover;
-        @apply cursor-pointer;
-    }
+  .fadingEffect3 {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+  }
 
-    .hoverSideBarOption {
-        @apply hover:bg-side-bar-option-hover-bg hover:text-side-bar-option-hover-text;
-    }
-    .userProfileImage {
-        @apply rounded-full;
-    }
+  .list-item .button-area {
+    visibility: hidden;
+  }
 
-    .block-hover-state{
-        @apply hover:text-hover-blue;
-    }
-
-    .welcome-page-image{
-        max-width: 100%;
-        height: auto;
-        box-Shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-
-    @keyframes slideInFromLeft {
-        0% {
-          transform: translateX(-50%);
-        }
-        100% {
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes slideInFromRight {
-        0% {
-          transform: translateX(50%);
-        }
-        100% {
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes slideInFromBottom {
-        0% {
-          transform: translateY(50%);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-    .fadingEffect1 {
-        animation: 1s ease-out 0s 1 slideInFromLeft;
-    }
-    .fadingEffect2 {
-        animation: 1s ease-out 0s 1 slideInFromRight;
-    }
-    .fadingEffect3 {
-        animation: 1s ease-out 0s 1 slideInFromLeft;
-    }
+  .list-item:hover .button-area {
+    visibility: visible;
+  }
 }

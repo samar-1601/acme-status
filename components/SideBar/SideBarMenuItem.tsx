@@ -32,21 +32,21 @@ const getIcon = (menuItem: SideBarMenu, activeMenuItem: SideBarMenu) => {
   switch (menuItem) {
     case SideBarMenu.IncidentsView:
       return activeMenuItem == menuItem ? (
-        <AiOutlineExclamationCircle color="rgb(20,47,93)" size={20} />
+        <AiOutlineExclamationCircle color="palevioletred" size={20} />
       ) : (
-        <AiOutlineExclamationCircle color="yellowgreen" size={20} />
+        <AiOutlineExclamationCircle color="black" size={20} />
       );
     case SideBarMenu.ClientsPage:
       return activeMenuItem == menuItem ? (
-        <MdOpenInNew color="rgb(20,47,93)" size={20} />
+        <MdOpenInNew color="palevioletred" size={20} />
       ) : (
-        <MdOpenInNew color="yellow" size={20} />
+        <MdOpenInNew color="black" size={20} />
       );
     case SideBarMenu.Components:
       return activeMenuItem == menuItem ? (
-        <TbComponents color="rgb(20,47,93)" size={20} />
+        <TbComponents color="palevioletred" size={20} />
       ) : (
-        <TbComponents color="pink" size={20} />
+        <TbComponents color="black" size={20} />
       );
   }
 };
@@ -64,16 +64,17 @@ export const SideBarMenuItem: React.FC<Props> = React.memo(
           Block: {
             style: {
               backgroundColor: `${
-                activeMenuItem == menuItem ? "lightblue" : "rgb(16, 36, 71)"
+                activeMenuItem == menuItem ? "rgba(0, 0 ,0, 0.1)" : "#F8F8FA"
               }`, // toggle the style based on the active page
-              color: `${
-                activeMenuItem == menuItem ? "rgb(20,47,93)" : "#F8F8FA"
-              }`, // toggle the style based on the active page
+              // color: `${
+              //   activeMenuItem == menuItem ? "rgb(20,47,93)" : "#F8F8FA"
+              // }`, // toggle the style based on the active page
+              color: "black",
               padding: "16px",
               margin: "12px 20px",
               cursor: "pointer",
               textAlign: "center",
-              borderRadius: "8px",
+              borderRadius: "16px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

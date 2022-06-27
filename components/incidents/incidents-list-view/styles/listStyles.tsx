@@ -13,11 +13,12 @@ export const listItem: BlockProps = {
         padding: "20px 30px 15px 30px",
         backgroundColor: "white",
         margin: "10px auto 20px auto",
-        width: "79%",
+        width: "80%",
         borderTop: "4px rgb(243, 214, 54) solid",
         borderRadius: "8px",
         boxShadow:
           "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+        listStyle: "none",
       },
     },
   },
@@ -27,7 +28,6 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "100%",
-        margin: "auto",
       },
     },
   },
@@ -41,6 +41,7 @@ export const listDetails: BlockProps = {
         gap: "6px",
         flexDirection: "row",
         flexWrap: "wrap",
+        width: "100%",
       },
     },
   },
@@ -54,7 +55,8 @@ export const itemName: BlockProps = {
         fontWeight: 900,
         marginBottom: "6px",
         textTransform: "capitalize",
-        display: "inline",
+        display: "flex",
+        justifyContent: "space-between",
       },
     },
   },
@@ -217,10 +219,23 @@ export const editIncidentButton: BlockProps = {
   overrides: {
     Block: {
       style: {
-        marginBottom: "80px",
-        padding: "0px 16px",
-        height: "34px",
-        width: "92px",
+        padding: "4px",
+        display: "inline",
+        cursor: "pointer",
+        ":hover": {
+          color : "#808080",
+        },
+        color: "lightgrey",
+      },
+    },
+  },
+};
+export const buttonArea: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        gap:"10px",
       },
     },
   },

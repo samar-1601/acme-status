@@ -17,8 +17,8 @@ export const content: BlockProps = {
   overrides: {
     Block: {
       style: {
-        position: "relative",
-        margin: "10px 0px",
+        width: "100%",
+        margin: "10px auto",
       },
     },
   },

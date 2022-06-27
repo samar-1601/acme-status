@@ -1,6 +1,8 @@
 // components
 import { Block } from "baseui/block";
 import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 // constants
 import {
@@ -21,6 +23,7 @@ import {
   editIncidentButton,
   componentItemIconWrapper,
   componentIconHoverTextStyle,
+  buttonArea,
 } from "../styles/listStyles";
 import Image from "next/image";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
@@ -119,24 +122,37 @@ export const renderData: React.FC = (incident: any): JSX.Element => {
   const renderComponents = getComponents(incident);
 
   return (
-    <Block key={incident["name"]} {...listItem}>
+    <Block key={incident["name"]} {...listItem} className="list-item">
       <Block {...listDetails}>
-        <Block {...itemName}>{incident["name"]}</Block>
+        <Block {...itemName}>
+          {incident["name"]}{" "}
+          <Block {...buttonArea} className="button-area">
+            <Link
+              href={{
+                pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
+              }}
+            >
+              <Block {...editIncidentButton}>
+                <FaEdit size={22} />
+              </Block>
+            </Link>
+            <Link
+              href={{
+                pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
+              }}
+            >
+              <Block {...editIncidentButton}>
+                <MdDelete size={22} />
+              </Block>
+            </Link>
+          </Block>
+        </Block>
         <Block {...itemDetailsSecondLine}>
           <Block {...itemStatus}>{incident["status"]}</Block>
           <Block {...itemDate}>{formatDate(incident["created_at"])}</Block>
         </Block>
         {renderComponents}
       </Block>
-      <Link
-        href={{
-          pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
-        }}
-      >
-        <Block {...editIncidentButton} className="secondary-button">
-          Edit
-        </Block>
-      </Link>
     </Block>
   );
 };
