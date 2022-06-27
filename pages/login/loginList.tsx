@@ -36,7 +36,7 @@ const providers = [
 
 const LoginProvidersList: React.FC = () => {
   const { data: session, status } = useSession();
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
 
   console.log(session);
   if (status === "loading")
@@ -57,7 +57,8 @@ const LoginProvidersList: React.FC = () => {
       redirect: false,
       callback: "/",
     })) ?? { url: "" };
-    push(data["url"]);
+    replace(data["url"], undefined, { shallow: true });
+    // push(data["url"]);
   };
 
   return (
