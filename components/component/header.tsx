@@ -1,7 +1,7 @@
 import { Block } from "baseui/block";
 import * as React from "react";
-import { headerBar, headerBarLeftWrapper, headerBarText } from "../incidents/incidents-list-view/styles/navStyles";
-import { headerBarBackIcon } from "./componentStyles";
+import { headerBar, headerBarLeftWrapper, headerBarText, headerBarBackIcon } from "../incidents/incidents-list-view/styles/navStyles";
+
 import Image from "next/image";
 
 interface Props {

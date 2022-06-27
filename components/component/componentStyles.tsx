@@ -1,6 +1,18 @@
 import { BlockProps } from "baseui/block";
 import Router from "next/router";
 
+export const detailStyles: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        fontSize: "14px",
+        color: "#808080",
+        paddingTop: "10px",
+      }
+    }
+  }
+}
+
 export const content: BlockProps = {
   overrides: {
     Block: {
@@ -65,6 +77,7 @@ export const divInsideNav: BlockProps = {
       style: {
         cursor: "pointer",
         marginRight: "20px",
+        fontSize: "14px",
       },
     },
   },
@@ -181,6 +194,7 @@ export const element: BlockProps = {
         margin: "10px auto 20px auto",
         boxShadow: "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
         width: "80%",
+        borderRadius: "8px",
       }
     }
   }

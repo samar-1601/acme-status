@@ -8,15 +8,12 @@ import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { Header, NavigationBar } from "../../components/component/Component";
 
 // styles
-import styles from "../../components/ComponentCreation/styles.module.css";
 import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/createIncidents/styles/BlockStyles";
-import { ComponentCreationForm } from "../../components/ComponentCreation/ComponentCreationForm";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
 
 // constants

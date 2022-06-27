@@ -9,7 +9,8 @@ export const Footer = React.memo((props: any)=> {
             display: "flex",
             flexDirection: "row-reverse",
             right: 0,
-            alignItems: "center"
+            alignItems: "center",
+            paddingBottom: "20px",
           },
           props: {
             className: "footer-bar"
