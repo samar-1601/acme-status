@@ -55,7 +55,18 @@ const WelcomePage: React.FC = () => {
       </Block>
       <Block {...contentBlock}>
         {/*souvik*/}
-        <Block {...rowContent}>
+        <Block
+          {...rowContent}
+          overrides={{
+            Block: {
+              style: {
+                // border: "2px solid black",
+                borderRadius: "8px",
+              },
+              props: { className: "fadingEffect1" },
+            },
+          }}
+        >
           <Block {...textProps}>
             <Block {...headerStyle}>Incidents</Block>
             <Block {...descriptionContentStyle}>
@@ -65,14 +76,19 @@ const WelcomePage: React.FC = () => {
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/incidentsView.png" />
+            <img src="/incidentsView.png" className="welcome-page-image" />
           </Block>
         </Block>
         <Block
           {...rowContent}
           overrides={{
             Block: {
-              style: { flexDirection: "row-reverse", paddingRight: "100px" },
+              style: {
+                // border: "2px solid black",
+                borderRadius: "8px",
+                flexDirection: "row-reverse",
+              },
+              props: { className: "fadingEffect2" },
             },
           }}
         >
@@ -85,10 +101,21 @@ const WelcomePage: React.FC = () => {
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/components.png" />
+            <img src="/components.png" className="welcome-page-image" />
           </Block>
         </Block>
-        <Block {...rowContent}>
+        <Block
+          {...rowContent}
+          overrides={{
+            Block: {
+              style: {
+                // border: "2px solid black",
+                borderRadius: "8px",
+              },
+              props: { className: "fadingEffect3" },
+            },
+          }}
+        >
           <Block {...textProps}>
             <Block {...headerStyle}>Client Side view</Block>
             <Block {...descriptionContentStyle}>
@@ -98,7 +125,7 @@ const WelcomePage: React.FC = () => {
             </Block>
           </Block>
           <Block {...imageProps}>
-            <img src="/components.png" />
+            <img src="/components.png" className="welcome-page-image" />
           </Block>
         </Block>
       </Block>

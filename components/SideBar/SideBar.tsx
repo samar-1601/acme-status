@@ -10,6 +10,7 @@ import Router from "next/router";
 import { SideBarMenuItem } from "./SideBarMenuItem";
 import WelcomePage from "../WelcomePage/WelcomePage";
 import Image from "next/image";
+import { FaSignOutAlt } from "react-icons/fa";
 
 // constants
 import { SideBarMenu } from "../../constants";
@@ -73,7 +74,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
           ></Image>
         </Block>
         <Block {...userNameWrapper}>{session.user?.name ?? "User Name"}</Block>
-        <Block {...emailWrapper}>{session.user?.email ?? "User Name"}</Block>
+        <Block {...emailWrapper}>{session.user?.email ?? "User Email"}</Block>
       </Block>
       <Block>
         <Block>
@@ -105,7 +106,6 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
         </Block>
       </Block>
       <Block
-        className="secondary-button"
         onClick={() => {
           // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
           localStorage.removeItem("loadingCount");
@@ -113,6 +113,7 @@ const SideBar: React.FC<Props> = React.memo(({ activeItemID }) => {
         }}
         {...signOutButton}
       >
+        <FaSignOutAlt />
         Sign Out
       </Block>
     </Block>

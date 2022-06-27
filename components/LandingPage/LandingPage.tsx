@@ -12,7 +12,11 @@ import { SideBarMenu } from "../../constants";
 import { IncidentsViewHomePage } from "../incidents/incidents-list-view/IncidentsHomePage";
 import { Block } from "baseui/block";
 import Image from "next/image";
-import { landingPageContainerStyle, landingPageDescriptionStyle, landingPageHeaderStyle } from "./LandingPageStyles";
+import {
+  landingPageContainerStyle,
+  landingPageDescriptionStyle,
+  landingPageHeaderStyle,
+} from "./LandingPageStyles";
 
 /**
  * The HomePage/Landing page opened after the user has logged in successfully
@@ -23,7 +27,7 @@ const LandingPage = React.memo(() => {
     if (localStorage.getItem("loadingCount") == undefined) {
       // if the page has loaded for the first time after logging in then only shoe the message.
       // dequeue();
-      enqueue({ message: "Succesfully Logged in!" }, DURATION.long);
+      enqueue({ message: "Succesfully Logged in!" }, DURATION.short);
       // after the snackbar has been shown for the first time, we set in to a value to not show snackbar again and again when the page is rendered
       localStorage.setItem("loadingCount", "1");
     }
@@ -37,8 +41,8 @@ const LandingPage = React.memo(() => {
       </PageSlot.Slot>
       <PageSlot.Slot name="rightContent">
         <Block {...landingPageContainerStyle}>
-          <Block {...landingPageHeaderStyle}>Welcome to StatusPage</Block>
-          <Image src="/landingPage.svg" height={600} width={600}></Image>
+          <Block {...landingPageHeaderStyle}>Welcome to <b>statusapp</b></Block>
+          <Image src="/landingPage2.svg" height={600} width={600}></Image>
           <Block {...landingPageDescriptionStyle}>Managing, Updating and Creating your Incidents & Components is now easy !!</Block>
         </Block>
       </PageSlot.Slot>

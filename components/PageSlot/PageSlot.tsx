@@ -4,6 +4,7 @@ import { Children } from "react";
 
 // components
 import { Block } from "baseui/block";
+import Head from "next/head";
 
 // styles
 import {
@@ -31,10 +32,16 @@ export const PageSlot = ({
     (child) => child?.props?.name === "rightContent"
   );
   return (
-    <Block {...pageWrapperStyles}>
-      <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
-      <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>
-    </Block>
+    <>
+      <Head>
+        <title>statusapp</title>
+        <link rel="icon" href="/Status_icon.png" />
+      </Head>
+      <Block {...pageWrapperStyles}>
+        <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
+        <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>
+      </Block>
+    </>
   );
 };
 

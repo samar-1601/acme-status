@@ -3,6 +3,19 @@ import { SelectProps } from "baseui/select";
 import { TextareaProps } from "baseui/textarea";
 import { CheckboxProps } from "baseui/checkbox";
 import { DatepickerProps } from "baseui/datepicker";
+import { BlockProps } from "baseui/block";
+
+export const formStyles: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        paddingTop: "20px",
+        width: "70%",
+        margin: "auto",
+      }
+    }
+  }
+}
 
 export const dateStyles: DatepickerProps = {
   overrides: {

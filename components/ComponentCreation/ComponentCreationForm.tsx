@@ -10,7 +10,6 @@ import {
 
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
-import { Textarea } from "baseui/textarea";
 import { Select, Value } from "baseui/select";
 import { Checkbox } from "baseui/checkbox";
 import { Block } from "baseui/block";
@@ -19,8 +18,8 @@ import { DatePicker } from "baseui/datepicker";
 import styles from "./styles.module.css";
 import Router from "next/router";
 import { Spinner } from "baseui/spinner";
-import { checkBoxStyles, dateStyles, inputDescriptionStyle, inputNameStyle, inputStatusStyle } from "./componentCreationStyles";
-import { SelectStatusComponent } from "../incidents/createIncidents/SelectStatusComponent";
+import { checkBoxStyles, dateStyles, inputNameStyle, inputStatusStyle } from "./componentCreationStyles";
+
 import { useStyletron } from "styletron-react";
 
 
@@ -62,7 +61,7 @@ const NameForm =  function (props: any) {
 };
 
 const Description  = function (props: any) {
-    const [css] = useStyletron();
+  const [css] = useStyletron();
   return (
     <Block  overrides={{
       Block: {
@@ -147,6 +146,7 @@ const ComponentGroup = function (props: any) {
         labelKey="label"
         valueKey="id"
         onChange={({value}) => {
+            console.log(value)
             props.setGrp(value)
           }
         }
@@ -331,8 +331,7 @@ export const ComponentCreationForm = function (props: { id: any; }) {
           }
         }
       }}>
-        
-        <Block 
+              <Block 
           overrides ={{
             Block : {
               style : {               

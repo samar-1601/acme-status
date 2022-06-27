@@ -64,7 +64,7 @@
     .footer-bar {
         @apply fixed left-0 bottom-0;
         @apply bg-white;
-        @apply h-footer-height w-full pr-4;
+        @apply w-full pr-4 pt-4;
 
     }
 
@@ -82,5 +82,47 @@
 
     .block-hover-state{
         @apply hover:text-hover-blue;
+    }
+
+    .welcome-page-image{
+        max-width: 100%;
+        height: auto;
+        box-Shadow: 0 30px 40px rgba(0,0,0,0.5);
+    }
+
+    @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromRight {
+        0% {
+          transform: translateX(50%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInFromBottom {
+        0% {
+          transform: translateY(50%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    .fadingEffect1 {
+        animation: 1s ease-out 0s 1 slideInFromLeft;
+    }
+    .fadingEffect2 {
+        animation: 1s ease-out 0s 1 slideInFromRight;
+    }
+    .fadingEffect3 {
+        animation: 1s ease-out 0s 1 slideInFromLeft;
     }
 }

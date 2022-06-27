@@ -90,6 +90,8 @@ export default () => {
       </Block>
     );
   }
+  console.log("session", session);
+
   const { params = [] } = router.query;
   if (params.length === 0) {
     return <IncidentsHomePage />;
