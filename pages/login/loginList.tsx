@@ -57,7 +57,8 @@ const LoginProvidersList: React.FC = () => {
       redirect: false,
       callback: "/",
     })) ?? { url: "" };
-    replace(data["url"], "/", { shallow: true });
+    replace(data["url"].split("?")[0], "/", { shallow: true });
+    console.log(data["url"]);
   };
 
   return (
