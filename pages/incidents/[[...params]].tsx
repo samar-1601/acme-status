@@ -2,6 +2,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 import {
   mainStyle,
@@ -14,9 +15,15 @@ import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
 import { SideBarMenu } from "../../constants";
 
-const IncidentsHomePage = () => {
+const IncidentsHomePage: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = (props) => {
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.IncidentsView} />
       </PageSlot.Slot>
@@ -27,9 +34,15 @@ const IncidentsHomePage = () => {
   );
 };
 
-const CreateIncidentPage = () => {
+const CreateIncidentPage: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = (props) => {
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.CreateIncidents} />
       </PageSlot.Slot>
@@ -53,13 +66,19 @@ const WrongUrlPage = () => {
   );
 };
 
-const UpdateIncidentPage = () => {
+const UpdateIncidentPage: React.FC<{
+  isOpen: boolean;
+  handleIsOpenChange: Function;
+}> = (props) => {
   const router = useRouter();
   console.log(router.asPath);
   let param = router.asPath.split("/")[3];
 
   return (
-    <PageSlot>
+    <PageSlot
+      isOpen={props.isOpen}
+      handleIsOpenChange={props.handleIsOpenChange}
+    >
       <PageSlot.Slot name="leftNavBar">
         <SideBar activeItemID={SideBarMenu.CreateIncidents} />
       </PageSlot.Slot>
@@ -71,6 +90,7 @@ const UpdateIncidentPage = () => {
 };
 
 export default () => {
+  const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
   const { push } = useRouter();
   const { data: session, status } = useSession({
@@ -92,13 +112,32 @@ export default () => {
   }
   console.log("session", session);
 
+  const handleIsOpenChange = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
   const { params = [] } = router.query;
   if (params.length === 0) {
-    return <IncidentsHomePage />;
+    return (
+      <IncidentsHomePage
+        isOpen={isOpen}
+        handleIsOpenChange={handleIsOpenChange}
+      />
+    );
   } else if (params.length === 1 && params[0] == "new") {
-    return <CreateIncidentPage />;
+    return (
+      <CreateIncidentPage
+        isOpen={isOpen}
+        handleIsOpenChange={handleIsOpenChange}
+      />
+    );
   } else if (params.length === 2 && params[0] == "edit") {
-    return <UpdateIncidentPage />;
+    return (
+      <UpdateIncidentPage
+        isOpen={isOpen}
+        handleIsOpenChange={handleIsOpenChange}
+      />
+    );
   } else {
     return <WrongUrlPage />;
   }

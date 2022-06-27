@@ -223,9 +223,9 @@ export const editIncidentButton: BlockProps = {
         display: "inline",
         cursor: "pointer",
         ":hover": {
-          color : "#808080",
+          color: "#808080",
         },
-        color: "lightgrey",
+        // color: "lightgrey",
       },
     },
   },
@@ -235,7 +235,7 @@ export const buttonArea: BlockProps = {
     Block: {
       style: {
         display: "flex",
-        gap:"10px",
+        gap: "10px",
       },
     },
   },
