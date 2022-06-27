@@ -15,7 +15,7 @@ module.exports = {
         'secondary-not-hover': "white",
         'border-color': "#E6E6E9",
         // 'side-bar-option-hover-bg' : "rgb(16, 36, 71)",
-        'side-bar-option-hover-bg' : "#EEEFF1",
+        'side-bar-option-hover-bg' : "rgba(0,0,0,0.15)",
         'side-bar-option-hover-text' : "black",
         'hover-blue': 'blue',
       },
