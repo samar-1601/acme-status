@@ -20,11 +20,13 @@ export const ComponentsViewHomePage: React.FC = () => {
               pageType={Page.Active}
               currentPage={activePage}
               onClick={() => setPage(Page.Active)}
+              disabled={false}
             />
             <NavBarMenuItem
               pageType={Page.ThirdParty}
               currentPage={activePage}
-              onClick={() => setPage(Page.ThirdParty)}
+              onClick={() => {}}
+              disabled={true}
             />
           </Block>
           <CreateComponentButton />
@@ -32,7 +34,6 @@ export const ComponentsViewHomePage: React.FC = () => {
       </Block>
       <Block {...content}>
         <ComponentList pageType={activePage} />
-      {/* </Block>*/}
       </Block> 
     </Block>
   );
