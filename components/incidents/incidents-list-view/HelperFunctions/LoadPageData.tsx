@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 
 // constants
 import {
-  NEXT_PUBLIC_AUTH_TOKEN,
   PageType,
   PAGE_ID,
 } from "../../../../constants";
@@ -41,7 +40,7 @@ const getData = async (pageNumber: number, pageType: string) => {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
 

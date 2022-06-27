@@ -9,7 +9,7 @@ import { Footer } from "./footer";
 import { Header } from "./header";
 import { UptimeBox } from "./uptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PAGE_ID, NEXT_PUBLIC_AUTH_TOKEN } from "../../constants";
+import { PAGE_ID } from "../../constants";
 import { formStyles } from "./componentCreationStyles";
 
 const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"]
@@ -80,7 +80,7 @@ export default function ComponentForm(props: any) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
         },
         body: JSON.stringify(payload),
       })

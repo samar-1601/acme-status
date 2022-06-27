@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ComponentStatusIconUrls, NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../constants";
+import { ComponentStatusIconUrls, PAGE_ID } from "../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { Spinner } from "baseui/spinner";
@@ -25,7 +25,7 @@ export const ComponentList = function (props: any) {
       const response = await fetch(URL, {
         headers : { 
           "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
         }
       })
       let xjson = await response.json();
@@ -114,7 +114,7 @@ export const ComponentList = function (props: any) {
     const response = await fetch(URL, {
       headers : {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`
       }
     })
     let xjson = await response.json();

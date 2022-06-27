@@ -10,7 +10,7 @@ import { ComponentObject, JSONObject, pageData } from "../../../variableTypes";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
-import { NEXT_PUBLIC_AUTH_TOKEN, STATUS, PAGE_ID } from "../../../constants";
+import { STATUS, PAGE_ID } from "../../../constants";
 
 //variable to load the initial data from api call
 let InitialData: (ComponentObject | never)[] = [];
@@ -51,7 +51,7 @@ export default function IncidentCreation() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
         },
         body: JSON.stringify(payload),
       })
@@ -98,7 +98,7 @@ export default function IncidentCreation() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     })
       .then((response) => response.json())
