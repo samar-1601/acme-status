@@ -5,12 +5,22 @@ import { CheckboxProps } from "baseui/checkbox";
 import { DatepickerProps } from "baseui/datepicker";
 import { BlockProps } from "baseui/block";
 
+export const headerStyles:BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        marginTop: "14px",
+        marginBottom: "22px",
+      }
+    }
+  }
+}
+
 export const formStyles: BlockProps = {
   overrides: {
     Block: {
       style: {
-        paddingTop: "20px",
-        width: "70%",
+        width: "60%",
         margin: "auto",
       }
     }
@@ -35,6 +45,11 @@ export const dateStyles: DatepickerProps = {
           Input: {
             style: {
               backgroundColor: "white"
+            }
+          },
+          ClearIcon: {
+            style: {
+              marginLeft: "12px"
             }
           }
         }

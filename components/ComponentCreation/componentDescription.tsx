@@ -27,6 +27,7 @@ export const ComponentDescription = React.memo((props: any) => {
             padding: "10px 14px 10px 14px",
             boxSizing: "border-box",
             borderWidth: "1px",
+            outline: "none",
             ":hover": {
               borderColor: "#0E61F6",
             },

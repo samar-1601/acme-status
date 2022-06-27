@@ -3,7 +3,7 @@ import { Select } from "baseui/select";
 import * as React from "react";
 import { ITEMS } from "../../constants";
 import { componentStyle } from "../incidents/createIncidents/styles/BlockStyles";
-import { selectOptionStyle } from "./componentCreationStyles";
+import { inputStatusStyle } from "./componentCreationStyles";
 
 function Image(props: any) {
   return (
@@ -37,7 +37,7 @@ export const ComponentStatus = React.memo((props: any) => {
       onChange={(event) => {
         props.handleStatusChange(event);
       }}
-      {...selectOptionStyle}
+      {...inputStatusStyle}
     />
   </Block>);
 })
