@@ -19,6 +19,7 @@ export const listItem: BlockProps = {
         boxShadow:
           "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
         listStyle: "none",
+        flexDirection: "column",
       },
     },
   },
@@ -47,11 +48,35 @@ export const listDetails: BlockProps = {
     },
   },
 };
+export const listDetailsFirstTwoLines: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        gap: "6px",
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-between",
+      },
+    },
+  },
+};
+export const listFirstPartLeft: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        gap: "6px",
+        flexDirection: "column",
+      },
+    },
+  },
+};
 export const itemName: BlockProps = {
   overrides: {
     Block: {
       style: {
-        flex: "100%",
+        // flex: "100%",
         fontSize: "1.2rem",
         fontWeight: 900,
         marginBottom: "6px",
@@ -101,7 +126,6 @@ export const itemDetailsSecondLine: BlockProps = {
   overrides: {
     Block: {
       style: {
-        flex: "100%",
         display: "inline",
       },
     },
@@ -235,7 +259,7 @@ export const buttonArea: BlockProps = {
     Block: {
       style: {
         display: "flex",
-        gap: "10px",
+        gap: "16px",
       },
     },
   },
