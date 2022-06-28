@@ -1,6 +1,6 @@
 import { Block } from "baseui/block"
 import * as React from "react";
-import { Page } from "../../../constants";
+import { Page } from "../../../../constants";
 import { ComponentList } from "./ComponentList";
 import { componentsListView, container, content, nav, navbarWrapper } from "../overrides/componentListStyles";
 import { CreateComponentButton } from "./CreateComponentButton";

@@ -18,9 +18,9 @@ import { hasListLoadedStyle } from "../../components/incidents/list/overrides/li
 
 // constants
 import { SideBarMenu } from "../../constants";
-import EditComponent from "../../components/components/editComponents/EditComponents";
-import { ComponentCreation } from "../../components/components/createComponents/CreateComponents";
-import { ComponentsViewHomePage } from "../../components/components/componentsListView/ComponentsViewHomePage";
+import EditComponent from "../../components/incidentError/components/editComponents/EditComponents";
+import { ComponentCreation } from "../../components/incidentError/components/createComponents/CreateComponents";
+import { ComponentsViewHomePage } from "../../components/incidentError/components/componentsListView/ComponentsViewHomePage";
 
 const AddComponents: React.FC<{
   isOpen: boolean;

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ComponentStatusIconUrls, PAGE_ID } from "../../../constants";
+import { ComponentStatusIconUrls, PAGE_ID } from "../../../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { Spinner } from "baseui/spinner";
