@@ -4,8 +4,8 @@ import router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 // components
-import { PageSlot } from "../../components/PageSlot/PageSlot";
-import SideBar from "../../components/SideBar/SideBar";
+import { PageSlot } from "../../components/pageSlot/PageSlot";
+import SideBar from "../../components/sideBar/SideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
@@ -19,7 +19,7 @@ import { hasListLoadedStyle } from "../../components/incidents/list/overrides/li
 // constants
 import { SideBarMenu } from "../../constants";
 import EditComponent from "../../components/editComponent/editComponent";
-import { ComponentCreation } from "../../components/ComponentCreation/ComponentCreation";
+import { ComponentCreation } from "../../components/componentCreation/ComponentCreation";
 import { ComponentsViewHomePage } from "../../components/component/componentsHomePage";
 
 const AddComponents: React.FC<{

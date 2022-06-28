@@ -4,19 +4,18 @@ import * as React from "react";
 
 // components
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PageSlot } from "../PageSlot/PageSlot";
-import SideBar from "../SideBar/SideBar";
+import { PageSlot } from "../pageSlot/PageSlot";
+import SideBar from "../sideBar/SideBar";
 
 // constants
 import { SideBarMenu } from "../../constants";
-import { IncidentsViewHomePage } from "../incidents/list/IncidentsHomePage";
 import { Block } from "baseui/block";
 import Image from "next/image";
 import {
   landingPageContainerStyle,
   landingPageDescriptionStyle,
   landingPageHeaderStyle,
-} from "./LandingPageStyles";
+} from "./landingPageStyles";
 
 /**
  * The HomePage/Landing page opened after the user has logged in successfully

@@ -1,3 +1,6 @@
+// lib
+import * as React from "react"
+
 // components
 import Image from "next/image";
 import { Block } from "baseui/block";
@@ -22,7 +25,7 @@ import {
  * @param incident the incident for which the components list is made
  * @returns JSX containing the components in the current incident
  */
-export const getComponents = (incident: any): JSX.Element => {
+export const getComponents = React.memo((incident: any): JSX.Element => {
   let componentsList: JSX.Element[] = []; // List to store the formatted components list
 
   // if there are components for the incident
@@ -73,4 +76,4 @@ export const getComponents = (incident: any): JSX.Element => {
       No components affected
     </Block>
   );
-};
+});

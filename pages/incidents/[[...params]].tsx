@@ -11,8 +11,8 @@ import {
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";
-import { PageSlot } from "../../components/PageSlot/PageSlot";
-import SideBar from "../../components/SideBar/SideBar";
+import { PageSlot } from "../../components/pageSlot/PageSlot";
+import SideBar from "../../components/sideBar/SideBar";
 import { SideBarMenu } from "../../constants";
 
 const IncidentsHomePage: React.FC<{

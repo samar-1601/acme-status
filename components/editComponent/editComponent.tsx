@@ -1,6 +1,6 @@
 import * as React from "react"
 import { PAGE_ID } from "../../constants";
-import ComponentForm from "../ComponentCreation/ComponentForm";
+import ComponentForm from "../componentCreation/ComponentForm";
 
 const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"];
 

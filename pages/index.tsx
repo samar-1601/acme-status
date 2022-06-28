@@ -6,7 +6,7 @@ import Head from "next/head";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import WelcomePage from "../components/WelcomePage/WelcomePage";
-import LandingPage from "../components/LandingPage/LandingPage";
+import LandingPage from "../components/landingPage/LandingPage";
 
 // styles
 import { hasListLoadedStyle } from "../components/incidents/list/overrides/listStyles";

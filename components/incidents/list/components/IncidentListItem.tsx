@@ -1,3 +1,6 @@
+// lib
+import * as React from "react"
+
 // components
 import { Block } from "baseui/block";
 import { getComponents } from "./ComponentListForIncidentItem";
@@ -28,7 +31,7 @@ interface Props {
  * @param incident data recieved from the API
  * @returns JSX component list
  */
-export const RenderIncidentData: React.FC<Props> = ({
+export const RenderIncidentData: React.FC<Props> = React.memo(({
   incident,
   reFetch,
   enqueue,
@@ -92,4 +95,4 @@ export const RenderIncidentData: React.FC<Props> = ({
       </Block>
     </Block>
   );
-};
+});
