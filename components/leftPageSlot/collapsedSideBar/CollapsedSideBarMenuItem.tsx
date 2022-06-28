@@ -9,6 +9,7 @@ import { TbComponents } from "react-icons/tb";
 
 // constants
 import { SideBarMenu } from "../../../constants";
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
 /**
  * Props for a SideBarMenuItem
@@ -58,35 +59,50 @@ const getIcon = (menuItem: SideBarMenu, activeMenuItem: SideBarMenu) => {
 export const CollapsedSideBarMenuItem: React.FC<Props> = React.memo(
   ({ activeMenuItem, menuItem, onClick }) => {
     return (
-      <Block
-        onClick={onClick}
-        overrides={{
-          Block: {
-            style: {
-              backgroundColor: `${
-                activeMenuItem == menuItem ? "rgba(0,0,0,0.15)" : "#EEEEF1"
-              }`, // toggle the style based on the active page
-              color: "black",
-              padding: "12px",
-              margin: "12px 8px",
-              cursor: "pointer",
-              textAlign: "center",
-              borderRadius: "8px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "10px",
+      <>
+        <StatefulPopover
+          content={menuItem}
+          triggerType={TRIGGER_TYPE.hover}
+          overrides={{
+            Body: {
+              style: {
+                zIndex: 100,
+                padding: "8px",
+              },
             },
-            props: {
-              className: `${
-                activeMenuItem != menuItem ? "hoverSideBarOption" : ""
-              }`,
-            },
-          },
-        }}
-      >
-        {getIcon(menuItem, activeMenuItem)}
-      </Block>
+          }}
+        >
+          <Block
+            onClick={onClick}
+            overrides={{
+              Block: {
+                style: {
+                  backgroundColor: `${
+                    activeMenuItem == menuItem ? "rgba(0,0,0,0.15)" : "#EEEEF1"
+                  }`, // toggle the style based on the active page
+                  color: "black",
+                  padding: "12px",
+                  margin: "12px 8px",
+                  cursor: "pointer",
+                  textAlign: "center",
+                  borderRadius: "8px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "10px",
+                },
+                props: {
+                  className: `${
+                    activeMenuItem != menuItem ? "hoverSideBarOption" : ""
+                  }`,
+                },
+              },
+            }}
+          >
+            {getIcon(menuItem, activeMenuItem)}
+          </Block>
+        </StatefulPopover>
+      </>
     );
   }
 );
