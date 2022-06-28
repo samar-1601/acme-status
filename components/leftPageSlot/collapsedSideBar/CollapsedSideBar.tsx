@@ -147,17 +147,29 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
             </a>
           </Block>
         </Block>
-        <Block
-          onClick={() => {
-            // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
-            localStorage.removeItem("loadingCount");
-            localStorage.removeItem("isSideBarOpen");
-            signOut();
+        <StatefulPopover
+          content={<Block {...collapsedSideBarHoverStyle}>Sign Out</Block>}
+          triggerType={TRIGGER_TYPE.hover}
+          overrides={{
+            Body: {
+              style: {
+                zIndex: 100,
+              },
+            },
           }}
-          {...collapsedSignOutButton}
         >
-          <FaSignOutAlt color="black" />
-        </Block>
+          <Block
+            onClick={() => {
+              // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
+              localStorage.removeItem("loadingCount");
+              localStorage.removeItem("isSideBarOpen");
+              signOut();
+            }}
+            {...collapsedSignOutButton}
+          >
+            <FaSignOutAlt color="black" />
+          </Block>
+        </StatefulPopover>
       </Block>
     );
   }

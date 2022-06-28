@@ -4,7 +4,7 @@ export const collapsedSideBarStyle: BlockProps = {
   overrides: {
     Block: {
       style: {
-        margin: "0px auto",
+        margin: "0px",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "white",
