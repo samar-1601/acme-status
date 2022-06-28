@@ -12,13 +12,11 @@ import WelcomePage from "../../welcomePage/WelcomePage";
 import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
+import { AiOutlineRight } from "react-icons/ai";
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
 // constants
-import {
-  ComponentStatusIconUrls,
-  getDisplayComponentStatusText,
-  SideBarMenu,
-} from "../../../constants";
+import { SideBarMenu } from "../../../constants";
 
 // styles
 import {
@@ -27,18 +25,10 @@ import {
   collapsedSignOutButton,
   collapsedUserDetailsWrapper,
   userImageWrapper,
-  userNameWrapper,
   collapsedEmailWrapper,
   sideBarCollapseIcon,
 } from "./overrides/collapsedSideBarStyles";
-import {
-  component,
-  componentIconHoverTextStyle,
-  componentItemIconWrapper,
-  hasListLoadedStyle,
-} from "../../incidents/list/overrides/listStyles";
-import { AiOutlineRight } from "react-icons/ai";
-import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { hasListLoadedStyle } from "../../incidents/list/overrides/listStyles";
 
 interface Props {
   /**
@@ -154,6 +144,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
           onClick={() => {
             // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
             localStorage.removeItem("loadingCount");
+            localStorage.removeItem("isSideBarOpen");
             signOut();
           }}
           {...collapsedSignOutButton}

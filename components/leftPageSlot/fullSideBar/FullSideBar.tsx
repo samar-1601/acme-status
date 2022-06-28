@@ -29,7 +29,6 @@ import {
 } from "./overrides/sideBarStyles";
 import { hasListLoadedStyle } from "../../incidents/list/overrides/listStyles";
 import { AiOutlineLeft } from "react-icons/ai";
-import { headerBarBackIcon } from "../../components/overrides/componentListStyles";
 
 interface Props {
   /**
@@ -123,6 +122,7 @@ const FullSideBar: React.FC<Props> = React.memo(
           onClick={() => {
             // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)
             localStorage.removeItem("loadingCount");
+            localStorage.removeItem("isSideBarOpen");
             signOut();
           }}
           {...signOutButton}
