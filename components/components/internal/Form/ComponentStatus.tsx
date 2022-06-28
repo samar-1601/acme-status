@@ -1,9 +1,9 @@
 import { Block } from "baseui/block";
 import { Select } from "baseui/select";
 import * as React from "react";
-import { ITEMS } from "../../constants";
-import { componentStyle } from "../incidents/internal/form/styles/BlockStyles";
-import { inputStatusStyle } from "./componentCreationStyles";
+import { ITEMS } from "../../../../constants";
+import { componentStyle } from "../../../incidents/internal/form/styles/BlockStyles";
+import { inputStatusStyle } from "../../overrides/componentFormStyles";
 
 function Image(props: any) {
   return (

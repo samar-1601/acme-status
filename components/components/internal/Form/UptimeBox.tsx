@@ -1,10 +1,9 @@
 import * as React from "react"
 import { Block } from "baseui/block"
-import { colorfullBarWrapper, getColorFullBars, componentTimelineRow, horizontalLine } from "./uptimeStyles"
 import { Checkbox } from "baseui/checkbox";
 import { DatePicker } from "baseui/datepicker";
 import { FormControl } from "baseui/form-control";
-import { checkBoxStyles, dateStyles } from "./componentCreationStyles";
+import { checkBoxStyles, colorfullBarWrapper, componentTimelineRow, dateStyles, getColorFullBars, horizontalLine } from "../../overrides/componentFormStyles";
 
 export const UptimeBox = React.memo((props: any) => {
   const [date, setDate] = React.useState([new Date()]);

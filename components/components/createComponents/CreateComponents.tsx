@@ -1,5 +1,5 @@
 import * as React from "react";
-import ComponentForm from "./ComponentForm";
+import ComponentForm from "../internal/Form/ComponentForm";
 
 export const ComponentCreation = React.memo(() => {
   const [componentName, setComponentName] = React.useState<String>("");

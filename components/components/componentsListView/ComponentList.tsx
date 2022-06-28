@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ComponentStatusIconUrls, PAGE_ID } from "../../constants";
+import { ComponentStatusIconUrls, PAGE_ID } from "../../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { Spinner } from "baseui/spinner";
@@ -8,12 +8,10 @@ import Image from "next/image";
 
 import Link from "next/link";
 
-import { useRouter } from "next/router";
 import { Block } from "baseui/block";
-import { detailStyles, element, listItem, loader } from "./componentStyles";
+import { detailStyles, element, listItem, loader } from "../overrides/componentListStyles";
 
 export const ComponentList = function (props: any) {
-  const router = useRouter()
   const [dataList, setDataList] = React.useState<any>([]);
   const [loaded, setLoaded] = React.useState(false);
   
