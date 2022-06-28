@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 //components
-import IncidentForm from "./IncidentForm";
+import IncidentForm from "../internal/form/IncidentForm";
 import { ComponentObject, JSONObject, pageData } from "../../../variableTypes";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
@@ -29,7 +29,7 @@ export default function IncidentCreation() {
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //stores if submit button is clicked or not. If clicked then loading state of cursor
   const { enqueue, dequeue } = useSnackbar(); //snackBar hook
 
-  const handleSubmit = (payload: any) => {
+  const handleSubmit = React.useCallback((payload: any) => {
     /**
      * @params payload: sent by submitForm function of CreateIncident
      * Post the data to the API.
@@ -89,7 +89,7 @@ export default function IncidentCreation() {
           console.log(err);
         });
     }
-  };
+  }, []);
 
   //will execute on component mounting gets data from API sets it and sends to CreateIncident
   useEffect(() => {

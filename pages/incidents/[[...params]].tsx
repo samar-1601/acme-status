@@ -7,10 +7,10 @@ import IncidentCreation from "../../components/incidents/createIncidents/Inciden
 import {
   mainStyle,
   errorPageStyle,
-} from "../../components/incidents/createIncidents/styles/BlockStyles";
+} from "../../components/incidents/internal/form/styles/BlockStyles";
 import { IncidentsViewHomePage } from "../../components/incidents/incidents-list-view/IncidentsHomePage";
 import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
-import UpdateIncident from "../../components/incidents/updateIncidents/updateIncident";
+import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";
 import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";
 import { SideBarMenu } from "../../constants";

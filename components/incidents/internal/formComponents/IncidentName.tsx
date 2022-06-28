@@ -6,10 +6,10 @@ import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 
 //constants
-import { IncidentNameProps } from "../../../variableTypes";
+import { IncidentNameProps } from "../../../../variableTypes";
 
 //styles
-import { inputNameStyle } from "./styles/InputStyles";
+import { inputNameStyle } from "../form/styles/InputStyles";
 
 /**
  * IncidentName Component

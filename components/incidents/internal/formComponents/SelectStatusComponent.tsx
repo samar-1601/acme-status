@@ -10,14 +10,14 @@ import { Checkbox, LABEL_PLACEMENT } from "baseui/checkbox";
 import { Block } from "baseui/block";
 
 //constants
-import { ITEMS } from "./../../../constants";
-import { ImageProps, statusComponentProps } from "./../../../variableTypes";
+import { ITEMS } from "../../../../constants";
+import { ImageProps, statusComponentProps } from "../../../../variableTypes";
 
 //styles
-import { componentStyle } from "./styles/BlockStyles";
-import { checkBoxStyles } from "./styles/CheckBoxStyles";
-import { selectOptionStyle } from "./styles/SelectStyles";
-import { popoverMessageStyle } from "./styles/PopoverStyles";
+import { componentStyle } from "../form/styles/BlockStyles";
+import { checkBoxStyles } from "../form/styles/CheckBoxStyles";
+import { selectOptionStyle } from "../form/styles/SelectStyles";
+import { popoverMessageStyle } from "../form/styles/PopoverStyles";
 
 function Image(props: ImageProps) {
   return (
