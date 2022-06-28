@@ -120,6 +120,19 @@ export const collapsedEmailWrapper: BlockProps = {
     },
   },
 };
+export const collapsedSideBarHoverStyle: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        padding: "8px",
+        fontSize: "16px",
+        borderRadius: "8px",
+        backgroundColor: "#F8F8FA",
+        zIndex: 10,
+      },
+    },
+  },
+};
 
 export const sideBarCollapseIcon: BlockProps = {
   overrides: {

@@ -27,6 +27,7 @@ import {
   userImageWrapper,
   collapsedEmailWrapper,
   sideBarCollapseIcon,
+  collapsedSideBarHoverStyle,
 } from "./overrides/collapsedSideBarStyles";
 import { hasListLoadedStyle } from "../../incidents/list/overrides/listStyles";
 
@@ -73,13 +74,16 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
         </Block>
         <Block {...collapsedUserDetailsWrapper}>
           <StatefulPopover
-            content={session.user?.name ?? "User Name"}
+            content={
+              <Block {...collapsedSideBarHoverStyle}>
+                {session.user?.name ?? "User Name"}
+              </Block>
+            }
             triggerType={TRIGGER_TYPE.hover}
             overrides={{
               Body: {
                 style: {
                   zIndex: 100,
-                  padding: "8px",
                 },
               },
             }}
@@ -95,13 +99,16 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
             </Block>
           </StatefulPopover>
           <StatefulPopover
-            content={session.user?.email ?? "User Email"}
+            content={
+              <Block {...collapsedSideBarHoverStyle}>
+                {session.user?.email ?? "User Email"}
+              </Block>
+            }
             triggerType={TRIGGER_TYPE.hover}
             overrides={{
               Body: {
                 style: {
                   zIndex: 100,
-                  padding: "8px",
                 },
               },
             }}

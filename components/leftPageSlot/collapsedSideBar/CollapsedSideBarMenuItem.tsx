@@ -10,6 +10,7 @@ import { TbComponents } from "react-icons/tb";
 // constants
 import { SideBarMenu } from "../../../constants";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { collapsedSideBarHoverStyle } from "./overrides/collapsedSideBarStyles";
 
 /**
  * Props for a SideBarMenuItem
@@ -61,13 +62,12 @@ export const CollapsedSideBarMenuItem: React.FC<Props> = React.memo(
     return (
       <>
         <StatefulPopover
-          content={menuItem}
+          content={<Block {...collapsedSideBarHoverStyle}>{menuItem}</Block>}
           triggerType={TRIGGER_TYPE.hover}
           overrides={{
             Body: {
               style: {
                 zIndex: 100,
-                padding: "8px",
               },
             },
           }}

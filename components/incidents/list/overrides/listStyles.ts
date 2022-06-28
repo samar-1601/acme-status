@@ -29,7 +29,7 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "100%",
-        overflow: "overlay",
+        overflowX: "hidden",
       },
     },
   },
