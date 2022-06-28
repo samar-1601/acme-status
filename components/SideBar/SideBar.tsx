@@ -8,7 +8,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import Router from "next/router";
 import { SideBarMenuItem } from "./SideBarMenuItem";
-import WelcomePage from "../WelcomePage/WelcomePage";
+import WelcomePage from "../welcomePage/WelcomePage";
 import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
 

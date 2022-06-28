@@ -5,7 +5,7 @@ import Head from "next/head";
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import WelcomePage from "../components/WelcomePage/WelcomePage";
+import WelcomePage from "../components/welcomePage/WelcomePage";
 import LandingPage from "../components/landingPage/LandingPage";
 
 // styles
