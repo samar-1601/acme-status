@@ -13,7 +13,7 @@ import {
   pageWrapperStyles,
   rightContentStyles,
   leftNavBarStylesHidden,
-} from "./pageSlotStyles";
+} from "./PageSlotStyles";
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
 
 const Slot: React.FC<{
