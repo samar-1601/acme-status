@@ -1,16 +1,16 @@
 import { Block } from "baseui/block";
 import Router from "next/router";
 import * as React from "react";
-import { ComponentDescription } from "./componentDescription";
-import { ComponentGroup } from "./componentGroup";
-import { ComponentName } from "./componentName";
-import { ComponentStatus } from "./componentStatus";
-import { Footer } from "./footer";
-import { Header } from "./header";
-import { UptimeBox } from "./uptimeBox";
+import { ComponentDescription } from "./ComponentDescription";
+import { ComponentGroup } from "./ComponentGroup";
+import { ComponentName } from "./ComponentName";
+import { ComponentStatus } from "./ComponentStatus";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { UptimeBox } from "./UptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PAGE_ID } from "../../constants";
-import { formStyles } from "./componentCreationStyles";
+import { PAGE_ID } from "../../../../constants";
+import { formStyles } from "../../overrides/componentFormStyles";
 
 const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"]
 
@@ -53,7 +53,6 @@ export default function ComponentForm(props: any) {
 
   const handleSubmit = () => {
     setSubmit(true)
-    let method="PUT";
     if(addComponent)  { 
       let payload = {
         "component" : {
@@ -72,7 +71,7 @@ export default function ComponentForm(props: any) {
       } else {
         console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN)
         fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
-          method: method,
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,

@@ -2,8 +2,8 @@ import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import * as React from "react";
-import { PAGE_ID } from "../../constants";
-import { inputStatusStyle } from "./componentCreationStyles";
+import { PAGE_ID } from "../../../../constants";
+import { inputStatusStyle } from "../../overrides/componentFormStyles";
 
 export const ComponentGroup = function (props: any) {
   const [groups, setGroups] = React.useState([{}]);

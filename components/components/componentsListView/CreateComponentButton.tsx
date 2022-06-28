@@ -3,7 +3,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Block } from "baseui/block";
 
-import { createComponentButton } from "./componentStyles";
+import { createComponentButton } from "../overrides/componentListStyles";
 
 export const CreateComponentButton = React.memo(() => {
   return (

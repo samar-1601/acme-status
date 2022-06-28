@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Block } from "baseui/block";
-import { headerStyles } from "./componentCreationStyles";
+import { headerStyles } from "../../overrides/componentFormStyles";
 
 export const Header= React.memo((props: any) => {
   console.log(props.addComponent)

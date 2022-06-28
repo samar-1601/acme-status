@@ -1,6 +1,6 @@
 import { Block } from "baseui/block";
 import * as React from "react";
-import { divInsideNav, divInsideNavDisabled, navActiveItem, navNonActiveItem, spanInsideNav } from "./componentStyles";
+import { divInsideNav, divInsideNavDisabled, navActiveItem, navNonActiveItem, spanInsideNav } from "../overrides/componentListStyles";
 
 
 interface Props {
