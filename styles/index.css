@@ -148,6 +148,5 @@
   .edit-icon-wrapper :hover{
     background-color: #EEEFF1;
     cursor: pointer;
-    @apply rounded-full;
   }
 }
