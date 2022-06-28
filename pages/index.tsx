@@ -10,9 +10,14 @@ import LandingPage from "../components/landingPage/LandingPage";
 
 // styles
 import { hasListLoadedStyle } from "../components/incidents/list/overrides/listStyles";
+import { useEffect } from "react";
 
 const Home = () => {
   const { data: session, status } = useSession(); // get user's session details
+  useEffect(() => {
+    if (session && !localStorage.getItem("isSideBarOpen"))
+      localStorage.setItem("isSideBarOpen", "true");
+  }, []);
 
   // if status not confirmed
   if (status === "loading") {

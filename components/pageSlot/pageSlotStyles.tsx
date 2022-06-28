@@ -63,14 +63,16 @@ export const constantPaneStyles: BlockProps = {
   },
 };
 
-export const leftNavBarStylesHidden: BlockProps = {
+export const leftNavBarStylesCollapsed: BlockProps = {
   overrides: {
     Block: {
       style: {
-        width: "0px",
-        visibility: "hidden",
+        width: "100px",
         minHeight: "100vh",
         zIndex: 10,
+        display: "flex",
+        margin: "0px ",
+        padding: "0px",
       },
     },
   },

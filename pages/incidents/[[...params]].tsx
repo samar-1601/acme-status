@@ -2,7 +2,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 import {
   mainStyle,
@@ -12,45 +12,14 @@ import { IncidentsViewHomePage } from "../../components/incidents/list/Incidents
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";
 import { PageSlot } from "../../components/pageSlot/PageSlot";
-import SideBar from "../../components/sideBar/SideBar";
 import { SideBarMenu } from "../../constants";
 
-const IncidentsHomePage: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = (props) => {
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.IncidentsView} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <IncidentsViewHomePage />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+const IncidentsHomePage: React.FC = (props) => {
+  return <IncidentsViewHomePage />;
 };
 
-const CreateIncidentPage: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = (props) => {
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.CreateIncidents} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <IncidentCreation />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+const CreateIncidentPage: React.FC = (props) => {
+  return <IncidentCreation />;
 };
 
 const WrongUrlPage = () => {
@@ -66,31 +35,19 @@ const WrongUrlPage = () => {
   );
 };
 
-const UpdateIncidentPage: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = (props) => {
+const UpdateIncidentPage: React.FC = (props) => {
   const router = useRouter();
   console.log(router.asPath);
   let param = router.asPath.split("/")[3];
 
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.CreateIncidents} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <UpdateIncident incidentId={param} />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+  return <UpdateIncident incidentId={param} />;
 };
 
 export default () => {
-  const [isOpen, setIsOpen] = useState(true);
+  useEffect(() => {
+    if (session && !localStorage.getItem("isSideBarOpen"))
+      localStorage.setItem("isSideBarOpen", "true");
+  }, []);
   const router = useRouter();
   const { push } = useRouter();
   const { data: session, status } = useSession({
@@ -111,34 +68,22 @@ export default () => {
     );
   }
   console.log("session", session);
-
-  const handleIsOpenChange = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+  let content: React.ReactElement = <></>;
 
   const { params = [] } = router.query;
   if (params.length === 0) {
-    return (
-      <IncidentsHomePage
-        isOpen={isOpen}
-        handleIsOpenChange={handleIsOpenChange}
-      />
-    );
+    content = <IncidentsHomePage />;
   } else if (params.length === 1 && params[0] == "new") {
-    return (
-      <CreateIncidentPage
-        isOpen={isOpen}
-        handleIsOpenChange={handleIsOpenChange}
-      />
-    );
+    content = <CreateIncidentPage />;
   } else if (params.length === 2 && params[0] == "edit") {
-    return (
-      <UpdateIncidentPage
-        isOpen={isOpen}
-        handleIsOpenChange={handleIsOpenChange}
-      />
-    );
+    content = <UpdateIncidentPage />;
   } else {
-    return <WrongUrlPage />;
+    content = <WrongUrlPage />;
   }
+
+  return (
+    <PageSlot activeMenuItem={SideBarMenu.IncidentsView}>
+      <PageSlot.Slot name="rightContent">{content}</PageSlot.Slot>
+    </PageSlot>
+  );
 };

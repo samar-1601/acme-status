@@ -1,11 +1,11 @@
 // lib
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 // components
 import { PageSlot } from "../../components/pageSlot/PageSlot";
-import SideBar from "../../components/sideBar/SideBar";
+import FullSideBar from "../../components/leftPageSlot/fullSideBar/FullSideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
@@ -22,65 +22,20 @@ import EditComponent from "../../components/components/editComponents/EditCompon
 import { ComponentCreation } from "../../components/components/createComponents/CreateComponents";
 import { ComponentsViewHomePage } from "../../components/components/componentsListView/ComponentsViewHomePage";
 
-const AddComponents: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = (props) => {
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.Components} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <ComponentCreation />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+const AddComponents: React.FC = (props) => {
+  return <ComponentCreation />;
 };
 
-const Components: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = (props) => {
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.Components} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <ComponentsViewHomePage />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+const Components: React.FC = (props) => {
+  return <ComponentsViewHomePage />;
 };
 
-const EditComponents: React.FC<{
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-}> = function (props) {
+const EditComponents: React.FC = function (props) {
   const router = useRouter();
   console.log(router.asPath);
   let param = router.asPath.split("/")[3];
 
-  return (
-    <PageSlot
-      isOpen={props.isOpen}
-      handleIsOpenChange={props.handleIsOpenChange}
-    >
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.Components} />
-      </PageSlot.Slot>
-      <PageSlot.Slot name="rightContent">
-        <EditComponent componentId={param} />
-      </PageSlot.Slot>
-    </PageSlot>
-  );
+  return <EditComponent componentId={param} />;
 };
 
 const WrongUrlPage = () => {
@@ -97,13 +52,14 @@ const WrongUrlPage = () => {
 };
 
 export default () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const handleIsOpenChange = () => {
-    setIsOpen((prevState) => !prevState);
-  };
   const router = useRouter();
 
   const { push } = useRouter();
+
+  useEffect(() => {
+    if (session && !localStorage.getItem("isSideBarOpen"))
+      localStorage.setItem("isSideBarOpen", "true");
+  }, []);
   const { data: session, status } = useSession({
     // get user's session details
     required: true,
@@ -121,20 +77,21 @@ export default () => {
       </Block>
     );
   }
+  let content: React.ReactElement = <></>;
   const { params = [] } = router.query;
   if (params.length === 0) {
-    return (
-      <Components isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
-    );
+    content = <Components />;
   } else if (params.length === 1 && params[0] == "new") {
-    return (
-      <AddComponents isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
-    );
+    content = <AddComponents />;
   } else if (params.length === 2 && params[0] == "edit") {
-    return (
-      <EditComponents isOpen={isOpen} handleIsOpenChange={handleIsOpenChange} />
-    );
+    content = <EditComponents />;
   } else {
-    return <WrongUrlPage />;
+    content = <WrongUrlPage />;
   }
+
+  return (
+    <PageSlot activeMenuItem={SideBarMenu.Components}>
+      <PageSlot.Slot name="rightContent">{content}</PageSlot.Slot>
+    </PageSlot>
+  );
 };

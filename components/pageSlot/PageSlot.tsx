@@ -1,6 +1,6 @@
 // lib
 import * as React from "react";
-import { Children } from "react";
+import { Children, useEffect, useState } from "react";
 
 // components
 import { Block } from "baseui/block";
@@ -8,44 +8,50 @@ import Head from "next/head";
 
 // styles
 import {
-  constantPaneStyles,
   leftNavBarStyles,
+  leftNavBarStylesCollapsed,
   pageWrapperStyles,
   rightContentStyles,
-  leftNavBarStylesHidden,
 } from "./pageSlotStyles";
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from "react-icons/ai";
+import { SideBarMenu } from "../../constants";
+import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
+import CollapsedSideBar from "../leftPageSlot/collapsedSideBar/CollapsedSideBar";
 
 const Slot: React.FC<{
   name: "leftNavBar" | "rightContent";
 }> = () => null;
 
-interface Props {
+interface RightProps {
   rightContent: any;
 }
 
-const RightContent: React.FC<Props> = React.memo(({ rightContent }) => {
+const RightContent: React.FC<RightProps> = React.memo(({ rightContent }) => {
   return <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>;
 });
 
 export const PageSlot = ({
-  isOpen,
-  handleIsOpenChange,
   children,
+  activeMenuItem,
 }: {
-  isOpen: boolean;
-  handleIsOpenChange: Function;
-  children: Array<React.ReactElement>;
+  children: React.ReactElement;
+  activeMenuItem: SideBarMenu;
 }) => {
   const childrenArray = Children.toArray(
     children
   ) as unknown as React.ReactElement[];
-  const leftNavBar = childrenArray.find(
-    (child) => child.props.name === "leftNavBar"
-  );
   const rightContent = childrenArray.find(
-    (child) => child?.props?.name === "rightContent"
+    (child) => child.props.name === "rightContent"
   );
+
+  const [isOpen, setIsOpen] = useState<boolean>(
+    localStorage.getItem("isSideBarOpen") == "false" ? false : true
+  );
+
+  const handleIsOpenChange = () => {
+    localStorage.setItem("isSideBarOpen", `${!isOpen}`);
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <Head>
@@ -53,23 +59,19 @@ export const PageSlot = ({
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block {...pageWrapperStyles}>
-        <Block
-          {...constantPaneStyles}
-          onClick={() => {
-            handleIsOpenChange();
-          }}
-        >
-          {isOpen ? (
-            <AiOutlineDoubleLeft size={28} />
-          ) : (
-            <AiOutlineDoubleRight size={28} />
-          )}
-        </Block>
         {isOpen ? (
-          <Block {...leftNavBarStyles}>{leftNavBar?.props?.children}</Block>
+          <Block {...leftNavBarStyles}>
+            <FullSideBar
+              activeItemID={activeMenuItem}
+              handleIsOpenChange={handleIsOpenChange}
+            />
+          </Block>
         ) : (
-          <Block {...leftNavBarStylesHidden}>
-            {leftNavBar?.props?.children}
+          <Block {...leftNavBarStylesCollapsed}>
+            <CollapsedSideBar
+              activeItemID={activeMenuItem}
+              handleIsOpenChange={handleIsOpenChange}
+            />
           </Block>
         )}
         <RightContent rightContent={rightContent} />

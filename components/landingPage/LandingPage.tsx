@@ -5,7 +5,7 @@ import * as React from "react";
 // components
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { PageSlot } from "../pageSlot/PageSlot";
-import SideBar from "../sideBar/SideBar";
+import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
 
 // constants
 import { SideBarMenu } from "../../constants";
@@ -22,10 +22,6 @@ import {
  */
 const LandingPage = React.memo(() => {
   const { enqueue, dequeue } = useSnackbar(); // snackbar to show successfully signed in message.
-  const [isOpen, setIsOpen] = useState(true);
-  const handleIsOpenChange = () => {
-    setIsOpen((prevState) => !prevState);
-  };
 
   useEffect(() => {
     if (localStorage.getItem("loadingCount") == undefined) {
@@ -39,10 +35,7 @@ const LandingPage = React.memo(() => {
 
   // slotted page with sidebar on left and IncidentsListView on the right
   return (
-    <PageSlot isOpen={isOpen} handleIsOpenChange={handleIsOpenChange}>
-      <PageSlot.Slot name="leftNavBar">
-        <SideBar activeItemID={SideBarMenu.Home} />
-      </PageSlot.Slot>
+    <PageSlot activeMenuItem={SideBarMenu.Home}>
       <PageSlot.Slot name="rightContent">
         <Block {...landingPageContainerStyle}>
           <Block {...landingPageHeaderStyle}>

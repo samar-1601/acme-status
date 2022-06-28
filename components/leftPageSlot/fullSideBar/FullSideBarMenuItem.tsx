@@ -8,7 +8,7 @@ import { MdOpenInNew } from "react-icons/md";
 import { TbComponents } from "react-icons/tb";
 
 // constants
-import { SideBarMenu } from "../../constants";
+import { SideBarMenu } from "../../../constants";
 
 /**
  * Props for a SideBarMenuItem
@@ -55,7 +55,7 @@ const getIcon = (menuItem: SideBarMenu, activeMenuItem: SideBarMenu) => {
  * SideBarMenuItem Component
  * @returns react component for a menu-item in sidebar
  */
-export const SideBarMenuItem: React.FC<Props> = React.memo(
+export const FullSideBarMenuItem: React.FC<Props> = React.memo(
   ({ activeMenuItem, menuItem, onClick }) => {
     return (
       <Block

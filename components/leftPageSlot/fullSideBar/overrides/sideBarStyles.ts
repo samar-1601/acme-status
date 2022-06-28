@@ -26,12 +26,21 @@ export const sideBarHeaderName: BlockProps = {
         lineHeight: "2.525rem",
         fontWeight: 500,
         padding: "24px 0px",
-        textAlign: "center",
-        display: "flex",
-        gap: "10px",
-        alignItems: "center",
-        justifyContent: "center",
+        marginLeft: "10px",
         cursor: "pointer",
+        display: "inline",
+      },
+    },
+  },
+};
+export const sideBarHeaderWrapper: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: "0px 20px",
       },
     },
   },
@@ -115,6 +124,23 @@ export const emailWrapper: BlockProps = {
       style: {
         fontSize: "0.85rem",
         color: "lightslategrey",
+      },
+    },
+  },
+};
+
+export const sideBarCollapseIcon: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        cursor: "pointer",
+        borderRadius: "60000px",
+        backgroundColor: "#EEEEF1",
+        padding: "8px",
+        display: "inline",
+        ":hover": {
+          backgroundColor: "#DBDBDB",
+        },
       },
     },
   },
