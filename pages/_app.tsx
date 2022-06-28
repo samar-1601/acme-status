@@ -15,8 +15,19 @@ export default class MyApp extends App {
       <SessionProvider session={pageProps.session}>
         <StyletronProvider value={styletron}>
           <BaseProvider theme={LightTheme}>
-            <SnackbarProvider placement="bottom">
-                <Component {...pageProps} />
+            <SnackbarProvider
+              placement="bottom"
+              overrides={{
+                Content: {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                },
+              }}
+            >
+              <Component {...pageProps} />
             </SnackbarProvider>
           </BaseProvider>
         </StyletronProvider>
