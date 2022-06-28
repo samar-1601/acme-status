@@ -9,7 +9,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { UptimeBox } from "./UptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PAGE_ID } from "../../../../../constants";
+import { PAGE_ID } from "../../../../constants";
 import { formStyles } from "../../overrides/componentFormStyles";
 
 const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"]
