@@ -4,7 +4,7 @@ import * as React from "react";
 
 // components
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PageSlot } from "../pageSlot/PageSlot";
+import { PageSlot } from "../../components/pageSlot/PageSlot";
 import SideBar from "../sideBar/SideBar";
 
 // constants
