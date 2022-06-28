@@ -17,7 +17,7 @@ import {
   loginPageWrapper,
   loginProviderName,
 } from "../../styles/loginStyles";
-import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
+import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 import Image from "next/image";
 
 /**
@@ -52,9 +52,8 @@ const LoginProvidersList: React.FC = () => {
     console.log("already signed in");
   }
 
-  const handleOAuthSignIn = (provider: any) => async () => {
-    await signIn(provider);
-
+  const handleOAuthSignIn = (provider: any) => () => {
+    signIn(provider);
     // const data = (await signIn(provider, {
     //   redirect: false,
     //   callback: "/",

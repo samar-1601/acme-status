@@ -1,6 +1,6 @@
 import { Block } from "baseui/block";
 import * as React from "react";
-import { headerBar, headerBarLeftWrapper, headerBarText, headerBarBackIcon } from "../incidents/incidents-list-view/styles/navStyles";
+import { headerBar, headerBarLeftWrapper, headerBarText, headerBarBackIcon } from "../incidents/list/overrides/navStyles";
 
 import Image from "next/image";
 

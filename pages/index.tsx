@@ -9,7 +9,7 @@ import WelcomePage from "../components/WelcomePage/WelcomePage";
 import LandingPage from "../components/LandingPage/LandingPage";
 
 // styles
-import { hasListLoadedStyle } from "../components/incidents/incidents-list-view/styles/listStyles";
+import { hasListLoadedStyle } from "../components/incidents/list/overrides/listStyles";
 
 const Home = () => {
   const { data: session, status } = useSession(); // get user's session details

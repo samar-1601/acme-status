@@ -8,8 +8,8 @@ import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/createIncidents/styles/BlockStyles";
-import { IncidentsViewHomePage } from "../../components/incidents/incidents-list-view/IncidentsHomePage";
-import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
+import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
+import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/updateIncident";
 import { PageSlot } from "../../components/PageSlot/PageSlot";
 import SideBar from "../../components/SideBar/SideBar";

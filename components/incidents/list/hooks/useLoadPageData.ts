@@ -2,10 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // constants
-import {
-  PageType,
-  PAGE_ID,
-} from "../../../../constants";
+import { PageType, PAGE_ID } from "../../../../constants";
 
 /**
  * Loads data from API
@@ -55,7 +52,7 @@ const getData = async (pageNumber: number, pageType: string) => {
 export default function useLoadPageData(pageType: PageType) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API
-    hasLoaded: false, // hasLoaded : status of loading data from API
+    isLoading: true, // isLoading : status of loading data from API
     hasMore: true, // hasMore : do we have to fetch more data
     pageNumber: 1, // pageNumber : page number for pagination
   });
@@ -68,6 +65,8 @@ export default function useLoadPageData(pageType: PageType) {
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
     let dataItem = [];
     try {
+      setState({ ...state, isLoading: true });
+
       dataItem = await getData(pageNumber, pageType);
 
       console.log(
@@ -76,19 +75,27 @@ export default function useLoadPageData(pageType: PageType) {
         "hasMore",
         dataItem.length > 0,
         "API data:",
-        dataItem.length
+        dataItem.length,
+        dataItem
       );
 
       setState({
         ...state,
         pageNumber: pageNumber,
-        hasLoaded: true, // loading completed
+        isLoading: false, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
         dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
       });
     } catch (err) {
       console.log(err);
     }
+  };
+
+  /**
+   * function to be called when fresh data is needed to be fetched again
+   */
+  const reFetch = async () => {
+    await LoadDataItems(1, pageType);
   };
 
   /**
@@ -101,14 +108,15 @@ export default function useLoadPageData(pageType: PageType) {
   };
 
   useEffect(() => {
-    setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
+    setState({ ...state, isLoading: true, pageNumber: 1 }); // if scrolled below, set isLoading as false for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 
   return {
     dataList: state.dataList,
-    isLoaded: state.hasLoaded,
+    isLoading: state.isLoading,
     hasMore: state.hasMore,
     fetchMore: fetchMore,
+    reFetch: reFetch,
   };
 }

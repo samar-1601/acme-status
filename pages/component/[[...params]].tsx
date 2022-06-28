@@ -14,7 +14,7 @@ import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/createIncidents/styles/BlockStyles";
-import { hasListLoadedStyle } from "../../components/incidents/incidents-list-view/styles/listStyles";
+import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 
 // constants
 import { SideBarMenu } from "../../constants";

@@ -9,7 +9,7 @@ import SideBar from "../SideBar/SideBar";
 
 // constants
 import { SideBarMenu } from "../../constants";
-import { IncidentsViewHomePage } from "../incidents/incidents-list-view/IncidentsHomePage";
+import { IncidentsViewHomePage } from "../incidents/list/IncidentsHomePage";
 import { Block } from "baseui/block";
 import Image from "next/image";
 import {

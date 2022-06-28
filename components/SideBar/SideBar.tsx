@@ -25,7 +25,7 @@ import {
   userNameWrapper,
   emailWrapper,
 } from "./SideBarStyles";
-import { hasListLoadedStyle } from "../incidents/incidents-list-view/styles/listStyles";
+import { hasListLoadedStyle } from "../incidents/list/overrides/listStyles";
 
 interface Props {
   /**

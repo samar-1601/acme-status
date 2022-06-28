@@ -12,8 +12,8 @@ import { Block } from "baseui/block";
 import { PageType } from "../../../constants";
 
 // styles
-import { incidentsListView } from "./styles/listStyles";
-import { container, content, navbarWrapper, nav } from "./styles/navStyles";
+import { incidentsListView } from "./overrides/listStyles";
+import { container, content, navbarWrapper, nav } from "./overrides/navStyles";
 
 /**
  * IncidentsList View Header

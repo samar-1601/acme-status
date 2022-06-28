@@ -3,15 +3,14 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
-import Image from "next/image";
+import { FiArrowLeft } from "react-icons/fi";
 
 // styles
 import {
   headerBarLeftWrapper,
   headerBarBackIcon,
-  headerBarText,
   headerBar,
-} from "../styles/navStyles";
+} from "../overrides/navStyles";
 
 interface Props {
   headerText: string; // text to render in the header
@@ -26,11 +25,9 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
       <Block {...headerBar}>
         <Block {...headerBarLeftWrapper}>
           <Block {...headerBarBackIcon}>
-            <Image width="32px" height="32px" src="/backArrow.png"></Image>
+            <FiArrowLeft size={22} />
           </Block>
-          <Block {...headerBarText} className="header">
-            {headerText}
-          </Block>
+          <Block className="header">{headerText}</Block>
         </Block>
       </Block>
     );

@@ -1,10 +1,11 @@
 import { DURATION } from "baseui/snackbar";
-import Router from "next/router";
-import { PAGE_ID } from "../../../constants";
+import { PAGE_ID } from "../../../../constants";
 
-
-export const DeleteIncident = (incidentId: string, enqueue: Function) => {
-
+export const deleteIncident = async (
+  incidentId: string,
+  enqueue: Function,
+  reFetch: any
+) => {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
       PAGE_ID +
@@ -19,22 +20,18 @@ export const DeleteIncident = (incidentId: string, enqueue: Function) => {
     }
   )
     .then((response) => response.json())
-    .then((json) => {
+    .then(async (json) => {
       console.log(json);
       if ("error" in json) {
         throw json.error;
       }
-      // throw json;
-      // dequeue();
       enqueue(
         {
           message: "Successfully Deleted Incident",
         },
         DURATION.long
       );
-    })
-    .then(() => {
-      Router.reload();
+      await reFetch();
     })
     .catch((err) => {
       console.log(err);
@@ -45,10 +42,6 @@ export const DeleteIncident = (incidentId: string, enqueue: Function) => {
         },
         DURATION.short
       );
-      //   setIsSubmitClicked(false);
+      return false;
     });
 };
-function useHistory() {
-  throw new Error("Function not implemented.");
-}
-

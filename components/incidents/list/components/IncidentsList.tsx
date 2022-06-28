@@ -3,10 +3,10 @@ import { useEffect, useState, useRef } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "../HelperFunctions/LoadPageData";
+import useLoadPageData from "../hooks/useLoadPageData";
 
 // components
-import { renderData } from "../HelperFunctions/HelperFunctions";
+import { RenderIncidentData } from "./IncidentListItem";
 import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
@@ -20,7 +20,7 @@ import "react-virtualized/styles.css";
 
 // constants
 import { PageType } from "../../../../constants";
-import { hasListLoadedStyle } from "../styles/listStyles";
+import { hasListLoadedStyle } from "../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
 
 interface Props {
@@ -50,10 +50,11 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   /**
    * API response
    * dataList : JSON response for the limit(currently 15) items in the current pageNumber
-   * isLoaded : whether the data has loaded or not from the API
+   * isLoading : whether the data has loaded or not from the API
    * hasMore : is there more data to fetch when we scroll
    */
-  const { dataList, isLoaded, hasMore, fetchMore } = useLoadPageData(pageType);
+  const { dataList, isLoading, hasMore, fetchMore, reFetch } =
+    useLoadPageData(pageType);
 
   /**
    * triggered when the data is loaded from the API
@@ -61,10 +62,10 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    */
   useEffect(() => {
     // if page has loaded
-    if (isLoaded) {
+    if (!isLoading) {
       return setPageLoaded(true);
     }
-  }, [isLoaded]);
+  }, [isLoading]);
 
   /**
    * Triggered when the PageType changes i.e when the user clicks another navigation bar item
@@ -113,7 +114,13 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                         columnIndex={0}
                         rowIndex={index ?? 0}
                       >
-                        <div style={style}>{renderData(element, enqueue)}</div>
+                        <div style={style}>
+                          <RenderIncidentData
+                            incident={element}
+                            enqueue={enqueue}
+                            reFetch={reFetch}
+                          />
+                        </div>
                       </CellMeasurer>
                     );
                   }}

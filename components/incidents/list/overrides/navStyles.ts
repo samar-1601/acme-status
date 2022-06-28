@@ -49,30 +49,10 @@ export const headerBar: BlockProps = {
     },
   },
 };
-export const headerBarText: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        // fontSize: "2rem",
-        // fontWeight: 900,
-        // className: "header",
-      },
-    },
-  },
-};
+
 export const headerBarBackIcon: BlockProps = {
   onClick: () => {
     Router.push("/");
-  },
-  onMouseEnter: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.border = "2px #EEEEF1 solid";
-    }
-  },
-  onMouseLeave: (event) => {
-    if (event.target) {
-      (event.target as HTMLElement).style.border = "";
-    }
   },
   overrides: {
     Block: {
@@ -80,9 +60,13 @@ export const headerBarBackIcon: BlockProps = {
         cursor: "pointer",
         borderRadius: "60000px",
         backgroundColor: "#EEEEF1",
+        padding: "8px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        ":hover": {
+          backgroundColor: "#DBDBDB",
+        },
       },
     },
   },
