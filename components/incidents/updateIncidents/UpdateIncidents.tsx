@@ -5,22 +5,18 @@ import { useEffect } from "react";
 import Router from "next/router";
 
 //components
-import IncidentForm from "../createIncidents/IncidentForm";
+import IncidentForm from "../internal/form/IncidentForm";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
-import {
-  STATUS,
-  getIncidentStatusFromPost,
-  PAGE_ID,
-} from "../../../constants";
+import { STATUS, getIncidentStatusFromPost, PAGE_ID } from "../../../constants";
 import {
   ComponentObject,
   JSONObject,
   UpdateIncidentProps,
   IncidentFetchType,
 } from "../../../variableTypes";
-import IncidentErrorPage from "../createIncidents/IncidentErrorPage";
+import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
 //global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
@@ -47,7 +43,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
    * function handleSubmit submits data send by CreateIncident
    * @param payload : data sent by submitForm
    */
-  const handleSubmit = (payload: any) => {
+  const handleSubmit = React.useCallback((payload: any) => {
     setIsSubmitClicked(true);
     if (payload.incident.name == "") {
       // dequeue();
@@ -105,7 +101,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           setIsSubmitClicked(false);
         });
     }
-  };
+  }, []);
 
   //useEffect for fetching components and incidentDetails from API
   useEffect(() => {

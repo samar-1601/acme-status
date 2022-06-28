@@ -5,10 +5,10 @@ import * as React from "react";
 import { FormControl } from "baseui/form-control";
 
 //constants
-import { IncidentMessageProps } from "../../../variableTypes";
+import { IncidentMessageProps } from "../../../../variableTypes";
 
 //styles
-import { StyledTextArea } from "./styles/StyledTextArea";
+import { StyledTextArea } from "../form/styles/StyledTextArea";
 
 /**
  * IncidentMessage Component

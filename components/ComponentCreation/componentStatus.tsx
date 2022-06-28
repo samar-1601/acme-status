@@ -2,7 +2,7 @@ import { Block } from "baseui/block";
 import { Select } from "baseui/select";
 import * as React from "react";
 import { ITEMS } from "../../constants";
-import { componentStyle } from "../incidents/createIncidents/styles/BlockStyles";
+import { componentStyle } from "../incidents/internal/form/styles/BlockStyles";
 import { inputStatusStyle } from "./componentCreationStyles";
 
 function Image(props: any) {
@@ -19,25 +19,26 @@ export const ComponentStatus = React.memo((props: any) => {
     return {
       label: (
         <Image key={item.imgUrl} title={item.title} imgUrl={item.imgUrl} />
-        ),
-        id: idx,
-      };
-    });
-    console.log(options)
+      ),
+      id: idx,
+    };
+  });
+  console.log(options);
 
-  return(
-  <Block {...componentStyle}>
-    <Select
-      options={options}
-      backspaceRemoves={false}
-      clearable={false}
-      searchable={false}
-      placeholder="Select Component Status"
-      value={[options[props.id]]}
-      onChange={(event) => {
-        props.handleStatusChange(event);
-      }}
-      {...inputStatusStyle}
-    />
-  </Block>);
-})
+  return (
+    <Block {...componentStyle}>
+      <Select
+        options={options}
+        backspaceRemoves={false}
+        clearable={false}
+        searchable={false}
+        placeholder="Select Component Status"
+        value={[options[props.id]]}
+        onChange={(event) => {
+          props.handleStatusChange(event);
+        }}
+        {...inputStatusStyle}
+      />
+    </Block>
+  );
+});

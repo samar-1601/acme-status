@@ -13,7 +13,7 @@ import { Spinner } from "baseui/spinner";
 import {
   mainStyle,
   errorPageStyle,
-} from "../../components/incidents/createIncidents/styles/BlockStyles";
+} from "../../components/incidents/internal/form/styles/BlockStyles";
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 
 // constants

@@ -6,19 +6,19 @@ import Link from "next/link";
 //components
 import { Spinner, SIZE } from "baseui/spinner";
 import { Block } from "baseui/block";
-import { InputStatus } from "./InputStatus";
-import { IncidentName } from "./IncidentName";
-import { IncidentMessage } from "./IncidentMessage";
-import { AffectedComponents } from "./AffectedComponents";
+import { InputStatus } from "../formComponents/InputStatus";
+import { IncidentName } from "../formComponents/IncidentName";
+import { IncidentMessage } from "../formComponents/IncidentMessage";
+import { AffectedComponents } from "../formComponents/AffectedComponents";
 
 //constants
-import { getIncidentStatus, getStatus } from "../../../constants";
+import { getIncidentStatus, getStatus } from "../../../../constants";
 import {
   SendComponentObject,
   IncidentCreationProps,
   ComponentObject,
-} from "../../../variableTypes";
-import IncidentErrorPage from "./IncidentErrorPage";
+} from "../../../../variableTypes";
+import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 
 //styles
 import {

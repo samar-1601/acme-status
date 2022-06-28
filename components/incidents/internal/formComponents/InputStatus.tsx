@@ -8,11 +8,11 @@ import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
 
 //constants
-import { SpecialEvent, InputStatusprops } from "../../../variableTypes";
-import { STATUSNames } from "./../../../constants";
+import { SpecialEvent, InputStatusprops } from "../../../../variableTypes";
+import { STATUSNames } from "../../../../constants";
 
 //styles
-import { inputStatusFormControlStyle } from "./styles/FormControlStyles";
+import { inputStatusFormControlStyle } from "../form/styles/FormControlStyles";
 
 //function to calculate percentage of progress bar to be filled from status
 function calculateStatus(status: String): number {

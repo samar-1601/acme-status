@@ -28,6 +28,7 @@ export const incidentsListView: BlockProps = {
     Block: {
       style: {
         width: "100%",
+        overflow: "overlay",
       },
     },
   },
@@ -225,7 +226,6 @@ export const editIncidentButton: BlockProps = {
         ":hover": {
           color: "#808080",
         },
-        // color: "lightgrey",
       },
     },
   },
