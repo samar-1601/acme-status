@@ -6,52 +6,46 @@ import { DatepickerProps } from "baseui/datepicker";
 import { Block, BlockProps } from "baseui/block";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
-export const headerStyles: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        marginTop: "14px",
-        marginBottom: "22px",
-      },
+export const HEADER_STYLES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      marginTop: "14px",
+      marginBottom: "22px",
     },
   },
 };
 
-export const formStyles: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        width: "60%",
-        margin: "auto",
-      },
+export const FORM_STYLES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      width: "60%",
+      margin: "auto",
     },
   },
 };
 
-export const dateStyles: DatepickerProps = {
-  overrides: {
-    Input: {
-      props: {
-        overrides: {
-          Root: {
-            style: ({ $isFocused }: any) => ({
-              borderRadius: "8px !important",
-              borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
-              ":hover": {
-                borderColor: "#0E61F6",
-              },
-              borderWidth: "1px",
-            }),
-          },
-          Input: {
-            style: {
-              backgroundColor: "white",
+export const DATE_STYLES: DatepickerProps["overrides"] = {
+  Input: {
+    props: {
+      overrides: {
+        Root: {
+          style: ({ $isFocused }: any) => ({
+            borderRadius: "8px !important",
+            borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
+            ":hover": {
+              borderColor: "#0E61F6",
             },
+            borderWidth: "1px",
+          }),
+        },
+        Input: {
+          style: {
+            backgroundColor: "white",
           },
-          ClearIcon: {
-            style: {
-              marginLeft: "12px",
-            },
+        },
+        ClearIcon: {
+          style: {
+            marginLeft: "12px",
           },
         },
       },
@@ -59,135 +53,119 @@ export const dateStyles: DatepickerProps = {
   },
 };
 
-export const checkBoxStyles: CheckboxProps = {
-  overrides: {
-    Root: {
-      style: {
-        paddingTop: "15px",
+export const CHECKBOX_STYLES: CheckboxProps["overrides"] = {
+  Root: {
+    style: {
+      paddingTop: "15px",
+    },
+  },
+  Checkmark: {
+    style: ({ $checked }) => ({
+      borderLeftColor: "blue",
+      borderRightColor: "blue",
+      borderTopColor: "blue",
+      borderBottomColor: "blue",
+      backgroundColor: $checked ? "blue" : "white",
+      border: "1px solid blue",
+      height: "16px",
+      width: "16px",
+      marginTop: "5px",
+      borderRadius: "2px",
+    }),
+  },
+};
+
+export const INPUT_NAME_STYLE: InputProps["overrides"] = {
+  Root: {
+    style: ({ $isFocused }) => ({
+      borderRadius: "8px !important",
+      borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
+      ":hover": {
+        borderColor: "#0E61F6",
       },
-    },
-    Checkmark: {
-      style: ({ $checked }) => ({
-        borderLeftColor: "blue",
-        borderRightColor: "blue",
-        borderTopColor: "blue",
-        borderBottomColor: "blue",
-        backgroundColor: $checked ? "blue" : "white",
-        border: "1px solid blue",
-        height: "16px",
-        width: "16px",
-        marginTop: "5px",
-        borderRadius: "2px",
-      }),
-    },
+      borderWidth: "1px",
+    }),
+  },
+  InputContainer: {
+    style: { backgroundColor: "white" },
   },
 };
 
-export const inputNameStyle: InputProps = {
-  overrides: {
-    Root: {
-      style: ({ $isFocused }) => ({
-        borderRadius: "8px !important",
-        borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
-        ":hover": {
-          borderColor: "#0E61F6",
-        },
-        borderWidth: "1px",
-      }),
-    },
-    InputContainer: {
-      style: { backgroundColor: "white" },
-    },
+export const INPUT_DESCRIPTION_STYLE: TextareaProps["overrides"] = {
+  Input: {
+    style: ({ $isFocused }) => ({
+      borderRadius: "8px",
+      ":hover": {
+        borderColor: "#0E61F6",
+      },
+    }),
   },
-};
-
-export const inputDescriptionStyle: TextareaProps = {
-  overrides: {
-    Input: {
-      style: ({ $isFocused }) => ({
+  InputContainer: {
+    style: {
+      backgroundColor: "white",
+      ":hover": {
+        borderColor: "#0E61F6",
         borderRadius: "8px",
-        ":hover": {
-          borderColor: "#0E61F6",
-        },
-      }),
-    },
-    InputContainer: {
-      style: {
-        backgroundColor: "white",
-        ":hover": {
-          borderColor: "#0E61F6",
-          borderRadius: "8px",
-        },
       },
     },
   },
 };
 
-export const inputStatusStyle: SelectProps = {
-  overrides: {
-    ControlContainer: {
-      style: ({ $isFocused }) => ({
-        backgroundColor: "white",
-        borderRadius: "8px !important",
-        borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
-        ":hover": {
-          borderColor: "#0E61F6",
-        },
-        borderWidth: "1px",
-      }),
+export const INPUT_STATUS_STYLE: SelectProps["overrides"] = {
+  ControlContainer: {
+    style: ({ $isFocused }) => ({
+      backgroundColor: "white",
+      borderRadius: "8px !important",
+      borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
+      ":hover": {
+        borderColor: "#0E61F6",
+      },
+      borderWidth: "1px",
+    }),
+  },
+};
+
+export const COLORFULL_BAR_WRAPPER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      width: "100%",
+      display: "flex",
+      gap: "4px",
     },
   },
 };
 
-export const colorfullBarWrapper: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        width: "100%",
-        display: "flex",
-        gap: "4px",
-      },
+export const COMPONENT_HEADER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-end",
     },
   },
 };
 
-export const componentHeader: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-end",
-      },
+export const HORIZONTAL_LINE: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      border: "0.5px solid rgb(211,211,211)",
+      width: "1px",
+      flexGrow: 1,
+      margin: "0px 15px",
     },
   },
 };
 
-export const horizontalLine: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        border: "0.5px solid rgb(211,211,211)",
-        width: "1px",
-        flexGrow: 1,
-        margin: "0px 15px",
-      },
-    },
-  },
-};
-
-export const componentTimelineRow: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignContent: "center",
-        alignItems: "center",
-        flexDirection: "row",
-        color: "grey",
-        fontSize: "14px",
-      },
+export const COMPONENT_TIMELINE_ROW: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignContent: "center",
+      alignItems: "center",
+      flexDirection: "row",
+      color: "grey",
+      fontSize: "14px",
     },
   },
 };
@@ -223,25 +201,62 @@ export const getColorFullBars = (count: number) => {
   return barsList;
 };
 
-export const componentNameText: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        fontSize: "18px",
-        fontWeight: 900,
-      },
+export const COMPONENT_NAME_TEXT: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      fontSize: "18px",
+      fontWeight: 900,
     },
   },
 };
 
-export const componentStatus: BlockProps = {
-  overrides: {
-    Block: {
-      style: () => ({
-        textTransform: "capitalize",
-        fontSize: "17px",
-        fontWeight: 700,
-      }),
-    },
+export const COMPONENT_STATUS: BlockProps["overrides"] = {
+  Block: {
+    style: () => ({
+      textTransform: "capitalize",
+      fontSize: "17px",
+      fontWeight: 700,
+    }),
   },
 };
+
+export const SAVE_BUTTON: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      marginLeft: "20px",
+      width: "92px",
+      height: "34px",
+    },
+    props: {
+      className: "primary-button",
+    },
+  },
+}
+
+export const CANCEL_BUTTON: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      marginLeft: "20px",
+      width: "92px",
+      height: "34px",
+    },
+    props: {
+      className: "secondary-button",
+    },
+  },
+}
+
+export const FOOTER_WRAPPER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "row-reverse",
+      right: 0,
+      alignItems: "center",
+      paddingBottom: "20px",
+    },
+    props: {
+      className: "footer-bar",
+    },
+  },
+}

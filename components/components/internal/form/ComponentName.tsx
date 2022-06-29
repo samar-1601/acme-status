@@ -3,17 +3,16 @@ import * as React from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 
-import { inputNameStyle } from "../../overrides/componentFormStyles";
+import { INPUT_NAME_STYLE } from "../../overrides/componentFormStyles";
 
 export const ComponentName = React.memo((props: any) => {
   return (
     <FormControl label="Component name">
-      <Input
+      <Input overrides={INPUT_NAME_STYLE}
         id="input-id"
         value={props.value}
         onChange={props.handleNameChange}
         placeholder="Component name"
-        {...inputNameStyle}
       />
     </FormControl>
   );

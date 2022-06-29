@@ -3,7 +3,7 @@ import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import * as React from "react";
 import { PAGE_ID } from "../../../../constants";
-import { inputStatusStyle } from "../../overrides/componentFormStyles";
+import { INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
 
 export const ComponentGroup = function (props: any) {
   const [groups, setGroups] = React.useState([{}]);
@@ -43,7 +43,7 @@ export const ComponentGroup = function (props: any) {
       }}
     >
       <FormControl label="Component group">
-        <Select
+        <Select overrides={INPUT_STATUS_STYLE}
           creatable
           options={groups}
           labelKey="label"
@@ -51,7 +51,6 @@ export const ComponentGroup = function (props: any) {
           onChange={() => {}}
           value={props.value}
           placeholder="This component does not belong to a group"
-          {...inputStatusStyle}
         />
       </FormControl>
     </Block>

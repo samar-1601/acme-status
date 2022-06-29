@@ -3,11 +3,11 @@ import * as React from "react";
 import { Page } from "../../../constants";
 import { ComponentList } from "./ComponentList";
 import {
-  componentsListView,
-  container,
-  content,
-  nav,
-  navbarWrapper,
+  COMPONENTS_LIST_VIEW,
+  CONTAINER,
+  CONTENT,
+  NAV,
+  NAV_BAR_WRAPPER,
 } from "../overrides/componentListStyles";
 import { CreateComponentButton } from "./CreateComponentButton";
 
@@ -18,11 +18,11 @@ export const ComponentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = React.useState<Page>(Page.Active); // variable indicating the current selected navbar menu-item
 
   return (
-    <Block {...componentsListView}>
-      <Block {...container}>
+    <Block overrides={COMPONENTS_LIST_VIEW}>
+      <Block overrides={CONTAINER}>
         <Header headerText="Components" />
-        <Block {...navbarWrapper}>
-          <Block {...nav}>
+        <Block overrides={NAV_BAR_WRAPPER}>
+          <Block overrides={NAV}>
             <NavBarMenuItem
               pageType={Page.Active}
               currentPage={activePage}
@@ -39,7 +39,7 @@ export const ComponentsViewHomePage: React.FC = () => {
           <CreateComponentButton />
         </Block>
       </Block>
-      <Block {...content}>
+      <Block overrides={CONTENT}>
         <ComponentList pageType={activePage} />
       </Block>
     </Block>

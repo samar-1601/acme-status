@@ -3,12 +3,12 @@ import * as React from "react";
 import Link from "next/link";
 import { Block } from "baseui/block";
 
-import { createComponentButton } from "../overrides/componentListStyles";
+import { CREATE_COMPONENT_BUTTON } from "../overrides/componentListStyles";
 
 export const CreateComponentButton = React.memo(() => {
   return (
     <Link href="/component/new">
-      <Block {...createComponentButton} className="primary-button">
+      <Block overrides={CREATE_COMPONENT_BUTTON} className="primary-button">
         Create Component
       </Block>
     </Link>

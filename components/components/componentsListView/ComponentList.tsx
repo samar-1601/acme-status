@@ -9,14 +9,14 @@ import Link from "next/link";
 
 import { Block } from "baseui/block";
 import {
-  componentsButtonArea,
-  detailStyles,
-  element,
-  listItem,
-  loader,
+  COMPONENTS_BUTTON_AREA,
+  DETAIL_STYLES,
+  ELEMENT,
+  LIST_ITEM,
+  LOADER,
 } from "../overrides/componentListStyles";
-import { BUTTON_AREA } from "../../incidents/list/overrides/listStyles";
-import { DURATION, useSnackbar } from "baseui/snackbar";
+import { useSnackbar } from "baseui/snackbar";
+import { deleteComponent } from "../internal/helpers/deleteComponent";
 
 export const ComponentList = function (props: any) {
   const [dataList, setDataList] = React.useState<any>([]);
@@ -28,13 +28,13 @@ export const ComponentList = function (props: any) {
     details = (
       <>
         <Block>{props.comp.name}</Block>
-        <Block {...detailStyles}>{props.msg}</Block>
+        <Block overrides={DETAIL_STYLES}>{props.msg}</Block>
       </>
     );
 
     return (
-      <Block {...element} className="list-item">
-        <Block {...listItem}>
+      <Block overrides={ELEMENT} className="list-item">
+        <Block overrides={LIST_ITEM}>
           <StatefulPopover
             content={<>{props.comp.status}</>}
             accessibilityType={"tooltip"}
@@ -58,7 +58,7 @@ export const ComponentList = function (props: any) {
             </Block>
           </StatefulPopover>
           <Block>{details}</Block>
-          <Block {...componentsButtonArea} className="button-area">
+          <Block overrides={COMPONENTS_BUTTON_AREA} className="button-area">
             <Link
               href={{
                 pathname: `/component/edit/${props.comp.id}`,
@@ -87,42 +87,11 @@ export const ComponentList = function (props: any) {
             </Link>
             <Block
               onClick={() => {
-                fetch(
-                  "https://api.statuspage.io/v1/pages/" +
-                    PAGE_ID +
-                    "/components/" +
-                    props.comp.id,
-                  {
-                    method: "DELETE",
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `OAuth ${
-                        process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""
-                      }`,
-                    },
-                  }
-                )
-                  .then((response) => {
-                    if (response.status != 204) {
-                      throw "Error in Deletion";
-                    }
-                    enqueue(
-                      {
-                        message: "Successfully Deleted Component",
-                      },
-                      DURATION.long
-                    );
-                    setLoaded(false);
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    enqueue(
-                      {
-                        message: String(err),
-                      },
-                      DURATION.short
-                    );
-                  });
+                deleteComponent(props = {
+                  "id": props.comp.id,
+                  "enqueue": enqueue,
+                  "setLoaded": setLoaded
+                })
               }}
               className="edit-icon-wrapper"
             >
@@ -218,7 +187,7 @@ export const ComponentList = function (props: any) {
   if (loaded) return <GenerateList dataList={dataList} />;
   else
     return (
-      <Block {...loader}>
+      <Block overrides={LOADER}>
         <Spinner />
       </Block>
     );

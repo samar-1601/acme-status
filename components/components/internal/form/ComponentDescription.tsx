@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 import { useStyletron } from "styletron-react";
 

@@ -10,7 +10,9 @@ import { Header } from "./Header";
 import { UptimeBox } from "./UptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { PAGE_ID } from "../../../../constants";
-import { formStyles } from "../../overrides/componentFormStyles";
+import { FORM_STYLES } from "../../overrides/componentFormStyles";
+import { createComponent } from "../helpers/createComponent";
+import { updateComponent } from "../helpers/updateComponent";
 
 const status = [
   "operational",
@@ -91,41 +93,11 @@ export default function ComponentForm(props: any) {
         );
         setSubmit(false);
       } else {
-        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN);
-        fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-          },
-          body: JSON.stringify(payload),
+        createComponent(props = {
+          enqueue: enqueue,
+          setSubmit: setSubmit,
+          payload: payload,
         })
-          .then((response) => response.json())
-          .then((json) => {
-            if ("error" in json) {
-              throw json.error;
-            }
-            enqueue(
-              {
-                message: "Successfully Created Component",
-              },
-              DURATION.medium
-            );
-            setSubmit(false);
-          })
-          .then(() => {
-            Router.push("/component");
-          })
-          .catch((err) => {
-            enqueue(
-              {
-                message: "Failed to Submit Form. Please Try Again!",
-              },
-              DURATION.short
-            );
-            setSubmit(false);
-            console.log(err);
-          });
       }
     } else {
       let payload = {
@@ -144,48 +116,12 @@ export default function ComponentForm(props: any) {
         );
         setSubmit(false);
       } else {
-        fetch(
-          "https://api.statuspage.io/v1/pages/" +
-            PAGE_ID +
-            "/components/" +
-            props.id,
-          {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `OAuth ${
-                process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""
-              }`,
-            },
-            body: JSON.stringify(payload),
-          }
-        )
-          .then((response) => response.json())
-          .then((json) => {
-            if ("error" in json) {
-              throw json.error;
-            }
-            enqueue(
-              {
-                message: "Successfully updated the component",
-              },
-              DURATION.medium
-            );
-            setSubmit(false);
-          })
-          .then(() => {
-            Router.push("/component");
-          })
-          .catch((err) => {
-            enqueue(
-              {
-                message: "Failed to Submit Form. Please Try Again!",
-              },
-              DURATION.short
-            );
-            setSubmit(false);
-            console.log(err);
-          });
+        updateComponent(props = {
+          "id": props.id,
+          "payload": payload,
+          "enqueue": enqueue,
+          "setSubmit": setSubmit,
+        })
       }
     }
   };
@@ -195,7 +131,7 @@ export default function ComponentForm(props: any) {
   };
 
   return (
-    <Block {...formStyles}>
+    <Block overrides={FORM_STYLES}>
       <Header addComponent={addComponent} />
       <ComponentName
         value={componentName}
@@ -214,7 +150,7 @@ export default function ComponentForm(props: any) {
         handleGroupChange={handleGroupChange}
       />
       <UptimeBox />
-      <Footer handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <Footer addComponent={addComponent} handleSubmit={handleSubmit} handleCancel={handleCancel} />
     </Block>
   );
 }

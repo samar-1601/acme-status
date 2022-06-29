@@ -1,37 +1,30 @@
 import { BlockProps } from "baseui/block";
-import Router from "next/router";
 
-export const detailStyles: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        fontSize: "14px",
-        color: "#808080",
-        paddingTop: "10px",
-      },
+export const DETAIL_STYLES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      fontSize: "14px",
+      color: "#808080",
+      paddingTop: "10px",
     },
   },
 };
 
-export const content: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        position: "relative",
-        margin: "10px 0px",
-      },
+export const CONTENT: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      position: "relative",
+      margin: "10px 0px",
     },
   },
 };
 
-export const createComponentButton: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        alignSelf: "flex-end",
-        marginBottom: "8px",
-        padding: "10px",
-      },
+export const CREATE_COMPONENT_BUTTON: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      alignSelf: "flex-end",
+      marginBottom: "8px",
+      padding: "10px",
     },
   },
 };
@@ -71,190 +64,155 @@ export const spanInsideNav: BlockProps = {
   },
 };
 
-export const divInsideNav: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        cursor: "pointer",
-        marginRight: "20px",
-        fontSize: "14px",
-      },
+export const DIV_INSIDE_NAV: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      cursor: "pointer",
+      marginRight: "20px",
+      fontSize: "14px",
     },
   },
 };
 
-export const divInsideNavDisabled: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        cursor: "not-allowed",
-        marginRight: "20px",
-        fontSize: "14px",
-      },
+export const DIV_INSIDE_NAV_DISABLED: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      cursor: "not-allowed",
+      marginRight: "20px",
+      fontSize: "14px",
     },
   },
 };
 
-export const nav: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: "10px",
-        marginTop: "10px",
-      },
+export const NAV: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: "10px",
+      marginTop: "10px",
     },
   },
 };
 
-export const navbarWrapper: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        borderBottom: "2px rgb(205, 203, 203) solid",
-      },
+export const NAV_BAR_WRAPPER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      borderBottom: "2px rgb(205, 203, 203) solid",
     },
   },
 };
 
-export const container: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        top: "0ch",
-        width: "80%",
-        margin: "auto",
-        position: "sticky",
-        zIndex: 10,
-        backgroundColor: "#EEEFF1",
-      },
+export const CONTAINER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      top: "0ch",
+      width: "80%",
+      margin: "auto",
+      position: "sticky",
+      zIndex: 10,
+      backgroundColor: "#EEEFF1",
     },
   },
 };
 
-export const componentsListView: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        width: "100%",
-      },
+export const COMPONENTS_LIST_VIEW: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      width: "100%",
     },
   },
 };
 
-export const headerBarBackIcon: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        marginRight: "15px",
-        cursor: "pointer",
-      },
+export const HEADER_BAR_BACK_ICON: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      marginRight: "15px",
+      cursor: "pointer",
     },
   },
 };
 
-export const header: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        padding: "20px",
-        fontSize: "20px",
-        display: "flex",
-        justifyContent: "space-between",
-      },
+export const HEADER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      padding: "20px",
+      fontSize: "20px",
+      display: "flex",
+      justifyContent: "space-between",
     },
   },
 };
 
-export const heading: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        paddingTop: "5px",
-        fontSize: "24px",
-        fontWeight: 400,
-        display: "flex",
-      },
+export const HEADING: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      paddingTop: "5px",
+      fontSize: "24px",
+      fontWeight: 400,
+      display: "flex",
     },
   },
 };
 
-export const listItem: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        fontSize: "16px",
-        display: "flex",
-      },
+export const LIST_ITEM: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      fontSize: "16px",
+      display: "flex",
     },
   },
 };
 
-export const componentsButtonArea: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        gap: "16px",
-        marginLeft: "auto",
-      },
+export const COMPONENTS_BUTTON_AREA: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      gap: "16px",
+      marginLeft: "auto",
     },
   },
 };
 
-export const element: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "white",
-        padding: "16px",
-        margin: "10px auto 20px auto",
-        boxShadow:
-          "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
-        width: "78%",
-        borderRadius: "8px",
-        listStyle: "none",
-      },
+export const ELEMENT: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      backgroundColor: "white",
+      padding: "16px",
+      margin: "10px auto 20px auto",
+      boxShadow:
+        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+      width: "78%",
+      borderRadius: "8px",
+      listStyle: "none",
     },
   },
 };
 
-export const loader: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "80vh",
-        width: "100%",
-      },
+export const LOADER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "80vh",
+      width: "100%",
     },
   },
 };
 
-export const page: BlockProps = {
-  overrides: {
-    Block: {
-      style: {
-        width: "80%",
-        margin: "auto",
-        backgroundColor: "#F8F8FA",
-      },
+export const PAGE: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      width: "80%",
+      margin: "auto",
+      backgroundColor: "#F8F8FA",
     },
   },
 };
 
-export const x: BlockProps = {
-  overrides: {
-    Block: {
-      style: {},
-    },
-  },
-};
