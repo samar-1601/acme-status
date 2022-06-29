@@ -7,41 +7,18 @@ import { ProgressBar, SIZE } from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
 
+//helpers
+import {
+  calculateStatus,
+  getStatusBarColor,
+  getStatusFromPercentage,
+} from "../helpers/helperFunctions";
+
 //constants
 import { STATUSNames } from "../../../../constants";
 
 //styles
 import { INPUT_STATUS_OVERRIDES } from "../form/overrides/FormControlOverrides";
-
-//function to calculate percentage of progress bar to be filled from status
-function calculateStatus(status: String): number {
-  if (status == "Investigating") {
-    return 0;
-  }
-  if (status == "Identified") {
-    return 33;
-  }
-  if (status == "Monitoring") {
-    return 66;
-  } else {
-    return 100;
-  }
-}
-
-//funtion to get color code of progress bar
-function getStatusBarColor(status: String): string {
-  if (status == "Investigating") {
-    return "red";
-  }
-  if (status == "Identified") {
-    return "#FFD04F";
-  }
-  if (status == "Monitoring") {
-    return "#F08C1A";
-  } else {
-    return "#33CC99";
-  }
-}
 
 interface InputStatusOnClickEvent {
   nativeEvent: {
@@ -93,15 +70,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
       } else {
         percentage = (e.nativeEvent.offsetX * 100) / e.target.offsetWidth;
       }
-      if (percentage < 16) {
-        props.updateStatus("Investigating");
-      } else if (percentage < 50) {
-        props.updateStatus("Identified");
-      } else if (percentage < 83) {
-        props.updateStatus("Monitoring");
-      } else {
-        props.updateStatus("Resolved");
-      }
+      props.updateStatus(getStatusFromPercentage(percentage));
     },
     [props.incidentStatus]
   );
