@@ -1,9 +1,10 @@
-import { Block } from "baseui/block"
-import * as React from "react"
+import { Block } from "baseui/block";
+import * as React from "react";
 
-export const Footer = React.memo((props: any)=> {
+export const Footer = React.memo((props: any) => {
   return (
-    <Block overrides={{
+    <Block
+      overrides={{
         Block: {
           style: {
             display: "flex",
@@ -13,25 +14,28 @@ export const Footer = React.memo((props: any)=> {
             paddingBottom: "20px",
           },
           props: {
-            className: "footer-bar"
-          }
-        }
-      }}>
-      <Block 
-        overrides ={{
-          Block : {
-            style : {               
+            className: "footer-bar",
+          },
+        },
+      }}
+    >
+      <Block
+        overrides={{
+          Block: {
+            style: {
               marginLeft: "20px",
               width: "92px",
               height: "34px",
             },
-            props : {
-              className: "primary-button"
-            }
-          }
+            props: {
+              className: "primary-button",
+            },
+          },
         }}
-        onClick = {props.handleSubmit}
-      >Save </Block>
+        onClick={props.handleSubmit}
+      >
+        Save{" "}
+      </Block>
       <Block
         overrides={{
           Block: {
@@ -45,7 +49,10 @@ export const Footer = React.memo((props: any)=> {
             },
           },
         }}
-        onClick = {props.handleCancel}
-      >Cancel</Block>
-    </Block>)
+        onClick={props.handleCancel}
+      >
+        Cancel
+      </Block>
+    </Block>
+  );
 });

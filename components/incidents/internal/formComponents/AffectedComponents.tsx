@@ -8,7 +8,7 @@ import { FormControl } from "baseui/form-control";
 
 //constants
 import { ComponentsAffectedProps } from "../../../../variableTypes";
-import { affectedComponenetsStyle } from "../form/styles/BlockStyles";
+import { affectedComponenetsStyle } from "../form/overrides/BlockStyles";
 
 const label = <Block>Components Affected</Block>;
 

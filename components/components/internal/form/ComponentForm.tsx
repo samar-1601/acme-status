@@ -12,64 +12,86 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 import { PAGE_ID } from "../../../../constants";
 import { formStyles } from "../../overrides/componentFormStyles";
 
-const status = ["operational", "degraded_performance", "partial_outage", "major_outage", "under_maintenance"]
+const status = [
+  "operational",
+  "degraded_performance",
+  "partial_outage",
+  "major_outage",
+  "under_maintenance",
+];
 
 export default function ComponentForm(props: any) {
-  const [addComponent, setAddComponent] = React.useState<Boolean>(props.addComponent);
-  const [componentName, setComponentName] = React.useState<String>(props.componentName);
-  const [componentDescription, setComponentDescription] = React.useState<String>(props.componentDescription);
-  const [componentStatus, setComponentStatus] = React.useState<number>(props.componentStatus);
-  const [componentGroup, setComponentGroup] = React.useState<any>(props.componentGroup);
+  const [addComponent, setAddComponent] = React.useState<Boolean>(
+    props.addComponent
+  );
+  const [componentName, setComponentName] = React.useState<String>(
+    props.componentName
+  );
+  const [componentDescription, setComponentDescription] =
+    React.useState<String>(props.componentDescription);
+  const [componentStatus, setComponentStatus] = React.useState<number>(
+    props.componentStatus
+  );
+  const [componentGroup, setComponentGroup] = React.useState<any>(
+    props.componentGroup
+  );
   const [submit, setSubmit] = React.useState<Boolean>(false);
   const { enqueue, dequeue } = useSnackbar();
-  
-  React.useEffect(()=> {
+
+  React.useEffect(() => {
     setComponentName(props.componentName);
   }, [props.componentName]);
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     setComponentDescription(props.componentDescription);
   }, [props.componentDescription]);
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     setComponentStatus(props.componentStatus);
   }, [props.componentStatus]);
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     setComponentGroup(props.componentGroup);
   }, [props.componentGroup]);
 
-  const handleNameChange = React.useCallback((e)=>setComponentName(e.target.value),[]);
+  const handleNameChange = React.useCallback(
+    (e) => setComponentName(e.target.value),
+    []
+  );
 
-  const handleDescriptionChange = React.useCallback((e)=>setComponentDescription(e.target.value),[]);
+  const handleDescriptionChange = React.useCallback(
+    (e) => setComponentDescription(e.target.value),
+    []
+  );
 
   const handleStatusChange = React.useCallback((e) => {
-    setComponentStatus(e.value[0].id)
-  }, [])
+    setComponentStatus(e.value[0].id);
+  }, []);
 
   const handleGroupChange = React.useCallback((e) => {
-    console.log(e)
-  }, [])
+    console.log(e);
+  }, []);
 
   const handleSubmit = () => {
-    setSubmit(true)
-    if(addComponent)  { 
+    setSubmit(true);
+    if (addComponent) {
       let payload = {
-        "component" : {
-          "description": componentDescription,
-          "status": status[componentStatus],
-          "name": componentName,
-        }
-      }
+        component: {
+          description: componentDescription,
+          status: status[componentStatus],
+          name: componentName,
+        },
+      };
       if (payload.component.name == "") {
-        enqueue({
+        enqueue(
+          {
             message: "Component Name can't be Blank!",
           },
           DURATION.short
         );
         setSubmit(false);
       } else {
-        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN)
+        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN);
         fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
           method: "POST",
           headers: {
@@ -78,23 +100,25 @@ export default function ComponentForm(props: any) {
           },
           body: JSON.stringify(payload),
         })
-        .then((response) => response.json())
-        .then((json) => {
-          if ("error" in json) {
-            throw json.error; 
-          }
-          enqueue({
-            message: "Successfully Created Component",
-          },
-          DURATION.medium
-          );
+          .then((response) => response.json())
+          .then((json) => {
+            if ("error" in json) {
+              throw json.error;
+            }
+            enqueue(
+              {
+                message: "Successfully Created Component",
+              },
+              DURATION.medium
+            );
             setSubmit(false);
           })
           .then(() => {
             Router.push("/component");
           })
           .catch((err) => {
-            enqueue({
+            enqueue(
+              {
                 message: "Failed to Submit Form. Please Try Again!",
               },
               DURATION.short
@@ -105,45 +129,56 @@ export default function ComponentForm(props: any) {
       }
     } else {
       let payload = {
-        "component" : {
-          "description": componentDescription,
-          "status": status[componentStatus],
-          "name": componentName,
-        }
-      }
+        component: {
+          description: componentDescription,
+          status: status[componentStatus],
+          name: componentName,
+        },
+      };
       if (payload.component.name == "") {
-        enqueue({
+        enqueue(
+          {
             message: "Component Name can't be Blank!",
           },
           DURATION.short
         );
         setSubmit(false);
       } else {
-        fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-          },
-          body: JSON.stringify(payload),
-        })
-        .then((response) => response.json())
-        .then((json) => {
-          if ("error" in json) {
-            throw json.error; 
+        fetch(
+          "https://api.statuspage.io/v1/pages/" +
+            PAGE_ID +
+            "/components/" +
+            props.id,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `OAuth ${
+                process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""
+              }`,
+            },
+            body: JSON.stringify(payload),
           }
-          enqueue({
-            message: "Successfully updated the component",
-          },
-          DURATION.medium
-          );
+        )
+          .then((response) => response.json())
+          .then((json) => {
+            if ("error" in json) {
+              throw json.error;
+            }
+            enqueue(
+              {
+                message: "Successfully updated the component",
+              },
+              DURATION.medium
+            );
             setSubmit(false);
           })
           .then(() => {
             Router.push("/component");
           })
           .catch((err) => {
-            enqueue({
+            enqueue(
+              {
                 message: "Failed to Submit Form. Please Try Again!",
               },
               DURATION.short
@@ -153,21 +188,33 @@ export default function ComponentForm(props: any) {
           });
       }
     }
-  } 
+  };
 
   const handleCancel = () => {
-    Router.push("/component")
-  }
+    Router.push("/component");
+  };
 
   return (
     <Block {...formStyles}>
-      <Header addComponent={addComponent}/>
-      <ComponentName value={componentName} handleNameChange={handleNameChange} />
-      <ComponentDescription value={componentDescription} handleDescriptionChange={handleDescriptionChange}/>
-      <ComponentStatus id={componentStatus} handleStatusChange={handleStatusChange}/>
-      <ComponentGroup value={componentGroup} handleGroupChange={handleGroupChange}/>
+      <Header addComponent={addComponent} />
+      <ComponentName
+        value={componentName}
+        handleNameChange={handleNameChange}
+      />
+      <ComponentDescription
+        value={componentDescription}
+        handleDescriptionChange={handleDescriptionChange}
+      />
+      <ComponentStatus
+        id={componentStatus}
+        handleStatusChange={handleStatusChange}
+      />
+      <ComponentGroup
+        value={componentGroup}
+        handleGroupChange={handleGroupChange}
+      />
       <UptimeBox />
-      <Footer handleSubmit={handleSubmit} handleCancel={handleCancel}/>
+      <Footer handleSubmit={handleSubmit} handleCancel={handleCancel} />
     </Block>
   );
 }

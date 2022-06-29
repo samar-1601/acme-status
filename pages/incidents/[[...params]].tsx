@@ -7,7 +7,7 @@ import IncidentCreation from "../../components/incidents/createIncidents/Inciden
 import {
   mainStyle,
   errorPageStyle,
-} from "../../components/incidents/internal/form/styles/BlockStyles";
+} from "../../components/incidents/internal/form/overrides/BlockStyles";
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";

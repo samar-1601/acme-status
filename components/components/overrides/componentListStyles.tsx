@@ -8,10 +8,10 @@ export const detailStyles: BlockProps = {
         fontSize: "14px",
         color: "#808080",
         paddingTop: "10px",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const content: BlockProps = {
   overrides: {
@@ -161,91 +161,103 @@ export const headerBarBackIcon: BlockProps = {
 };
 
 export const header: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         padding: "20px",
         fontSize: "20px",
         display: "flex",
         justifyContent: "space-between",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const heading: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         paddingTop: "5px",
         fontSize: "24px",
         fontWeight: 400,
         display: "flex",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const listItem: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         fontSize: "16px",
         display: "flex",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
+
+export const componentsButtonArea: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        display: "flex",
+        gap: "16px",
+        marginLeft: "auto",
+      },
+    },
+  },
+};
 
 export const element: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "white",
         padding: "16px",
         margin: "10px auto 20px auto",
-        boxShadow: "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+        boxShadow:
+          "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
         width: "78%",
         borderRadius: "8px",
-      }
-    }
-  }
-}
+        listStyle: "none",
+      },
+    },
+  },
+};
 
 export const loader: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         height: "80vh",
         width: "100%",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const page: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
+  overrides: {
+    Block: {
+      style: {
         width: "80%",
-        margin: "auto",   
+        margin: "auto",
         backgroundColor: "#F8F8FA",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const x: BlockProps = {
-  overrides : {
-    Block : {
-      style : {
-        
-      }
-    }
-  }
-}
+  overrides: {
+    Block: {
+      style: {},
+    },
+  },
+};

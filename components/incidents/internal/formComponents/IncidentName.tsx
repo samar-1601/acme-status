@@ -9,7 +9,7 @@ import { Input } from "baseui/input";
 import { IncidentNameProps } from "../../../../variableTypes";
 
 //styles
-import { inputNameStyle } from "../form/styles/InputStyles";
+import { inputNameStyle } from "../form/overrides/InputStyles";
 
 /**
  * IncidentName Component

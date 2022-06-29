@@ -2,7 +2,7 @@ import { Block } from "baseui/block";
 import { Select } from "baseui/select";
 import * as React from "react";
 import { ITEMS } from "../../../../constants";
-import { componentStyle } from "../../../incidents/internal/form/styles/BlockStyles";
+import { componentStyle } from "../../../incidents/internal/form/overrides/BlockStyles";
 import { inputStatusStyle } from "../../overrides/componentFormStyles";
 
 function Image(props: any) {

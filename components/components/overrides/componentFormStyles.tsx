@@ -6,16 +6,16 @@ import { DatepickerProps } from "baseui/datepicker";
 import { Block, BlockProps } from "baseui/block";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
-export const headerStyles:BlockProps = {
+export const headerStyles: BlockProps = {
   overrides: {
     Block: {
       style: {
         marginTop: "14px",
         marginBottom: "22px",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const formStyles: BlockProps = {
   overrides: {
@@ -23,10 +23,10 @@ export const formStyles: BlockProps = {
       style: {
         width: "60%",
         margin: "auto",
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export const dateStyles: DatepickerProps = {
   overrides: {
@@ -45,19 +45,19 @@ export const dateStyles: DatepickerProps = {
           },
           Input: {
             style: {
-              backgroundColor: "white"
-            }
+              backgroundColor: "white",
+            },
           },
           ClearIcon: {
             style: {
-              marginLeft: "12px"
-            }
-          }
-        }
-      }
-    }
-  }
-}
+              marginLeft: "12px",
+            },
+          },
+        },
+      },
+    },
+  },
+};
 
 export const checkBoxStyles: CheckboxProps = {
   overrides: {
@@ -112,16 +112,16 @@ export const inputDescriptionStyle: TextareaProps = {
       }),
     },
     InputContainer: {
-      style: { 
+      style: {
         backgroundColor: "white",
         ":hover": {
           borderColor: "#0E61F6",
           borderRadius: "8px",
         },
-     },
+      },
     },
   },
-}
+};
 
 export const inputStatusStyle: SelectProps = {
   overrides: {
@@ -137,7 +137,7 @@ export const inputStatusStyle: SelectProps = {
       }),
     },
   },
-}
+};
 
 export const colorfullBarWrapper: BlockProps = {
   overrides: {
@@ -196,7 +196,8 @@ export const getColorFullBars = (count: number) => {
   let barsList = [];
   for (let i = 0; i < count; i++) {
     barsList.push(
-      <StatefulPopover key={i}
+      <StatefulPopover
+        key={i}
         content={() => (
           <Block padding={"20px"} backgroundColor={"white"}>
             Details of this day !!
@@ -204,16 +205,18 @@ export const getColorFullBars = (count: number) => {
         )}
         triggerType={TRIGGER_TYPE.hover}
       >
-        <Block overrides = {{
-          Block: {
-            style: {
-              width: "calc(100%/90)",
-              height: "42px",
-              backgroundColor: "rgb(211,211,211)",
-              margin: "12px 0px",
+        <Block
+          overrides={{
+            Block: {
+              style: {
+                width: "calc(100%/90)",
+                height: "42px",
+                backgroundColor: "rgb(211,211,211)",
+                margin: "12px 0px",
+              },
             },
-          },}
-        }></Block>
+          }}
+        ></Block>
       </StatefulPopover>
     );
   }
@@ -242,4 +245,3 @@ export const componentStatus: BlockProps = {
     },
   },
 };
-

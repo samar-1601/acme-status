@@ -7,7 +7,7 @@ import { IncidentErrorPageProps } from "../../variableTypes";
 import {
   errorPageStyle,
   mainStyle,
-} from "../incidents/internal/form/styles/BlockStyles";
+} from "../incidents/internal/form/overrides/BlockStyles";
 
 /*Will be displayed if error in processing incident update request or fetching components* */
 

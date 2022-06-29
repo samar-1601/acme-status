@@ -33,25 +33,27 @@ export const ComponentGroup = function (props: any) {
   }, []);
 
   return (
-    <Block overrides={{
-      Block: {
-        style: {
-          margin: "20px 0"
-        }
-      }
-    }}>
-    <FormControl label="Component group">
-      <Select 
-        creatable
-        options={groups}
-        labelKey="label"
-        valueKey="id"
-        onChange={()=>{}}
-        value={props.value}
-        placeholder="This component does not belong to a group"
-        {...inputStatusStyle}
-      />
-    </FormControl>
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            margin: "20px 0",
+          },
+        },
+      }}
+    >
+      <FormControl label="Component group">
+        <Select
+          creatable
+          options={groups}
+          labelKey="label"
+          valueKey="id"
+          onChange={() => {}}
+          value={props.value}
+          placeholder="This component does not belong to a group"
+          {...inputStatusStyle}
+        />
+      </FormControl>
     </Block>
   );
 };

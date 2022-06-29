@@ -29,7 +29,7 @@ import {
   cancelButtonStyle,
   submitButtonStyle,
   onSubmitButtonStyle,
-} from "./styles/BlockStyles";
+} from "./overrides/BlockStyles";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 

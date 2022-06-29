@@ -6,7 +6,7 @@ import { Input } from "baseui/input";
 import { inputNameStyle } from "../../overrides/componentFormStyles";
 
 export const ComponentName = React.memo((props: any) => {
-  return(
+  return (
     <FormControl label="Component name">
       <Input
         id="input-id"
@@ -16,5 +16,5 @@ export const ComponentName = React.memo((props: any) => {
         {...inputNameStyle}
       />
     </FormControl>
-  )
+  );
 });

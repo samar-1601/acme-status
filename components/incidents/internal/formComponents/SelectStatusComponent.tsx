@@ -14,10 +14,10 @@ import { ITEMS } from "../../../../constants";
 import { ImageProps, statusComponentProps } from "../../../../variableTypes";
 
 //styles
-import { componentStyle } from "../form/styles/BlockStyles";
-import { checkBoxStyles } from "../form/styles/CheckBoxStyles";
-import { selectOptionStyle } from "../form/styles/SelectStyles";
-import { popoverMessageStyle } from "../form/styles/PopoverStyles";
+import { componentStyle } from "../form/overrides/BlockStyles";
+import { checkBoxStyles } from "../form/overrides/CheckBoxStyles";
+import { selectOptionStyle } from "../form/overrides/SelectStyles";
+import { popoverMessageStyle } from "../form/overrides/PopoverStyles";
 
 function Image(props: ImageProps) {
   return (

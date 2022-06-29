@@ -8,7 +8,7 @@ import { FormControl } from "baseui/form-control";
 import { IncidentMessageProps } from "../../../../variableTypes";
 
 //styles
-import { StyledTextArea } from "../form/styles/StyledTextArea";
+import { StyledTextArea } from "../form/overrides/StyledTextArea";
 
 /**
  * IncidentMessage Component
