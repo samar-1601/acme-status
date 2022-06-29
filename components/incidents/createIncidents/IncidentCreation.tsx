@@ -65,7 +65,7 @@ export default function IncidentCreation() {
           // dequeue();
           enqueue(
             {
-              message: "Successfully submitted form details",
+              message: "Successfully Created Incident",
             },
             DURATION.short
           );

@@ -23,7 +23,6 @@ export const ComponentStatus = React.memo((props: any) => {
       id: idx,
     };
   });
-  console.log(options);
 
   return (
     <Block {...componentStyle}>

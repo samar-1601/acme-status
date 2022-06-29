@@ -19,12 +19,14 @@ export const deleteIncident = async (
       },
     }
   )
-    .then((response) => response.json())
+    .then((response) => {
+      if(response.status != 200) {
+        throw "Error in Deletion";
+      }
+      response.json()
+    })
     .then(async (json) => {
       console.log(json);
-      if ("error" in json) {
-        throw json.error;
-      }
       enqueue(
         {
           message: "Successfully Deleted Incident",
@@ -33,15 +35,12 @@ export const deleteIncident = async (
       );
       await reFetch();
     })
-    .catch((err) => {
-      console.log(err);
-      // dequeue();
-      enqueue(
-        {
-          message: err,
-        },
-        DURATION.short
-      );
-      return false;
-    });
+    .catch((err)=> {
+      console.log(err)
+      enqueue({
+        message: String(err),
+      },
+      DURATION.short
+    );
+    })  
 };

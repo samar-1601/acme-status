@@ -84,7 +84,7 @@ export default function ComponentForm(props: any) {
             throw json.error; 
           }
           enqueue({
-            message: "Successfully submitted form details",
+            message: "Successfully Created Component",
           },
           DURATION.medium
           );
@@ -119,7 +119,6 @@ export default function ComponentForm(props: any) {
         );
         setSubmit(false);
       } else {
-        console.log(process.env.NEXT_PUBLIC_AUTH_TOKEN)
         fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id, {
           method: "PATCH",
           headers: {
