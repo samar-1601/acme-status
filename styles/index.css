@@ -65,6 +65,7 @@
     @apply fixed left-0 bottom-0;
     @apply bg-white;
     @apply w-full pr-4 pt-4;
+    @apply border-t-2 border-border-color
 
   }
 
