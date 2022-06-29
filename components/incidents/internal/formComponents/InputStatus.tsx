@@ -11,7 +11,7 @@ import { Block } from "baseui/block";
 import { STATUSNames } from "../../../../constants";
 
 //styles
-import { INPUT_STATUS_OVERRIDES } from "../form/overrides/FormControlStyles";
+import { INPUT_STATUS_OVERRIDES } from "../form/overrides/FormControlOverrides";
 
 //function to calculate percentage of progress bar to be filled from status
 function calculateStatus(status: String): number {

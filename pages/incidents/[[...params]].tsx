@@ -7,7 +7,7 @@ import IncidentCreation from "../../components/incidents/createIncidents/Inciden
 import {
   ERROR_PAGE_OVERRIDES,
   MAIN_STYLE_OVERRIDES,
-} from "../../components/incidents/internal/form/overrides/BlockStyles";
+} from "../../components/incidents/internal/form/overrides/BlockOverrides";
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
 import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";

@@ -7,7 +7,7 @@ import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 
 //constants
-import { AFFECTED_COMPONENTS_OVERRIDES } from "../form/overrides/BlockStyles";
+import { AFFECTED_COMPONENTS_OVERRIDES } from "../form/overrides/BlockOverrides";
 import { ComponentObject } from "../../../../types";
 
 const label = <Block>Components Affected</Block>;

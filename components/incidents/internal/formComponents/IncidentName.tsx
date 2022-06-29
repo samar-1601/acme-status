@@ -6,7 +6,7 @@ import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 
 //styles
-import { INPUT_NAME_OVERRIDES } from "../form/overrides/InputStyles";
+import { INPUT_NAME_OVERRIDES } from "../form/overrides/InputOverrides";
 
 interface IncidentNameProps {
   handleNameChange: Function;

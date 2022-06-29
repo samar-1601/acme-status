@@ -6,7 +6,7 @@ import { Block } from "baseui/block";
 import {
   ERROR_PAGE_OVERRIDES,
   MAIN_STYLE_OVERRIDES,
-} from "../incidents/internal/form/overrides/BlockStyles";
+} from "../incidents/internal/form/overrides/BlockOverrides";
 
 interface IncidentErrorPageProps {
   message: string;

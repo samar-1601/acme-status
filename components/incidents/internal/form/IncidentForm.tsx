@@ -24,7 +24,7 @@ import {
   CANCEL_BUTTON_OVERRIDES,
   SUBMIT_BUTTON_OVERRIDES,
   ONSUBMIT_BUTTON_STYLE_OVERRIDES,
-} from "./overrides/BlockStyles";
+} from "./overrides/BlockOverrides";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 

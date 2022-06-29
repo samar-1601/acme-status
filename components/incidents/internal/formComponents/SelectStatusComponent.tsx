@@ -13,10 +13,10 @@ import { Block } from "baseui/block";
 import { ITEMS } from "../../../../constants";
 
 //styles
-import { COMPONENT_OVERRIDES } from "../form/overrides/BlockStyles";
-import { CHECKBOX_OVERRIDES } from "../form/overrides/CheckBoxStyles";
-import { SELECT_OPTION_OVERRIDES } from "../form/overrides/SelectStyles";
-import { POPOVER_MESSAGE_OVERRIDES } from "../form/overrides/PopoverStyles";
+import { COMPONENT_OVERRIDES } from "../form/overrides/BlockOverrides";
+import { CHECKBOX_OVERRIDES } from "../form/overrides/CheckBoxOverrides";
+import { SELECT_OPTION_OVERRIDES } from "../form/overrides/SelectOverrides";
+import { POPOVER_MESSAGE_OVERRIDES } from "../form/overrides/PopoverOverrides";
 
 interface ImageProps {
   imgUrl: string;

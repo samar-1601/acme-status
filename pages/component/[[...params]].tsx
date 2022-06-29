@@ -1,5 +1,5 @@
 // lib
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -12,7 +12,7 @@ import { Spinner } from "baseui/spinner";
 import {
   MAIN_STYLE_OVERRIDES,
   ERROR_PAGE_OVERRIDES,
-} from "../../components/incidents/internal/form/overrides/BlockStyles";
+} from "../../components/incidents/internal/form/overrides/BlockOverrides";
 import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 
 // constants
