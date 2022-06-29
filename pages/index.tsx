@@ -9,7 +9,7 @@ import WelcomePage from "../components/welcomePage/WelcomePage";
 import LandingPage from "../components/landingPage/LandingPage";
 
 // styles
-import { hasListLoadedStyle } from "../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../components/incidents/list/overrides/listStyles";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
   // if status not confirmed
   if (status === "loading") {
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         <Spinner />
       </Block>
     );

@@ -20,7 +20,7 @@ import "react-virtualized/styles.css";
 
 // constants
 import { PageType } from "../../../../constants";
-import { hasListLoadedStyle } from "../overrides/listStyles";
+import { LOADER_OVERRIDES } from "../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
 
 interface Props {
@@ -84,7 +84,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     // if page has Loaded
     dataList.length == 0 ? (
       // If the page has no data
-      <Block {...hasListLoadedStyle}> This Page has no Incidents !!</Block>
+      <Block overrides={LOADER_OVERRIDES}> This Page has no Incidents !!</Block>
     ) : (
       // If the page has loaded and has data to display
       <InfiniteLoader
@@ -133,7 +133,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     )
   ) : (
     // if page has not loaded
-    <Block {...hasListLoadedStyle}>
+    <Block overrides={LOADER_OVERRIDES}>
       <Spinner />
     </Block>
   );

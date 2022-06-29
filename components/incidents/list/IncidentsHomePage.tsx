@@ -12,8 +12,13 @@ import { Block } from "baseui/block";
 import { PageType } from "../../../constants";
 
 // styles
-import { incidentsListView } from "./overrides/listStyles";
-import { container, content, navbarWrapper, nav } from "./overrides/navStyles";
+import { INCIDENT_LIST_VIEW_OVERRIDES } from "./overrides/listStyles";
+import {
+  HEADER_CONTAINER_OVERRIDES,
+  CONTENT_OVERRIDES,
+  NAVBAR_OVERRIDES,
+  NAV_OVERRIDES,
+} from "./overrides/navStyles";
 
 /**
  * IncidentsList View Header
@@ -24,11 +29,11 @@ export const IncidentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
 
   return (
-    <Block {...incidentsListView}>
-      <Block {...container}>
+    <Block overrides={INCIDENT_LIST_VIEW_OVERRIDES}>
+      <Block overrides={HEADER_CONTAINER_OVERRIDES}>
         <HeaderBarContents headerText="Incidents" />
-        <Block {...navbarWrapper}>
-          <Block {...nav}>
+        <Block overrides={NAVBAR_OVERRIDES}>
+          <Block overrides={NAV_OVERRIDES}>
             <NavBarMenuItem
               pageType={PageType.All}
               currentPage={activePage}
@@ -53,7 +58,7 @@ export const IncidentsViewHomePage: React.FC = () => {
           <CreateIncidentButton />
         </Block>
       </Block>
-      <Block {...content}>
+      <Block overrides={CONTENT_OVERRIDES}>
         <IncidentsList pageType={activePage} />
       </Block>
     </Block>

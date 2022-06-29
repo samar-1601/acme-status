@@ -17,17 +17,16 @@ import { SideBarMenu } from "../../../constants";
 
 // styles
 import {
-  sideBarHeaderName,
-  sideBarStyle,
-  signOutButton,
-  userDetailsWrapper,
-  userImageWrapper,
-  userNameWrapper,
-  emailWrapper,
-  sideBarCollapseIcon,
-  sideBarHeaderWrapper,
+  SIDE_BAR_HEADER_NAME_OVERRIDES,
+  SIDE_BAR_STYLE_OVERRIDES,
+  SIGN_OUT_BUTTON_OVERRIDES,
+  USER_DETAILS_WRAPPER_OVERRIDES,
+  USER_NAME_WRAPPER_OVERRIDES,
+  EMAIL_WRAPPER_OVERRIDES,
+  SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
+  SIDE_BAR_HEADER_WRAPPER_OVERRIDES,
 } from "./overrides/sideBarStyles";
-import { hasListLoadedStyle } from "../../incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 import { AiOutlineLeft } from "react-icons/ai";
 
 interface Props {
@@ -54,7 +53,7 @@ const FullSideBar: React.FC<Props> = React.memo(
     // if status not confirmed
     if (status === "loading") {
       return (
-        <Block {...hasListLoadedStyle}>
+        <Block overrides={LOADER_OVERRIDES}>
           <Spinner />
         </Block>
       );
@@ -64,18 +63,24 @@ const FullSideBar: React.FC<Props> = React.memo(
     if (!session) return <WelcomePage />;
 
     return (
-      <Block {...sideBarStyle}>
-        <Block {...sideBarHeaderWrapper}>
-          <Block {...sideBarHeaderName} onClick={() => Router.push("/")}>
+      <Block overrides={SIDE_BAR_STYLE_OVERRIDES}>
+        <Block overrides={SIDE_BAR_HEADER_WRAPPER_OVERRIDES}>
+          <Block
+            overrides={SIDE_BAR_HEADER_NAME_OVERRIDES}
+            onClick={() => Router.push("/")}
+          >
             {/* <Image src="/Status_icon.png" height={40} width={50}></Image> */}
             Acme
           </Block>
-          <Block {...sideBarCollapseIcon} onClick={() => handleIsOpenChange()}>
+          <Block
+            overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
+            onClick={() => handleIsOpenChange()}
+          >
             <AiOutlineLeft size={26} />
           </Block>
         </Block>
-        <Block {...userDetailsWrapper}>
-          <Block {...userImageWrapper}>
+        <Block overrides={USER_DETAILS_WRAPPER_OVERRIDES}>
+          <Block>
             <Image
               alt="User Image"
               src={session?.user?.image ?? "/blankProfileImage.png"}
@@ -84,10 +89,12 @@ const FullSideBar: React.FC<Props> = React.memo(
               className="userProfileImage"
             ></Image>
           </Block>
-          <Block {...userNameWrapper}>
+          <Block overrides={USER_NAME_WRAPPER_OVERRIDES}>
             {session.user?.name ?? "User Name"}
           </Block>
-          <Block {...emailWrapper}>{session.user?.email ?? "User Email"}</Block>
+          <Block overrides={EMAIL_WRAPPER_OVERRIDES}>
+            {session.user?.email ?? "User Email"}
+          </Block>
         </Block>
         <Block>
           <Block>
@@ -125,7 +132,7 @@ const FullSideBar: React.FC<Props> = React.memo(
             localStorage.removeItem("isSideBarOpen");
             signOut();
           }}
-          {...signOutButton}
+          overrides={SIGN_OUT_BUTTON_OVERRIDES}
         >
           <FaSignOutAlt color="black" />
           Sign Out

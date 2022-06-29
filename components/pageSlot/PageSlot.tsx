@@ -1,6 +1,6 @@
 // lib
 import * as React from "react";
-import { Children, useEffect, useState } from "react";
+import { Children, useState } from "react";
 
 // components
 import { Block } from "baseui/block";
@@ -8,11 +8,11 @@ import Head from "next/head";
 
 // styles
 import {
-  leftNavBarStyles,
-  leftNavBarStylesCollapsed,
-  pageWrapperStyles,
-  rightContentStyles,
-} from "./pageSlotStyles";
+  LEFT_CONTENT_OVERRIDES,
+  COLLAPSED_LEFT_CONTENT_OVERRIDES,
+  PAGE_WRAPPER_OVERRIDES,
+  RIGHT_CONTENT_OVERRIDES,
+} from "./overrides/pageSlotStyles";
 import { SideBarMenu } from "../../constants";
 import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
 import CollapsedSideBar from "../leftPageSlot/collapsedSideBar/CollapsedSideBar";
@@ -26,7 +26,11 @@ interface RightProps {
 }
 
 const RightContent: React.FC<RightProps> = React.memo(({ rightContent }) => {
-  return <Block {...rightContentStyles}>{rightContent?.props?.children}</Block>;
+  return (
+    <Block overrides={RIGHT_CONTENT_OVERRIDES}>
+      {rightContent?.props?.children}
+    </Block>
+  );
 });
 
 export const PageSlot = ({
@@ -58,16 +62,16 @@ export const PageSlot = ({
         <title>statusapp</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
-      <Block {...pageWrapperStyles}>
+      <Block overrides={PAGE_WRAPPER_OVERRIDES}>
         {isOpen ? (
-          <Block {...leftNavBarStyles}>
+          <Block overrides={LEFT_CONTENT_OVERRIDES}>
             <FullSideBar
               activeItemID={activeMenuItem}
               handleIsOpenChange={handleIsOpenChange}
             />
           </Block>
         ) : (
-          <Block {...leftNavBarStylesCollapsed}>
+          <Block overrides={COLLAPSED_LEFT_CONTENT_OVERRIDES}>
             <CollapsedSideBar
               activeItemID={activeMenuItem}
               handleIsOpenChange={handleIsOpenChange}

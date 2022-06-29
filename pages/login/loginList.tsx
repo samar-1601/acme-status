@@ -17,7 +17,7 @@ import {
   loginPageWrapper,
   loginProviderName,
 } from "../../styles/loginStyles";
-import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 import Image from "next/image";
 
 /**
@@ -41,7 +41,7 @@ const LoginProvidersList: React.FC = () => {
   console.log(session);
   if (status === "loading")
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         {"Checking authentication status ... "}
         <Spinner />
       </Block>

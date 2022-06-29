@@ -12,10 +12,10 @@ import { SideBarMenu } from "../../constants";
 import { Block } from "baseui/block";
 import Image from "next/image";
 import {
-  landingPageContainerStyle,
-  landingPageDescriptionStyle,
-  landingPageHeaderStyle,
-} from "./landingPageStyles";
+  LANDING_PAGE_CONTAINER_OVERRIDES,
+  LANDING_PAGE_DESCRIPTION_OVERRIDES,
+  LANDING_PAGE_HEADER_OVERRIDES,
+} from "./overrides/landingPageStyles";
 
 /**
  * The HomePage/Landing page opened after the user has logged in successfully
@@ -37,12 +37,12 @@ const LandingPage = React.memo(() => {
   return (
     <PageSlot activeMenuItem={SideBarMenu.Home}>
       <PageSlot.Slot name="rightContent">
-        <Block {...landingPageContainerStyle}>
-          <Block {...landingPageHeaderStyle}>
+        <Block overrides={LANDING_PAGE_CONTAINER_OVERRIDES}>
+          <Block overrides={LANDING_PAGE_HEADER_OVERRIDES}>
             Welcome to <b>statusapp</b>
           </Block>
           <Image src="/landingPage2.svg" height={600} width={600}></Image>
-          <Block {...landingPageDescriptionStyle}>
+          <Block overrides={LANDING_PAGE_DESCRIPTION_OVERRIDES}>
             Managing, Updating and Creating your Incidents & Components is now
             easy !!
           </Block>

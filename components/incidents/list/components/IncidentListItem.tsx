@@ -8,15 +8,15 @@ import Link from "next/link";
 
 // styles
 import {
-  listDetails,
-  listItem,
-  itemStatus,
-  itemDate,
-  itemDetailsSecondLine,
-  itemName,
-  buttonArea,
-  listDetailsFirstTwoLines,
-  listFirstPartLeft,
+  ITEM_DETAILS_OVERRIDES,
+  LIST_ITEM_OVERRIDES,
+  ITEM_STATUS,
+  ITEM_DATE_OVERRIDES,
+  ITEM_DETAILS_SECOND_LINE_OVERRIDES,
+  ITEM_NAME_OVERRIDES,
+  BUTTON_AREA,
+  ITEM_DETAILS_FIRST_TWO_LINES_WRAPPER_OVERRIDES,
+  ITEM_FIRST_PART_LEFT_OVERRIDES,
 } from "../overrides/listStyles";
 
 // helpers
@@ -36,19 +36,23 @@ interface Props {
 export const RenderIncidentData: React.FC<Props> = React.memo(
   ({ incident, reFetch, enqueue }): JSX.Element => {
     return (
-      <Block key={incident["name"]} {...listItem} className="list-item">
-        <Block {...listDetails}>
-          <Block {...listDetailsFirstTwoLines}>
-            <Block {...listFirstPartLeft}>
-              <Block {...itemName}>{incident["name"]}</Block>
-              <Block {...itemDetailsSecondLine}>
-                <Block {...itemStatus}>{incident["status"]}</Block>
-                <Block {...itemDate}>
+      <Block
+        key={incident["name"]}
+        overrides={LIST_ITEM_OVERRIDES}
+        className="list-item"
+      >
+        <Block overrides={ITEM_DETAILS_OVERRIDES}>
+          <Block overrides={ITEM_DETAILS_FIRST_TWO_LINES_WRAPPER_OVERRIDES}>
+            <Block overrides={ITEM_FIRST_PART_LEFT_OVERRIDES}>
+              <Block overrides={ITEM_NAME_OVERRIDES}>{incident["name"]}</Block>
+              <Block overrides={ITEM_DETAILS_SECOND_LINE_OVERRIDES}>
+                <Block overrides={ITEM_STATUS}>{incident["status"]}</Block>
+                <Block overrides={ITEM_DATE_OVERRIDES}>
                   {formatDate(incident["created_at"])}
                 </Block>
               </Block>
             </Block>
-            <Block {...buttonArea} className="button-area">
+            <Block overrides={BUTTON_AREA} className="button-area">
               <Link
                 href={{
                   pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address

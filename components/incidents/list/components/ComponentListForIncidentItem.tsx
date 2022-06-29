@@ -14,10 +14,10 @@ import {
 
 // styles
 import {
-  component,
-  componentItem,
-  componentItemIconWrapper,
-  componentIconHoverTextStyle,
+  COMPONENT_OVERRIDES,
+  COMPONENT_ITEM_OVERRIDES,
+  COMPONENT_ITEM_ICON_WRAPPER_OVERRIDES,
+  COMPONENT_ICON_HOVER_OVERRIDES,
 } from "../overrides/listStyles";
 
 interface Props {
@@ -41,16 +41,16 @@ export const ComponentsListForIncident: React.FC<Props> = React.memo(
       incident["components"].forEach((component: any) => {
         const renderComponent: JSX.Element = // variable storing the formatted component ready to render
           (
-            <Block key={component["name"]} {...componentItem}>
+            <Block key={component["name"]} overrides={COMPONENT_ITEM_OVERRIDES}>
               <StatefulPopover
                 content={
-                  <Block {...componentIconHoverTextStyle}>
+                  <Block overrides={COMPONENT_ICON_HOVER_OVERRIDES}>
                     {getDisplayComponentStatusText(component["status"])}
                   </Block>
                 }
                 triggerType={TRIGGER_TYPE.hover}
               >
-                <Block {...componentItemIconWrapper}>
+                <Block overrides={COMPONENT_ITEM_ICON_WRAPPER_OVERRIDES}>
                   <Image // NextJS component for rendering Image
                     src={ComponentStatusIconUrls(component["status"])} // get the src address for the component based on its status
                     height="16px"
@@ -65,7 +65,7 @@ export const ComponentsListForIncident: React.FC<Props> = React.memo(
       });
     }
     if (componentsList.length > 0) {
-      return <Block {...component}>{componentsList}</Block>;
+      return <Block overrides={COMPONENT_OVERRIDES}>{componentsList}</Block>;
     }
     // handling the case when no component has been affected by the incident
     return (

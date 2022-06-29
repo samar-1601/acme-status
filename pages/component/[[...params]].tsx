@@ -14,7 +14,7 @@ import {
   mainStyle,
   errorPageStyle,
 } from "../../components/incidents/internal/form/overrides/BlockStyles";
-import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 
 // constants
 import { SideBarMenu } from "../../constants";
@@ -72,7 +72,7 @@ export default () => {
   // if status not confirmed
   if (status == "loading") {
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         <Spinner />
       </Block>
     );

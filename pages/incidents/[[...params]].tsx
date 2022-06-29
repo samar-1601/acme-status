@@ -9,7 +9,7 @@ import {
   errorPageStyle,
 } from "../../components/incidents/internal/form/overrides/BlockStyles";
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
-import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";
 import { PageSlot } from "../../components/pageSlot/PageSlot";
 import { SideBarMenu } from "../../constants";
@@ -62,7 +62,7 @@ export default () => {
   // if status not confirmed
   if (status == "loading") {
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         <Spinner />
       </Block>
     );
