@@ -14,10 +14,10 @@ import { ITEMS } from "../../../../constants";
 import { ImageProps, statusComponentProps } from "../../../../variableTypes";
 
 //styles
-import { componentStyle } from "../form/overrides/BlockStyles";
-import { checkBoxStyles } from "../form/overrides/CheckBoxStyles";
-import { selectOptionStyle } from "../form/overrides/SelectStyles";
-import { popoverMessageStyle } from "../form/overrides/PopoverStyles";
+import { COMPONENT_OVERRIDES } from "../form/overrides/BlockStyles";
+import { CHECKBOX_OVERRIDES } from "../form/overrides/CheckBoxStyles";
+import { SELECT_OPTION_OVERRIDES } from "../form/overrides/SelectStyles";
+import { POPOVER_MESSAGE_OVERRIDES } from "../form/overrides/PopoverStyles";
 
 function Image(props: ImageProps) {
   return (
@@ -54,7 +54,7 @@ export const SelectStatusComponent = React.memo(
     //if component not selected show disabled status and statefulPopover on hover
     if (!props.selected) {
       return (
-        <Block id={props.id} {...componentStyle}>
+        <Block id={props.id} overrides={{ ...COMPONENT_OVERRIDES }}>
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
@@ -62,13 +62,13 @@ export const SelectStatusComponent = React.memo(
               props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
-            {...checkBoxStyles}
+            overrides={{ ...CHECKBOX_OVERRIDES }}
           >
             {props.name}
           </Checkbox>
 
           <StatefulPopover
-            {...popoverMessageStyle}
+            overrides={{ ...POPOVER_MESSAGE_OVERRIDES }}
             content={
               <ParagraphSmall padding="scale500">
                 Select Component to enable options
@@ -93,7 +93,7 @@ export const SelectStatusComponent = React.memo(
                     Number(event.option!.id) + 1
                   );
                 }}
-                {...selectOptionStyle}
+                overrides={{ ...SELECT_OPTION_OVERRIDES }}
               />
             </span>
           </StatefulPopover>
@@ -103,7 +103,7 @@ export const SelectStatusComponent = React.memo(
     //if component selected then enable select
     else {
       return (
-        <Block id={props.id} {...componentStyle}>
+        <Block id={props.id} overrides={{ ...COMPONENT_OVERRIDES }}>
           <Checkbox
             labelPlacement={LABEL_PLACEMENT.right}
             checked={props.selected}
@@ -111,7 +111,7 @@ export const SelectStatusComponent = React.memo(
               props.handleChange(props.id, !props.selected, props.type);
             }}
             name={props.id}
-            {...checkBoxStyles}
+            overrides={{ ...CHECKBOX_OVERRIDES }}
           >
             {props.name}
           </Checkbox>
@@ -130,7 +130,7 @@ export const SelectStatusComponent = React.memo(
                 Number(event.option!.id) + 1
               );
             }}
-            {...selectOptionStyle}
+            overrides={{ ...SELECT_OPTION_OVERRIDES }}
           />
         </Block>
       );

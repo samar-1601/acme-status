@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 import {
-  mainStyle,
-  errorPageStyle,
+  ERROR_PAGE_OVERRIDES,
+  MAIN_STYLE_OVERRIDES,
 } from "../../components/incidents/internal/form/overrides/BlockStyles";
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
@@ -24,8 +24,8 @@ const CreateIncidentPage: React.FC = (props) => {
 
 const WrongUrlPage = () => {
   return (
-    <Block {...mainStyle}>
-      <Block {...errorPageStyle}>
+    <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
+      <Block overrides={{ ...ERROR_PAGE_OVERRIDES }}>
         <h1 className="header">
           Sorry the Page you requested for is not available!!!
         </h1>

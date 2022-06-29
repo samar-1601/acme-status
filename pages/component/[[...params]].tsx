@@ -11,8 +11,8 @@ import { Spinner } from "baseui/spinner";
 
 // styles
 import {
-  mainStyle,
-  errorPageStyle,
+  MAIN_STYLE_OVERRIDES,
+  ERROR_PAGE_OVERRIDES,
 } from "../../components/incidents/internal/form/overrides/BlockStyles";
 import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
 
@@ -40,8 +40,8 @@ const EditComponents: React.FC = function (props) {
 
 const WrongUrlPage = () => {
   return (
-    <Block {...mainStyle}>
-      <Block {...errorPageStyle}>
+    <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
+      <Block overrides={{ ...ERROR_PAGE_OVERRIDES }}>
         <h1 className="header">
           Sorry the Page you requested for is not available!!!
         </h1>

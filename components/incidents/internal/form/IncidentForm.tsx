@@ -22,13 +22,13 @@ import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 
 //styles
 import {
-  buttonAlignment,
-  mainStyle,
-  onLoadSpinnerStyle,
-  onLoadStyle,
-  cancelButtonStyle,
-  submitButtonStyle,
-  onSubmitButtonStyle,
+  FOOTER_BAR_OVERRIDES,
+  MAIN_STYLE_OVERRIDES,
+  ONLOAD_SPINNER_OVERRIDES,
+  ONLOAD_STYLE_OVERRIDES,
+  CANCEL_BUTTON_OVERRIDES,
+  SUBMIT_BUTTON_OVERRIDES,
+  ONSUBMIT_BUTTON_STYLE_OVERRIDES,
 } from "./overrides/BlockStyles";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
@@ -204,20 +204,26 @@ export default function IncidentForm(props: IncidentCreationProps) {
       if (props.currentStateOfPage == 1) {
         return (
           <>
-            <Block {...mainStyle}>
+            <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
               {formConstant}
-              <Block {...buttonAlignment} className="footer-bar">
+              <Block
+                overrides={{ ...FOOTER_BAR_OVERRIDES }}
+                className="footer-bar"
+              >
                 <Block
                   className="primary-button"
                   onClick={() => {
                     submitForm();
                   }}
-                  {...submitButtonStyle}
+                  overrides={{ ...SUBMIT_BUTTON_OVERRIDES }}
                 >
                   {props.type}
                 </Block>
                 <Link href={{ pathname: "/incidents" }}>
-                  <Block className="secondary-button" {...cancelButtonStyle}>
+                  <Block
+                    className="secondary-button"
+                    overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
+                  >
                     Cancel
                   </Block>
                 </Link>
@@ -230,8 +236,8 @@ export default function IncidentForm(props: IncidentCreationProps) {
       else {
         return (
           <>
-            <Block {...onLoadStyle}>
-              <Block {...onLoadSpinnerStyle}>
+            <Block overrides={{ ...ONLOAD_STYLE_OVERRIDES }}>
+              <Block overrides={{ ...ONLOAD_SPINNER_OVERRIDES }}>
                 <Spinner />
               </Block>
             </Block>
@@ -243,20 +249,26 @@ export default function IncidentForm(props: IncidentCreationProps) {
     else {
       return (
         <>
-          <Block {...mainStyle}>
+          <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
             {formConstant}
-            <Block {...buttonAlignment} className="footer-bar">
+            <Block
+              overrides={{ ...FOOTER_BAR_OVERRIDES }}
+              className="footer-bar"
+            >
               <Block
                 className="primary-button"
                 onClick={() => {
                   submitForm();
                 }}
-                {...onSubmitButtonStyle}
+                overrides={{ ...ONSUBMIT_BUTTON_STYLE_OVERRIDES }}
               >
                 <Spinner $size={SIZE.small} />
               </Block>
               <Link href={{ pathname: "/incidents" }}>
-                <Block className="secondary-button" {...cancelButtonStyle}>
+                <Block
+                  className="secondary-button"
+                  overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
+                >
                   Cancel
                 </Block>
               </Link>

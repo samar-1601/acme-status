@@ -5,16 +5,16 @@ import Link from "next/link";
 import { Block } from "baseui/block";
 import { IncidentErrorPageProps } from "../../variableTypes";
 import {
-  errorPageStyle,
-  mainStyle,
+  ERROR_PAGE_OVERRIDES,
+  MAIN_STYLE_OVERRIDES,
 } from "../incidents/internal/form/overrides/BlockStyles";
 
 /*Will be displayed if error in processing incident update request or fetching components* */
 
 export default function IncidentErrorPage(props: IncidentErrorPageProps) {
   return (
-    <Block {...mainStyle}>
-      <Block {...errorPageStyle}>
+    <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
+      <Block overrides={{ ...ERROR_PAGE_OVERRIDES }}>
         <h1 className="header">{props.message}</h1>
         <Block>
           <Link href={"/incidents"}>

@@ -9,7 +9,7 @@ import { Input } from "baseui/input";
 import { IncidentNameProps } from "../../../../variableTypes";
 
 //styles
-import { inputNameStyle } from "../form/overrides/InputStyles";
+import { INPUT_NAME_OVERRIDES } from "../form/overrides/InputStyles";
 
 /**
  * IncidentName Component
@@ -29,7 +29,7 @@ export const IncidentName = React.memo((props: IncidentNameProps) => {
         }}
         value={props.value}
         placeholder={"Incident Name"}
-        {...inputNameStyle}
+        overrides={{ ...INPUT_NAME_OVERRIDES }}
       />
     </FormControl>
   );

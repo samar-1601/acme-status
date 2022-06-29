@@ -8,7 +8,7 @@ import { FormControl } from "baseui/form-control";
 
 //constants
 import { ComponentsAffectedProps } from "../../../../variableTypes";
-import { affectedComponenetsStyle } from "../form/overrides/BlockStyles";
+import { AFFECTED_COMPONENTS_OVERRIDES } from "../form/overrides/BlockStyles";
 
 const label = <Block>Components Affected</Block>;
 
@@ -21,7 +21,7 @@ const label = <Block>Components Affected</Block>;
 export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
     return (
-      <Block {...affectedComponenetsStyle}>
+      <Block overrides={{ ...AFFECTED_COMPONENTS_OVERRIDES }}>
         <FormControl
           label={label}
           overrides={{
