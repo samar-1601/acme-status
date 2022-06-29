@@ -2,7 +2,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 import {
   mainStyle,

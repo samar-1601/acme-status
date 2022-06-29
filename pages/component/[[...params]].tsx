@@ -1,11 +1,10 @@
 // lib
-import React, { useEffect, useState } from "react";
-import router, { useRouter } from "next/router";
+import React, { useEffect} from "react";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 // components
 import { PageSlot } from "../../components/pageSlot/PageSlot";
-import FullSideBar from "../../components/leftPageSlot/fullSideBar/FullSideBar";
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
