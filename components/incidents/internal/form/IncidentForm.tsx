@@ -1,6 +1,5 @@
 //lib
 import React, { useEffect, useState, useCallback } from "react";
-import { Button } from "baseui/button";
 import Link from "next/link";
 
 //components
@@ -13,11 +12,7 @@ import { AffectedComponents } from "../formComponents/AffectedComponents";
 
 //constants
 import { getIncidentStatus, getStatus } from "../../../../constants";
-import {
-  SendComponentObject,
-  IncidentCreationProps,
-  ComponentObject,
-} from "../../../../variableTypes";
+import { ComponentObject } from "../../../../types";
 import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 
 //styles
@@ -43,6 +38,26 @@ import {
  * incidentStatus: status of the incident(default: Investigating)
  * @returns
  */
+
+interface SendComponentObject {
+  [key: string]: string;
+}
+
+interface optionType {
+  option: {
+    id: Number;
+  };
+}
+
+interface IncidentCreationProps {
+  components: ComponentObject[];
+  currentStateOfPage: number;
+  isSubmitClicked: boolean;
+  handleSubmit: Function;
+  incidentName: string;
+  incidentStatus: string;
+  type: string;
+}
 
 export default function IncidentForm(props: IncidentCreationProps) {
   //0 --> data Fetching 1 --> data fetched successfully  2--> cannot fetch data

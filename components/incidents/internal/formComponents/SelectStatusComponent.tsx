@@ -11,13 +11,24 @@ import { Block } from "baseui/block";
 
 //constants
 import { ITEMS } from "../../../../constants";
-import { ImageProps, statusComponentProps } from "../../../../variableTypes";
 
 //styles
 import { COMPONENT_OVERRIDES } from "../form/overrides/BlockStyles";
 import { CHECKBOX_OVERRIDES } from "../form/overrides/CheckBoxStyles";
 import { SELECT_OPTION_OVERRIDES } from "../form/overrides/SelectStyles";
 import { POPOVER_MESSAGE_OVERRIDES } from "../form/overrides/PopoverStyles";
+
+interface ImageProps {
+  imgUrl: string;
+  title: string;
+}
+interface statusComponentProps {
+  selected: boolean;
+  id: string;
+  name: string;
+  handleChange: Function;
+  type: number;
+}
 
 function Image(props: ImageProps) {
   return (

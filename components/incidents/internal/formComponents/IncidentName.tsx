@@ -5,11 +5,13 @@ import * as React from "react";
 import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 
-//constants
-import { IncidentNameProps } from "../../../../variableTypes";
-
 //styles
 import { INPUT_NAME_OVERRIDES } from "../form/overrides/InputStyles";
+
+interface IncidentNameProps {
+  handleNameChange: Function;
+  value: string;
+}
 
 /**
  * IncidentName Component

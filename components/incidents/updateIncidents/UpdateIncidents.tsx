@@ -10,16 +10,20 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
 import { STATUS, getIncidentStatusFromPost, PAGE_ID } from "../../../constants";
-import {
-  ComponentObject,
-  JSONObject,
-  UpdateIncidentProps,
-  IncidentFetchType,
-} from "../../../variableTypes";
+import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
 //global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
+
+interface UpdateIncidentProps {
+  incidentId: string | string[] | undefined;
+}
+
+interface IncidentFetchType {
+  id: string;
+  status: string;
+}
 
 /**
  * UpdateIncident Component
@@ -116,7 +120,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        InitialData = json.map((item: JSONObject, index: Number) => {
+        InitialData = json.map((item: ComponentsJSONObject, index: Number) => {
           return {
             compName: item.name,
             compType: STATUS[item.status],

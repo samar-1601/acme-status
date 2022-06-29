@@ -8,7 +8,6 @@ import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
 
 //constants
-import { SpecialEvent, InputStatusprops } from "../../../../variableTypes";
 import { STATUSNames } from "../../../../constants";
 
 //styles
@@ -44,6 +43,22 @@ function getStatusBarColor(status: String): string {
   }
 }
 
+interface InputStatusOnClickEvent {
+  nativeEvent: {
+    offsetX: number;
+  };
+  target: {
+    offsetWidth: number;
+    classList: DOMTokenList;
+    innerHTML: string;
+  };
+}
+
+interface InputStatusprops {
+  updateStatus: Function;
+  incidentStatus: String;
+}
+
 /**
  * InputStatus component
  * @params props contains:
@@ -60,7 +75,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
    * Then we call props.updateStatus to update the state.
    */
   const updateStatusBarOnClick = useCallback(
-    (e: SpecialEvent) => {
+    (e: InputStatusOnClickEvent) => {
       let percentage = 0;
       if (e.target.classList.contains("root")) {
         return;
@@ -134,7 +149,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
             overrides={{
               Block: {
                 props: {
-                  onClick: (event: SpecialEvent) =>
+                  onClick: (event: InputStatusOnClickEvent) =>
                     updateStatusBarOnClick(event),
                 },
               },

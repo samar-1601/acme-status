@@ -1,9 +1,9 @@
-import { STATUSType } from "./variableTypes";
+import { STATUSType } from "./types";
 export const PAGE_ID = "7dwwybj29fy8";
 
 export enum Page {
-  Active="Active",
-  ThirdParty="Third-Party"
+  Active = "Active",
+  ThirdParty = "Third-Party",
 }
 
 /**

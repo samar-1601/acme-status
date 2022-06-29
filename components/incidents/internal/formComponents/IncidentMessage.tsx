@@ -4,11 +4,13 @@ import * as React from "react";
 //components
 import { FormControl } from "baseui/form-control";
 
-//constants
-import { IncidentMessageProps } from "../../../../variableTypes";
-
 //styles
 import { StyledTextArea } from "../form/overrides/StyledTextArea";
+
+interface IncidentMessageProps {
+  updateIncidentMessage: Function;
+  value: string | number | undefined;
+}
 
 /**
  * IncidentMessage Component

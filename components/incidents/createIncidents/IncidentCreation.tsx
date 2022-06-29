@@ -6,7 +6,7 @@ import Router from "next/router";
 
 //components
 import IncidentForm from "../internal/form/IncidentForm";
-import { ComponentObject, JSONObject, pageData } from "../../../variableTypes";
+import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
@@ -105,7 +105,7 @@ export default function IncidentCreation() {
       .then((json) => {
         console.log(json);
         //convert the data fetched from API to ComponentObject[] and store in global variable InitialData
-        InitialData = json.map((item: JSONObject, index: Number) => {
+        InitialData = json.map((item: ComponentsJSONObject, index: Number) => {
           return {
             compName: item.name,
             compType: STATUS[item.status],

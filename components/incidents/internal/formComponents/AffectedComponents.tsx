@@ -7,10 +7,15 @@ import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 
 //constants
-import { ComponentsAffectedProps } from "../../../../variableTypes";
 import { AFFECTED_COMPONENTS_OVERRIDES } from "../form/overrides/BlockStyles";
+import { ComponentObject } from "../../../../types";
 
 const label = <Block>Components Affected</Block>;
+
+interface ComponentsAffectedProps {
+  componentList: ComponentObject[];
+  handleComponentUpdate: Function;
+}
 
 /**
  * AffectedComponents Component
@@ -18,6 +23,7 @@ const label = <Block>Components Affected</Block>;
  * componentList: list of components containing isSelected and type of choice
  * handleComponentUpdate: Funtion
  */
+
 export const AffectedComponents = React.memo(
   (props: ComponentsAffectedProps) => {
     return (
