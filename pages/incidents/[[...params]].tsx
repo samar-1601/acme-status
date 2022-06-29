@@ -2,14 +2,14 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import IncidentCreation from "../../components/incidents/createIncidents/IncidentCreation";
 import {
   ERROR_PAGE_OVERRIDES,
   MAIN_STYLE_OVERRIDES,
 } from "../../components/incidents/internal/form/overrides/BlockStyles";
 import { IncidentsViewHomePage } from "../../components/incidents/list/IncidentsHomePage";
-import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 import UpdateIncident from "../../components/incidents/updateIncidents/UpdateIncidents";
 import { PageSlot } from "../../components/pageSlot/PageSlot";
 import { SideBarMenu } from "../../constants";
@@ -62,7 +62,7 @@ export default () => {
   // if status not confirmed
   if (status == "loading") {
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         <Spinner />
       </Block>
     );

@@ -147,9 +147,6 @@ export const componentsListView: BlockProps = {
 };
 
 export const headerBarBackIcon: BlockProps = {
-  onClick: () => {
-    Router.push("/");
-  },
   overrides: {
     Block: {
       style: {

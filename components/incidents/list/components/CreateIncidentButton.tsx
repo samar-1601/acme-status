@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Block } from "baseui/block";
 
 // styles
-import { createIncidentButton } from "../overrides/navStyles";
+import { CREATE_BUTTON_OVERRIDES } from "../overrides/navStyles";
 
 /**
  * Button component for create incident
@@ -15,7 +15,7 @@ import { createIncidentButton } from "../overrides/navStyles";
 export const CreateIncidentButton = React.memo(() => {
   return (
     <Link href="/incidents/new">
-      <Block {...createIncidentButton} className="primary-button">
+      <Block overrides={CREATE_BUTTON_OVERRIDES} className="primary-button">
         Create Incident
       </Block>
     </Link>

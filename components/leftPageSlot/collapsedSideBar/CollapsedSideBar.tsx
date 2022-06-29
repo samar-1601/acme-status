@@ -20,16 +20,15 @@ import { SideBarMenu } from "../../../constants";
 
 // styles
 import {
-  collapsedSideBarHeaderName,
-  collapsedSideBarStyle,
-  collapsedSignOutButton,
-  collapsedUserDetailsWrapper,
-  userImageWrapper,
-  collapsedEmailWrapper,
-  sideBarCollapseIcon,
-  collapsedSideBarHoverStyle,
+  COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES,
+  COLLAPSED_SIDE_BAR_OVERRIDES,
+  COLLAPSED_SIGN_OUT_BUTTON_OVERRIDES,
+  COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES,
+  COLLAPSED_EMAIL_WRAPPER_OVERRIDES,
+  COLLAPSED_SIDE_BAR_HOVER_OVERRIDES,
+  SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
 } from "./overrides/collapsedSideBarStyles";
-import { hasListLoadedStyle } from "../../incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 
 interface Props {
   /**
@@ -55,7 +54,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
     // if status not confirmed
     if (status === "loading") {
       return (
-        <Block {...hasListLoadedStyle}>
+        <Block overrides={LOADER_OVERRIDES}>
           <Spinner />
         </Block>
       );
@@ -65,17 +64,23 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
     if (!session) return <WelcomePage />;
 
     return (
-      <Block {...collapsedSideBarStyle}>
-        <Block {...sideBarCollapseIcon} onClick={() => handleIsOpenChange()}>
+      <Block overrides={COLLAPSED_SIDE_BAR_OVERRIDES}>
+        <Block
+          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
+          onClick={() => handleIsOpenChange()}
+        >
           <AiOutlineRight size={26} />
         </Block>
-        <Block {...collapsedSideBarHeaderName} onClick={() => Router.push("/")}>
+        <Block
+          overrides={COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES}
+          onClick={() => Router.push("/")}
+        >
           A
         </Block>
-        <Block {...collapsedUserDetailsWrapper}>
+        <Block overrides={COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES}>
           <StatefulPopover
             content={
-              <Block {...collapsedSideBarHoverStyle}>
+              <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
                 {session.user?.name ?? "User Name"}
               </Block>
             }
@@ -88,7 +93,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
               },
             }}
           >
-            <Block {...userImageWrapper}>
+            <Block>
               <Image
                 alt="User Image"
                 src={session?.user?.image ?? "/blankProfileImage.png"}
@@ -100,7 +105,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
           </StatefulPopover>
           <StatefulPopover
             content={
-              <Block {...collapsedSideBarHoverStyle}>
+              <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
                 {session.user?.email ?? "User Email"}
               </Block>
             }
@@ -113,7 +118,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
               },
             }}
           >
-            <Block {...collapsedEmailWrapper}>
+            <Block overrides={COLLAPSED_EMAIL_WRAPPER_OVERRIDES}>
               <HiOutlineMail size={26} />
             </Block>
           </StatefulPopover>
@@ -148,7 +153,9 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
           </Block>
         </Block>
         <StatefulPopover
-          content={<Block {...collapsedSideBarHoverStyle}>Sign Out</Block>}
+          content={
+            <Block overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}>Sign Out</Block>
+          }
           triggerType={TRIGGER_TYPE.hover}
           overrides={{
             Body: {
@@ -165,7 +172,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
               localStorage.removeItem("isSideBarOpen");
               signOut();
             }}
-            {...collapsedSignOutButton}
+            overrides={COLLAPSED_SIGN_OUT_BUTTON_OVERRIDES}
           >
             <FaSignOutAlt color="black" />
           </Block>

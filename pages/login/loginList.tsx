@@ -1,6 +1,6 @@
 // lib
 import { useSession, signIn } from "next-auth/react";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 // components and icons
 import { BsGithub, BsGoogle } from "react-icons/bs";
@@ -10,14 +10,14 @@ import Head from "next/head";
 
 // styles
 import {
-  loginListItem,
-  loginListView,
-  loginPageDividerLine,
-  loginPageHeaderName,
-  loginPageWrapper,
-  loginProviderName,
+  LOGIN_LIST_ITEM_OVERRIDES,
+  LOGIN_LIST_VIEW_OVERRIDES,
+  LOGIN_PAGE_DIVIDER_LINE_OVERRIDES,
+  LOGIN_PAGE_HEADER_NAME_OVERRIDES,
+  LOGIN_PAGE_WRAPPER_OVERRIDES,
+  LOGIN_PROVIDER_NAME_OVERRIDES,
 } from "../../styles/loginStyles";
-import { hasListLoadedStyle } from "../../components/incidents/list/overrides/listStyles";
+import { LOADER_OVERRIDES } from "../../components/incidents/list/overrides/listStyles";
 import Image from "next/image";
 
 /**
@@ -41,7 +41,7 @@ const LoginProvidersList: React.FC = () => {
   console.log(session);
   if (status === "loading")
     return (
-      <Block {...hasListLoadedStyle}>
+      <Block overrides={LOADER_OVERRIDES}>
         {"Checking authentication status ... "}
         <Spinner />
       </Block>
@@ -88,28 +88,28 @@ const LoginProvidersList: React.FC = () => {
         <title>statusapp</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
-      <Block {...loginPageWrapper}>
+      <Block overrides={LOGIN_PAGE_WRAPPER_OVERRIDES}>
         <Image
           src="/loginImage1.svg"
           height={550}
           width={550}
           alt="login page image"
         ></Image>
-        <Block {...loginPageDividerLine}></Block>
-        <Block {...loginListView}>
-          <Block {...loginPageHeaderName}>
+        <Block overrides={LOGIN_PAGE_DIVIDER_LINE_OVERRIDES}></Block>
+        <Block overrides={LOGIN_LIST_VIEW_OVERRIDES}>
+          <Block overrides={LOGIN_PAGE_HEADER_NAME_OVERRIDES}>
             One step away from <b>statusapp</b>
           </Block>
           {providers.map(({ name, Icon }) => (
             <Block
               key={name}
-              {...loginListItem}
+              overrides={LOGIN_LIST_ITEM_OVERRIDES}
               onClick={handleOAuthSignIn(name)}
             >
               <Icon size={32} color="white">
                 {Icon}
               </Icon>
-              <Block {...loginProviderName} key={name}>
+              <Block overrides={LOGIN_PROVIDER_NAME_OVERRIDES} key={name}>
                 Sign in with {name}
               </Block>
             </Block>

@@ -15,7 +15,7 @@ import {
   listItem,
   loader,
 } from "../overrides/componentListStyles";
-import { buttonArea } from "../../incidents/list/overrides/listStyles";
+import { BUTTON_AREA } from "../../incidents/list/overrides/listStyles";
 import { DURATION, useSnackbar } from "baseui/snackbar";
 
 export const ComponentList = function (props: any) {

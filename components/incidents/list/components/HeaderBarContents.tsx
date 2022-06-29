@@ -1,5 +1,6 @@
 // lib
 import * as React from "react";
+import Router from "next/router";
 
 // components
 import { Block } from "baseui/block";
@@ -7,9 +8,9 @@ import { FiArrowLeft } from "react-icons/fi";
 
 // styles
 import {
-  headerBarLeftWrapper,
-  headerBarBackIcon,
-  headerBar,
+  HEADER_BAR_LEFT_WRAPPER_OVERRIDES,
+  BACK_ICON_OVERRIDES,
+  HEADER_BAR_OVERRIDES,
 } from "../overrides/navStyles";
 
 interface Props {
@@ -22,9 +23,14 @@ interface Props {
 export const HeaderBarContents: React.FC<Props> = React.memo(
   ({ headerText }) => {
     return (
-      <Block {...headerBar}>
-        <Block {...headerBarLeftWrapper}>
-          <Block {...headerBarBackIcon}>
+      <Block overrides={HEADER_BAR_OVERRIDES}>
+        <Block overrides={HEADER_BAR_LEFT_WRAPPER_OVERRIDES}>
+          <Block
+            overrides={BACK_ICON_OVERRIDES}
+            onClick={() => {
+              Router.push("/");
+            }}
+          >
             <FiArrowLeft size={22} />
           </Block>
           <Block className="header">{headerText}</Block>

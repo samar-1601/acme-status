@@ -3,10 +3,9 @@ import * as React from "react";
 
 // styles
 import {
-  divInsideNav,
-  spanInsideNav,
-  navActiveItem,
-  navNonActiveItem,
+  NAV_BAR_MENU_ITEM_WRAPPER_OVERRIDES,
+  ACTIVE_NAV_ITEM_OVERRIDES,
+  NON_ACTIVE_NAV_ITEM_OVERRIDES,
 } from "../overrides/navStyles";
 
 // components
@@ -26,13 +25,15 @@ interface Props {
 export const NavBarMenuItem: React.FC<Props> = React.memo(
   ({ currentPage, pageType, onClick }) => {
     return (
-      <Block {...divInsideNav} onClick={onClick}>
+      <Block overrides={NAV_BAR_MENU_ITEM_WRAPPER_OVERRIDES} onClick={onClick}>
         <Block
-          {...spanInsideNav}
+          onClick={onClick}
           overrides={{
             Block: {
               style:
-                currentPage === pageType ? navActiveItem : navNonActiveItem, // toggle the style based on the active page
+                currentPage === pageType
+                  ? ACTIVE_NAV_ITEM_OVERRIDES
+                  : NON_ACTIVE_NAV_ITEM_OVERRIDES, // toggle the style based on the active page
             },
           }}
         >
