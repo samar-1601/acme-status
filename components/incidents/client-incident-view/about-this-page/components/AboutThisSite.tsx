@@ -4,22 +4,17 @@ import { useState, useEffect, useCallback } from "react";
 
 // loading and helper functions
 import { getComponents } from "../helpers/loadAboutPageData";
-import {
-  renderComponents,
-  legendColorDeterminer,
-} from "../helpers/AboutPageHelperFunctions";
+import { renderComponents } from "./AboutPageComponentsList";
 
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // styles
-import {
-  componentListWrapper,
-  legendBoxStyle,
-  legendBoxWrapperStyle,
-} from "../overrides/aboutThisStyles";
-import { ComponentStatusType } from "../../../../../constants";
+import { componentListWrapper } from "../overrides/aboutThisStyles";
+import { Legends } from "./Legends";
+
+const totalDays: number = 90; // total no. of days for whcih we are rendering data
 
 /**
  * About this page component
@@ -39,7 +34,7 @@ export const AboutThisSite = React.memo(() => {
       let componentList = [];
       componentList = await getComponents(); // get components from API
       let components = [];
-      components = await renderComponents(componentList); // get formatted list ready to render from the API
+      components = await renderComponents(totalDays, componentList); // get formatted list ready to render from the API
 
       setState({ ...state, componentsList: components, isLoaded: true }); // set the componentsList to returned render ready list and isLoaded to true
     } catch (err) {
@@ -54,36 +49,7 @@ export const AboutThisSite = React.memo(() => {
   return state.isLoaded ? (
     // render components if data has loaded
     <>
-      <Block {...legendBoxWrapperStyle}>
-        <Block
-          {...legendBoxStyle}
-          backgroundColor={legendColorDeterminer(
-            ComponentStatusType.MajorOutage
-          )}
-        ></Block>
-        <Block>Major Outage</Block>
-        <Block
-          {...legendBoxStyle}
-          backgroundColor={legendColorDeterminer(
-            ComponentStatusType.PartialOutage
-          )}
-        ></Block>
-        <Block>Partial Outage</Block>
-        <Block
-          backgroundColor={legendColorDeterminer(
-            ComponentStatusType.Operational
-          )}
-          {...legendBoxStyle}
-        ></Block>
-        <Block>Operational</Block>
-        <Block
-          {...legendBoxStyle}
-          backgroundColor={legendColorDeterminer(
-            ComponentStatusType.UnderMaintenance
-          )}
-        ></Block>
-        <Block>No Incidents Reported</Block>
-      </Block>
+      <Legends />
       <Block {...componentListWrapper}>{state.componentsList}</Block>
     </>
   ) : (

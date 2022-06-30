@@ -5,10 +5,10 @@ import * as React from "react";
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { GetPastIncidentComponents } from "../helpers/PastIncidentsHelperFunctions";
 
 // constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
+import { PastIncidentsList } from "./PastIncidentsList";
 
 /**
  * @returns list of completed incidents in the given PAGE_ID
@@ -36,7 +36,7 @@ const getCompletedIncidents = async () => {
  */
 export const PastIncidents: React.FC = React.memo(() => {
   const [state, setState] = useState({
-    pastIncidentsList: Array(),
+    pastIncidentsList: [],
     isLoaded: false,
   });
 
@@ -45,9 +45,9 @@ export const PastIncidents: React.FC = React.memo(() => {
    * @returns a JSX componentList ready to render after styling the API response
    */
   const loadComponentsList = useCallback(async () => {
-    let components = [];
+    let completedIncidents = [];
     try {
-      components = await getCompletedIncidents();
+      completedIncidents = await getCompletedIncidents();
 
       /**
        * isLoaded : To notify the loading spinner whether data has loaded
@@ -55,7 +55,7 @@ export const PastIncidents: React.FC = React.memo(() => {
        */
       setState({
         ...state,
-        pastIncidentsList: GetPastIncidentComponents(components),
+        pastIncidentsList: completedIncidents,
         isLoaded: true,
       });
     } catch (err) {
@@ -69,7 +69,24 @@ export const PastIncidents: React.FC = React.memo(() => {
   }, []);
 
   return state.isLoaded ? (
-    <Block>{state.pastIncidentsList}</Block>
+    state.pastIncidentsList.length == 0 ? (
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              marginTop: "15vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            },
+          },
+        }}
+      >
+        No past Incidents !!
+      </Block>
+    ) : (
+      <PastIncidentsList incidentList={state.pastIncidentsList} />
+    )
   ) : (
     <Block
       overrides={{

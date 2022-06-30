@@ -1,30 +1,26 @@
+// lib
+import * as React from "react"
+
 // components
 import { Block } from "baseui/block";
 
-//helper function
+// helpers
 import { formatDate } from "../../list-view-incidents/helpers/formatDate";
+import { formattedDateInSlashFormat } from "../helpers/formatDateInSlashFormat";
 
 // styles
 import {
-  pastIncidentNameStyle,
-  pastIncidentHeaderDateStyle,
   pastIncidentDetailsWrapper,
-  pastIncidentWrapper,
   pastIncidentStatusStyle,
   pastIncidentStatusBody,
   pastIncidentStatusDate,
+  pastIncidentWrapper,
+  pastIncidentNameStyle,
+  pastIncidentHeaderDateStyle,
 } from "../overrides/pastIncidentsStyles";
 
-// get the formatted date in dd/mm/yy format
-function formattedDateInSlashFormat(d = new Date()) {
-  let month = String(d.getUTCMonth() + 1);
-  let day = String(d.getUTCDate());
-  const year = String(d.getUTCFullYear());
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return `${day}/${month}/${year}`;
+interface Props {
+  incidentList: any;
 }
 
 /**
@@ -32,7 +28,7 @@ function formattedDateInSlashFormat(d = new Date()) {
  * @param incidentList the past/completed Incidents List
  * @returns Formatted List of past/completed incidents grouped on basis of resolved dates for the PastIncidents.tsx page
  */
-export const GetPastIncidentComponents = (incidentList: any[]) => {
+export const PastIncidentsList: React.FC<Props> = React.memo(({ incidentList }) => {
   let map = new Map(); // map to store all incident updates for the same day together (date is used as key)
 
   // iterate through the incidents and add keys for the map and subsequently add the incidents completed on the same day together
@@ -83,7 +79,7 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
           <Block {...pastIncidentNameStyle}> {incidentName}</Block>
           <Block>{renderIncidentUpdates}</Block>
         </Block>
-      ); 
+      );
     }
 
     // couple the date and the incidents for this day
@@ -95,5 +91,5 @@ export const GetPastIncidentComponents = (incidentList: any[]) => {
     );
   });
 
-  return renderList;
-};
+  return <>{renderList}</>;
+});
