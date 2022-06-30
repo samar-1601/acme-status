@@ -14,8 +14,8 @@ const StatusItem = () => {
       speed={2}
       width={"100%"}
       height={86}
-      backgroundColor="#eeeff1"
-      foregroundColor="white"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#b8b8b8"
     >
       <Block></Block>
       <rect x="60%" y="7" rx="0" ry="0" width="379" height="33" />
@@ -47,24 +47,24 @@ const TombStone: React.FC<Props> = (props) => {
       <h2 className="header my-3.5">{props.type} Incident</h2>
       <ContentLoader
         width={"100%"}
-        backgroundColor="#EEEFF1"
-        foregroundColor="white"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#b8b8b8"
       >
         {/* y = 6px because there's margin at the top of text */}
         <rect y="20px" width="100%" height="36px" />
       </ContentLoader>
       <ContentLoader
         width={"100%"}
-        backgroundColor="#EEEFF1"
-        foregroundColor="white"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#b8b8b8"
       >
         {/* y = 6px because there's margin at the top of text */}
         <rect width="100%" height="97px" />
       </ContentLoader>
       <ContentLoader
         width={"100%"}
-        backgroundColor="#EEEFF1"
-        foregroundColor="white"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#b8b8b8"
       >
         {/* y = 6px because there's margin at the top of text */}
         <rect width="100%" height="94px" />
