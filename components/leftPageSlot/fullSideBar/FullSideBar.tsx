@@ -81,6 +81,12 @@ const FullSideBar: React.FC<Props> = React.memo(
           <FaSignOutAlt color="black" />
           Sign Out
         </Block>
+        <Block
+          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
+          onClick={() => handleIsOpenChange()}
+        >
+          <AiOutlineLeft size={20} />
+        </Block>
       </Block>
     );
   }

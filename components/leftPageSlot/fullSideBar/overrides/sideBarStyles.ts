@@ -103,10 +103,14 @@ export const SIDE_BAR_COLLAPSE_ICON_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
       cursor: "pointer",
+      display:"float",
+      position: "absolute",
+      left: '297px',
+      top: "180px",
       borderRadius: "60000px",
-      backgroundColor: "#EEEEF1",
-      padding: "8px",
-      display: "inline",
+      boxShadow: " 0 1px 4px 0 rgba(10,10,20,0.15)",
+      backgroundColor: "white",
+      padding: "4px",
       ":hover": {
         backgroundColor: "#DBDBDB",
       },

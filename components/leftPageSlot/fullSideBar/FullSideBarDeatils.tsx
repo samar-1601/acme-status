@@ -30,12 +30,6 @@ export const FullSideBarDetails: React.FC<Props> = React.memo(
           >
             Acme
           </Block>
-          <Block
-            overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
-            onClick={() => handleIsOpenChange()}
-          >
-            <AiOutlineLeft size={26} />
-          </Block>
         </Block>
         <Block overrides={USER_DETAILS_WRAPPER_OVERRIDES}>
           <Block>

@@ -25,12 +25,6 @@ export const CollapsedSideBarDetails: React.FC<Props> = React.memo(
     return (
       <>
         <Block
-          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
-          onClick={() => handleIsOpenChange()}
-        >
-          <AiOutlineRight size={26} />
-        </Block>
-        <Block
           overrides={COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES}
           onClick={() => Router.push("/")}
         >

@@ -27,6 +27,7 @@ import {
   COLLAPSED_EMAIL_WRAPPER_OVERRIDES,
   COLLAPSED_SIDE_BAR_HOVER_OVERRIDES,
   SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
+  COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES,
 } from "./overrides/collapsedSideBarStyles";
 import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 import { CollapsedSideBarDetails } from "./CollapsedSideBarDetails";
@@ -70,7 +71,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
           userName={session.user?.name ?? "User Name"}
           handleIsOpenChange={handleIsOpenChange}
         />
-        <Block>
+        <Block overrides={COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES}>
           <CollapsedSideBarMenuList activeItemID={activeItemID} />
         </Block>
         <StatefulPopover
@@ -98,6 +99,12 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
             <FaSignOutAlt color="black" />
           </Block>
         </StatefulPopover>
+        <Block
+          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
+          onClick={() => handleIsOpenChange()}
+        >
+          <AiOutlineRight size={20} />
+        </Block>
       </Block>
     );
   }
