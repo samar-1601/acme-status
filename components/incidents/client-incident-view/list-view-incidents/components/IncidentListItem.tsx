@@ -9,7 +9,7 @@ import { formatDate } from "../helpers/formatDate";
 
 // styles
 import {
-  LIST_ITEM_OVERRIDES,
+  ACTIVE_LIST_ITEM_OVERRIDES,
   ITEM_STATUS_OVERRIDES,
   ITEM_NAME_OVERRIDES,
 } from "../overrides/fullIncidentsListStyles";
@@ -91,7 +91,7 @@ export const IncidentListItem: React.FC<Props> = ({
 
     case PageType.Active:
       return (
-        <Block key={incident["id"]} overrides={LIST_ITEM_OVERRIDES}>
+        <Block key={incident["id"]} overrides={ACTIVE_LIST_ITEM_OVERRIDES}>
           <Block overrides={ITEM_NAME_OVERRIDES}>{incident["name"]}</Block>
           <Block overrides={ITEM_STATUS_OVERRIDES}>
             {renderIncidentUpdates}

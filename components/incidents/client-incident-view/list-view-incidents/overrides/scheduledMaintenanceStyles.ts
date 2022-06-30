@@ -11,6 +11,17 @@ export const MAINTENANCE_LIST_ITEM_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
+export const MAINTENANCE_LIST_ITEM_LOADER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+      margin: "10px 15px 19px 0px",
+      maxWidth: "100%",
+    },
+  },
+};
 
 export const MAINTENANCE_ITEM_NAME_OVERRIDES: BlockProps["overrides"] = {
   Block: {

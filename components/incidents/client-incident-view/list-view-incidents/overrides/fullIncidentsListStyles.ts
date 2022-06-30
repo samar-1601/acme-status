@@ -1,7 +1,7 @@
 // component prop type
 import { BlockProps } from "baseui/block";
 
-export const LIST_ITEM_OVERRIDES: BlockProps["overrides"] = {
+export const ACTIVE_LIST_ITEM_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
       display: "flex",
@@ -9,6 +9,29 @@ export const LIST_ITEM_OVERRIDES: BlockProps["overrides"] = {
       border: "0.5px solid grey",
       gap: "10px",
       marginBottom: "30px",
+      marginRight: "10px",
+    },
+  },
+};
+export const ACTIVE_LIST_ITEM_LOADER_FIRST_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      border: "0.5px solid grey",
+      gap: "10px",
+      marginBottom: "30px",
+      marginRight: "10px",
+    },
+  },
+};
+export const ACTIVE_LIST_ITEM_LOADER_SECOND_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      border: "0.5px solid grey",
+      gap: "10px",
       marginRight: "10px",
     },
   },

@@ -19,7 +19,7 @@ import "react-virtualized/styles.css";
 // constants
 import { PageType } from "../../../../../constants";
 import { LOADER_OVERRIDES } from "../overrides/fullIncidentsListStyles";
-import { TombStoneLoader } from "./TombStoneLoader";
+import { TombStoneLoader } from "../../tombstoneLoader/TombStoneLoader";
 import { IncidentListItem } from "./IncidentListItem";
 
 interface Props {
@@ -97,7 +97,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
         <InfiniteLoader
           isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
           loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-          rowCount={dataList.length + 1} // total row count of the data to be displayed
+          rowCount={dataList.length ?? 0 + 1} // total row count of the data to be displayed
         >
           {({ onRowsRendered, registerChild }) => (
             <div style={{ width: "100%", height: `56vh` }}>
@@ -108,9 +108,9 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                     height={height}
                     onRowsRendered={onRowsRendered}
                     ref={registerChild}
-                    rowHeight={cache.current.rowHeight}
-                    deferredMeasurementCache={cache.current}
-                    rowCount={dataList.length}
+                    rowHeight={cache.current.rowHeight ?? 0}
+                    deferredMeasurementCache={cache.current ?? 0}
+                    rowCount={dataList.length ?? 0}
                     rowRenderer={({ key, index, style, parent }) => {
                       const element = dataList[index];
                       return (
@@ -140,6 +140,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     )
   ) : (
     // if page has not loaded
-    <TombStoneLoader />
+    <TombStoneLoader pageType={pageType} />
   );
 });

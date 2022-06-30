@@ -1,7 +1,7 @@
 // components
 import { IncidentsList } from "./list-view-incidents/components/IncidentsList";
 import { Block } from "baseui/block";
-import { AboutThisSite } from "./about-this-page/components/AboutThisSite";
+import { AboutThisSite } from "./about-this-page/components/AboutPage";
 import { PastIncidents } from "./past-incidents-component/components/PastIncidents";
 
 // constants
