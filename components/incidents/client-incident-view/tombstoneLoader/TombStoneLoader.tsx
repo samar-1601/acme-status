@@ -14,43 +14,39 @@ const ActivePageLoader = (props: any) => (
     <Block overrides={ACTIVE_LIST_ITEM_LOADER_FIRST_OVERRIDES}>
       <ContentLoader
         speed={4}
-        width={1191}
+        width="100%"
         height={347}
-        viewBox="0 0 1191 347"
+        // viewBox="0 0 1191 347"
         backgroundColor="#f3f3f3"
         foregroundColor="#b8b8b8"
         {...props}
       >
-        <circle cx="971" cy="12" r="11" />
-        <circle cx="1011" cy="12" r="11" />
-        <rect x="1" y="0" rx="0" ry="0" width="1191" height="56" />
-        <rect x="25" y="84" rx="0" ry="0" width="119" height="16" />
-        <rect x="155" y="84" rx="0" ry="0" width="272" height="16" />
-        <rect x="26" y="115" rx="0" ry="0" width="169" height="16" />
-        <rect x="25" y="156" rx="0" ry="0" width="137" height="17" />
-        <rect x="175" y="157" rx="0" ry="0" width="162" height="15" />
-        <rect x="25" y="187" rx="0" ry="0" width="166" height="17" />
-        <rect x="25" y="235" rx="0" ry="0" width="127" height="15" />
-        <rect x="170" y="236" rx="0" ry="0" width="450" height="14" />
-        <rect x="25" y="265" rx="0" ry="0" width="162" height="18" />
+        <rect x="0" y="0" rx="0" ry="0" width="100%" height="56" />
+        <rect x="2.09%" y="24.2%" rx="0" ry="0" width="10%" height="16" />
+        <rect x="13%" y="24.2%" rx="0" ry="0" width="22.8%" height="16" />
+        <rect x="2.18%" y="33.1%" rx="0" ry="0" width="14.1%" height="16" />
+        <rect x="2.09%" y="44.9%" rx="0" ry="0" width="11.5%" height="17" />
+        <rect x="14.6%" y="44.9%" rx="0" ry="0" width="14.1%" height="15" />
+        <rect x="2.09%" y="53.8%" rx="0" ry="0" width="14.1%" height="17" />
+        <rect x="2.09%" y="67.7%" rx="0" ry="0" width="10.6%" height="15" />
+        <rect x="14.2%" y="67.7%" rx="0" ry="0" width="37.7%" height="14" />
+        <rect x="2.09%" y="76.3%" rx="0" ry="0" width="14.1%" height="18" />
       </ContentLoader>
     </Block>
     <Block overrides={ACTIVE_LIST_ITEM_LOADER_SECOND_OVERRIDES}>
       <ContentLoader
         speed={4}
-        width={1191}
+        width="100%"
         height={148}
-        viewBox="0 0 1191 148"
+        // viewBox="0 0 1191 148"
         backgroundColor="#f3f3f3"
         foregroundColor="#b8b8b8"
         {...props}
       >
-        <circle cx="971" cy="12" r="11" />
-        <circle cx="1011" cy="12" r="11" />
-        <rect x="1" y="0" rx="0" ry="0" width="1191" height="56" />
-        <rect x="25" y="84" rx="0" ry="0" width="119" height="16" />
-        <rect x="155" y="84" rx="0" ry="0" width="272" height="16" />
-        <rect x="26" y="115" rx="0" ry="0" width="169" height="16" />
+        <rect x="0" y="0" rx="0" ry="0" width="100%" height="56" />
+        <rect x="2.09%" y="56.7%" rx="0" ry="0" width="10%" height="16" />
+        <rect x="13.01%" y="56.7%" rx="0" ry="0" width="22.8%" height="16" />
+        <rect x="2.09%" y="77.7%" rx="0" ry="0" width="14.1%" height="16" />
       </ContentLoader>
     </Block>
   </>
