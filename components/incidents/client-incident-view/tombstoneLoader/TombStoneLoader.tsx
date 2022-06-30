@@ -9,7 +9,6 @@ import {
 } from "../list-view-incidents/overrides/fullIncidentsListStyles";
 import {
   MAINTENANCE_LIST_ITEM_LOADER_OVERRIDES,
-  MAINTENANCE_LIST_ITEM_OVERRIDES,
 } from "../list-view-incidents/overrides/scheduledMaintenanceStyles";
 
 const ActivePageLoader = (props: any) => (
