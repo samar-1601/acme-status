@@ -1,15 +1,11 @@
 // lib
-import { useState } from "react";
 import * as React from "react";
 import { signOut, useSession } from "next-auth/react";
 
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import Router from "next/router";
-import { FullSideBarMenuItem } from "./FullSideBarMenuItem";
 import WelcomePage from "../../welcomePage/WelcomePage";
-import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
 
 // constants
@@ -17,14 +13,9 @@ import { SideBarMenu } from "../../../constants";
 
 // styles
 import {
-  SIDE_BAR_HEADER_NAME_OVERRIDES,
   SIDE_BAR_STYLE_OVERRIDES,
   SIGN_OUT_BUTTON_OVERRIDES,
-  USER_DETAILS_WRAPPER_OVERRIDES,
-  USER_NAME_WRAPPER_OVERRIDES,
-  EMAIL_WRAPPER_OVERRIDES,
   SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
-  SIDE_BAR_HEADER_WRAPPER_OVERRIDES,
 } from "./overrides/sideBarStyles";
 import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -66,7 +57,6 @@ const FullSideBar: React.FC<Props> = React.memo(
           userEmail={session.user?.email ?? "User Email"}
           userImageSRC={session?.user?.image ?? "/blankProfileImage.png"}
           userName={session.user?.name ?? "User Name"}
-          handleIsOpenChange={handleIsOpenChange}
         />
         <FullSideBarMenuList activeItemID={activeItemID} />
         <Block

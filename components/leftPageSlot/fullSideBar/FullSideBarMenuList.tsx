@@ -1,9 +1,14 @@
+//lib
 import * as React from "react";
-import { Block } from "baseui/block";
 import Router from "next/router";
-import { SideBarMenu } from "../../../constants";
-import { FullSideBarMenuItem } from "./FullSideBarMenuItem";
 import { useState } from "react";
+
+//components
+import { Block } from "baseui/block";
+import { FullSideBarMenuItem } from "./FullSideBarMenuItem";
+
+//constants
+import { SideBarMenu } from "../../../constants";
 
 interface Props {
   /**

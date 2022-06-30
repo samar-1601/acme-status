@@ -1,27 +1,29 @@
-import { Block } from "baseui/block";
-import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+//lib
+import * as React from "react";
 import Router from "next/router";
 import Image from "next/image";
-import { AiOutlineRight } from "react-icons/ai";
+
+//components
+import { Block } from "baseui/block";
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { HiOutlineMail } from "react-icons/hi";
+
+//overrides
 import {
-  SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
   COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES,
   COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES,
   COLLAPSED_SIDE_BAR_HOVER_OVERRIDES,
   COLLAPSED_EMAIL_WRAPPER_OVERRIDES,
 } from "./overrides/collapsedSideBarStyles";
-import * as React from "react";
 
 interface Props {
-  handleIsOpenChange: Function;
   userName: string;
   userEmail: string;
   userImageSRC: string;
 }
 
 export const CollapsedSideBarDetails: React.FC<Props> = React.memo(
-  ({ handleIsOpenChange, userName, userEmail, userImageSRC }) => {
+  ({ userName, userEmail, userImageSRC }) => {
     return (
       <>
         <Block

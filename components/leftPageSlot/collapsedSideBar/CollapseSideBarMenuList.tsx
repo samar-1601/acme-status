@@ -1,9 +1,14 @@
-import { Block } from "baseui/block";
-import Router from "next/router";
+//lib
 import * as React from "react";
+import Router from "next/router";
 import { useState } from "react";
-import { SideBarMenu } from "../../../constants";
+
+//components
+import { Block } from "baseui/block";
 import { CollapsedSideBarMenuItem } from "./CollapsedSideBarMenuItem";
+
+//constants
+import { SideBarMenu } from "../../../constants";
 
 interface Props {
   activeItemID: SideBarMenu;
