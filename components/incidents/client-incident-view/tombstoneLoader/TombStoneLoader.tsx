@@ -7,9 +7,7 @@ import {
   ACTIVE_LIST_ITEM_LOADER_FIRST_OVERRIDES,
   ACTIVE_LIST_ITEM_LOADER_SECOND_OVERRIDES,
 } from "../list-view-incidents/overrides/fullIncidentsListStyles";
-import {
-  MAINTENANCE_LIST_ITEM_LOADER_OVERRIDES,
-} from "../list-view-incidents/overrides/scheduledMaintenanceStyles";
+import { MAINTENANCE_LIST_ITEM_LOADER_OVERRIDES } from "../list-view-incidents/overrides/scheduledMaintenanceStyles";
 
 const ActivePageLoader = (props: any) => (
   <>
@@ -70,8 +68,6 @@ const MaintenancePageLoader = (props: any) => (
         foregroundColor="#b8b8b8"
         {...props}
       >
-        <circle cx="971" cy="12" r="11" />
-        <circle cx="1011" cy="12" r="11" />
         <rect x="0" y="1" rx="0" ry="0" width="261" height="26" />
         <rect x="850" y="3" rx="0" ry="0" width="336" height="21" />
         <rect x="0" y="34" rx="0" ry="0" width="1187" height="1" />
