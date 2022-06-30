@@ -12,6 +12,7 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 import { STATUS, getIncidentStatusFromPost, PAGE_ID } from "../../../constants";
 import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
+import { Block } from "baseui/block";
 
 //global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
@@ -83,7 +84,12 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           // dequeue();
           enqueue(
             {
-              message: "Successfully updated Incident",
+              message: (
+                <Block display="flex">
+                  <img className="h-6 w-6 mr-1.5" src={"/operational2.webp"} />{" "}
+                  <Block>Successfully Updated Incident!!!</Block>
+                </Block>
+              ),
             },
             DURATION.short
           );
@@ -98,7 +104,12 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
           // console.log(err);
           enqueue(
             {
-              message: err,
+              message: (
+                <Block display="flex">
+                  <img className="h-6 w-6 mr-1.5" src={"/major_outage.png"} />{" "}
+                  <Block>Error in Updating Incident</Block>
+                </Block>
+              ),
             },
             DURATION.short
           );

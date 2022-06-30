@@ -1,3 +1,4 @@
+import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
 import { PAGE_ID } from "../../../../constants";
 
@@ -20,27 +21,38 @@ export const deleteIncident = async (
     }
   )
     .then((response) => {
-      if(response.status != 200) {
+      if (response.status != 200) {
         throw "Error in Deletion";
       }
-      response.json()
+      response.json();
     })
     .then(async (json) => {
       console.log(json);
       enqueue(
         {
-          message: "Successfully Deleted Incident",
+          message: (
+            <Block display="flex">
+              <img className="h-6 w-6 mr-1.5" src={"/operational2.webp"} />{" "}
+              <Block>Successfully Deleted Incident!!!</Block>
+            </Block>
+          ),
         },
         DURATION.long
       );
       await reFetch();
     })
-    .catch((err)=> {
-      console.log(err)
-      enqueue({
-        message: String(err),
-      },
-      DURATION.short
-    );
-    })  
+    .catch((err) => {
+      console.log(err);
+      enqueue(
+        {
+          message: (
+            <Block display="flex">
+              <img className="h-6 w-6 mr-1.5" src={"/major_outage.png"} />{" "}
+              <Block>${String(err)}</Block>
+            </Block>
+          ),
+        },
+        DURATION.short
+      );
+    });
 };

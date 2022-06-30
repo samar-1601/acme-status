@@ -11,6 +11,7 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
 import { STATUS, PAGE_ID } from "../../../constants";
+import { Block } from "baseui/block";
 
 //variable to load the initial data from api call
 let InitialData: (ComponentObject | never)[] = [];
@@ -65,7 +66,12 @@ export default function IncidentCreation() {
           // dequeue();
           enqueue(
             {
-              message: "Successfully Created Incident",
+              message: (
+                <Block display="flex">
+                  <img className="h-6 w-6 mr-1.5" src={"/operational2.webp"} />{" "}
+                  <Block>Successfully Created Incident!!!</Block>
+                </Block>
+              ),
             },
             DURATION.short
           );
@@ -81,7 +87,12 @@ export default function IncidentCreation() {
           // dequeue();
           enqueue(
             {
-              message: "Failed to Submit Form. Please Try Again!",
+              message: (
+                <Block display="flex">
+                  <img className="h-6 w-6 mr-1.5" src={"/major_outage.png"} />{" "}
+                  <Block>Failed To Submit Form. Please Try Again!!!</Block>
+                </Block>
+              ),
             },
             DURATION.short
           );

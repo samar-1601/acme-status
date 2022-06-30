@@ -27,7 +27,17 @@ const LandingPage = React.memo(() => {
     if (localStorage.getItem("loadingCount") == undefined) {
       // if the page has loaded for the first time after logging in then only shoe the message.
       // dequeue();
-      enqueue({ message: "Succesfully Logged in!" }, DURATION.short);
+      enqueue(
+        {
+          message: (
+            <Block display="flex">
+              <img className="h-6 w-6 mr-1.5" src={"/operational2.webp"} />{" "}
+              <Block>Successfully Logged In!!!</Block>
+            </Block>
+          ),
+        },
+        DURATION.short
+      );
       // after the snackbar has been shown for the first time, we set in to a value to not show snackbar again and again when the page is rendered
       localStorage.setItem("loadingCount", "1");
     }

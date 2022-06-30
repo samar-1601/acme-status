@@ -87,17 +87,19 @@ export default function ComponentForm(props: any) {
       if (payload.component.name == "") {
         enqueue(
           {
-            message: "Component Name can't be Blank!",
+            message: `Component Name can't be Blank!`,
           },
           DURATION.short
         );
         setSubmit(false);
       } else {
-        createComponent(props = {
-          enqueue: enqueue,
-          setSubmit: setSubmit,
-          payload: payload,
-        })
+        createComponent(
+          (props = {
+            enqueue: enqueue,
+            setSubmit: setSubmit,
+            payload: payload,
+          })
+        );
       }
     } else {
       let payload = {
@@ -116,12 +118,14 @@ export default function ComponentForm(props: any) {
         );
         setSubmit(false);
       } else {
-        updateComponent(props = {
-          "id": props.id,
-          "payload": payload,
-          "enqueue": enqueue,
-          "setSubmit": setSubmit,
-        })
+        updateComponent(
+          (props = {
+            id: props.id,
+            payload: payload,
+            enqueue: enqueue,
+            setSubmit: setSubmit,
+          })
+        );
       }
     }
   };
@@ -150,7 +154,11 @@ export default function ComponentForm(props: any) {
         handleGroupChange={handleGroupChange}
       />
       <UptimeBox />
-      <Footer addComponent={addComponent} handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <Footer
+        addComponent={addComponent}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
     </Block>
   );
 }

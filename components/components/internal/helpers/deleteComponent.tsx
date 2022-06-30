@@ -1,3 +1,4 @@
+import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
 import { PAGE_ID } from "../../../../constants";
 
@@ -23,7 +24,12 @@ export const deleteComponent = function (props: any) {
       }
       props.enqueue(
         {
-          message: "Successfully Deleted Component",
+          message: (
+            <Block display="flex">
+              <img className="h-6 w-6 mr-1.5" src={"/operational2.webp"} />{" "}
+              <Block>Successfully Deleted Component!!!</Block>
+            </Block>
+          ),
         },
         DURATION.long
       );
@@ -33,7 +39,12 @@ export const deleteComponent = function (props: any) {
       console.log(err);
       props.enqueue(
         {
-          message: String(err),
+          message: (
+            <Block display="flex">
+              <img className="h-6 w-6 mr-1.5" src={"/major_outage.png"} />{" "}
+              <Block>${String(err)}</Block>
+            </Block>
+          ),
         },
         DURATION.short
       );
