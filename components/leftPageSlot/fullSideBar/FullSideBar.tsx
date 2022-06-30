@@ -28,6 +28,8 @@ import {
 } from "./overrides/sideBarStyles";
 import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 import { AiOutlineLeft } from "react-icons/ai";
+import { FullSideBarMenuList } from "./FullSideBarMenuList";
+import { FullSideBarDetails } from "./FullSideBarDeatils";
 
 interface Props {
   /**
@@ -44,10 +46,6 @@ interface Props {
  */
 const FullSideBar: React.FC<Props> = React.memo(
   ({ activeItemID, handleIsOpenChange }) => {
-    // state stroing the currently selected sidebar menu-item
-    const [activeMenuItem, setActiveMenuItem] =
-      useState<SideBarMenu>(activeItemID);
-
     const { data: session, status } = useSession(); // get user's session details
 
     // if status not confirmed
@@ -64,67 +62,13 @@ const FullSideBar: React.FC<Props> = React.memo(
 
     return (
       <Block overrides={SIDE_BAR_STYLE_OVERRIDES}>
-        <Block overrides={SIDE_BAR_HEADER_WRAPPER_OVERRIDES}>
-          <Block
-            overrides={SIDE_BAR_HEADER_NAME_OVERRIDES}
-            onClick={() => Router.push("/")}
-          >
-            {/* <Image src="/Status_icon.png" height={40} width={50}></Image> */}
-            Acme
-          </Block>
-          <Block
-            overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
-            onClick={() => handleIsOpenChange()}
-          >
-            <AiOutlineLeft size={26} />
-          </Block>
-        </Block>
-        <Block overrides={USER_DETAILS_WRAPPER_OVERRIDES}>
-          <Block>
-            <Image
-              alt="User Image"
-              src={session?.user?.image ?? "/blankProfileImage.png"}
-              height={100}
-              width={100}
-              className="userProfileImage"
-            ></Image>
-          </Block>
-          <Block overrides={USER_NAME_WRAPPER_OVERRIDES}>
-            {session.user?.name ?? "User Name"}
-          </Block>
-          <Block overrides={EMAIL_WRAPPER_OVERRIDES}>
-            {session.user?.email ?? "User Email"}
-          </Block>
-        </Block>
-        <Block>
-          <Block>
-            <FullSideBarMenuItem
-              onClick={() => {
-                setActiveMenuItem(SideBarMenu.IncidentsView);
-                Router.push("/incidents");
-              }}
-              menuItem={SideBarMenu.IncidentsView}
-              activeMenuItem={activeMenuItem}
-            />
-            <FullSideBarMenuItem
-              onClick={() => {
-                setActiveMenuItem(SideBarMenu.Components);
-                Router.push("/component");
-              }}
-              menuItem={SideBarMenu.Components}
-              activeMenuItem={activeMenuItem}
-            />
-            <a
-              href="https://client-incident-list-view.netlify.app/"
-              target="_blank"
-            >
-              <FullSideBarMenuItem
-                menuItem={SideBarMenu.ClientsPage}
-                activeMenuItem={activeMenuItem}
-              />
-            </a>
-          </Block>
-        </Block>
+        <FullSideBarDetails
+          userEmail={session.user?.email ?? "User Email"}
+          userImageSRC={session?.user?.image ?? "/blankProfileImage.png"}
+          userName={session.user?.name ?? "User Name"}
+          handleIsOpenChange={handleIsOpenChange}
+        />
+        <FullSideBarMenuList activeItemID={activeItemID} />
         <Block
           onClick={() => {
             // signOut of the page and also remove the loadingcount for the homepage (used for showing the successfully logged in SnackBar when signed in for the first time)

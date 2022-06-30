@@ -21,7 +21,7 @@ export const SIDE_BAR_HEADER_NAME_OVERRIDES: BlockProps["overrides"] = {
     style: {
       fontSize: "2.5rem",
       lineHeight: "2.525rem",
-      fontWeight: 500,
+      fontWeight: 700,
       padding: "24px 0px",
       marginLeft: "10px",
       cursor: "pointer",

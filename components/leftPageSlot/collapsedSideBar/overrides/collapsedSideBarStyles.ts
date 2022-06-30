@@ -22,7 +22,7 @@ export const COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES: BlockProps["overrides"] =
       style: {
         fontSize: "2.1rem",
         lineHeight: "2.125rem",
-        fontWeight: 500,
+        fontWeight: 700,
         padding: "12px 20px",
         cursor: "pointer",
         borderRadius: "9999px",
