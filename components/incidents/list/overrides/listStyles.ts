@@ -22,6 +22,23 @@ export const LIST_ITEM_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
+export const LIST_ITEM_LOADER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      padding: "20px 30px 15px 30px",
+      backgroundColor: "white",
+      margin: "20px auto 30px auto",
+      width: "80%",
+      borderRadius: "8px",
+      boxShadow:
+        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+      listStyle: "none",
+      flexDirection: "column",
+    },
+  },
+};
 
 export const INCIDENT_LIST_VIEW_OVERRIDES: BlockProps["overrides"] = {
   Block: {

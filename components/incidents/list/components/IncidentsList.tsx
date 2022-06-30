@@ -22,6 +22,7 @@ import "react-virtualized/styles.css";
 import { PageType } from "../../../../constants";
 import { LOADER_OVERRIDES } from "../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
+import { TombStoneLoader } from "./TombStoneLoader";
 
 interface Props {
   /**
@@ -133,8 +134,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     )
   ) : (
     // if page has not loaded
-    <Block overrides={LOADER_OVERRIDES}>
-      <Spinner />
-    </Block>
+    <TombStoneLoader />
   );
 });
