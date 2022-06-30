@@ -5,27 +5,23 @@ import { useState } from "react";
 
 //components
 import { Block } from "baseui/block";
-import { FullSideBarMenuItem } from "./FullSideBarMenuItem";
+import { CollapsedSideBarMenuItem } from "./CollapsedSideBarMenuItem";
 
 //constants
 import { SideBarMenu } from "../../../constants";
 
 interface Props {
-  /**
-   * the active/selected item currently on the sidebar
-   */
   activeItemID: SideBarMenu;
 }
 
-export const FullSideBarMenuList: React.FC<Props> = React.memo(
+export const CollapsedSideBarMenuList: React.FC<Props> = React.memo(
   ({ activeItemID }) => {
-    // state stroing the currently selected sidebar menu-item
     const [activeMenuItem, setActiveMenuItem] =
       useState<SideBarMenu>(activeItemID);
 
     return (
       <Block>
-        <FullSideBarMenuItem
+        <CollapsedSideBarMenuItem
           onClick={() => {
             setActiveMenuItem(SideBarMenu.IncidentsView);
             Router.push("/incidents");
@@ -33,7 +29,7 @@ export const FullSideBarMenuList: React.FC<Props> = React.memo(
           menuItem={SideBarMenu.IncidentsView}
           activeMenuItem={activeMenuItem}
         />
-        <FullSideBarMenuItem
+        <CollapsedSideBarMenuItem
           onClick={() => {
             setActiveMenuItem(SideBarMenu.Components);
             Router.push("/component");
@@ -45,7 +41,7 @@ export const FullSideBarMenuList: React.FC<Props> = React.memo(
           href="https://client-incident-list-view.netlify.app/"
           target="_blank"
         >
-          <FullSideBarMenuItem
+          <CollapsedSideBarMenuItem
             menuItem={SideBarMenu.ClientsPage}
             activeMenuItem={activeMenuItem}
           />

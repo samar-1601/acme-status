@@ -1,17 +1,12 @@
 // lib
-import { useState } from "react";
 import * as React from "react";
 import { signOut, useSession } from "next-auth/react";
 
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import Router from "next/router";
-import { CollapsedSideBarMenuItem } from "./CollapsedSideBarMenuItem";
 import WelcomePage from "../../welcomePage/WelcomePage";
-import Image from "next/image";
 import { FaSignOutAlt } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineRight } from "react-icons/ai";
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 
@@ -20,15 +15,14 @@ import { SideBarMenu } from "../../../constants";
 
 // styles
 import {
-  COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES,
   COLLAPSED_SIDE_BAR_OVERRIDES,
   COLLAPSED_SIGN_OUT_BUTTON_OVERRIDES,
-  COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES,
-  COLLAPSED_EMAIL_WRAPPER_OVERRIDES,
-  COLLAPSED_SIDE_BAR_HOVER_OVERRIDES,
   SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
+  COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES,
 } from "./overrides/collapsedSideBarStyles";
 import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
+import { CollapsedSideBarDetails } from "./CollapsedSideBarDetails";
+import { CollapsedSideBarMenuList } from "./CollapseSideBarMenuList";
 
 interface Props {
   /**
@@ -46,9 +40,6 @@ interface Props {
 const CollapsedSideBar: React.FC<Props> = React.memo(
   ({ activeItemID, handleIsOpenChange }) => {
     // state stroing the currently selected sidebar menu-item
-    const [activeMenuItem, setActiveMenuItem] =
-      useState<SideBarMenu>(activeItemID);
-
     const { data: session, status } = useSession(); // get user's session details
 
     // if status not confirmed
@@ -65,92 +56,13 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
 
     return (
       <Block overrides={COLLAPSED_SIDE_BAR_OVERRIDES}>
-        <Block
-          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
-          onClick={() => handleIsOpenChange()}
-        >
-          <AiOutlineRight size={26} />
-        </Block>
-        <Block
-          overrides={COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES}
-          onClick={() => Router.push("/")}
-        >
-          A
-        </Block>
-        <Block overrides={COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES}>
-          <StatefulPopover
-            content={
-              <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
-                {session.user?.name ?? "User Name"}
-              </Block>
-            }
-            triggerType={TRIGGER_TYPE.hover}
-            overrides={{
-              Body: {
-                style: {
-                  zIndex: 100,
-                },
-              },
-            }}
-          >
-            <Block>
-              <Image
-                alt="User Image"
-                src={session?.user?.image ?? "/blankProfileImage.png"}
-                height={48}
-                width={48}
-                className="userProfileImage"
-              ></Image>
-            </Block>
-          </StatefulPopover>
-          <StatefulPopover
-            content={
-              <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
-                {session.user?.email ?? "User Email"}
-              </Block>
-            }
-            triggerType={TRIGGER_TYPE.hover}
-            overrides={{
-              Body: {
-                style: {
-                  zIndex: 100,
-                },
-              },
-            }}
-          >
-            <Block overrides={COLLAPSED_EMAIL_WRAPPER_OVERRIDES}>
-              <HiOutlineMail size={26} />
-            </Block>
-          </StatefulPopover>
-        </Block>
-        <Block>
-          <Block>
-            <CollapsedSideBarMenuItem
-              onClick={() => {
-                setActiveMenuItem(SideBarMenu.IncidentsView);
-                Router.push("/incidents");
-              }}
-              menuItem={SideBarMenu.IncidentsView}
-              activeMenuItem={activeMenuItem}
-            />
-            <CollapsedSideBarMenuItem
-              onClick={() => {
-                setActiveMenuItem(SideBarMenu.Components);
-                Router.push("/component");
-              }}
-              menuItem={SideBarMenu.Components}
-              activeMenuItem={activeMenuItem}
-            />
-            <a
-              href="https://client-incident-list-view.netlify.app/"
-              target="_blank"
-            >
-              <CollapsedSideBarMenuItem
-                menuItem={SideBarMenu.ClientsPage}
-                activeMenuItem={activeMenuItem}
-              />
-            </a>
-          </Block>
+        <CollapsedSideBarDetails
+          userEmail={session.user?.email ?? "User Email"}
+          userImageSRC={session?.user?.image ?? "/blankProfileImage.png"}
+          userName={session.user?.name ?? "User Name"}
+        />
+        <Block overrides={COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES}>
+          <CollapsedSideBarMenuList activeItemID={activeItemID} />
         </Block>
         <StatefulPopover
           content={
@@ -177,6 +89,12 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
             <FaSignOutAlt color="black" />
           </Block>
         </StatefulPopover>
+        <Block
+          overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
+          onClick={() => handleIsOpenChange()}
+        >
+          <AiOutlineRight size={20} />
+        </Block>
       </Block>
     );
   }

@@ -74,14 +74,16 @@ export const DIV_INSIDE_NAV: BlockProps["overrides"] = {
   },
 };
 
-export const DIV_INSIDE_NAV_DISABLED: BlockProps["overrides"] = {
-  Block: {
-    style: {
-      cursor: "not-allowed",
-      marginRight: "20px",
-      fontSize: "14px",
+export const DIV_INSIDE_NAV_DISABLED: BlockProps = {
+  overrides: {
+    Block: {
+      style: {
+        cursor: "not-allowed",
+        marginRight: "20px",
+        fontSize: "14px",
+      },
     },
-  },
+  }
 };
 
 export const NAV: BlockProps["overrides"] = {

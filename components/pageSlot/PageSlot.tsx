@@ -51,10 +51,10 @@ export const PageSlot = ({
     localStorage.getItem("isSideBarOpen") == "false" ? false : true
   );
 
-  const handleIsOpenChange = () => {
+  const handleIsOpenChange = React.useCallback(() => {
     localStorage.setItem("isSideBarOpen", `${!isOpen}`);
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   return (
     <>

@@ -1,26 +1,28 @@
+//lib
 import * as React from "react";
-import { Block } from "baseui/block";
 import Image from "next/image";
 import Router from "next/router";
-import { AiOutlineLeft } from "react-icons/ai";
+
+//components
+import { Block } from "baseui/block";
+
+//overrides
 import {
   SIDE_BAR_HEADER_WRAPPER_OVERRIDES,
   SIDE_BAR_HEADER_NAME_OVERRIDES,
-  SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
   USER_DETAILS_WRAPPER_OVERRIDES,
   USER_NAME_WRAPPER_OVERRIDES,
   EMAIL_WRAPPER_OVERRIDES,
 } from "./overrides/sideBarStyles";
 
 interface Props {
-  handleIsOpenChange: Function;
   userName: string;
   userEmail: string;
   userImageSRC: string;
 }
 
 export const FullSideBarDetails: React.FC<Props> = React.memo(
-  ({ handleIsOpenChange, userEmail, userImageSRC, userName }) => {
+  ({ userEmail, userImageSRC, userName }) => {
     return (
       <>
         <Block overrides={SIDE_BAR_HEADER_WRAPPER_OVERRIDES}>
@@ -29,12 +31,6 @@ export const FullSideBarDetails: React.FC<Props> = React.memo(
             onClick={() => Router.push("/")}
           >
             Acme
-          </Block>
-          <Block
-            overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
-            onClick={() => handleIsOpenChange()}
-          >
-            <AiOutlineLeft size={26} />
           </Block>
         </Block>
         <Block overrides={USER_DETAILS_WRAPPER_OVERRIDES}>

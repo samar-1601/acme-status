@@ -23,12 +23,12 @@ export const COLLAPSED_SIDE_BAR_HEADER_NAME_OVERRIDES: BlockProps["overrides"] =
         fontSize: "2.1rem",
         lineHeight: "2.125rem",
         fontWeight: 700,
-        padding: "12px 20px",
+        padding: "14px 20px",
         cursor: "pointer",
         borderRadius: "9999px",
         backgroundColor: "#EEEEF1",
         display: "inline",
-        margin: " 10px auto",
+        margin: " 12px auto",
         ":hover": {
           backgroundColor: "#DBDBDB",
         },
@@ -110,14 +110,26 @@ export const SIDE_BAR_COLLAPSE_ICON_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
       cursor: "pointer",
+      display: "float",
+      position:"absolute",
+      top:"60px",
+      left:"68px",
       borderRadius: "60000px",
-      backgroundColor: "#EEEEF1",
-      padding: "8px",
-      display: "inline",
-      margin: "20px auto",
+      backgroundColor: "white",
+      boxShadow: " 0 1px 4px 0 rgba(10,10,20,0.15)",
+      padding: "4px",
+      // margin: "20px auto",
       ":hover": {
         backgroundColor: "#DBDBDB",
       },
     },
   },
 };
+
+export const COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES: BlockProps['overrides'] = {
+  Block:{
+    style:{
+      paddingTop:'68px'
+    }
+  }
+}

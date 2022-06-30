@@ -1,8 +1,8 @@
 import { Block } from "baseui/block";
 import * as React from "react";
 import {
-  divInsideNav,
-  divInsideNavDisabled,
+  DIV_INSIDE_NAV,
+  DIV_INSIDE_NAV_DISABLED,
   navActiveItem,
   navNonActiveItem,
   spanInsideNav,
@@ -19,7 +19,7 @@ export const NavBarMenuItem: React.FC<Props> = React.memo(
   ({ currentPage, pageType, onClick, disabled }) => {
     if (!disabled) {
       return (
-        <Block {...divInsideNav} onClick={onClick}>
+        <Block overrides={DIV_INSIDE_NAV} onClick={onClick}>
           <Block
             {...spanInsideNav}
             overrides={{
@@ -35,12 +35,11 @@ export const NavBarMenuItem: React.FC<Props> = React.memo(
       );
     } else {
       return (
-        <Block {...divInsideNavDisabled} onClick={onClick}>
-          <Block
-            {...spanInsideNav}
+        <Block overrides={DIV_INSIDE_NAV} onClick={onClick}>
+          <Block {...DIV_INSIDE_NAV_DISABLED}
             overrides={{
               Block: {
-                style:
+                style: 
                   currentPage === pageType ? navActiveItem : navNonActiveItem,
               },
             }}

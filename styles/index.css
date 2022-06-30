@@ -48,6 +48,14 @@
     @apply flex justify-center items-center;
   }
 
+  .primary-button-disabled {
+    @apply bg-primary-hover;
+    @apply rounded-lg;
+    @apply text-white;
+    @apply cursor-not-allowed;
+    @apply flex justify-center items-center;
+  }
+
   /*to be used for secondary button*/
   .secondary-button {
     @apply bg-secondary-not-hover;
