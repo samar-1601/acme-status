@@ -5,10 +5,10 @@ import * as React from "react";
 // components
 import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
-import { GetPastIncidentComponents } from "./PastIncidentsHelperFunctions";
+import { GetPastIncidentComponents } from "../helpers/PastIncidentsHelperFunctions";
 
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
 
 /**
  * @returns list of completed incidents in the given PAGE_ID

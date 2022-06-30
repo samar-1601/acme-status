@@ -2,14 +2,17 @@
 import { Block } from "baseui/block";
 
 // constants
-import { PageType } from "../../../../constants";
+import { PageType } from "../../../../../constants";
+
+// helpers
+import { formatDate } from "../helpers/formatDate";
 
 // styles
 import {
   listItem,
   itemStatus,
   itemName,
-} from "../styles/fullIncidentsListStyles";
+} from "../overrides/fullIncidentsListStyles";
 
 import {
   maintenanceListItem,
@@ -18,44 +21,12 @@ import {
   maintenanceItemHeaderWrapper,
   maintenanceItemStatusBody,
   maintenanceItemStatusStyle,
-} from "../styles/scheduledMaintenanceList";
+} from "../overrides/scheduledMaintenanceStyles";
 
-/**
- * Format date for display
- * @param date The date which needs to be formatted to display
- * @param pageType The type in which we need the formatted date
- * @returns formatted data in the required format
- */
-export const formatDate = (
-  date: string | Date,
-  pageType: string = PageType.All
-): string => {
-  const formatter = new Intl.DateTimeFormat("en", { month: "short" });
-  date = new Date(date);
-
-  // making h:m to hh:mm
-  let timeHour: string = `${date.getUTCHours()}`;
-  if (timeHour.length == 1) timeHour = `0${timeHour}`;
-  let timeMins: string = `${date.getUTCMinutes()}`;
-  if (timeMins.length == 1) timeMins = `0${timeMins}`;
-
-  // returns formatted date if "Scheduled" pageType
-  if (pageType == PageType.Scheduled)
-    return `Posted on ${date.getUTCDate()} ${formatter.format(
-      date
-    )}, ${timeHour}:${timeMins} UTC`;
-
-  // return formatted date for "Completed" pageType
-  if (pageType == PageType.Completed)
-    return `${date.getUTCDate()} ${formatter.format(
-      date
-    )}, ${date.getUTCFullYear()}`;
-
-  return `${date.getUTCDate()} ${formatter.format(
-    date
-  )}, ${timeHour}:${timeMins} UTC`;
-};
-
+interface Props {
+  incident: any;
+  pageType: string;
+}
 /**
  * list of data-items to display on screen
  * used inside Incidents List to render a data item fetched from an API
@@ -63,10 +34,10 @@ export const formatDate = (
  * @param pageType the pageType for which wee need to format and render accordingly
  * @returns JSX component list
  */
-export const renderData: React.FC = (
-  incident: any,
-  pageType: string
-): JSX.Element => {
+export const IncidentListItem: React.FC<Props> = ({
+  incident,
+  pageType,
+}): JSX.Element => {
   const incidentUpdates = incident["incident_updates"]; // stores the list of incident_updates for an incident
   let renderIncidentUpdates: JSX.Element[] = []; // JSX Elements list to store the formatted JSX list
 

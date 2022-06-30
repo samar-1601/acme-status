@@ -12,19 +12,19 @@ import {
   componentStatus,
   horizontalLine,
   componentNameText,
-} from "../styles/aboutThisStyles";
+} from "../overrides/aboutThisStyles";
 
 // loading and helper functions
-import { getComponentUptime } from "./LoadAboutPageData";
-import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
+import { getComponentUptime } from "./loadAboutPageData";
+import { formatDate } from "../../list-view-incidents/helpers/formatDate";
 
 // constants
-import { ComponentStatusType, getComponentStatusText , PageType } from "../../../../constants";
+import { ComponentStatusType, getComponentStatusText , PageType } from "../../../../../constants";
 import {
   hoverBox,
   hoverDateStyle,
   hoverRelatedTextStyle,
-} from "../styles/barHoverStyles";
+} from "../overrides/barHoverStyles";
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
 

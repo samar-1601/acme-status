@@ -2,7 +2,7 @@
 import {
   ComponentStatusType,
   getComponentStatusText,
-} from "../../../../constants";
+} from "../../../../../constants";
 
 // component proptype
 import { BlockProps } from "baseui/block";

@@ -2,7 +2,7 @@
 import { Block } from "baseui/block";
 
 //helper function
-import { formatDate } from "../list-view-incidents/IncidentsListViewHelperFunctions";
+import { formatDate } from "../../list-view-incidents/helpers/formatDate";
 
 // styles
 import {
@@ -13,7 +13,7 @@ import {
   pastIncidentStatusStyle,
   pastIncidentStatusBody,
   pastIncidentStatusDate,
-} from "../styles/pastIncidentsStyles";
+} from "../overrides/pastIncidentsStyles";
 
 // get the formatted date in dd/mm/yy format
 function formattedDateInSlashFormat(d = new Date()) {

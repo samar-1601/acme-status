@@ -3,11 +3,9 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "./LoadIncidentsListData";
+import useLoadPageData from "../hooks/useLoadIncidentsListData";
 
 // components
-import { renderData } from "./IncidentsListViewHelperFunctions";
-import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
   InfiniteLoader,
@@ -19,8 +17,10 @@ import {
 import "react-virtualized/styles.css";
 
 // constants
-import { PageType } from "../../../../constants";
-import { hasListLoadedStyle } from "../styles/fullIncidentsListStyles";
+import { PageType } from "../../../../../constants";
+import { hasListLoadedStyle } from "../overrides/fullIncidentsListStyles";
+import { TombStoneLoader } from "./TombStoneLoader";
+import { IncidentListItem } from "./IncidentListItem";
 
 interface Props {
   /**
@@ -122,7 +122,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                           rowIndex={index}
                         >
                           <div style={style}>
-                            {renderData(element, pageType)}
+                            <IncidentListItem incident={element} pageType={pageType}/>
                           </div>
                         </CellMeasurer>
                       );
@@ -137,8 +137,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     )
   ) : (
     // if page has not loaded
-    <Block {...hasListLoadedStyle}>
-      <Spinner />
-    </Block>
+    <TombStoneLoader />
   );
 });

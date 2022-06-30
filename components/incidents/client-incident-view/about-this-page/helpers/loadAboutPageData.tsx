@@ -1,5 +1,5 @@
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../constants";
+import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
 
 /**
  * get a list components 

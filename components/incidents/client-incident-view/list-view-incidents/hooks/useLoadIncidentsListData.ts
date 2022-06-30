@@ -6,7 +6,7 @@ import {
   NEXT_PUBLIC_AUTH_TOKEN,
   PageType,
   PAGE_ID,
-} from "../../../../constants";
+} from "../../../../../constants";
 
 /**
  * Loads data from API

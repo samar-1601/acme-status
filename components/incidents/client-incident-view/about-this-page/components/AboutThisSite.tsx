@@ -3,11 +3,11 @@ import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
 
 // loading and helper functions
-import { getComponents } from "./LoadAboutPageData";
+import { getComponents } from "../helpers/loadAboutPageData";
 import {
   renderComponents,
   legendColorDeterminer,
-} from "./AboutPageHelperFunctions";
+} from "../helpers/AboutPageHelperFunctions";
 
 // components
 import { Block } from "baseui/block";
@@ -18,8 +18,8 @@ import {
   componentListWrapper,
   legendBoxStyle,
   legendBoxWrapperStyle,
-} from "../styles/aboutThisStyles";
-import { ComponentStatusType } from "../../../../constants";
+} from "../overrides/aboutThisStyles";
+import { ComponentStatusType } from "../../../../../constants";
 
 /**
  * About this page component
