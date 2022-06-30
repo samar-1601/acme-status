@@ -9,18 +9,18 @@ import { formatDate } from "../helpers/formatDate";
 
 // styles
 import {
-  listItem,
-  itemStatus,
-  itemName,
+  LIST_ITEM_OVERRIDES,
+  ITEM_STATUS_OVERRIDES,
+  ITEM_NAME_OVERRIDES,
 } from "../overrides/fullIncidentsListStyles";
 
 import {
-  maintenanceListItem,
-  maintenanceItemName,
-  maintenanceItemDate,
-  maintenanceItemHeaderWrapper,
-  maintenanceItemStatusBody,
-  maintenanceItemStatusStyle,
+  MAINTENANCE_LIST_ITEM_OVERRIDES,
+  MAINTENANCE_ITEM_NAME_OVERRIDES,
+  MAINTENANCE_ITEM_DATE_OVERRIDES,
+  MAINTENANCE_ITEMHEADER_OVERRIDES,
+  MAINTENANCE_ITEM_STATUS_BODY_OVERRIDES,
+  MAINTENANCE_ITEM_STATUS_OVERRIDES,
 } from "../overrides/scheduledMaintenanceStyles";
 
 interface Props {
@@ -55,9 +55,14 @@ export const IncidentListItem: React.FC<Props> = ({
         }}
         key={update["id"]}
       >
-        <Block {...maintenanceItemStatusStyle}>{update["status"]}</Block>
-        <Block {...maintenanceItemStatusBody}> - {update["body"]} </Block>
-        <Block {...maintenanceItemDate}>
+        <Block overrides={MAINTENANCE_ITEM_STATUS_OVERRIDES}>
+          {update["status"]}
+        </Block>
+        <Block overrides={MAINTENANCE_ITEM_STATUS_BODY_OVERRIDES}>
+          {" "}
+          - {update["body"]}{" "}
+        </Block>
+        <Block overrides={MAINTENANCE_ITEM_DATE_OVERRIDES}>
           {formatDate(update["updated_at"], PageType.All)}
         </Block>
       </Block>
@@ -69,10 +74,12 @@ export const IncidentListItem: React.FC<Props> = ({
     case PageType.Scheduled:
       // finally return the formatted list of updates along with the incident name & incident schedule timings
       return (
-        <Block key={incident["id"]} {...maintenanceListItem}>
-          <Block {...maintenanceItemHeaderWrapper}>
-            <Block {...maintenanceItemName}>{incident["name"]}</Block>
-            <Block {...maintenanceItemDate}>
+        <Block key={incident["id"]} overrides={MAINTENANCE_LIST_ITEM_OVERRIDES}>
+          <Block overrides={MAINTENANCE_ITEMHEADER_OVERRIDES}>
+            <Block overrides={MAINTENANCE_ITEM_NAME_OVERRIDES}>
+              {incident["name"]}
+            </Block>
+            <Block overrides={MAINTENANCE_ITEM_DATE_OVERRIDES}>
               Scheduled for{" "}
               {formatDate(incident["scheduled_for"], PageType.All)} -{" "}
               {formatDate(incident["scheduled_until"], PageType.All)}
@@ -84,9 +91,11 @@ export const IncidentListItem: React.FC<Props> = ({
 
     case PageType.Active:
       return (
-        <Block key={incident["id"]} {...listItem}>
-          <Block {...itemName}>{incident["name"]}</Block>
-          <Block {...itemStatus}>{renderIncidentUpdates}</Block>
+        <Block key={incident["id"]} overrides={LIST_ITEM_OVERRIDES}>
+          <Block overrides={ITEM_NAME_OVERRIDES}>{incident["name"]}</Block>
+          <Block overrides={ITEM_STATUS_OVERRIDES}>
+            {renderIncidentUpdates}
+          </Block>
         </Block>
       );
     default:

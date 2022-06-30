@@ -1,14 +1,13 @@
 import { Block } from "baseui/block";
 // styles
 import {
-  colorfullBar,
-  colorfullBarWrapper,
-  componentHeader,
-  componentTimelineRow,
-  componentDetailsWrapper,
-  componentStatus,
-  horizontalLine,
-  componentNameText,
+  COLORFUL_BAR_WRAPPER_OVERRIDES,
+  COMPONENT_HEADER_OVERRIDES,
+  COMPONENT_TIMELINE_ROW_OVERRIDES,
+  COMPONENT_DETAILS_WRAPPER_OVERRIDES,
+  COMPONENT_STATUS_OVERRIDES,
+  HORIZONTAL_LINE_OVERRIDES,
+  COMPONENT_NAME_TEXT_OVERRIDES,
 } from "../overrides/aboutThisStyles";
 import { getComponentUptime } from "../helpers/loadAboutPageData";
 import { getComponentStatusText } from "../../../../../constants";
@@ -32,24 +31,29 @@ export const renderComponents = async (
         // if the component has uptime, then return 90 day colored status bars
         bars = (
           <>
-            <Block {...colorfullBarWrapper}>
+            <Block overrides={COLORFUL_BAR_WRAPPER_OVERRIDES}>
               <ColoredBars totalDays={totalDays} />
             </Block>
-            <Block {...componentTimelineRow}>
+            <Block overrides={COMPONENT_TIMELINE_ROW_OVERRIDES}>
               <Block>{totalDays} Days Ago</Block>
-              <Block {...horizontalLine}></Block>
+              <Block width="1px" overrides={HORIZONTAL_LINE_OVERRIDES}></Block>
               <Block>{componentUptime}% uptime</Block>
-              <Block {...horizontalLine}></Block>
+              <Block width="1px" overrides={HORIZONTAL_LINE_OVERRIDES}></Block>
               <Block>Today</Block>
             </Block>
           </>
         );
       }
       renderComponentList.push(
-        <Block {...componentDetailsWrapper} key={component["id"]}>
-          <Block {...componentHeader}>
-            <Block {...componentNameText}>{component["name"]}</Block>
-            <Block {...componentStatus}>
+        <Block
+          overrides={COMPONENT_DETAILS_WRAPPER_OVERRIDES}
+          key={component["id"]}
+        >
+          <Block overrides={COMPONENT_HEADER_OVERRIDES}>
+            <Block overrides={COMPONENT_NAME_TEXT_OVERRIDES}>
+              {component["name"]}
+            </Block>
+            <Block overrides={COMPONENT_STATUS_OVERRIDES}>
               {getComponentStatusText(component["status"])}
             </Block>
           </Block>

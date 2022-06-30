@@ -2,7 +2,7 @@
 import { formatDate } from "../../list-view-incidents/helpers/formatDate";
 
 // constants
-import { ComponentStatusType, PageType } from "../../../../../constants";
+import { ComponentStatusType, getComponentStatusText, PageType } from "../../../../../constants";
 
 /**
  * function for determining the color for a component-status-type
@@ -53,4 +53,44 @@ export const getDateforBar = (totalDays: number, day: number) => {
   let date = new Date();
   date.setDate(date.getDate() - daysAgo);
   return formatDate(date, PageType.Completed); // get formatted date in "08 June 2022" format
+};
+
+/**
+ * Status' style
+ * @param { string } status Status's name obtained in API response
+ * @returns { string } The style for the status in list-view
+ * @global
+ */
+ export const componentsStatusColor = (status: string) => {
+  switch (status) {
+    case getComponentStatusText(ComponentStatusType.Operational):
+      return {
+        //green
+        color: "#2fcc66",
+      };
+    case getComponentStatusText(ComponentStatusType.DegradedPerformance):
+      //yellow
+      return {
+        color: "#f1c40f",
+      };
+    case getComponentStatusText(ComponentStatusType.MajorOutage):
+      // red
+      return {
+        color: "#e74c3c",
+      };
+    case getComponentStatusText(ComponentStatusType.PartialOutage):
+      // orange
+      return {
+        color: "#e67e22",
+      };
+    case getComponentStatusText(ComponentStatusType.UnderMaintenance):
+      // pink
+      return {
+        color: "#3498DB",
+      };
+    default:
+      return {
+        color: "black",
+      };
+  }
 };

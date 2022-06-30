@@ -5,8 +5,11 @@ import {
   generateRandomBarsData,
   getDateforBar,
 } from "../helpers/helpers";
-import { colorfullBar } from "../overrides/aboutThisStyles";
-import { hoverBox, hoverDateStyle } from "../overrides/barHoverStyles";
+import { COLORFUL_BAR_OVERRIDES } from "../overrides/aboutThisStyles";
+import {
+  HOVER_BOX_OVERRIDES,
+  HOVER_DATE_OVERRIDES,
+} from "../overrides/barHoverStyles";
 
 interface Props {
   totalDays: number;
@@ -24,14 +27,16 @@ export const ColoredBars: React.FC<Props> = ({ totalDays }) => {
       <StatefulPopover // BASE UI component to show values when the bar is hovered
         key={`bar${i}`}
         content={() => (
-          <Block {...hoverBox}>
-            <Block {...hoverDateStyle}>{getDateforBar(totalDays, i)}</Block>
+          <Block overrides={HOVER_BOX_OVERRIDES}>
+            <Block overrides={HOVER_DATE_OVERRIDES}>
+              {getDateforBar(totalDays, i)}
+            </Block>
           </Block>
         )}
         triggerType={TRIGGER_TYPE.hover}
       >
         <Block
-          {...colorfullBar}
+          overrides={COLORFUL_BAR_OVERRIDES}
           backgroundColor={barColorDeterminer(barValues[i])}
         ></Block>
       </StatefulPopover>

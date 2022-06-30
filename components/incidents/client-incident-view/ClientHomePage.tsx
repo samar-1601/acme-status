@@ -9,11 +9,11 @@ import { PageType, PAGE_NAME } from "../../../constants";
 
 // styles
 import {
-  pageContainer,
-  h1,
-  h3,
-  clientsCommonComponentsWrapper,
-  homepageHeader,
+  PAGE_CONTAINER_OVERRIDES,
+  H1_OVERRIDES,
+  H3_OVERRIDES,
+  CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES,
+  HOME_PAGE_HEADER_OVERRIDES,
 } from "./styles/containerStyles";
 
 /**
@@ -23,22 +23,22 @@ import {
  */
 export const ClientsHomePage: React.FC = () => {
   return (
-    <Block {...pageContainer}>
-      <Block {...homepageHeader}>{PAGE_NAME}</Block>
-      <Block {...clientsCommonComponentsWrapper}>
-        <Block {...h1}> Active Incidents </Block>
+    <Block overrides={PAGE_CONTAINER_OVERRIDES}>
+      <Block overrides={HOME_PAGE_HEADER_OVERRIDES}>{PAGE_NAME}</Block>
+      <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
+        <Block overrides={H1_OVERRIDES}> Active Incidents </Block>
         <IncidentsList pageType={PageType.Active} />
       </Block>
-      <Block {...clientsCommonComponentsWrapper}>
-        <Block {...h3}> Scheduled Maintenance</Block>
+      <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
+        <Block overrides={H3_OVERRIDES}> Scheduled Maintenance</Block>
         <IncidentsList pageType={PageType.Scheduled} />
       </Block>
-      <Block {...clientsCommonComponentsWrapper}>
-        <Block {...h3}> About This Site</Block>
+      <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
+        <Block overrides={H3_OVERRIDES}> About This Site</Block>
         <AboutThisSite />
       </Block>
-      <Block {...clientsCommonComponentsWrapper}>
-        <Block {...h3}> Past Incidents</Block>
+      <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
+        <Block overrides={H3_OVERRIDES}> Past Incidents</Block>
         <PastIncidents />
       </Block>
     </Block>

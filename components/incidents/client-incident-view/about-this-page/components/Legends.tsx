@@ -12,20 +12,20 @@ import { legendColorDeterminer } from "../helpers/helpers";
 
 // styles
 import {
-  legendBoxWrapperStyle,
-  legendBoxStyle,
+  LEGEND_BOX_WRAPPER_OVERRIDES,
+  LEGEND_BOX_OVERRIDES,
 } from "../overrides/aboutThisStyles";
 
 export const Legends: React.FC = React.memo(() => {
   return (
-    <Block {...legendBoxWrapperStyle}>
+    <Block overrides={LEGEND_BOX_WRAPPER_OVERRIDES}>
       <Block
-        {...legendBoxStyle}
+        overrides={LEGEND_BOX_OVERRIDES}
         backgroundColor={legendColorDeterminer(ComponentStatusType.MajorOutage)}
       ></Block>
       <Block>Major Outage</Block>
       <Block
-        {...legendBoxStyle}
+        overrides={LEGEND_BOX_OVERRIDES}
         backgroundColor={legendColorDeterminer(
           ComponentStatusType.PartialOutage
         )}
@@ -33,11 +33,11 @@ export const Legends: React.FC = React.memo(() => {
       <Block>Partial Outage</Block>
       <Block
         backgroundColor={legendColorDeterminer(ComponentStatusType.Operational)}
-        {...legendBoxStyle}
+        overrides={LEGEND_BOX_OVERRIDES}
       ></Block>
       <Block>Operational</Block>
       <Block
-        {...legendBoxStyle}
+        overrides={LEGEND_BOX_OVERRIDES}
         backgroundColor={legendColorDeterminer(
           ComponentStatusType.UnderMaintenance
         )}

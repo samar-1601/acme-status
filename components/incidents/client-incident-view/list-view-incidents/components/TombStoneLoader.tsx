@@ -1,10 +1,10 @@
-import { Block } from "baseui/block"
-import React from "react"
-import ContentLoader from "react-content-loader"
-import { listItem } from "../overrides/fullIncidentsListStyles"
+import { Block } from "baseui/block";
+import React from "react";
+import ContentLoader from "react-content-loader";
+import { LIST_ITEM_OVERRIDES } from "../overrides/fullIncidentsListStyles";
 
-export const MyLoader = (props:any) => (
-  <ContentLoader 
+export const MyLoader = (props: any) => (
+  <ContentLoader
     speed={4}
     width={1084}
     height={125}
@@ -13,19 +13,19 @@ export const MyLoader = (props:any) => (
     foregroundColor="#b8b8b8"
     {...props}
   >
-    <rect x="2" y="86" rx="3" ry="3" width="1024" height="19" /> 
-    <rect x="1" y="4" rx="0" ry="0" width="241" height="20" /> 
-    <rect x="2" y="44" rx="0" ry="0" width="110" height="17" /> 
-    <rect x="124" y="45" rx="0" ry="0" width="110" height="15" /> 
-    <circle cx="971" cy="12" r="11" /> 
+    <rect x="2" y="86" rx="3" ry="3" width="1024" height="19" />
+    <rect x="1" y="4" rx="0" ry="0" width="241" height="20" />
+    <rect x="2" y="44" rx="0" ry="0" width="110" height="17" />
+    <rect x="124" y="45" rx="0" ry="0" width="110" height="15" />
+    <circle cx="971" cy="12" r="11" />
     <circle cx="1011" cy="12" r="11" />
   </ContentLoader>
-)
+);
 
-export const TombStoneLoader = ()=>{
-    return(
-        <Block {...listItem}>
-            <MyLoader/>
-        </Block>
-    )
-}
+export const TombStoneLoader = () => {
+  return (
+    <Block overrides={LIST_ITEM_OVERRIDES}>
+      <MyLoader />
+    </Block>
+  );
+};

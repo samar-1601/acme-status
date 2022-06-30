@@ -11,7 +11,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // styles
-import { componentListWrapper } from "../overrides/aboutThisStyles";
+import { COMPONENT_LIST_WRAPPER_OVERRIDES } from "../overrides/aboutThisStyles";
 import { Legends } from "./Legends";
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
@@ -50,7 +50,9 @@ export const AboutThisSite = React.memo(() => {
     // render components if data has loaded
     <>
       <Legends />
-      <Block {...componentListWrapper}>{state.componentsList}</Block>
+      <Block overrides={COMPONENT_LIST_WRAPPER_OVERRIDES}>
+        {state.componentsList}
+      </Block>
     </>
   ) : (
     // show spinner if data has not loaded
