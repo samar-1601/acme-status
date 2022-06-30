@@ -103,6 +103,17 @@ export const SUBMIT_BUTTON_OVERRIDES: BlockProps["overrides"] = {
   },
 };
 
+export const SUBMIT_BUTTON_DISABLED_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: () => ({
+      width: "92px",
+      alignSelf: "end",
+      height: "34px",
+      cursor: "not-allowed"
+    }),
+  },
+};
+
 export const ONSUBMIT_BUTTON_STYLE_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: () => ({

@@ -25,6 +25,7 @@ import {
   SUBMIT_BUTTON_OVERRIDES,
   ONSUBMIT_BUTTON_STYLE_OVERRIDES,
 } from "./overrides/BlockOverrides";
+import TombStone from "../formComponents/TombStone";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -251,11 +252,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
       else {
         return (
           <>
-            <Block overrides={{ ...ONLOAD_STYLE_OVERRIDES }}>
-              <Block overrides={{ ...ONLOAD_SPINNER_OVERRIDES }}>
-                <Spinner />
-              </Block>
-            </Block>
+            <TombStone type={props.type} />
           </>
         );
       }
