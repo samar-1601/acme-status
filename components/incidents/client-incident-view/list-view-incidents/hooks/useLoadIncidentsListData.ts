@@ -49,7 +49,7 @@ const getData = async (pageNumber: number, pageType: string) => {
 
     return dataItem;
   } catch (err) {
-    console.log(err);
+    throw err;
   }
 };
 
@@ -59,6 +59,7 @@ export default function useLoadPageData(pageType: PageType) {
     hasLoaded: false, // hasLoaded : status of loading data from API
     hasMore: true, // hasMore : do we have to fetch more data
     pageNumber: 1, // pageNumber : page number for pagination
+    isError: false
   });
 
   /**
@@ -86,9 +87,11 @@ export default function useLoadPageData(pageType: PageType) {
         hasLoaded: true, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
         dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
+        isError: false
       });
     } catch (err) {
       console.log(err);
+      setState({...state, isError: true});
     }
   };
 
@@ -102,7 +105,7 @@ export default function useLoadPageData(pageType: PageType) {
   };
 
   useEffect(() => {
-    setState({ ...state, hasLoaded: false, pageNumber: 1 }); // if scrolled below, set hasLoaded as false for the future data to render
+    setState({ ...state, hasLoaded: false, pageNumber: 1, isError:false }); // if scrolled below, set hasLoaded as false for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 
@@ -111,5 +114,6 @@ export default function useLoadPageData(pageType: PageType) {
     isLoaded: state.hasLoaded,
     hasMore: state.hasMore,
     fetchMore: fetchMore,
+    isError: state.isError
   };
 }

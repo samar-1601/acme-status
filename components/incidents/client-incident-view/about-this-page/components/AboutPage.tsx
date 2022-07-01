@@ -13,6 +13,7 @@ import { Spinner } from "baseui/spinner";
 // styles
 import { COMPONENT_LIST_WRAPPER_OVERRIDES } from "../overrides/aboutThisStyles";
 import { Legends } from "./Legends";
+import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
 const totalDays: number = 90; // total no. of days for whcih we are rendering data
 
@@ -24,6 +25,7 @@ export const AboutThisSite = React.memo(() => {
   const [state, setState] = useState({
     componentsList: Array(), // store the final response of components list to render
     isLoaded: false, // stores whether the page is loaded
+    isError: false,
   });
 
   /**
@@ -36,9 +38,15 @@ export const AboutThisSite = React.memo(() => {
       let components = [];
       components = await renderComponents(totalDays, componentList); // get formatted list ready to render from the API
 
-      setState({ ...state, componentsList: components, isLoaded: true }); // set the componentsList to returned render ready list and isLoaded to true
+      setState({
+        ...state,
+        componentsList: components,
+        isLoaded: true,
+        isError: false,
+      }); // set the componentsList to returned render ready list and isLoaded to true
     } catch (err) {
       console.log(err);
+      setState({ ...state, isError: true });
     }
   }, []);
 
@@ -46,6 +54,9 @@ export const AboutThisSite = React.memo(() => {
     loadComponentsList();
   }, []);
 
+  if (state.isError) {
+    return <IncidentErrorPage message="Failed to Fetch Components!!!" />;
+  }
   return state.isLoaded ? (
     // render components if data has loaded
     <>

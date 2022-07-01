@@ -9,6 +9,7 @@ import { Spinner } from "baseui/spinner";
 // constants
 import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
 import { PastIncidentsList } from "./PastIncidentsList";
+import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
 /**
  * @returns list of completed incidents in the given PAGE_ID
@@ -27,7 +28,8 @@ const getCompletedIncidents = async () => {
 
     return completedList;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    throw err;
   }
 };
 
@@ -38,6 +40,7 @@ export const PastIncidents: React.FC = React.memo(() => {
   const [state, setState] = useState({
     pastIncidentsList: [],
     isLoaded: false,
+    isError: false,
   });
 
   /**
@@ -57,8 +60,10 @@ export const PastIncidents: React.FC = React.memo(() => {
         ...state,
         pastIncidentsList: completedIncidents,
         isLoaded: true,
+        isError: false,
       });
     } catch (err) {
+      setState({ ...state, isError: true });
       console.log(err);
     }
   }, []);
@@ -68,8 +73,31 @@ export const PastIncidents: React.FC = React.memo(() => {
     loadComponentsList();
   }, []);
 
-  return state.isLoaded ? (
-    state.pastIncidentsList.length == 0 ? (
+  if (state.isError) {
+    return (
+      <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
+    );
+  } else
+    return state.isLoaded ? (
+      state.pastIncidentsList.length == 0 ? (
+        <Block
+          overrides={{
+            Block: {
+              style: {
+                marginTop: "15vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              },
+            },
+          }}
+        >
+          No past Incidents !!
+        </Block>
+      ) : (
+        <PastIncidentsList incidentList={state.pastIncidentsList} />
+      )
+    ) : (
       <Block
         overrides={{
           Block: {
@@ -82,25 +110,7 @@ export const PastIncidents: React.FC = React.memo(() => {
           },
         }}
       >
-        No past Incidents !!
+        <Spinner />
       </Block>
-    ) : (
-      <PastIncidentsList incidentList={state.pastIncidentsList} />
-    )
-  ) : (
-    <Block
-      overrides={{
-        Block: {
-          style: {
-            marginTop: "15vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          },
-        },
-      }}
-    >
-      <Spinner />
-    </Block>
-  );
+    );
 });

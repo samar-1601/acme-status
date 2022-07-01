@@ -2,7 +2,7 @@
 import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
 
 /**
- * get a list components 
+ * get a list components
  * @returns Components list fetched from API
  */
 export const getComponents = async () => {
@@ -19,7 +19,8 @@ export const getComponents = async () => {
 
     return componentList;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    throw err;
   }
 };
 
