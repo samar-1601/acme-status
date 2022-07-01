@@ -30,9 +30,7 @@ const getData = async (pageNumber: number, pageType: string) => {
   try {
     let URL;
     URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
-    if (pageType == PageType.Maintenance) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
-    } else if (pageType == PageType.Active) {
+    if (pageType == PageType.Active) {
       URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
       URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
