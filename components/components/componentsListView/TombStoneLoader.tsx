@@ -17,8 +17,8 @@ export const MyLoader = (props: any) => (
       foregroundColor="#b8b8b8"
       {...props}
     >
-      <rect x="30" y="8" rx="3" ry="3" width="60%" height="20" /> 
-      <rect x="30" y="58" rx="3" ry="3" width="100%" height="15" />       <circle cx="93%" cy="12" r="11" />
+      <rect x="30" y="8" rx="3" ry="3" width="60%" height="20" />
+      <rect x="30" y="58" rx="3" ry="3" width="100%" height="15" />
       <circle cx="10" cy="18" r="10" />
     </ContentLoader>
   </Block>

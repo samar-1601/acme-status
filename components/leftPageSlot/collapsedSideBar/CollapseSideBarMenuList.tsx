@@ -32,7 +32,7 @@ export const CollapsedSideBarMenuList: React.FC<Props> = React.memo(
         <CollapsedSideBarMenuItem
           onClick={() => {
             setActiveMenuItem(SideBarMenu.Components);
-            Router.push("/component");
+            Router.push("/components");
           }}
           menuItem={SideBarMenu.Components}
           activeMenuItem={activeMenuItem}

@@ -36,7 +36,7 @@ export const FullSideBarMenuList: React.FC<Props> = React.memo(
         <FullSideBarMenuItem
           onClick={() => {
             setActiveMenuItem(SideBarMenu.Components);
-            Router.push("/component");
+            Router.push("/components");
           }}
           menuItem={SideBarMenu.Components}
           activeMenuItem={activeMenuItem}

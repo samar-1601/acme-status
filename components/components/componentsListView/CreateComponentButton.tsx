@@ -7,7 +7,7 @@ import { CREATE_COMPONENT_BUTTON } from "../overrides/componentListStyles";
 
 export const CreateComponentButton = React.memo(() => {
   return (
-    <Link href="/component/new">
+    <Link href="/components/new">
       <Block overrides={CREATE_COMPONENT_BUTTON} className="primary-button">
         Create Component
       </Block>

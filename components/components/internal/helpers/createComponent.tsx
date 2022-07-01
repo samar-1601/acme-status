@@ -31,7 +31,7 @@ export const createComponent = function (props: any) {
       props.setSubmit(false);
     })
     .then(() => {
-      Router.push("/component");
+      Router.push("/components");
     })
     .catch((err) => {
       props.enqueue(

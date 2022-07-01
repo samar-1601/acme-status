@@ -34,7 +34,7 @@ export const updateComponent = function (props: any) {
       props.setSubmit(false);
     })
     .then(() => {
-      Router.push("/component");
+      Router.push("/components");
     })
     .catch((err) => {
       props.enqueue(

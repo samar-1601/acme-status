@@ -131,7 +131,7 @@ export default function ComponentForm(props: any) {
   };
 
   const handleCancel = () => {
-    Router.push("/component");
+    Router.push("/components");
   };
 
   return (
