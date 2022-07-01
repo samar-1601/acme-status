@@ -196,6 +196,23 @@ export const ELEMENT: BlockProps["overrides"] = {
   },
 };
 
+export const ELEMENT_LOADER: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      backgroundColor: "white",
+      padding: "16px",
+      margin: "10px auto 20px auto",
+      boxShadow:
+        "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
+      width: "78%",
+      borderRadius: "8px",
+      listStyle: "none",
+    },
+  },
+}
+
 export const LOADER: BlockProps["overrides"] = {
   Block: {
     style: {

@@ -3,7 +3,6 @@ import * as React from "react";
 import { ComponentStatusIconUrls, PAGE_ID } from "../../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
-import { Spinner } from "baseui/spinner";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,6 +16,7 @@ import {
 } from "../overrides/componentListStyles";
 import { useSnackbar } from "baseui/snackbar";
 import { deleteComponent } from "../internal/helpers/deleteComponent";
+import { TombStoneLoader } from "./TombStoneLoader";
 
 export const ComponentList = function (props: any) {
   const [dataList, setDataList] = React.useState<any>([]);
@@ -188,7 +188,7 @@ export const ComponentList = function (props: any) {
   else
     return (
       <Block overrides={LOADER}>
-        <Spinner />
+        <TombStoneLoader />
       </Block>
     );
 };
