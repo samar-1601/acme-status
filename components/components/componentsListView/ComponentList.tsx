@@ -1,6 +1,10 @@
 import * as React from "react";
 
-import { ComponentStatusIconUrls, PAGE_ID } from "../../../constants";
+import {
+  ComponentStatusIconUrls,
+  getDisplayComponentStatusText,
+  PAGE_ID,
+} from "../../../constants";
 
 import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import Image from "next/image";
@@ -18,6 +22,7 @@ import { useSnackbar } from "baseui/snackbar";
 import { deleteComponent } from "../internal/helpers/deleteComponent";
 import { TombStoneLoader } from "./TombStoneLoader";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
+import { COMPONENT_ICON_HOVER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 
 export const ComponentList = function (props: any) {
   const [dataList, setDataList] = React.useState<any>([]);
@@ -41,7 +46,13 @@ export const ComponentList = function (props: any) {
         <Block overrides={ELEMENT} className="list-item">
           <Block overrides={LIST_ITEM}>
             <StatefulPopover
-              content={<>{props.comp.status}</>}
+              content={
+                <Block overrides={COMPONENT_ICON_HOVER_OVERRIDES}>
+                  {getDisplayComponentStatusText(
+                    props?.comp?.status?.toLowerCase() ?? ""
+                  )}
+                </Block>
+              }
               accessibilityType={"tooltip"}
               triggerType={TRIGGER_TYPE.hover}
             >
