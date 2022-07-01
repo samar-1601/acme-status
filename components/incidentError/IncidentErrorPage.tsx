@@ -20,8 +20,8 @@ export default function IncidentErrorPage(props: IncidentErrorPageProps) {
       <Block overrides={{ ...ERROR_PAGE_OVERRIDES }}>
         <h1 className="header">{props.message}</h1>
         <Block>
-          <Link href={"/incidents"}>
-            <a className="link">Go back to Incidents Home Page</a>
+          <Link href={"/"}>
+            <a className="link">Go back to Home Page</a>
           </Link>
         </Block>
       </Block>

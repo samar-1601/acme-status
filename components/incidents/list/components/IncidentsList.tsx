@@ -23,6 +23,7 @@ import { PageType } from "../../../../constants";
 import { LOADER_OVERRIDES } from "../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
 import { TombStoneLoader } from "./TombStoneLoader";
+import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 
 interface Props {
   /**
@@ -54,7 +55,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * isLoading : whether the data has loaded or not from the API
    * hasMore : is there more data to fetch when we scroll
    */
-  const { dataList, isLoading, hasMore, fetchMore, reFetch } =
+  const { dataList, isLoading, hasMore, fetchMore, reFetch, isError } =
     useLoadPageData(pageType);
 
   /**
@@ -81,59 +82,67 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * List : enables virtualization by populating the DOM with only the rows which are seen on screen
    * CellMeasurer : tells the size of the element
    */
-  return pageLoaded ? (
-    // if page has Loaded
-    dataList.length == 0 ? (
-      // If the page has no data
-      <Block overrides={LOADER_OVERRIDES}> This Page has no Incidents !!</Block>
+  if (isError) {
+    return <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />;
+  } else
+    return pageLoaded ? (
+      // if page has Loaded
+      dataList.length == 0 ? (
+        // If the page has no data
+        <Block overrides={LOADER_OVERRIDES}>
+          {" "}
+          This Page has no Incidents !!
+        </Block>
+      ) : (
+        // If the page has loaded and has data to display
+        <InfiniteLoader
+          isRowLoaded={({ index }) =>
+            !hasMore || index < (dataList.length ?? 0)
+          } // whether the current row is loaded
+          loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
+          rowCount={dataList.length + 1} // total row count of the data to be displayed
+        >
+          {({ onRowsRendered, registerChild }) => (
+            <div style={{ width: "100%", height: `calc(100vh - 156px)` }}>
+              <AutoSizer>
+                {({ width, height }) => (
+                  <List
+                    width={width}
+                    height={height}
+                    onRowsRendered={onRowsRendered}
+                    ref={registerChild}
+                    rowHeight={cache.current.rowHeight ?? 0}
+                    deferredMeasurementCache={cache.current}
+                    rowCount={dataList.length ?? 0}
+                    rowRenderer={({ key, index, style, parent }) => {
+                      const element = dataList[index];
+                      return (
+                        <CellMeasurer
+                          key={key}
+                          cache={cache.current}
+                          parent={parent}
+                          columnIndex={0}
+                          rowIndex={index ?? 0}
+                        >
+                          <div style={style}>
+                            <RenderIncidentData
+                              incident={element}
+                              enqueue={enqueue}
+                              reFetch={reFetch}
+                            />
+                          </div>
+                        </CellMeasurer>
+                      );
+                    }}
+                  ></List>
+                )}
+              </AutoSizer>
+            </div>
+          )}
+        </InfiniteLoader>
+      )
     ) : (
-      // If the page has loaded and has data to display
-      <InfiniteLoader
-        isRowLoaded={({ index }) => !hasMore || index < (dataList.length ?? 0)} // whether the current row is loaded
-        loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-        rowCount={dataList.length + 1} // total row count of the data to be displayed
-      >
-        {({ onRowsRendered, registerChild }) => (
-          <div style={{ width: "100%", height: `calc(100vh - 156px)` }}>
-            <AutoSizer>
-              {({ width, height }) => (
-                <List
-                  width={width}
-                  height={height}
-                  onRowsRendered={onRowsRendered}
-                  ref={registerChild}
-                  rowHeight={cache.current.rowHeight ?? 0}
-                  deferredMeasurementCache={cache.current}
-                  rowCount={dataList.length ?? 0}
-                  rowRenderer={({ key, index, style, parent }) => {
-                    const element = dataList[index];
-                    return (
-                      <CellMeasurer
-                        key={key}
-                        cache={cache.current}
-                        parent={parent}
-                        columnIndex={0}
-                        rowIndex={index ?? 0}
-                      >
-                        <div style={style}>
-                          <RenderIncidentData
-                            incident={element}
-                            enqueue={enqueue}
-                            reFetch={reFetch}
-                          />
-                        </div>
-                      </CellMeasurer>
-                    );
-                  }}
-                ></List>
-              )}
-            </AutoSizer>
-          </div>
-        )}
-      </InfiniteLoader>
-    )
-  ) : (
-    // if page has not loaded
-    <TombStoneLoader />
-  );
+      // if page has not loaded
+      <TombStoneLoader />
+    );
 });
