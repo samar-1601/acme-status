@@ -37,7 +37,7 @@ export const deleteIncident = async (
             </Block>
           ),
         },
-        DURATION.long
+        DURATION.short
       );
       await reFetch();
     })

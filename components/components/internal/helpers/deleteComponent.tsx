@@ -4,17 +4,12 @@ import { PAGE_ID } from "../../../../constants";
 
 export const deleteComponent = function (props: any) {
   fetch(
-    "https://api.statuspage.io/v1/pages/" +
-      PAGE_ID +
-      "/components/" +
-      props.id,
+    "https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id,
     {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${
-          process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""
-        }`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     }
   )
@@ -31,7 +26,7 @@ export const deleteComponent = function (props: any) {
             </Block>
           ),
         },
-        DURATION.long
+        DURATION.short
       );
       props.setLoaded(false);
     })
@@ -49,4 +44,4 @@ export const deleteComponent = function (props: any) {
         DURATION.short
       );
     });
-}
+};

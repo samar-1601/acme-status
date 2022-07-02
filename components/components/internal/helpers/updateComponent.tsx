@@ -29,7 +29,7 @@ export const updateComponent = function (props: any) {
             </Block>
           ),
         },
-        DURATION.medium
+        DURATION.short
       );
       props.setSubmit(false);
     })
