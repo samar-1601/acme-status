@@ -27,6 +27,7 @@ interface Props {
   incident: any;
   reFetch: any;
   enqueue: Function;
+  setIsLoading: Function;
 }
 /**
  * incident formatted for rendering in the incident list
@@ -34,7 +35,7 @@ interface Props {
  * @returns JSX component list
  */
 export const RenderIncidentData: React.FC<Props> = React.memo(
-  ({ incident, reFetch, enqueue }): JSX.Element => {
+  ({ incident, reFetch, enqueue, setIsLoading }): JSX.Element => {
     return (
       <Block
         key={incident["name"]}
@@ -81,7 +82,12 @@ export const RenderIncidentData: React.FC<Props> = React.memo(
               </Link>
               <Block
                 onClick={() => {
-                  deleteIncident(incident["id"], enqueue, reFetch);
+                  deleteIncident(
+                    incident["id"],
+                    enqueue,
+                    reFetch,
+                    setIsLoading
+                  );
                 }}
                 className="edit-icon-wrapper"
               >

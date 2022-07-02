@@ -129,6 +129,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                               incident={element}
                               enqueue={enqueue}
                               reFetch={reFetch}
+                              setIsLoading={setPageLoaded}
                             />
                           </div>
                         </CellMeasurer>

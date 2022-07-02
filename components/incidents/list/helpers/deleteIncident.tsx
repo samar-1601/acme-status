@@ -5,7 +5,8 @@ import { PAGE_ID } from "../../../../constants";
 export const deleteIncident = async (
   incidentId: string,
   enqueue: Function,
-  reFetch: any
+  reFetch: any,
+  setIsLoading: Function
 ) => {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
@@ -39,6 +40,7 @@ export const deleteIncident = async (
         },
         DURATION.long
       );
+      setIsLoading(false);
       await reFetch();
     })
     .catch((err) => {

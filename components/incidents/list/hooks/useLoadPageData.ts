@@ -45,7 +45,6 @@ const getData = async (pageNumber: number, pageType: string) => {
 
     return dataItem;
   } catch (err) {
-    
     console.log(err);
   }
 };
@@ -56,7 +55,7 @@ export default function useLoadPageData(pageType: PageType) {
     isLoading: true, // isLoading : status of loading data from API
     hasMore: true, // hasMore : do we have to fetch more data
     pageNumber: 1, // pageNumber : page number for pagination
-    isError: false// isError: Stores if fetch has error
+    isError: false, // isError: Stores if fetch has error
   });
 
   /**
@@ -87,13 +86,13 @@ export default function useLoadPageData(pageType: PageType) {
         isLoading: false, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
         dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
-        isError: false
+        isError: false,
       });
     } catch (err) {
       setState({
         ...state,
-        isError: true
-      })
+        isError: true,
+      });
       console.log(err);
     }
   };
@@ -125,6 +124,6 @@ export default function useLoadPageData(pageType: PageType) {
     hasMore: state.hasMore,
     fetchMore: fetchMore,
     reFetch: reFetch,
-    isError: state.isError
+    isError: state.isError,
   };
 }
