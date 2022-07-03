@@ -30,7 +30,29 @@ import {
   WELCOME_HEADER_WRAPPER,
 } from "./overrides/welcomePageStyles";
 
+function reveal() {
+  var reveals = document.querySelectorAll(".reveal");
+  console.log(reveals);
+
+  for (var i = 0; i < reveals.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals[i].getBoundingClientRect().top;
+    var elementVisible = 0;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add("active");
+      reveals[i].classList.remove("reveal");
+    } else {
+      reveals[i].classList.remove("active");
+    }
+  }
+}
+
 const WelcomePage: React.FC = React.memo(() => {
+  React.useEffect(() => {
+    window.addEventListener("scroll", reveal);
+  });
+
   return (
     <>
       <Head>
@@ -64,6 +86,7 @@ const WelcomePage: React.FC = React.memo(() => {
         <Block overrides={CONTENT_BLOCK_OVERRIDES}>
           <Block
             overrides={ROW_CONTENT_OVERRIDES_ODD}
+            className="startingEffect"
             backgroundColor="lightgrey !important"
           >
             <Block overrides={TEXT_OVERRIDES}>
@@ -83,7 +106,10 @@ const WelcomePage: React.FC = React.memo(() => {
               />
             </Block>
           </Block>
-          <Block overrides={ROW_CONTENT_OVERRIDES_EVEN}>
+          <Block
+            overrides={ROW_CONTENT_OVERRIDES_EVEN}
+            className="reveal fadingEffect2"
+          >
             <Block overrides={IMAGE_OVERRIDES}>
               <Image
                 src="/createIncidents.png"
@@ -101,7 +127,10 @@ const WelcomePage: React.FC = React.memo(() => {
               </Block>
             </Block>
           </Block>
-          <Block overrides={ROW_CONTENT_OVERRIDES_ODD}>
+          <Block
+            overrides={ROW_CONTENT_OVERRIDES_ODD}
+            className="reveal fadingEffect1"
+          >
             <Block overrides={TEXT_OVERRIDES}>
               <Block overrides={HEADER_OVERRIDES}>Client Side view</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
