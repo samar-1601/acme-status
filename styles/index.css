@@ -103,7 +103,7 @@
 
   @keyframes fade-left {
     0% {
-      transform: translateX(-50%);
+      transform: translateX(-5%);
       opacity: 0;
     }
 
@@ -115,7 +115,7 @@
 
   @keyframes fade-right {
     0% {
-      transform: translateX(50%);
+      transform: translateX(5%);
       opacity: 0;
     }
 
@@ -127,7 +127,7 @@
 
   @keyframes slideInFromLeft {
     0% {
-      transform: translateX(-50%);
+      transform: translateX(-5%);
     }
 
     100% {
@@ -136,14 +136,17 @@
   }
 
   .startingEffect {
+    transition-delay: 0.2s;
     animation: 1s ease-out 0s 1 slideInFromLeft;
   }
 
   .active.fadingEffect1 {
+    transition-delay: 0.2s;
     animation: fade-left 1s ease-in;
   }
 
   .active.fadingEffect2 {
+    transition-delay: 0.2s;
     animation: fade-right 1s ease-in;
   }
 
