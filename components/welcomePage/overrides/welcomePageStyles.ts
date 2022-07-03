@@ -5,10 +5,7 @@ export const CONTENT_BLOCK_OVERRIDES: BlockProps["overrides"] = {
     style: {
       display: "flex",
       flexDirection: "column",
-      paddingTop: "50px",
       backgroundColor: "white",
-      paddingLeft: "100px",
-      paddingRight: "100px",
       boxShadow:
         "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
     },
@@ -22,6 +19,8 @@ export const IMAGE_OVERRIDES: BlockProps["overrides"] = {
       minHeight: "400px",
       padding: "24px",
       alignSelf: "center",
+      boxShadow:
+        "0 0px 10px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
     },
   },
 };
@@ -29,26 +28,65 @@ export const IMAGE_OVERRIDES: BlockProps["overrides"] = {
 export const TEXT_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
-      width: "350px",
+      maxWidth: "350px",
       padding: "24px",
     },
   },
 };
 
-export const ROW_CONTENT_OVERRIDES: BlockProps["overrides"] = {
+export const LOGIN_TEXT_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      maxWidth: "350px",
+      padding: "24px",
+      color: "white",
+    },
+  },
+};
+
+export const ROW_CONTENT_OVERRIDES_ODD: BlockProps["overrides"] = {
   Block: {
     style: {
       display: "flex",
       justifyContent: "space-around",
       alignItems: "center",
       alignContent: "center",
-      marginTop: "25px",
-      marginBottom: "60px",
-      marginLeft: "150px",
-      marginRight: "150px",
-      flexWrap: "wrap",
-      borderRadius: "16px",
-      border: "1px solid rgb(20,47,93)",
+      margin: "0px",
+      flexWrap: "nowrap",
+      backgroundColor: "#F8F8FB",
+      paddingTop: "28px",
+      paddingBottom: "28px",
+    },
+  },
+};
+
+export const ROW_CONTENT_LOGIN_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+      alignContent: "center",
+      margin: "0px",
+      flexWrap: "nowrap",
+      backgroundColor: "rgb(20,47,93)",
+      paddingTop: "28px",
+      paddingBottom: "28px",
+    },
+  },
+};
+export const ROW_CONTENT_OVERRIDES_EVEN: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+      alignContent: "center",
+      margin: "0px",
+      flexWrap: "nowrap",
+      backgroundColor: "white",
+      paddingTop: "28px",
+      paddingBottom: "28px",
     },
   },
 };
@@ -73,6 +111,7 @@ export const DESCRIPTION_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
+
 export const WELCOME_HEADER_SECOND_HALF_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
@@ -154,4 +193,3 @@ export const WELCOME_HEADER_MEDIUM_TEXT_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
-
