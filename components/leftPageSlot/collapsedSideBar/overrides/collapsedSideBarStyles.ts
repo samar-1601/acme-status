@@ -61,7 +61,7 @@ export const COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES: BlockProps["overrides"] =
   {
     Block: {
       style: {
-        margin: "10px 8px 50px 8px",
+        margin: "45px 8px 15px 8px",
         padding: "16px 0px",
         backgroundColor: "#EEEFF1",
         borderRadius: "8px",
@@ -112,7 +112,7 @@ export const SIDE_BAR_COLLAPSE_ICON_OVERRIDES: BlockProps["overrides"] = {
       cursor: "pointer",
       display: "float",
       position:"absolute",
-      top:"60px",
+      top:"180px",
       left:"68px",
       borderRadius: "60000px",
       backgroundColor: "white",
