@@ -129,16 +129,28 @@ const WelcomePage: React.FC = React.memo(() => {
           </Block>
           <Block
             overrides={ROW_CONTENT_OVERRIDES_ODD}
-            className="reveal fadingEffect1"
+            className="reveal fadingEffect2"
           >
             <Block overrides={TEXT_OVERRIDES}>
-              <Block overrides={HEADER_OVERRIDES}>Client Side view</Block>
+              <Block overrides={HEADER_OVERRIDES}>Components</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
-                We provide a client side view of incidents where users will be
-                able to see the current status of incidents and also uptime of
-                components.
+                We can perform CRUD operations on components. The uptime data of each component is available on the component list view.
               </Block>
             </Block>
+            <Block overrides={IMAGE_OVERRIDES}>
+              <Image
+                src="/createIncidents.png"
+                className="welcome-page-image"
+                height={350}
+                width={600}
+              />
+            </Block>
+            
+          </Block>
+          <Block
+            overrides={ROW_CONTENT_OVERRIDES_EVEN}
+            className="reveal fadingEffect1"
+          >
             <Block overrides={IMAGE_OVERRIDES}>
               <Image
                 src="/AboutThisSite.png"
@@ -146,6 +158,14 @@ const WelcomePage: React.FC = React.memo(() => {
                 height={350}
                 width={550}
               />
+            </Block>
+            <Block overrides={TEXT_OVERRIDES}>
+              <Block overrides={HEADER_OVERRIDES}>Client Side view</Block>
+              <Block overrides={DESCRIPTION_OVERRIDES}>
+                We provide a client side view of incidents where users will be
+                able to see the current status of incidents and also uptime of
+                components.
+              </Block>
             </Block>
           </Block>
           <Block overrides={ROW_CONTENT_LOGIN_OVERRIDES}>
