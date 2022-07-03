@@ -90,7 +90,7 @@ const WelcomePage: React.FC = React.memo(() => {
             backgroundColor="lightgrey !important"
           >
             <Block overrides={TEXT_OVERRIDES}>
-              <Block overrides={HEADER_OVERRIDES}>Incidents</Block>
+              <Block overrides={HEADER_OVERRIDES}>Incidents List View</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
                 Our app provides the facility to properly manage incidents. We
                 can create and update incidents as we wish. Implemented using
@@ -119,46 +119,59 @@ const WelcomePage: React.FC = React.memo(() => {
               />
             </Block>
             <Block overrides={TEXT_OVERRIDES}>
-              <Block overrides={HEADER_OVERRIDES}>Components</Block>
+              <Block overrides={HEADER_OVERRIDES}>Incident Form</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
-                We can update status of components in incident. Also provided
-                facility for creating incidents and changing status of incidents
-                and components.
+                Provides facility to add, edit and delete incidents. Allows to
+                select which components are affected by the incidents. Also
+                changes component status because of incident.
               </Block>
             </Block>
           </Block>
           <Block
             overrides={ROW_CONTENT_OVERRIDES_ODD}
-            className="reveal fadingEffect2"
+            className="reveal fadingEffect1"
           >
             <Block overrides={TEXT_OVERRIDES}>
               <Block overrides={HEADER_OVERRIDES}>Components</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
-                We can perform CRUD operations on components. The uptime data of each component is available on the component list view.
+                We can perform CRUD operations on components. The uptime data of
+                each component is available on the component list view.
               </Block>
             </Block>
             <Block overrides={IMAGE_OVERRIDES}>
               <Image
-                src="/createIncidents.png"
+                src="/ComponentsListView.png"
                 className="welcome-page-image"
                 height={350}
                 width={600}
               />
             </Block>
-            
           </Block>
           <Block
             overrides={ROW_CONTENT_OVERRIDES_EVEN}
-            className="reveal fadingEffect1"
+            className="reveal fadingEffect2"
           >
             <Block overrides={IMAGE_OVERRIDES}>
               <Image
-                src="/AboutThisSite.png"
+                src="/AddComponent.png"
                 className="welcome-page-image"
                 height={350}
-                width={550}
+                width={600}
               />
             </Block>
+            <Block overrides={TEXT_OVERRIDES}>
+              <Block overrides={HEADER_OVERRIDES}>Component Form</Block>
+              <Block overrides={DESCRIPTION_OVERRIDES}>
+                The Components Form allows users to add or edit a component. The
+                start date of a component can also be altered after checking the
+                display uptime checkbox.
+              </Block>
+            </Block>
+          </Block>
+          <Block
+            overrides={ROW_CONTENT_OVERRIDES_ODD}
+            className="reveal fadingEffect1"
+          >
             <Block overrides={TEXT_OVERRIDES}>
               <Block overrides={HEADER_OVERRIDES}>Client Side view</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
@@ -166,6 +179,14 @@ const WelcomePage: React.FC = React.memo(() => {
                 able to see the current status of incidents and also uptime of
                 components.
               </Block>
+            </Block>
+            <Block overrides={IMAGE_OVERRIDES}>
+              <Image
+                src="/AboutThisSite.png"
+                className="welcome-page-image"
+                height={350}
+                width={550}
+              />
             </Block>
           </Block>
           <Block overrides={ROW_CONTENT_LOGIN_OVERRIDES}>
