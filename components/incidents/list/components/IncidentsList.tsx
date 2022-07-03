@@ -54,7 +54,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * isLoading : whether the data has loaded or not from the API
    * hasMore : is there more data to fetch when we scroll
    */
-  const { dataList, isLoading, hasMore, fetchMore, reFetch, isError } =
+  const { dataList, isLoading, hasMore, fetchMore, reFetch, isError, status } =
     useLoadPageData(pageType);
 
   /**
@@ -81,8 +81,12 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * List : enables virtualization by populating the DOM with only the rows which are seen on screen
    * CellMeasurer : tells the size of the element
    */
-  if (isError || dataList == undefined) {
+  if (isError) {
     return <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />;
+  } else if (status == 420) {
+    return (
+      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+    );
   } else
     return pageLoaded ? (
       // if page has Loaded
@@ -113,7 +117,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                     rowHeight={cache.current.rowHeight ?? 0}
                     deferredMeasurementCache={cache.current}
                     rowCount={dataList.length ?? 0}
-                    style={{ overflow: "overlay" }}
+                    style={{ overflow: "auto", scrollbarGutter: "stable" }}
                     rowRenderer={({ key, index, style, parent }) => {
                       const element = dataList[index];
                       return (

@@ -41,11 +41,13 @@ const getData = async (pageNumber: number, pageType: string) => {
       },
     });
 
-    const dataItem = await response.json();
+    const dataItem: any = await response.json();
+    const status: number = response.status;
 
-    return dataItem;
+    return [dataItem, status, false];
   } catch (err) {
     console.log(err);
+    return [[], 500, true];
   }
 };
 
@@ -56,6 +58,7 @@ export default function useLoadPageData(pageType: PageType) {
     hasMore: true, // hasMore : do we have to fetch more data
     pageNumber: 1, // pageNumber : page number for pagination
     isError: false, // isError: Stores if fetch has error
+    status: 200, // response status
   });
 
   /**
@@ -64,11 +67,16 @@ export default function useLoadPageData(pageType: PageType) {
    * @param pageType current menu item/pageType selected
    */
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
-    let dataItem = [];
     try {
       setState({ ...state, isLoading: true });
 
-      dataItem = await getData(pageNumber, pageType);
+      let dataItem: any = [],
+        responseStatus: number = 200,
+        responseIsError = false;
+      [dataItem, responseStatus, responseIsError] = await getData(
+        pageNumber,
+        pageType
+      );
 
       console.log(
         "pageNo:",
@@ -86,7 +94,8 @@ export default function useLoadPageData(pageType: PageType) {
         isLoading: false, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
         dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
-        isError: false,
+        isError: responseIsError,
+        status: responseStatus,
       });
     } catch (err) {
       setState({
@@ -114,7 +123,13 @@ export default function useLoadPageData(pageType: PageType) {
   };
 
   useEffect(() => {
-    setState({ ...state, isLoading: true, pageNumber: 1, isError: false }); // if scrolled below, set isLoading as false for the future data to render
+    setState({
+      ...state,
+      isLoading: true,
+      pageNumber: 1,
+      isError: false,
+      status: 200,
+    }); // if scrolled below, set isLoading as false for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 
@@ -125,5 +140,6 @@ export default function useLoadPageData(pageType: PageType) {
     fetchMore: fetchMore,
     reFetch: reFetch,
     isError: state.isError,
+    status: state.status,
   };
 }
