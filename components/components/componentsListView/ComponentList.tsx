@@ -154,28 +154,33 @@ export const ComponentList = function (props: any) {
   };
 
   const getMsg = async (id: string) => {
-    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}/uptime`;
-    const response = await fetch(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-    });
-    let xjson = await response.json();
-    if (!xjson.error) {
-      const date1 = new Date(xjson.range_end);
-      const date2 = new Date(xjson.range_start);
-      let days = Math.ceil(
-        Math.abs(date1.valueOf() - date2.valueOf()) / (1000 * 60 * 60 * 24)
-      );
-      return (
-        String(xjson.uptime_percentage) +
-        "% uptime in the past " +
-        String(days) +
-        " days"
-      );
-    } else {
-      return "Uptime Data unavailable!";
+    try {
+      const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}/uptime`;
+      const response = await fetch(URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        },
+      });
+      let xjson = await response.json();
+      if (!xjson.error) {
+        const date1 = new Date(xjson.range_end);
+        const date2 = new Date(xjson.range_start);
+        let days = Math.ceil(
+          Math.abs(date1.valueOf() - date2.valueOf()) / (1000 * 60 * 60 * 24)
+        );
+        return (
+          String(xjson.uptime_percentage) +
+          "% uptime in the past " +
+          String(days) +
+          " days"
+        );
+      } else {
+        return "Uptime Data unavailable!";
+      }
+    } catch {
+      console.log("uptime data can't be fetched");
+      setIsError(true);
     }
   };
 
@@ -196,9 +201,7 @@ export const ComponentList = function (props: any) {
       }
       setDataList(tmp);
       setLoaded(true);
-      setIsError(false);
     } catch {
-      console.log("here I am ");
       setIsError(true);
     }
   };
@@ -211,7 +214,7 @@ export const ComponentList = function (props: any) {
     }
   }, [loaded]);
 
-  if (isError)
+  if (isError || dataList == undefined)
     return <IncidentErrorPage message="Sorry Unable to Fetch Components" />;
   else if (loaded) return <GenerateList dataList={dataList} />;
   else

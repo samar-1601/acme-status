@@ -81,7 +81,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * List : enables virtualization by populating the DOM with only the rows which are seen on screen
    * CellMeasurer : tells the size of the element
    */
-  if (isError) {
+  if (isError || dataList == undefined) {
     return <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />;
   } else
     return pageLoaded ? (
@@ -144,6 +144,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
       )
     ) : (
       // if page has not loaded
-        <TombStoneLoader />
+      <TombStoneLoader />
     );
 });

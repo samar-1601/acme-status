@@ -50,7 +50,7 @@ export const deleteIncident = async (
           message: (
             <Block display="flex">
               <img className="h-6 w-6 mr-1.5" src={"/major_outage.png"} />{" "}
-              <Block>${String(err)}</Block>
+              <Block>{String(err)}</Block>
             </Block>
           ),
         },

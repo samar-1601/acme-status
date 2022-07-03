@@ -13,6 +13,7 @@ export const MyLoader = (props: any) => (
     <ContentLoader
       speed={4}
       height={80}
+      width="100%"
       backgroundColor="#f3f3f3"
       foregroundColor="#b8b8b8"
       {...props}
@@ -29,7 +30,7 @@ export const MyLoader = (props: any) => (
  */
 export const TombStoneLoader: React.FC = () => {
   return (
-    <Block width="100%">
+    <Block width="100%" marginTop="20px">
       <MyLoader />
       <MyLoader />
       <MyLoader />
