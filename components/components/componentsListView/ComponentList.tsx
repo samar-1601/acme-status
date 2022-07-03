@@ -29,6 +29,7 @@ export const ComponentList = function (props: any) {
   const [loaded, setLoaded] = React.useState(false);
   const { enqueue, dequeue } = useSnackbar();
   const [isError, setIsError] = React.useState<boolean>(false);
+  const [status, setStatus] = React.useState<number>(200);
 
   const Component = function (props: any) {
     let details: any;
@@ -201,8 +202,10 @@ export const ComponentList = function (props: any) {
       }
       setDataList(tmp);
       setLoaded(true);
+      setStatus(response.status);
     } catch {
       setIsError(true);
+      setStatus(500);
     }
   };
 
@@ -216,7 +219,11 @@ export const ComponentList = function (props: any) {
 
   if (isError || dataList == undefined)
     return <IncidentErrorPage message="Sorry Unable to Fetch Components" />;
-  else if (loaded) return <GenerateList dataList={dataList} />;
+  else if (status == 420) {
+    return (
+      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+    );
+  } else if (loaded) return <GenerateList dataList={dataList} />;
   else
     return (
       <Block overrides={LOADER}>
