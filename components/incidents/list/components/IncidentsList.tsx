@@ -7,7 +7,6 @@ import useLoadPageData from "../hooks/useLoadPageData";
 
 // components
 import { RenderIncidentData } from "./IncidentListItem";
-import { Spinner } from "baseui/spinner";
 import { Block } from "baseui/block";
 import {
   InfiniteLoader,
@@ -114,6 +113,7 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
                     rowHeight={cache.current.rowHeight ?? 0}
                     deferredMeasurementCache={cache.current}
                     rowCount={dataList.length ?? 0}
+                    style={{ overflow: "overlay" }}
                     rowRenderer={({ key, index, style, parent }) => {
                       const element = dataList[index];
                       return (
@@ -144,6 +144,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
       )
     ) : (
       // if page has not loaded
-      <TombStoneLoader />
+        <TombStoneLoader />
     );
 });
