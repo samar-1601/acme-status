@@ -26,7 +26,7 @@ export const createComponent = function (props: any) {
             </Block>
           ),
         },
-        DURATION.medium
+        DURATION.short
       );
       props.setSubmit(false);
     })
