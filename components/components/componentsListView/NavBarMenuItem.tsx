@@ -35,8 +35,8 @@ export const NavBarMenuItem: React.FC<Props> = React.memo(
       );
     } else {
       return (
-        <Block overrides={DIV_INSIDE_NAV} onClick={onClick}>
-          <Block {...DIV_INSIDE_NAV_DISABLED}
+        <Block overrides={DIV_INSIDE_NAV_DISABLED} onClick={onClick}>
+          <Block 
             overrides={{
               Block: {
                 style: 
