@@ -1,5 +1,6 @@
 // props for Block component
 import { BlockProps } from "baseui/block";
+import { InputProps } from "baseui/input";
 
 export const HEADER_CONTAINER_OVERRIDES: BlockProps["overrides"] = {
   Block: {
@@ -122,5 +123,69 @@ export const NON_ACTIVE_NAV_ITEM_OVERRIDES = {
   display: "inline",
   ":hover": {
     color: "rgb(106, 147, 197)",
+  },
+};
+
+export const SEARCH_WRAPPER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      flexBasis: "50%",
+    },
+  },
+};
+export const SEARCH_HOVER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      padding: "8px 12px",
+      fontSize: "14px",
+      borderRadius: "8px",
+      backgroundColor: "#F8F8FA",
+      zIndex: 10,
+    },
+  },
+};
+
+export const SEARCH_OVERRIDES: InputProps["overrides"] = {
+  Root: {
+    style: ({ $isFocused }) => ({
+      width: "100%",
+      borderRadius: "8px !important",
+      borderColor: $isFocused ? "#0E61F6" : "#E6E6E9",
+      ":hover": {
+        borderColor: "#0E61F6",
+      },
+      borderWidth: "1px",
+    }),
+  },
+  InputContainer: {
+    style: { backgroundColor: "white" },
+  },
+};
+
+export const DISABLED_SEARCH_OVERRIDES: InputProps["overrides"] = {
+  Root: {
+    style: ({ $isFocused }) => ({
+      borderRadius: "8px !important",
+      borderColor: "#E6E6E9",
+      borderWidth: "1px",
+    }),
+  },
+  InputContainer: {
+    style: { backgroundColor: "white" },
+  },
+};
+
+export const REFRESH_BUTTON_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      padding: "12px",
+      cursor: "pointer",
+      borderRadius: "8px",
+      backgroundColor: "white",
+      display: "inline",
+      ":hover": {
+        backgroundColor: "#DBDBDB",
+      },
+    },
   },
 };

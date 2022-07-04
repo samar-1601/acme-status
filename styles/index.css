@@ -165,4 +165,7 @@
     background-color: #EEEFF1;
     cursor: pointer;
   }
+  .disabled-on-hover :hover{
+    cursor: not-allowed;
+  }
 }

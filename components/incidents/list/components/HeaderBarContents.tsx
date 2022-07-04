@@ -11,17 +11,31 @@ import {
   HEADER_BAR_LEFT_WRAPPER_OVERRIDES,
   BACK_ICON_OVERRIDES,
   HEADER_BAR_OVERRIDES,
+  SEARCH_HOVER_OVERRIDES,
+  SEARCH_WRAPPER_OVERRIDES,
+  REFRESH_BUTTON_OVERRIDES,
 } from "../overrides/navStyles";
+import { Input } from "baseui/input";
+import {
+  DISABLED_INPUT_NAME_OVERRIDES,
+  INPUT_NAME_OVERRIDES,
+} from "../../internal/form/overrides/InputOverrides";
+import { PageType } from "../../../../constants";
+import { PLACEMENT, StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import { IoMdRefresh } from "react-icons/io";
 
 interface Props {
   headerText: string; // text to render in the header
+  onSubmit: Function;
+  activePage: PageType;
 }
 
 /**
  * React component to render the HeaderText on the top of the fixed navigation bar
  */
 export const HeaderBarContents: React.FC<Props> = React.memo(
-  ({ headerText }) => {
+  ({ headerText, onSubmit, activePage }) => {
+    const [inputValue, setInputValue] = React.useState<string>("");
     return (
       <Block overrides={HEADER_BAR_OVERRIDES}>
         <Block overrides={HEADER_BAR_LEFT_WRAPPER_OVERRIDES}>
@@ -34,6 +48,58 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
             <FiArrowLeft size={22} />
           </Block>
           <Block className="header">{headerText}</Block>
+        </Block>
+        <Block overrides={SEARCH_WRAPPER_OVERRIDES}>
+          {activePage == PageType.All ? (
+            <Block>
+              <Input
+                onChange={(e: React.BaseSyntheticEvent) => {
+                  setInputValue(e?.target?.value ?? "");
+                }}
+                placeholder={"Search"}
+                overrides={{ ...INPUT_NAME_OVERRIDES }}
+                onKeyDown={(e) => {
+                  if (e.code == "Enter") onSubmit(inputValue);
+                }}
+              />
+            </Block>
+          ) : (
+            <StatefulPopover
+              content={
+                <Block overrides={SEARCH_HOVER_OVERRIDES}>
+                  Search not available for this page
+                </Block>
+              }
+              placement={PLACEMENT.left}
+              triggerType={TRIGGER_TYPE.hover}
+              overrides={{
+                Body: {
+                  style: {
+                    zIndex: 100,
+                  },
+                },
+              }}
+            >
+              <Block className="disabled-on-hover">
+                <Input
+                  onChange={(e: React.BaseSyntheticEvent) => {
+                    console.log(e?.target?.value);
+                    setInputValue(e?.target?.value ?? "");
+                  }}
+                  placeholder={"Search"}
+                  overrides={DISABLED_INPUT_NAME_OVERRIDES}
+                  onKeyDown={(e) => {
+                    console.log(e);
+                    if (e.code == "Enter") onSubmit(inputValue);
+                  }}
+                  disabled={true}
+                />
+              </Block>
+            </StatefulPopover>
+          )}
+        </Block>
+        <Block overrides={REFRESH_BUTTON_OVERRIDES}>
+          <IoMdRefresh size={22} />
         </Block>
       </Block>
     );

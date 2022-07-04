@@ -1,5 +1,5 @@
 // lib
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import { NavBarMenuItem } from "./components/NavigationBarMenuItem";
@@ -27,17 +27,25 @@ import {
  */
 export const IncidentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
+  const [query, setQuery] = useState<string>("");
 
   return (
     <Block overrides={INCIDENT_LIST_VIEW_OVERRIDES}>
       <Block overrides={HEADER_CONTAINER_OVERRIDES}>
-        <HeaderBarContents headerText="Incidents" />
+        <HeaderBarContents
+          headerText="Incidents"
+          onSubmit={setQuery}
+          activePage={activePage}
+        />
         <Block overrides={NAVBAR_OVERRIDES}>
           <Block overrides={NAV_OVERRIDES}>
             <NavBarMenuItem
               pageType={PageType.All}
               currentPage={activePage}
-              onClick={() => setPage(PageType.All)}
+              onClick={() => {
+                setQuery("");
+                setPage(PageType.All);
+              }}
             />
             <NavBarMenuItem
               pageType={PageType.Active}
@@ -59,7 +67,7 @@ export const IncidentsViewHomePage: React.FC = () => {
         </Block>
       </Block>
       <Block overrides={CONTENT_OVERRIDES}>
-        <IncidentsList pageType={activePage} />
+        <IncidentsList pageType={activePage} query={query} />
       </Block>
     </Block>
   );
