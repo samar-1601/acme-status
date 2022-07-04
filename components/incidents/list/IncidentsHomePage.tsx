@@ -28,6 +28,7 @@ import {
 export const IncidentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = useState<PageType>(PageType.All); // variable indicating the current selected navbar menu-item
   const [query, setQuery] = useState<string>("");
+  const [isRefreshPressed, setIsRefreshPressed] = useState<boolean>(false);
 
   return (
     <Block overrides={INCIDENT_LIST_VIEW_OVERRIDES}>
@@ -36,6 +37,7 @@ export const IncidentsViewHomePage: React.FC = () => {
           headerText="Incidents"
           onSubmit={setQuery}
           activePage={activePage}
+          setRefreshPressed={setIsRefreshPressed}
         />
         <Block overrides={NAVBAR_OVERRIDES}>
           <Block overrides={NAV_OVERRIDES}>
@@ -67,7 +69,12 @@ export const IncidentsViewHomePage: React.FC = () => {
         </Block>
       </Block>
       <Block overrides={CONTENT_OVERRIDES}>
-        <IncidentsList pageType={activePage} query={query} />
+        <IncidentsList
+          pageType={activePage}
+          query={query}
+          isRefreshPressed={isRefreshPressed}
+          setRefreshPressed={setIsRefreshPressed}
+        />
       </Block>
     </Block>
   );

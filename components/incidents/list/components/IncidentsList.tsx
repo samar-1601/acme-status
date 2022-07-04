@@ -23,6 +23,10 @@ import { LOADER_OVERRIDES } from "../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
 import { TombStoneLoader } from "./TombStoneLoader";
 import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
+import {
+  MAIN_STYLE_OVERRIDES,
+  ERROR_PAGE_OVERRIDES,
+} from "../../internal/form/overrides/BlockOverrides";
 
 interface Props {
   /**
@@ -30,6 +34,8 @@ interface Props {
    */
   pageType: PageType;
   query: string;
+  isRefreshPressed: boolean;
+  setRefreshPressed: Function;
 }
 
 /**
@@ -38,7 +44,7 @@ interface Props {
  * @returns A list of JSX Elements with data obtained from the API response
  */
 export const IncidentsList: React.FC<Props> = React.memo(
-  ({ pageType, query }) => {
+  ({ pageType, query, isRefreshPressed, setRefreshPressed }) => {
     // const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
     const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
     const { enqueue, dequeue } = useSnackbar();
@@ -94,6 +100,14 @@ export const IncidentsList: React.FC<Props> = React.memo(
       reFetch();
     }, [query]);
 
+    useEffect(() => {
+      if (isRefreshPressed) {
+        setPageLoaded(false);
+        reFetch();
+        setRefreshPressed(false);
+      }
+    }, [isRefreshPressed]);
+
     /**
      * AutoSizer : enables the auto sizing of the child elements based on their size
      * List : enables virtualization by populating the DOM with only the rows which are seen on screen
@@ -110,11 +124,17 @@ export const IncidentsList: React.FC<Props> = React.memo(
         // if page has Loaded
         dataList.length == 0 ? (
           query ? (
-            <Block overrides={LOADER_OVERRIDES}>No Results Found !!</Block>
+            <Block overrides={MAIN_STYLE_OVERRIDES}>
+              <Block overrides={ERROR_PAGE_OVERRIDES}>
+                <h1 className="header">No Results Found</h1>
+              </Block>
+            </Block>
           ) : (
             // If the page has no data
-            <Block overrides={LOADER_OVERRIDES}>
-              This Page has no Incidents !!
+            <Block overrides={MAIN_STYLE_OVERRIDES}>
+              <Block overrides={ERROR_PAGE_OVERRIDES}>
+                <h1 className="header">This Page has no Incidents</h1>
+              </Block>
             </Block>
           )
         ) : (

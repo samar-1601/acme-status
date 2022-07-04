@@ -28,13 +28,14 @@ interface Props {
   headerText: string; // text to render in the header
   onSubmit: Function;
   activePage: PageType;
+  setRefreshPressed: Function;
 }
 
 /**
  * React component to render the HeaderText on the top of the fixed navigation bar
  */
 export const HeaderBarContents: React.FC<Props> = React.memo(
-  ({ headerText, onSubmit, activePage }) => {
+  ({ headerText, onSubmit, activePage, setRefreshPressed }) => {
     const [inputValue, setInputValue] = React.useState<string>("");
     return (
       <Block overrides={HEADER_BAR_OVERRIDES}>
@@ -98,7 +99,10 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
             </StatefulPopover>
           )}
         </Block>
-        <Block overrides={REFRESH_BUTTON_OVERRIDES}>
+        <Block
+          overrides={REFRESH_BUTTON_OVERRIDES}
+          onClick={() => setRefreshPressed(true)}
+        >
           <IoMdRefresh size={22} />
         </Block>
       </Block>

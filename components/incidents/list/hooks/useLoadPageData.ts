@@ -96,7 +96,10 @@ export default function useLoadPageData(pageType: PageType, query: string) {
         pageNumber: pageNumber,
         isLoading: false, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
-        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
+        dataList:
+          pageNumber == 1 || !state.dataList
+            ? dataItem
+            : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
         isError: responseIsError,
         status: responseStatus,
       });
