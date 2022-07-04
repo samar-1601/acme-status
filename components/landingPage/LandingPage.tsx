@@ -49,7 +49,7 @@ const LandingPage = React.memo(() => {
       <PageSlot.Slot name="rightContent">
         <Block overrides={LANDING_PAGE_CONTAINER_OVERRIDES}>
           <Block overrides={LANDING_PAGE_HEADER_OVERRIDES}>
-            Welcome to <b>statusapp</b>
+            Welcome to <b>Status App</b>
           </Block>
           <Image src="/landingPage2.svg" height={600} width={600}></Image>
           <Block overrides={LANDING_PAGE_DESCRIPTION_OVERRIDES}>

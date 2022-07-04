@@ -59,7 +59,7 @@ export const PageSlot = ({
   return (
     <>
       <Head>
-        <title>statusapp</title>
+        <title>Status App</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block overrides={PAGE_WRAPPER_OVERRIDES}>

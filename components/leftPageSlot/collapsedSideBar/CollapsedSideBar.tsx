@@ -19,6 +19,7 @@ import {
   COLLAPSED_SIGN_OUT_BUTTON_OVERRIDES,
   SIDE_BAR_COLLAPSE_ICON_OVERRIDES,
   COLLAPSE_SIDE_BAR_MENU_LIST_OVERRIDES,
+  COLLAPSED_SIDE_BAR_HOVER_OVERRIDES,
 } from "./overrides/collapsedSideBarStyles";
 import { LOADER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 import { CollapsedSideBarDetails } from "./CollapsedSideBarDetails";
@@ -66,7 +67,7 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
         </Block>
         <StatefulPopover
           content={
-            <Block overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}>Sign Out</Block>
+            <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>Sign Out</Block>
           }
           triggerType={TRIGGER_TYPE.hover}
           overrides={{

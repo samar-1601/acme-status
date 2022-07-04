@@ -85,7 +85,7 @@ const LoginProvidersList: React.FC = () => {
   return (
     <>
       <Head>
-        <title>statusapp</title>
+        <title>Status App</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block overrides={LOGIN_PAGE_WRAPPER_OVERRIDES}>
@@ -98,7 +98,7 @@ const LoginProvidersList: React.FC = () => {
         <Block overrides={LOGIN_PAGE_DIVIDER_LINE_OVERRIDES}></Block>
         <Block overrides={LOGIN_LIST_VIEW_OVERRIDES}>
           <Block overrides={LOGIN_PAGE_HEADER_NAME_OVERRIDES}>
-            One step away from <b>statusapp</b>
+            One step away from <b>Status App</b>
           </Block>
           {providers.map(({ name, Icon }) => (
             <Block

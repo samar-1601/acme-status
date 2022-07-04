@@ -58,25 +58,6 @@ export const CollapsedSideBarDetails: React.FC<Props> = React.memo(
               ></Image>
             </Block>
           </StatefulPopover>
-          <StatefulPopover
-            content={
-              <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
-                {userEmail}
-              </Block>
-            }
-            triggerType={TRIGGER_TYPE.hover}
-            overrides={{
-              Body: {
-                style: {
-                  zIndex: 100,
-                },
-              },
-            }}
-          >
-            <Block overrides={COLLAPSED_EMAIL_WRAPPER_OVERRIDES}>
-              <HiOutlineMail size={26} />
-            </Block>
-          </StatefulPopover>
         </Block>
       </>
     );

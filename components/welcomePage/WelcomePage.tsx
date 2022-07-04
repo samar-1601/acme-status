@@ -56,13 +56,13 @@ const WelcomePage: React.FC = React.memo(() => {
   return (
     <>
       <Head>
-        <title>statusapp</title>
+        <title>Status App</title>
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block>
         <Block overrides={WELCOME_HEADER_WRAPPER}>
           <Block overrides={WELCOME_HEADER_SITE_NAME_OVERRIDES}>
-            statusapp
+            Status App
           </Block>
           <Block overrides={WELCOME_HEADER_SECOND_HALF_OVERRIDES}>
             <Block overrides={WELCOME_HEADER_TEXT_OVERRIDES}>

@@ -46,9 +46,6 @@ export const COLLAPSED_SIGN_OUT_BUTTON_OVERRIDES: BlockProps["overrides"] = {
       backgroundColor: "white",
       alignSelf: "flex-start",
       margin: "auto auto 20px auto",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
       color: "black !important",
       ":hover": {
         backgroundColor: "#F8F8FA",
@@ -61,7 +58,7 @@ export const COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES: BlockProps["overrides"] =
   {
     Block: {
       style: {
-        margin: "45px 8px 15px 8px",
+        margin: "64px 8px 38px 8px",
         padding: "16px 0px",
         backgroundColor: "#EEEFF1",
         borderRadius: "8px",
@@ -110,7 +107,7 @@ export const SIDE_BAR_COLLAPSE_ICON_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
       cursor: "pointer",
-      display: "float",
+      // display: "float",
       position:"absolute",
       top:"180px",
       left:"68px",
