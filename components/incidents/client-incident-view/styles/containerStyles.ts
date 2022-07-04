@@ -56,3 +56,29 @@ export const H3_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
+
+export const ERROR_PAGE_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "50vh",
+      fontWeight: "200 !important",
+      flexDirection: "column",
+      textAlign: "center",
+    },
+  },
+};
+
+export const MAIN_STYLE_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      paddingLeft: "20%",
+      paddingRight: "20%",
+    },
+  },
+};
+
