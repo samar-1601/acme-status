@@ -158,7 +158,6 @@ export const IncidentsList: React.FC<Props> = React.memo(
                       rowHeight={cache.current.rowHeight ?? 0}
                       deferredMeasurementCache={cache.current}
                       rowCount={dataList.length ?? 0}
-                      style={{ overflow: "auto", scrollbarGutter: "stable" }}
                       rowRenderer={({ key, index, style, parent }) => {
                         const element = dataList[index];
                         return (

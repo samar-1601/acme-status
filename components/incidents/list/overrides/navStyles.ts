@@ -155,10 +155,26 @@ export const SEARCH_OVERRIDES: InputProps["overrides"] = {
         borderColor: "#0E61F6",
       },
       borderWidth: "1px",
+      padding: "0",
     }),
   },
   InputContainer: {
-    style: { backgroundColor: "white" },
+    style: {
+      backgroundColor: "white",
+    },
+  },
+  Input: {
+    style: {
+      paddingLeft: "8px",
+    },
+  },
+  StartEnhancer: {
+    style: {
+      backgroundColor: "white",
+      paddingLeft: "12px",
+      paddingRight: "0px",
+      margin: "0",
+    },
   },
 };
 
@@ -168,17 +184,33 @@ export const DISABLED_SEARCH_OVERRIDES: InputProps["overrides"] = {
       borderRadius: "8px !important",
       borderColor: "#E6E6E9",
       borderWidth: "1px",
+      padding: "0",
     }),
   },
   InputContainer: {
-    style: { backgroundColor: "white" },
+    style: {
+      backgroundColor: "white",
+    },
+  },
+  Input: {
+    style: {
+      paddingLeft: "8px",
+    },
+  },
+  StartEnhancer: {
+    style: {
+      backgroundColor: "white",
+      paddingLeft: "12px",
+      paddingRight: "0px",
+      margin: "0",
+    },
   },
 };
 
 export const REFRESH_BUTTON_OVERRIDES: BlockProps["overrides"] = {
   Block: {
     style: {
-      padding: "12px",
+      padding: "10px",
       cursor: "pointer",
       borderRadius: "8px",
       backgroundColor: "white",

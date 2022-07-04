@@ -14,15 +14,14 @@ import {
   SEARCH_HOVER_OVERRIDES,
   SEARCH_WRAPPER_OVERRIDES,
   REFRESH_BUTTON_OVERRIDES,
+  SEARCH_OVERRIDES,
+  DISABLED_SEARCH_OVERRIDES,
 } from "../overrides/navStyles";
 import { Input } from "baseui/input";
-import {
-  DISABLED_INPUT_NAME_OVERRIDES,
-  INPUT_NAME_OVERRIDES,
-} from "../../internal/form/overrides/InputOverrides";
 import { PageType } from "../../../../constants";
 import { PLACEMENT, StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import { IoMdRefresh } from "react-icons/io";
+import { AiOutlineSearch } from "react-icons/ai";
 
 interface Props {
   headerText: string; // text to render in the header
@@ -54,11 +53,12 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
           {activePage == PageType.All ? (
             <Block>
               <Input
+                startEnhancer={<AiOutlineSearch size={20} color="#6B6B6B" />}
                 onChange={(e: React.BaseSyntheticEvent) => {
                   setInputValue(e?.target?.value ?? "");
                 }}
                 placeholder={"Search"}
-                overrides={{ ...INPUT_NAME_OVERRIDES }}
+                overrides={SEARCH_OVERRIDES}
                 onKeyDown={(e) => {
                   if (e.code == "Enter") onSubmit(inputValue);
                 }}
@@ -71,7 +71,7 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
                   Search not available for this page
                 </Block>
               }
-              placement={PLACEMENT.left}
+              placement={PLACEMENT.bottom}
               triggerType={TRIGGER_TYPE.hover}
               overrides={{
                 Body: {
@@ -83,12 +83,13 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
             >
               <Block className="disabled-on-hover">
                 <Input
+                  startEnhancer={<AiOutlineSearch size={20} color="#6B6B6B" />}
                   onChange={(e: React.BaseSyntheticEvent) => {
                     console.log(e?.target?.value);
                     setInputValue(e?.target?.value ?? "");
                   }}
                   placeholder={"Search"}
-                  overrides={DISABLED_INPUT_NAME_OVERRIDES}
+                  overrides={DISABLED_SEARCH_OVERRIDES}
                   onKeyDown={(e) => {
                     console.log(e);
                     if (e.code == "Enter") onSubmit(inputValue);
