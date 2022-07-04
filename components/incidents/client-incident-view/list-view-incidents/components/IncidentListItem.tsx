@@ -2,7 +2,7 @@
 import { Block } from "baseui/block";
 
 // constants
-import { PageType } from "../../../../../constants";
+import { getComponentStatusText, PageType } from "../../../../../constants";
 
 // helpers
 import { formatDate } from "../helpers/formatDate";
@@ -56,7 +56,7 @@ export const IncidentListItem: React.FC<Props> = ({
         key={update["id"]}
       >
         <Block overrides={MAINTENANCE_ITEM_STATUS_OVERRIDES}>
-          {update["status"]}
+          {getComponentStatusText(update["status"])}
         </Block>
         <Block overrides={MAINTENANCE_ITEM_STATUS_BODY_OVERRIDES}>
           {" "}
