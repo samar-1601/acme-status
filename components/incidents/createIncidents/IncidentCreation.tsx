@@ -12,6 +12,8 @@ import { useSnackbar, DURATION } from "baseui/snackbar";
 //constants
 import { STATUS, PAGE_ID } from "../../../constants";
 import { Block } from "baseui/block";
+import TombStone from "../internal/formComponents/TombStone";
+import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
 //variable to load the initial data from api call
 let InitialData: (ComponentObject | never)[] = [];
@@ -131,15 +133,24 @@ export default function IncidentCreation() {
       })
       .catch(() => setStateOfPage(2)); //if error in fetching set state of page to 2 ("Sorry not able to fetch components")
   }, []);
-  return (
-    <IncidentForm
-      components={components}
-      currentStateOfPage={stateOfPage}
-      isSubmitClicked={isSubmitClicked}
-      handleSubmit={handleSubmit}
-      incidentName={""}
-      incidentStatus={"Investigating"}
-      type={"Create"} //sets formType to createIncident
-    />
-  );
+  if (stateOfPage == 0) {
+    return <TombStone type={"Create"} />;
+  } else if (stateOfPage == 2) {
+    return (
+      <IncidentErrorPage message="Sorry Unable to Fetch Components. Please Try Again!" />
+    );
+  } else
+    return (
+      <IncidentForm
+        components={components}
+        isSubmitClicked={isSubmitClicked}
+        handleSubmit={handleSubmit}
+        incidentMessage={
+          "We will be undergoing scheduled maintenance during this time."
+        }
+        incidentName={""}
+        incidentStatus={"Investigating"}
+        type={"Create"} //sets formType to createIncident
+      />
+    );
 }

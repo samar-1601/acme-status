@@ -41,3 +41,17 @@ export function getStatusFromPercentage(percentage: number):string{
         return "Resolved";
       }
   }
+
+export function getDefaultMessageFromStatus(status:string):string{
+  if (status == "Investigating") {
+    return "We will be undergoing scheduled maintenance during this time.";
+  }
+  if (status == "Identified") {
+    return "Scheduled maintenance is currently in progress. We will provide updates as necessary.";
+  }
+  if (status == "Monitoring") {
+    return "Verification is currently underway for the maintenance items.";
+  } else {
+    return "The scheduled maintenance has been completed.";
+  }
+}

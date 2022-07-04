@@ -1,5 +1,5 @@
 //lib
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 //components
 import { FormControl } from "baseui/form-control";
@@ -51,6 +51,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
    * Otherwise if click happens on the white region then we directly get the offset and calculate status.
    * Then we call props.updateStatus to update the state.
    */
+
   const updateStatusBarOnClick = useCallback(
     (e: InputStatusOnClickEvent) => {
       let percentage = 0;
@@ -90,8 +91,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
             justifyContent="center"
             color={item != props.incidentStatus ? "black" : "blue"}
             onClick={(e: Event) => {
-              const target = e.target as Element;
-              props.updateStatus(target.innerHTML);
+              props.updateStatus(item);
             }}
             overrides={{
               Block: {
@@ -104,7 +104,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
           </FlexGridItem>
         );
       }),
-    [props.incidentStatus]
+    [props.incidentStatus, props.updateStatus]
   );
 
   return (

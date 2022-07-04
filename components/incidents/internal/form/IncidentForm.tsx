@@ -19,13 +19,12 @@ import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 import {
   FOOTER_BAR_OVERRIDES,
   MAIN_STYLE_OVERRIDES,
-  ONLOAD_SPINNER_OVERRIDES,
-  ONLOAD_STYLE_OVERRIDES,
   CANCEL_BUTTON_OVERRIDES,
   SUBMIT_BUTTON_OVERRIDES,
   ONSUBMIT_BUTTON_STYLE_OVERRIDES,
 } from "./overrides/BlockOverrides";
 import TombStone from "../formComponents/TombStone";
+import { getDefaultMessageFromStatus } from "../helpers/helperFunctions";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.
 
@@ -52,11 +51,11 @@ interface optionType {
 
 interface IncidentCreationProps {
   components: ComponentObject[];
-  currentStateOfPage: number;
   isSubmitClicked: boolean;
   handleSubmit: Function;
   incidentName: string;
   incidentStatus: string;
+  incidentMessage: string;
   type: string;
 }
 
@@ -70,24 +69,17 @@ export default function IncidentForm(props: IncidentCreationProps) {
 
   const [incidentMessage, setIncidentMessage] = useState<
     string | number | undefined
-  >(""); //state for incident message
+  >(props.incidentMessage); //state for incident message
 
   const [affectedComponents, setAffectedComponents] = useState<
     ComponentObject[]
   >(props.components); //state for storing checked and selected type of components
 
-  //Setting the states once data is fetched in parent using useEffects
-  useEffect(() => {
-    setAffectedComponents(props.components);
-  }, [props.components]);
+  const [isMessageEntered, setIsMessageEntered] = useState<boolean>(false); //state for storing whether message has been entered by user
 
   useEffect(() => {
-    setIncidentName(props.incidentName);
-  }, [props.incidentName]);
-
-  useEffect(() => {
-    setIncidentStatus(props.incidentStatus);
-  }, [props.incidentStatus]);
+    console.log("value outside function", isMessageEntered);
+  });
 
   //function for handing name change
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
@@ -96,6 +88,7 @@ export default function IncidentForm(props: IncidentCreationProps) {
 
   //function for handling message change
   const updateIncidentMessage = useCallback((e: React.BaseSyntheticEvent) => {
+    setIsMessageEntered(true);
     setIncidentMessage(e.target.value);
   }, []);
 
@@ -132,13 +125,23 @@ export default function IncidentForm(props: IncidentCreationProps) {
   );
 
   //function to handle IncidentStatus Update
-  const updateStatus = useCallback((e: string) => {
-    setIncidentStatus(e);
-  }, []);
+  const updateStatus = useCallback(
+    (e: string) => {
+      setIncidentStatus(e);
+      if (isMessageEntered === false) {
+        console.log("value inside function", isMessageEntered);
+        setIncidentMessage(getDefaultMessageFromStatus(e));
+      }
+    },
+    [isMessageEntered]
+  );
+
+  useEffect(() => {
+    console.log("updateStatus has updated");
+  }, [updateStatus]);
 
   //sends all the data of state to props.handleSubmit in the form payload
   const submitForm = () => {
-    console.log(props.currentStateOfPage);
     console.log(incidentName);
     console.log(incidentMessage);
     console.log(incidentStatus);
@@ -212,88 +215,62 @@ export default function IncidentForm(props: IncidentCreationProps) {
     </>
   );
 
-  //if no error in fetching data
-  if (props.currentStateOfPage != 2) {
-    //if submitButton has not been clicked
-    if (!props.isSubmitClicked) {
-      //if data has been fetched properly
-      if (props.currentStateOfPage == 1) {
-        return (
-          <>
-            <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
-              {formConstant}
-              <Block
-                overrides={{ ...FOOTER_BAR_OVERRIDES }}
-                className="footer-bar"
-              >
-                <Block
-                  className="primary-button"
-                  onClick={() => {
-                    submitForm();
-                  }}
-                  overrides={{ ...SUBMIT_BUTTON_OVERRIDES }}
-                >
-                  {props.type}
-                </Block>
-                <Link href={{ pathname: "/incidents" }}>
-                  <Block
-                    className="secondary-button"
-                    overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
-                  >
-                    Cancel
-                  </Block>
-                </Link>
-              </Block>
-            </Block>
-          </>
-        );
-      }
-      //if data is being fetched show Spinner
-      else {
-        return (
-          <>
-            <TombStone type={props.type} />
-          </>
-        );
-      }
-    }
-    //if submit button has been clicked show loading button and show message in SnackBar
-    else {
-      return (
-        <>
-          <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
-            {formConstant}
+  //if submitButton has not been clicked
+  if (!props.isSubmitClicked) {
+    return (
+      <>
+        <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
+          {formConstant}
+          <Block overrides={{ ...FOOTER_BAR_OVERRIDES }} className="footer-bar">
             <Block
-              overrides={{ ...FOOTER_BAR_OVERRIDES }}
-              className="footer-bar"
+              className="primary-button"
+              onClick={() => {
+                submitForm();
+              }}
+              overrides={{ ...SUBMIT_BUTTON_OVERRIDES }}
             >
-              <Block
-                className="primary-button"
-                onClick={() => {
-                  submitForm();
-                }}
-                overrides={{ ...ONSUBMIT_BUTTON_STYLE_OVERRIDES }}
-              >
-                <Spinner $size={SIZE.small} />
-              </Block>
-              <Link href={{ pathname: "/incidents" }}>
-                <Block
-                  className="secondary-button"
-                  overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
-                >
-                  Cancel
-                </Block>
-              </Link>
+              {props.type}
             </Block>
+            <Link href={{ pathname: "/incidents" }}>
+              <Block
+                className="secondary-button"
+                overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
+              >
+                Cancel
+              </Block>
+            </Link>
           </Block>
-        </>
-      );
-    }
+        </Block>
+      </>
+    );
   }
-  //If error in fetching data show error message: Unable to Fetch Components
+  //if submitbutton has been clicked
   else {
     return (
-      <IncidentErrorPage message="Sorry Unable to Fetch Components. Please Try Again!" />
+      <>
+        <Block overrides={{ ...MAIN_STYLE_OVERRIDES }}>
+          {formConstant}
+          <Block overrides={{ ...FOOTER_BAR_OVERRIDES }} className="footer-bar">
+            <Block
+              className="primary-button"
+              onClick={() => {
+                submitForm();
+              }}
+              overrides={{ ...ONSUBMIT_BUTTON_STYLE_OVERRIDES }}
+            >
+              <Spinner $size={SIZE.small} />
+            </Block>
+            <Link href={{ pathname: "/incidents" }}>
+              <Block
+                className="secondary-button"
+                overrides={{ ...CANCEL_BUTTON_OVERRIDES }}
+              >
+                Cancel
+              </Block>
+            </Link>
+          </Block>
+        </Block>
+      </>
     );
   }
 }

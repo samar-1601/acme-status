@@ -13,6 +13,7 @@ import { STATUS, getIncidentStatusFromPost, PAGE_ID } from "../../../constants";
 import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 import { Block } from "baseui/block";
+import TombStone from "../internal/formComponents/TombStone";
 
 //global variable to store component data fetched from API
 let InitialData: (ComponentObject | never)[] = [];
@@ -41,6 +42,8 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
   const [stateOfPage, setStateOfPage] = useState(0); //state of page 0-->loading data 1-->loaded data 2-->cannot load components 3--> wrong incidentUpdate request
 
   const [isSubmitClicked, setIsSubmitClicked] = useState<boolean>(false); //(true/false) --> isSubmitButton clicked
+
+  const [incidentMessage, setIncidentMessage] = useState<string>("");
 
   const { enqueue, dequeue } = useSnackbar(); //state for SnackBar
 
@@ -166,9 +169,10 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
             });
             console.log(InitialData);
             setComponents(InitialData);
-            setStateOfPage(1);
             setIncidentName(json.name);
             setIncidentStatus(getIncidentStatusFromPost(json.status));
+            setIncidentMessage(json.incident_updates[0].body);
+            setStateOfPage(1);
           })
           .catch(() => {
             setStateOfPage(3);
@@ -178,12 +182,18 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
   }, []);
 
   //If incidentUpdateRequest is wrong
+  if (stateOfPage == 0) {
+    return <TombStone type={"Update"} />;
+  } else if (stateOfPage == 2) {
+    return (
+      <IncidentErrorPage message="Sorry Unable to Fetch Components. Please Try Again!" />
+    );
+  }
   if (stateOfPage == 3) {
     return (
       <IncidentErrorPage message="Incident does not exist. Please Check Again!" />
     );
   }
-
   //otherwise render the form
   else {
     return (
@@ -191,9 +201,9 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
         incidentName={incidentName}
         incidentStatus={incidentStatus}
         components={components}
-        currentStateOfPage={stateOfPage}
         isSubmitClicked={isSubmitClicked}
         handleSubmit={handleSubmit}
+        incidentMessage={incidentMessage}
         type={"Update"}
       />
     );
