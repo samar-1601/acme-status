@@ -201,7 +201,7 @@ export const ELEMENT_LOADER: BlockProps["overrides"] = {
       justifyContent: "space-between",
       backgroundColor: "white",
       padding: "16px",
-      margin: "10px auto 20px auto",
+      margin: "2px auto 20px auto",
       boxShadow:
         "0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19)",
       width: "80%",
@@ -217,7 +217,7 @@ export const LOADER: BlockProps["overrides"] = {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      height: "80vh",
+      margin: "0px auto",
       width: "100%",
     },
   },

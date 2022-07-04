@@ -30,7 +30,6 @@ interface Props {
    * the active/selected item currently on the sidebar
    */
   activeItemID: SideBarMenu;
-  // isOpen: boolean;
   handleIsOpenChange: Function;
 }
 
@@ -67,7 +66,9 @@ const CollapsedSideBar: React.FC<Props> = React.memo(
         </Block>
         <StatefulPopover
           content={
-            <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>Sign Out</Block>
+            <Block overrides={COLLAPSED_SIDE_BAR_HOVER_OVERRIDES}>
+              Sign Out
+            </Block>
           }
           triggerType={TRIGGER_TYPE.hover}
           overrides={{
