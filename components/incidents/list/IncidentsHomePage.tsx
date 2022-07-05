@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 
 // components
 import { NavBarMenuItem } from "./components/NavigationBarMenuItem";
-import { CreateIncidentButton } from "./components/CreateIncidentButton";
+import { CreateIncidentButton } from "./components/HeaderBar/CreateIncidentButton";
 import { IncidentsList } from "./components/IncidentsList";
-import { HeaderBarContents } from "./components/HeaderBarContents";
+import { HeaderBarContents } from "./components/HeaderBar/HeaderBarContents";
 import { Block } from "baseui/block";
 
 // constants
@@ -19,6 +19,7 @@ import {
   NAVBAR_OVERRIDES,
   NAV_OVERRIDES,
 } from "./overrides/navStyles";
+import { NavigationBar } from "./components/NavigationBar";
 
 /**
  * IncidentsList View Header
@@ -39,34 +40,11 @@ export const IncidentsViewHomePage: React.FC = () => {
           activePage={activePage}
           setRefreshPressed={setIsRefreshPressed}
         />
-        <Block overrides={NAVBAR_OVERRIDES}>
-          <Block overrides={NAV_OVERRIDES}>
-            <NavBarMenuItem
-              pageType={PageType.All}
-              currentPage={activePage}
-              onClick={() => {
-                setQuery("");
-                setPage(PageType.All);
-              }}
-            />
-            <NavBarMenuItem
-              pageType={PageType.Active}
-              currentPage={activePage}
-              onClick={() => setPage(PageType.Active)}
-            />
-            <NavBarMenuItem
-              pageType={PageType.Maintenance}
-              currentPage={activePage}
-              onClick={() => setPage(PageType.Maintenance)}
-            />
-            <NavBarMenuItem
-              pageType={PageType.Scheduled}
-              currentPage={activePage}
-              onClick={() => setPage(PageType.Scheduled)}
-            />
-          </Block>
-          <CreateIncidentButton />
-        </Block>
+        <NavigationBar
+          activePage={activePage}
+          setPage={setPage}
+          setQuery={setQuery}
+        />
       </Block>
       <Block overrides={CONTENT_OVERRIDES}>
         <IncidentsList
