@@ -1,8 +1,6 @@
 // constants
 import { PageType } from "../../../../../constants";
 
-
-
 /**
  * Format date for display
  * @param date The date which needs to be formatted to display
@@ -38,4 +36,3 @@ export const formatDate = (
     date
   )}, ${timeHour}:${timeMins} UTC`;
 };
-

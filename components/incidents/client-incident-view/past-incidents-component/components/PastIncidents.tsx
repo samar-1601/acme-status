@@ -16,7 +16,7 @@ import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
  */
 const getCompletedIncidents = async () => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?q=completed`;
+    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?q=completed+resolved`;
 
     const response = await fetch(URL, {
       headers: {

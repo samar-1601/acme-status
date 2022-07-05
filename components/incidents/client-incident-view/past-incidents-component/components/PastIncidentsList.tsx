@@ -18,7 +18,7 @@ import {
   PAST_INCIDENT_NAME_OVERRIDES,
   PAST_INCIDENT_HOVER_OVERRIDES,
 } from "../overrides/pastIncidentsStyles";
-import { getComponentStatusText } from "../../../../../constants";
+import { getComponentStatusText, PageType } from "../../../../../constants";
 
 interface Props {
   incidentList: any;
@@ -44,14 +44,30 @@ export const PastIncidentsList: React.FC<Props> = React.memo(
 
       map.set(date, previous.concat(incident)); // concat the new incidents to the previous ones on the same day
     }
-    map = new Map([...map].sort().reverse()); // sort the groups in decreasing order of dates
+    map = new Map(
+      [...map]
+        .sort(function (a: any, b: any) {
+          // '01/03/2014'.split('/')
+          // gives ["01", "03", "2014"]
+          let aa: any[] = a.toString().split("/");
+          let bb: any[] = b.toString().split("/");
+          return aa[2] - bb[2] || aa[1] - bb[1] || aa[0] - bb[0];
+        })
+        .reverse()
+    ); // sort the groups in decreasing order of dates
     console.log(map);
     let renderList: JSX.Element[] = []; // list to store formatted data
     let index = 0;
 
     // iterate through each date and format the related incidents with required styling
     map.forEach(function (value, key) {
-      const headerDate = key; // date for a group
+      let date = key.split("/");
+
+      // month is 0-based, that's why we need dataParts[1] - 1
+      var dateObject = new Date(
+        date[2] + "/" + date[1] + "/" + String(Number(date[0]) + 1)
+      );
+      const headerDate = formatDate(dateObject, PageType.Completed); // date for a group
       const incidents = value; // list of incidents on a date
       let incidentsForDate = [];
 
@@ -90,7 +106,6 @@ export const PastIncidentsList: React.FC<Props> = React.memo(
             overrides={PAST_INCIDENT_WRAPPER_OVERRIDES}
           >
             <Block overrides={PAST_INCIDENT_NAME_OVERRIDES}>
-              {" "}
               {incidentName}
             </Block>
             <Block>{renderIncidentUpdates}</Block>
@@ -102,7 +117,7 @@ export const PastIncidentsList: React.FC<Props> = React.memo(
       renderList.push(
         <Block key={index++}>
           <Block overrides={PAST_INCIDENT_HOVER_OVERRIDES}>{headerDate}</Block>
-          <Block>{incidentsForDate}</Block>
+          <Block>{incidentsForDate.reverse()}</Block>
         </Block>
       );
     });
