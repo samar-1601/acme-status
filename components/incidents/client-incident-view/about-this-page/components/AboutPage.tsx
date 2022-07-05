@@ -25,7 +25,8 @@ export const AboutThisSite = React.memo(() => {
   const [state, setState] = useState({
     componentsList: Array(), // store the final response of components list to render
     isLoaded: false, // stores whether the page is loaded
-    isError: false,
+    isError: false, // isError: Stores if fetch has error
+    status: 200, // response status
   });
 
   /**
@@ -33,8 +34,12 @@ export const AboutThisSite = React.memo(() => {
    */
   const loadComponentsList = useCallback(async () => {
     try {
-      let componentList = [];
-      componentList = await getComponents(); // get components from API
+      let componentList = [],
+        responseStatus: number = 200,
+        responseIsError = false;
+
+      [componentList, responseStatus, responseIsError] = await getComponents(); // get components from API
+
       let components = [];
       components = await renderComponents(totalDays, componentList); // get formatted list ready to render from the API
 
@@ -42,7 +47,8 @@ export const AboutThisSite = React.memo(() => {
         ...state,
         componentsList: components,
         isLoaded: true,
-        isError: false,
+        isError: responseIsError,
+        status: responseStatus,
       }); // set the componentsList to returned render ready list and isLoaded to true
     } catch (err) {
       console.log(err);
@@ -56,6 +62,11 @@ export const AboutThisSite = React.memo(() => {
 
   if (state.isError) {
     return <IncidentErrorPage message="Failed to Fetch Components!!!" />;
+  }
+  if (state.status == 420) {
+    return (
+      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+    );
   }
   return state.isLoaded ? (
     // render components if data has loaded

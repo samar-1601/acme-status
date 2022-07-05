@@ -18,6 +18,7 @@ import {
   PAST_INCIDENT_NAME_OVERRIDES,
   PAST_INCIDENT_HOVER_OVERRIDES,
 } from "../overrides/pastIncidentsStyles";
+import { getComponentStatusText } from "../../../../../constants";
 
 interface Props {
   incidentList: any;
@@ -69,7 +70,7 @@ export const PastIncidentsList: React.FC<Props> = React.memo(
               overrides={PAST_INCIDENT_DETAILS_WRAPPER_OVERRIDES}
             >
               <Block overrides={PAST_INCIDENT_STATUS_OVERRIDES}>
-                {update["status"]}
+                {getComponentStatusText(update["status"])}
               </Block>
               <Block overrides={PAST_INCIDENT_STATUS_BODY_OVERRIDES}>
                 {" "}

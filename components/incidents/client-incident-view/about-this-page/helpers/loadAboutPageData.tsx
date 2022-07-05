@@ -1,5 +1,5 @@
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
+import { PAGE_ID } from "../../../../../constants";
 
 /**
  * get a list components
@@ -12,15 +12,17 @@ export const getComponents = async () => {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
-    const componentList = await response.json();
 
-    return componentList;
+    const dataItem: any = await response.json();
+    const status: number = response.status;
+
+    return [dataItem, status, false];
   } catch (err) {
-    // console.log(err);
-    throw err;
+    console.log(err);
+    return [[], 500, true];
   }
 };
 
@@ -36,13 +38,13 @@ export const getComponentUptime = async (componentID: string) => {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
-    const uptimeResponse = await response.json();
-
-    return uptimeResponse["uptime_percentage"];
+    const dataItem: any = await response.json();
+    return [dataItem["uptime_percentage"], false];
   } catch (err) {
     console.log(err);
+    return [[], true];
   }
 };

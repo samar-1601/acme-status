@@ -2,11 +2,7 @@
 import { useEffect, useState } from "react";
 
 // constants
-import {
-  NEXT_PUBLIC_AUTH_TOKEN,
-  PageType,
-  PAGE_ID,
-} from "../../../../../constants";
+import { PageType, PAGE_ID } from "../../../../../constants";
 
 /**
  * Loads data from API
@@ -39,25 +35,28 @@ const getData = async (pageNumber: number, pageType: string) => {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
 
-    const dataItem = await response.json();
+    const dataItem: any = await response.json();
+    const status: number = response.status;
 
-    return dataItem;
+    return [dataItem, status, false];
   } catch (err) {
-    throw err;
+    console.log(err);
+    return [[], 500, true];
   }
 };
 
-export default function useLoadPageData(pageType: PageType) {
+export default function useLoadIncidentsListData(pageType: PageType) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API
-    hasLoaded: false, // hasLoaded : status of loading data from API
+    isLoading: true, // isLoading : status of loading data from API
     hasMore: true, // hasMore : do we have to fetch more data
     pageNumber: 1, // pageNumber : page number for pagination
-    isError: false
+    isError: false, // isError: Stores if fetch has error
+    status: 200, // response status
   });
 
   /**
@@ -66,30 +65,45 @@ export default function useLoadPageData(pageType: PageType) {
    * @param pageType current menu item/pageType selected
    */
   const LoadDataItems = async (pageNumber: number, pageType: string) => {
-    let dataItem = [];
     try {
-      dataItem = await getData(pageNumber, pageType);
+      setState({ ...state, isLoading: true });
+
+      let dataItem: any = [],
+        responseStatus: number = 200,
+        responseIsError = false;
+      [dataItem, responseStatus, responseIsError] = await getData(
+        pageNumber,
+        pageType
+      );
 
       console.log(
         "pageNo:",
         pageNumber,
         "hasMore",
-        dataItem.length > 0,
+        dataItem.length > 0 && dataItem.length == limit,
         "API data:",
-        dataItem.length
+        dataItem.length,
+        dataItem
       );
 
       setState({
         ...state,
         pageNumber: pageNumber,
-        hasLoaded: true, // loading completed
+        isLoading: false, // loading completed
         hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
-        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
-        isError: false
+        dataList:
+          pageNumber == 1 || !state.dataList
+            ? dataItem
+            : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
+        isError: responseIsError,
+        status: responseStatus,
       });
     } catch (err) {
+      setState({
+        ...state,
+        isError: true,
+      });
       console.log(err);
-      setState({...state, isError: true});
     }
   };
 
@@ -103,15 +117,23 @@ export default function useLoadPageData(pageType: PageType) {
   };
 
   useEffect(() => {
-    setState({ ...state, hasLoaded: false, pageNumber: 1, isError:false }); // if scrolled below, set hasLoaded as false for the future data to render
+    setState({
+      ...state,
+      isLoading: true,
+      pageNumber: 1,
+      isError: false,
+      hasMore: true,
+      status: 200,
+    }); // if new menu item selected, reset values for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 
   return {
     dataList: state.dataList,
-    isLoaded: state.hasLoaded,
+    isLoading: state.isLoading,
     hasMore: state.hasMore,
     fetchMore: fetchMore,
-    isError: state.isError
+    isError: state.isError,
+    status: state.status,
   };
 }

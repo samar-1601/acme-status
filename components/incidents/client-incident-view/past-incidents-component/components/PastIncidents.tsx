@@ -7,7 +7,7 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // constants
-import { NEXT_PUBLIC_AUTH_TOKEN, PAGE_ID } from "../../../../../constants";
+import { PAGE_ID } from "../../../../../constants";
 import { PastIncidentsList } from "./PastIncidentsList";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 
@@ -21,15 +21,16 @@ const getCompletedIncidents = async () => {
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `OAuth ${NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
       },
     });
     const completedList = await response.json();
+    const status: number = response.status;
 
-    return completedList;
+    return [completedList, status, false];
   } catch (err) {
-    // console.log(err);
-    throw err;
+    console.log(err);
+    return [[], 500, true];
   }
 };
 
@@ -41,6 +42,7 @@ export const PastIncidents: React.FC = React.memo(() => {
     pastIncidentsList: [],
     isLoaded: false,
     isError: false,
+    status: 200,
   });
 
   /**
@@ -48,9 +50,12 @@ export const PastIncidents: React.FC = React.memo(() => {
    * @returns a JSX componentList ready to render after styling the API response
    */
   const loadComponentsList = useCallback(async () => {
-    let completedIncidents = [];
     try {
-      completedIncidents = await getCompletedIncidents();
+      let completedIncidents = [],
+        responseStatus: number = 200,
+        responseIsError = false;
+      [completedIncidents, responseStatus, responseIsError] =
+        await getCompletedIncidents();
 
       /**
        * isLoaded : To notify the loading spinner whether data has loaded
@@ -60,7 +65,8 @@ export const PastIncidents: React.FC = React.memo(() => {
         ...state,
         pastIncidentsList: completedIncidents,
         isLoaded: true,
-        isError: false,
+        isError: responseIsError,
+        status: responseStatus,
       });
     } catch (err) {
       setState({ ...state, isError: true });
@@ -76,6 +82,10 @@ export const PastIncidents: React.FC = React.memo(() => {
   if (state.isError) {
     return (
       <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
+    );
+  } else if (state.status == 420) {
+    return (
+      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
     );
   } else
     return state.isLoaded ? (

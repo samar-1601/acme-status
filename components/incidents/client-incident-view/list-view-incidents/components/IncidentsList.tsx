@@ -1,9 +1,9 @@
 // lib
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "../hooks/useLoadIncidentsListData";
+import useLoadIncidentsListData from "../hooks/useLoadIncidentsListData";
 
 // components
 import { Block } from "baseui/block";
@@ -50,11 +50,11 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   /**
    * API response
    * dataList : JSON response for the limit(currently 15) items in the current pageNumber
-   * isLoaded : whether the data has loaded or not from the API
+   * isLoading : whether the data has loaded or not from the API
    * hasMore : is there more data to fetch when we scroll
    */
-  const { dataList, isLoaded, hasMore, fetchMore, isError } =
-    useLoadPageData(pageType);
+  const { dataList, isLoading, hasMore, fetchMore, isError, status } =
+    useLoadIncidentsListData(pageType);
 
   /**
    * triggered when the data is loaded from the API
@@ -62,10 +62,10 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    */
   useEffect(() => {
     // if page has loaded
-    if (isLoaded) {
+    if (!isLoading) {
       return setPageLoaded(true);
     }
-  }, [isLoaded]);
+  }, [isLoading]);
 
   /**
    * Triggered when the PageType changes i.e when the user clicks another navigation bar item
@@ -84,13 +84,16 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
     return (
       <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
     );
+  } else if (status == 420) {
+    return (
+      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+    );
   } else
     return pageLoaded ? (
       // if page has Loaded
       dataList.length == 0 ? (
         // If the page has no data
         <Block overrides={LOADER_OVERRIDES}>
-          {" "}
           This Page has no Incidents !!
         </Block>
       ) : (
@@ -105,9 +108,11 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
           }}
         >
           <InfiniteLoader
-            isRowLoaded={({ index }) => !hasMore || index < dataList.length} // whether the current row is loaded
+            isRowLoaded={({ index }) =>
+              !hasMore || index < (dataList.length ?? 0)
+            } // whether the current row is loaded
             loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-            rowCount={dataList.length ?? 0 + 1} // total row count of the data to be displayed
+            rowCount={dataList.length + 1} // total row count of the data to be displayed
           >
             {({ onRowsRendered, registerChild }) => (
               <div style={{ width: "100%", height: `56vh` }}>

@@ -1,4 +1,3 @@
-export const NEXT_PUBLIC_AUTH_TOKEN = "c12226f5-9156-47cd-bf7c-a36379785a25";
 export const PAGE_ID = "7dwwybj29fy8";
 export const PAGE_NAME = "Acme";
 
