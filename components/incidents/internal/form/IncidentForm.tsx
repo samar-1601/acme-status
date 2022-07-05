@@ -77,10 +77,6 @@ export default function IncidentForm(props: IncidentCreationProps) {
 
   const [isMessageEntered, setIsMessageEntered] = useState<boolean>(false); //state for storing whether message has been entered by user
 
-  useEffect(() => {
-    console.log("value outside function", isMessageEntered);
-  });
-
   //function for handing name change
   const handleNameChange = useCallback((e: React.BaseSyntheticEvent) => {
     setIncidentName(e.target.value);
@@ -127,18 +123,14 @@ export default function IncidentForm(props: IncidentCreationProps) {
   //function to handle IncidentStatus Update
   const updateStatus = useCallback(
     (e: string) => {
+      console.log("here is the status", e);
       setIncidentStatus(e);
       if (isMessageEntered === false) {
-        console.log("value inside function", isMessageEntered);
         setIncidentMessage(getDefaultMessageFromStatus(e));
       }
     },
     [isMessageEntered]
   );
-
-  useEffect(() => {
-    console.log("updateStatus has updated");
-  }, [updateStatus]);
 
   //sends all the data of state to props.handleSubmit in the form payload
   const submitForm = () => {

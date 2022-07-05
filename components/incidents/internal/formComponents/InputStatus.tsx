@@ -3,9 +3,15 @@ import React, { useCallback, useEffect, useMemo } from "react";
 
 //components
 import { FormControl } from "baseui/form-control";
-import { ProgressBar, SIZE } from "baseui/progress-bar";
+import {
+  ProgressBar,
+  ProgressBarRounded,
+  SIZE,
+  StyledBarProgress,
+} from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
+import { Slider } from "baseui/slider";
 
 //helpers
 import {
@@ -19,6 +25,9 @@ import { STATUSNames } from "../../../../constants";
 
 //styles
 import { INPUT_STATUS_OVERRIDES } from "../form/overrides/FormControlOverrides";
+import { State } from "baseui/input";
+import { withStyle } from "baseui";
+import { BsCircleFill } from "react-icons/bs";
 
 interface InputStatusOnClickEvent {
   nativeEvent: {
@@ -91,6 +100,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
             justifyContent="center"
             color={item != props.incidentStatus ? "black" : "blue"}
             onClick={(e: Event) => {
+              console.log(item);
               props.updateStatus(item);
             }}
             overrides={{
@@ -115,16 +125,16 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
       >
         <>
           <Block
-            overrides={{
-              Block: {
-                props: {
-                  onClick: (event: InputStatusOnClickEvent) =>
-                    updateStatusBarOnClick(event),
-                },
-              },
-            }}
+          // overrides={{
+          //   Block: {
+          //     props: {
+          //       onClick: (event: InputStatusOnClickEvent) =>
+          //         updateStatusBarOnClick(event),
+          //     },
+          //   },
+          // }}
           >
-            <ProgressBar
+            {/* <ProgressBar
               value={calculateStatus(props.incidentStatus)}
               size={SIZE.large}
               steps={undefined}
@@ -134,21 +144,83 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                     cursor: "pointer",
                     margin: "25px 10% 0px",
                     height: "6px",
+                    position: "relative",
                   }),
                   props: {
                     className: "bar",
                   },
                 },
                 BarContainer: {
+                  style: {},
                   props: {
                     className: "root",
                   },
                 },
                 BarProgress: {
+                  style: ({ $value }) => {
+                    return {
+                      backgroundColor: getStatusBarColor(props.incidentStatus),
+                      position: "relative",
+                      transition:
+                        "transform ease 0.2s, background-color ease 0.2s",
+                      ":after": {
+                        position: "absolute",
+                        content: `"A"`,
+                        zIndex: "100",
+                        backgroundColor: "white",
+                        left: "5px",
+                      },
+                    };
+                  },
+                },
+              }}
+            /> */}
+            <Slider
+              value={[calculateStatus(props.incidentStatus)]}
+              onChange={(value) => {
+                console.log(value.value[0]);
+                props.updateStatus(getStatusFromPercentage(value.value[0]));
+              }}
+              marks={false}
+              overrides={{
+                Root: {
+                  style: ({ $theme }) => ({
+                    cursor: "pointer",
+                    margin: "20px 10% 10px",
+                    height: "30px",
+                    width: "80%",
+                  }),
+                },
+                TickBar: {
+                  style: {
+                    display: "none",
+                  },
+                },
+                Thumb: {
                   style: {
                     backgroundColor: getStatusBarColor(props.incidentStatus),
-                    transition:
-                      "transform ease 0.2s, background-color ease 0.2s",
+                    boxShadow: "0 0 5px 0 rgba(0, 0, 0, 1)",
+                    height: "20px",
+                    width: "20px",
+                    zIndex: "1000",
+                  },
+                },
+                ThumbValue: {
+                  style: { display: "none" },
+                },
+                InnerTrack: {
+                  style: ({ $value }) => ({
+                    height: "4px",
+                    background: `linear-gradient(to right, ${getStatusBarColor(
+                      props.incidentStatus
+                    )} 0%, ${getStatusBarColor(
+                      props.incidentStatus
+                    )} ${$value}%, rgb(226, 226, 226) ${$value}%, rgb(226, 226, 226) 100%)`,
+                  }),
+                },
+                InnerThumb: {
+                  style: {
+                    display: "none",
                   },
                 },
               }}
