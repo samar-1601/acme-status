@@ -7,7 +7,7 @@ import { INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
 
 export const ComponentGroup = function (props: any) {
   const [groups, setGroups] = React.useState([{}]);
-  const[val, setVal] = React.useState<any>([]);
+  // const[val, setVal] = React.useState<any>([]);
 
   const getComponentGroups = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`;
@@ -49,9 +49,12 @@ export const ComponentGroup = function (props: any) {
           options={groups}
           labelKey="label"
           valueKey="id"
-          onChange={(e) => { setVal(e.option) }}
-          value={val}
-          placeholder={val ? "" : "This component does not belong to a group"}
+          onChange={(e) => {
+            console.log(e)
+            props.setVal(e.option)
+          }}
+          value={props.val}
+          placeholder={"This component does not belong to a group"}
         />
       </FormControl>
     </Block>

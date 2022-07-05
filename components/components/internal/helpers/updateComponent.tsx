@@ -32,8 +32,9 @@ export const updateComponent = function (props: any) {
         DURATION.short
       );
       props.setSubmit(false);
+      return json;
     })
-    .then(() => {
+    .then((x) => {
       Router.push("/components");
     })
     .catch((err) => {

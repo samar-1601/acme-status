@@ -1,6 +1,7 @@
-import { Block } from "baseui/block";
-import Router from "next/router";
 import * as React from "react";
+
+import Router from "next/router";
+
 import { ComponentDescription } from "./ComponentDescription";
 import { ComponentGroup } from "./ComponentGroup";
 import { ComponentName } from "./ComponentName";
@@ -9,8 +10,10 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { UptimeBox } from "./UptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
-import { PAGE_ID } from "../../../../constants";
+
+import { Block } from "baseui/block";
 import { FORM_STYLES } from "../../overrides/componentFormStyles";
+
 import { createComponent } from "../helpers/createComponent";
 import { updateComponent } from "../helpers/updateComponent";
 
@@ -37,8 +40,13 @@ export default function ComponentForm(props: any) {
   const [componentGroup, setComponentGroup] = React.useState<any>(
     props.componentGroup
   );
+  const[val, setVal] = React.useState<any>([]);
   const [submit, setSubmit] = React.useState<Boolean>(false);
   const { enqueue, dequeue } = useSnackbar();
+
+  React.useEffect(() => {
+    console.log(val)
+  }, [val]);
 
   React.useEffect(() => {
     setComponentName(props.componentName);
@@ -72,18 +80,33 @@ export default function ComponentForm(props: any) {
 
   const handleGroupChange = React.useCallback((e) => {
     console.log(e);
+    setComponentGroup(e.option)
   }, []);
 
   const handleSubmit = () => {
+    console.log(componentGroup)
     setSubmit(true);
+    let payload: any;
     if (addComponent) {
-      let payload = {
-        component: {
-          description: componentDescription,
-          status: status[componentStatus],
-          name: componentName,
-        },
-      };
+      if (componentGroup.key != componentGroup.label) {
+        payload = {
+          component: {
+            description: componentDescription,
+            status: status[componentStatus],
+            name: componentName,
+            group_id: componentGroup.id,
+          },
+        };
+      }
+      else {
+        payload = {
+          component: {
+            description: componentDescription,
+            status: status[componentStatus],
+            name: componentName,
+          },
+        };
+      }
       if (payload.component.name == "") {
         enqueue(
           {
@@ -98,6 +121,7 @@ export default function ComponentForm(props: any) {
             enqueue: enqueue,
             setSubmit: setSubmit,
             payload: payload,
+            componentGroup: val,
           })
         );
       }
@@ -150,8 +174,10 @@ export default function ComponentForm(props: any) {
         handleStatusChange={handleStatusChange}
       />
       <ComponentGroup
-        value={componentGroup}
-        handleGroupChange={handleGroupChange}
+        val={val}
+        setVal={setVal}
+        value={val}
+        handleGroupChange={setVal}
       />
       <UptimeBox />
       <Footer
