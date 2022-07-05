@@ -19,7 +19,6 @@ import "react-virtualized/styles.css";
 
 // constants
 import { PageType } from "../../../../../constants";
-import { LOADER_OVERRIDES } from "../../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
 import { TombStoneLoader } from "../TombStoneLoader";
 import IncidentErrorPage from "../../../../incidentError/IncidentErrorPage";

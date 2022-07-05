@@ -85,7 +85,7 @@ export default function useLoadPageData(pageType: PageType, query: string) {
         "pageNo:",
         pageNumber,
         "hasMore",
-        dataItem.length > 0,
+        dataItem.length > 0 && !query && dataItem.length == limit,
         "API data:",
         dataItem.length,
         dataItem
@@ -95,7 +95,7 @@ export default function useLoadPageData(pageType: PageType, query: string) {
         ...state,
         pageNumber: pageNumber,
         isLoading: false, // loading completed
-        hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
+        hasMore: dataItem.length == limit && !query, // if page limit is reached we may have more data on the next page
         dataList:
           pageNumber == 1 || !state.dataList
             ? dataItem
@@ -134,8 +134,9 @@ export default function useLoadPageData(pageType: PageType, query: string) {
       isLoading: true,
       pageNumber: 1,
       isError: false,
+      hasMore: true,
       status: 200,
-    }); // if scrolled below, set isLoading as false for the future data to render
+    }); // if new menu item selected, reset values for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 

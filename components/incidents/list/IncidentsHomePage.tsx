@@ -1,12 +1,11 @@
 // lib
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // components
-import { NavBarMenuItem } from "./components/NavigationBar/NavigationBarMenuItem";
-import { CreateIncidentButton } from "./components/HeaderBar/CreateIncidentButton";
+import { Block } from "baseui/block";
 import { IncidentsList } from "./components/IncidentList/IncidentsList";
 import { HeaderBarContents } from "./components/HeaderBar/HeaderBarContents";
-import { Block } from "baseui/block";
+import { NavigationBar } from "./components/NavigationBar/NavigationBar";
 
 // constants
 import { PageType } from "../../../constants";
@@ -16,10 +15,7 @@ import { INCIDENT_LIST_VIEW_OVERRIDES } from "./overrides/listStyles";
 import {
   HEADER_CONTAINER_OVERRIDES,
   CONTENT_OVERRIDES,
-  NAVBAR_OVERRIDES,
-  NAV_OVERRIDES,
 } from "./overrides/navStyles";
-import { NavigationBar } from "./components/NavigationBar/NavigationBar";
 
 /**
  * IncidentsList View Header
@@ -40,6 +36,7 @@ export const IncidentsViewHomePage: React.FC = () => {
           onSubmit={setQuery}
           activePage={activePage}
           setRefreshPressed={setIsRefreshPressed}
+          query={query}
         />
         <NavigationBar
           activePage={activePage}

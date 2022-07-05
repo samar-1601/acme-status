@@ -8,7 +8,7 @@ import { Block } from "baseui/block";
 import { HEADER_BAR_OVERRIDES } from "../../overrides/navStyles";
 import { PageType } from "../../../../../constants";
 import { HeaderBarText } from "./HeaderBarText";
-import { SearchBar } from "./SearchBar";
+// import { SearchBar } from "./SearchBar";
 import { RefreshButton } from "./RefreshButton";
 
 interface Props {
@@ -17,6 +17,7 @@ interface Props {
   activePage: PageType;
   setRefreshPressed: Function;
   isRefreshPressed: boolean;
+  query: string;
 }
 
 /**
@@ -29,11 +30,12 @@ export const HeaderBarContents: React.FC<Props> = React.memo(
     activePage,
     setRefreshPressed,
     isRefreshPressed,
+    query,
   }) => {
     return (
       <Block overrides={HEADER_BAR_OVERRIDES}>
         <HeaderBarText headerText={headerText} />
-        <SearchBar activePage={activePage} onSubmit={onSubmit} />
+        {/* <SearchBar activePage={activePage} onSubmit={onSubmit} query={query}/> */}
         <RefreshButton
           setRefreshPressed={setRefreshPressed}
           isRefreshPressed={isRefreshPressed}

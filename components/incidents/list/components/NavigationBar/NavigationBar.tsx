@@ -1,14 +1,21 @@
-import { Block } from "baseui/block";
+// lib
 import React from "react";
-import { PageType } from "../../../../../constants";
-import { NAVBAR_OVERRIDES, NAV_OVERRIDES } from "../../overrides/navStyles";
+
+// components
+import { Block } from "baseui/block";
 import { CreateIncidentButton } from "../HeaderBar/CreateIncidentButton";
 import { NavBarMenuItem } from "./NavigationBarMenuItem";
 
+// constants
+import { PageType } from "../../../../../constants";
+
+// styles
+import { NAVBAR_OVERRIDES, NAV_OVERRIDES } from "../../overrides/navStyles";
+
 interface Props {
-  activePage: PageType;
-  setPage: Function;
-  setQuery: Function;
+  activePage: PageType; // selected page in the navigation menu
+  setPage: Function; // set the page if new navigation menu item is selected
+  setQuery: Function; // flush the query when a new mavigation menu item is selected
 }
 export const NavigationBar: React.FC<Props> = React.memo(
   ({ activePage, setPage, setQuery }) => {
@@ -26,17 +33,26 @@ export const NavigationBar: React.FC<Props> = React.memo(
           <NavBarMenuItem
             pageType={PageType.Active}
             currentPage={activePage}
-            onClick={() => setPage(PageType.Active)}
+            onClick={() => {
+              setQuery("");
+              setPage(PageType.Active);
+            }}
           />
           <NavBarMenuItem
             pageType={PageType.Maintenance}
             currentPage={activePage}
-            onClick={() => setPage(PageType.Maintenance)}
+            onClick={() => {
+              setQuery("");
+              setPage(PageType.Maintenance);
+            }}
           />
           <NavBarMenuItem
             pageType={PageType.Scheduled}
             currentPage={activePage}
-            onClick={() => setPage(PageType.Scheduled)}
+            onClick={() => {
+              setQuery("");
+              setPage(PageType.Scheduled);
+            }}
           />
         </Block>
         <CreateIncidentButton />

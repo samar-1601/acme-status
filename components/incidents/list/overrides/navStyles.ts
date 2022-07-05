@@ -214,10 +214,25 @@ export const REFRESH_BUTTON_OVERRIDES: BlockProps["overrides"] = {
       cursor: "pointer",
       borderRadius: "8px",
       backgroundColor: "white",
+      borderColor: "#E6E6E9",
       display: "inline",
+      borderWidth: "1px",
       ":hover": {
-        backgroundColor: "#DBDBDB",
+        borderColor: "#0E61F6",
       },
+    },
+  },
+};
+export const REFRESH_BUTTON_SPINNER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      padding: "7px",
+      cursor: "not-allowed",
+      borderRadius: "8px",
+      backgroundColor: "white",
+      borderColor: "#0E61F6",
+      borderWidth: "1px",
+      display: "inline",
     },
   },
 };
