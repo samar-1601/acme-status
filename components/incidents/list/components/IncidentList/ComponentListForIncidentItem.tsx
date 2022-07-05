@@ -10,7 +10,7 @@ import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
 import {
   ComponentStatusIconUrls,
   getDisplayComponentStatusText,
-} from "../../../../constants";
+} from "../../../../../constants";
 
 // styles
 import {
@@ -18,7 +18,7 @@ import {
   COMPONENT_ITEM_OVERRIDES,
   COMPONENT_ITEM_ICON_WRAPPER_OVERRIDES,
   COMPONENT_ICON_HOVER_OVERRIDES,
-} from "../overrides/listStyles";
+} from "../../overrides/listStyles";
 
 interface Props {
   /**

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Block } from "baseui/block";
 
 // styles
-import { CREATE_BUTTON_OVERRIDES } from "../overrides/navStyles";
+import { CREATE_BUTTON_OVERRIDES } from "../../overrides/navStyles";
 
 /**
  * Button component for create incident

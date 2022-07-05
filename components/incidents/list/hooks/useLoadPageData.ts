@@ -19,13 +19,15 @@ const limit = 15; // determines the no. of rows of data in a page
  * @param pageType type of the page to be rendered
  * @returns the data fetched from the API
  */
-const getData = async (pageNumber: number, pageType: string) => {
+const getData = async (pageNumber: number, pageType: string, query: string) => {
   /**
    * The URL value is changed according to the PageType to get the desired response.
    */
   try {
     let URL;
-    URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
+    URL = query
+      ? `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
+      : `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
     if (pageType == PageType.Maintenance) {
       URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Active) {
@@ -51,7 +53,7 @@ const getData = async (pageNumber: number, pageType: string) => {
   }
 };
 
-export default function useLoadPageData(pageType: PageType) {
+export default function useLoadPageData(pageType: PageType, query: string) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API
     isLoading: true, // isLoading : status of loading data from API
@@ -75,14 +77,15 @@ export default function useLoadPageData(pageType: PageType) {
         responseIsError = false;
       [dataItem, responseStatus, responseIsError] = await getData(
         pageNumber,
-        pageType
+        pageType,
+        query
       );
 
       console.log(
         "pageNo:",
         pageNumber,
         "hasMore",
-        dataItem.length > 0,
+        dataItem.length > 0 && !query && dataItem.length == limit,
         "API data:",
         dataItem.length,
         dataItem
@@ -92,8 +95,11 @@ export default function useLoadPageData(pageType: PageType) {
         ...state,
         pageNumber: pageNumber,
         isLoading: false, // loading completed
-        hasMore: dataItem.length == limit, // if page limit is reached we may have more data on the next page
-        dataList: pageNumber == 1 ? dataItem : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
+        hasMore: dataItem.length == limit && !query, // if page limit is reached we may have more data on the next page
+        dataList:
+          pageNumber == 1 || !state.dataList
+            ? dataItem
+            : [...state.dataList, ...dataItem], // concat data obtained in the current response to previous datalist
         isError: responseIsError,
         status: responseStatus,
       });
@@ -128,8 +134,9 @@ export default function useLoadPageData(pageType: PageType) {
       isLoading: true,
       pageNumber: 1,
       isError: false,
+      hasMore: true,
       status: 200,
-    }); // if scrolled below, set isLoading as false for the future data to render
+    }); // if new menu item selected, reset values for the future data to render
     LoadDataItems(1, pageType);
   }, [pageType]);
 

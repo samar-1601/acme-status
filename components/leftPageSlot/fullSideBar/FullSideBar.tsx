@@ -75,7 +75,7 @@ const FullSideBar: React.FC<Props> = React.memo(
           overrides={SIDE_BAR_COLLAPSE_ICON_OVERRIDES}
           onClick={() => handleIsOpenChange()}
         >
-          <AiOutlineLeft size={20} />
+          <AiOutlineLeft size={16} />
         </Block>
       </Block>
     );

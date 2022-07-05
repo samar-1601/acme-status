@@ -110,7 +110,7 @@ export const SIDE_BAR_COLLAPSE_ICON_OVERRIDES: BlockProps["overrides"] = {
       // display: "float",
       position:"absolute",
       top:"180px",
-      left:"68px",
+      left:"74px",
       borderRadius: "60000px",
       backgroundColor: "white",
       boxShadow: " 0 1px 4px 0 rgba(10,10,20,0.15)",

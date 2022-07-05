@@ -165,4 +165,10 @@
     background-color: #EEEFF1;
     cursor: pointer;
   }
+  .disabled-on-hover :hover{
+    cursor: not-allowed;
+  }
+  .refresh-icon-wrapper:hover .refresh-icon{
+    fill: #0E61F6;
+  }
 }
