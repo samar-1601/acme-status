@@ -145,9 +145,7 @@ export default function IncidentCreation() {
         components={components}
         isSubmitClicked={isSubmitClicked}
         handleSubmit={handleSubmit}
-        incidentMessage={
-          "We will be undergoing scheduled maintenance during this time."
-        }
+        incidentMessage={"We are investigating this issue."}
         incidentName={""}
         incidentStatus={"Investigating"}
         type={"Create"} //sets formType to createIncident
