@@ -199,7 +199,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
                 Thumb: {
                   style: {
                     backgroundColor: getStatusBarColor(props.incidentStatus),
-                    boxShadow: "0 0 5px 0 rgba(0, 0, 0, 1)",
+                    boxShadow: "0 0 3px 0 rgba(0, 0, 0, 1)",
                     height: "20px",
                     width: "20px",
                     zIndex: "1000",
