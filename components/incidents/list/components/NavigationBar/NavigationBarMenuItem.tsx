@@ -6,7 +6,7 @@ import {
   NAV_BAR_MENU_ITEM_WRAPPER_OVERRIDES,
   ACTIVE_NAV_ITEM_OVERRIDES,
   NON_ACTIVE_NAV_ITEM_OVERRIDES,
-} from "../overrides/navStyles";
+} from "../../overrides/navStyles";
 
 // components
 import { Block } from "baseui/block";

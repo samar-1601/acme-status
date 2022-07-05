@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import * as React from "react";
 
 // helper functions
-import useLoadPageData from "../hooks/useLoadPageData";
+import useLoadPageData from "../../hooks/useLoadPageData";
 
 // components
 import { RenderIncidentData } from "./IncidentListItem";
@@ -18,15 +18,15 @@ import {
 import "react-virtualized/styles.css";
 
 // constants
-import { PageType } from "../../../../constants";
-import { LOADER_OVERRIDES } from "../overrides/listStyles";
+import { PageType } from "../../../../../constants";
+import { LOADER_OVERRIDES } from "../../overrides/listStyles";
 import { useSnackbar } from "baseui/snackbar";
-import { TombStoneLoader } from "./TombStoneLoader";
-import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
+import { TombStoneLoader } from "../TombStoneLoader";
+import IncidentErrorPage from "../../../../incidentError/IncidentErrorPage";
 import {
   MAIN_STYLE_OVERRIDES,
   ERROR_PAGE_OVERRIDES,
-} from "../../internal/form/overrides/BlockOverrides";
+} from "../../../internal/form/overrides/BlockOverrides";
 
 interface Props {
   /**
@@ -79,6 +79,7 @@ export const IncidentsList: React.FC<Props> = React.memo(
     useEffect(() => {
       // if page has loaded
       if (!isLoading) {
+        setRefreshPressed(false);
         return setPageLoaded(true);
       }
     }, [isLoading]);
@@ -104,7 +105,6 @@ export const IncidentsList: React.FC<Props> = React.memo(
       if (isRefreshPressed) {
         setPageLoaded(false);
         reFetch();
-        setRefreshPressed(false);
       }
     }, [isRefreshPressed]);
 

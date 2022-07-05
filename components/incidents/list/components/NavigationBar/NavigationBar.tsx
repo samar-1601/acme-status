@@ -1,8 +1,8 @@
 import { Block } from "baseui/block";
 import React from "react";
-import { PageType } from "../../../../constants";
-import { NAVBAR_OVERRIDES, NAV_OVERRIDES } from "../overrides/navStyles";
-import { CreateIncidentButton } from "./HeaderBar/CreateIncidentButton";
+import { PageType } from "../../../../../constants";
+import { NAVBAR_OVERRIDES, NAV_OVERRIDES } from "../../overrides/navStyles";
+import { CreateIncidentButton } from "../HeaderBar/CreateIncidentButton";
 import { NavBarMenuItem } from "./NavigationBarMenuItem";
 
 interface Props {

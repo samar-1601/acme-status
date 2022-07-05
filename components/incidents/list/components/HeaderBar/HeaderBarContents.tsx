@@ -16,18 +16,28 @@ interface Props {
   onSubmit: Function;
   activePage: PageType;
   setRefreshPressed: Function;
+  isRefreshPressed: boolean;
 }
 
 /**
  * React component to render the Header components on the top of the fixed navigation bar
  */
 export const HeaderBarContents: React.FC<Props> = React.memo(
-  ({ headerText, onSubmit, activePage, setRefreshPressed }) => {
+  ({
+    headerText,
+    onSubmit,
+    activePage,
+    setRefreshPressed,
+    isRefreshPressed,
+  }) => {
     return (
       <Block overrides={HEADER_BAR_OVERRIDES}>
         <HeaderBarText headerText={headerText} />
         <SearchBar activePage={activePage} onSubmit={onSubmit} />
-        <RefreshButton setRefreshPressed={setRefreshPressed} />
+        <RefreshButton
+          setRefreshPressed={setRefreshPressed}
+          isRefreshPressed={isRefreshPressed}
+        />
       </Block>
     );
   }

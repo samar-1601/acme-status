@@ -17,11 +17,11 @@ import {
   BUTTON_AREA,
   ITEM_DETAILS_FIRST_TWO_LINES_WRAPPER_OVERRIDES,
   ITEM_FIRST_PART_LEFT_OVERRIDES,
-} from "../overrides/listStyles";
+} from "../../overrides/listStyles";
 
 // helpers
-import { deleteIncident } from "../helpers/deleteIncident";
-import { formatDate } from "../helpers/formatDate";
+import { deleteIncident } from "../../helpers/deleteIncident";
+import { formatDate } from "../../helpers/formatDate";
 
 interface Props {
   incident: any;
