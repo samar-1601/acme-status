@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+
+  html,
+  body {
+    padding: 0;
+    margin: 0 !important;
+    background-color: #EEEFF1;
+
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0ch;
+  }
+
+}
+
+@layer components {
+
+  /*to be used for heading */
+  .header {
+    @apply text-3xl;
+    @apply font-black;
+  }
+
+  /*to be used to link or url*/
+  .link {
+    @apply underline;
+    @apply my-2;
+    @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
+  }
+
+  /*to be used for primary button*/
+  .primary-button {
+    @apply bg-primary-not-hover;
+    @apply rounded-lg;
+    @apply hover:bg-primary-hover;
+    @apply text-white;
+    @apply cursor-pointer;
+    @apply flex justify-center items-center;
+  }
+
+  .primary-button-disabled {
+    @apply bg-primary-hover;
+    @apply rounded-lg;
+    @apply text-white;
+    @apply cursor-not-allowed;
+    @apply flex justify-center items-center;
+  }
+
+  /*to be used for secondary button*/
+  .secondary-button {
+    @apply bg-secondary-not-hover;
+    @apply rounded-lg;
+    @apply hover:bg-secondary-hover;
+    @apply text-black;
+    @apply cursor-pointer;
+    @apply border;
+    @apply border-border-color;
+    @apply flex justify-center items-center;
+  }
+
+  /*to be used for applying footer bar in form*/
+  .footer-bar {
+    @apply fixed left-0 bottom-0;
+    @apply bg-white;
+    @apply w-full pr-4 pt-4;
+    @apply border-t-2 border-border-color
+
+  }
+
+  .sideBarOption {
+    @apply hover:bg-secondary-hover;
+    @apply cursor-pointer;
+  }
+
+  .hoverSideBarOption {
+    @apply hover:bg-side-bar-option-hover-bg hover:text-side-bar-option-hover-text;
+  }
+
+  .userProfileImage {
+    @apply rounded-full;
+  }
+
+  .block-hover-state {
+    @apply hover:text-hover-blue;
+  }
+
+  .welcome-page-image {
+    max-width: 100%;
+    height: auto;
+    box-Shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+
+  @keyframes fade-left {
+    0% {
+      transform: translateX(-5%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-right {
+    0% {
+      transform: translateX(5%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-5%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .startingEffect {
+    transition-delay: 0.2s;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+  }
+
+  .active.fadingEffect1 {
+    transition-delay: 0.2s;
+    animation: fade-left 1s ease-in;
+  }
+
+  .active.fadingEffect2 {
+    transition-delay: 0.2s;
+    animation: fade-right 1s ease-in;
+  }
+
+  .list-item .button-area {
+    visibility: hidden;
+  }
+
+  .list-item:hover .button-area {
+    visibility: visible;
+  }
+
+  .edit-icon {
+    fill: "black";
+  }
+  .edit-icon-wrapper :hover{
+    background-color: #EEEFF1;
+    cursor: pointer;
+  }
+  .disabled-on-hover :hover{
+    cursor: not-allowed;
+  }
+  .refresh-icon-wrapper:hover .refresh-icon{
+    fill: #0E61F6;
+  }
+}
