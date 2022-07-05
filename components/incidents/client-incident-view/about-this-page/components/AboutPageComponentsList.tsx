@@ -23,9 +23,11 @@ export const renderComponents = async (
   componentList: any[]
 ) => {
   let renderComponentList: JSX.Element[] = [];
-  if (componentList != undefined) {
+  if (componentList) {
     for (const component of componentList) {
-      const componentUptime = await getComponentUptime(component["id"]); // get the uptime percentage for the component
+      let componentUptime: string = "",
+        isError: boolean = false;
+      [componentUptime, isError] = await getComponentUptime(component["id"]); // get the uptime percentage for the component
       let bars: JSX.Element = <></>;
       if (componentUptime) {
         // if the component has uptime, then return 90 day colored status bars
