@@ -64,7 +64,7 @@ export const COLLAPSED_USER_DETAILS_WRAPPER_OVERRIDES: BlockProps["overrides"] =
         borderRadius: "8px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
         gap: "10px",
       },

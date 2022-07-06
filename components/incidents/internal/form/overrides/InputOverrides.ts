@@ -9,6 +9,7 @@ export const INPUT_NAME_OVERRIDES: InputProps["overrides"] = {
         borderColor: "#0E61F6",
       },
       borderWidth: "1px",
+      outline: "none"
     }),
   },
   InputContainer: {

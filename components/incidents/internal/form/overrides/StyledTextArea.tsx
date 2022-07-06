@@ -31,7 +31,7 @@ export const StyledTextArea: React.FC<Props> = React.memo((props) => {
         ":hover": {
           borderColor: "#0E61F6",
         },
-        ".focus": {
+        ":focus": {
           borderColor: "#0E61F6",
         },
       })}

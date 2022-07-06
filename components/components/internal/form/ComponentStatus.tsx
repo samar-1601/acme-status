@@ -1,9 +1,11 @@
-import { Block } from "baseui/block";
-import { Select } from "baseui/select";
 import * as React from "react";
+
+import { Block } from "baseui/block";
+import { FormControl } from "baseui/form-control";
+import { Select } from "baseui/select";
+import { COMPONENT_OVERRIDES, INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
+
 import { ITEMS } from "../../../../constants";
-import { COMPONENT_OVERRIDES } from "../../../incidents/internal/form/overrides/BlockOverrides";
-import { INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
 
 function Image(props: any) {
   return (
@@ -25,7 +27,8 @@ export const ComponentStatus = React.memo((props: any) => {
   });
 
   return (
-    <Block overrides={{ ...COMPONENT_OVERRIDES }}>
+    <FormControl label="Component Status">
+    <Block overrides={COMPONENT_OVERRIDES}>
       <Select overrides={INPUT_STATUS_STYLE}
         options={options}
         backspaceRemoves={false}
@@ -37,6 +40,7 @@ export const ComponentStatus = React.memo((props: any) => {
           props.handleStatusChange(event);
         }}
       />
-    </Block>
+      </Block>
+      </FormControl>
   );
 });
