@@ -1,4 +1,5 @@
 import { Block } from "baseui/block";
+import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
 import * as React from "react";
 import { ITEMS } from "../../../../constants";
@@ -25,6 +26,7 @@ export const ComponentStatus = React.memo((props: any) => {
   });
 
   return (
+    <FormControl label="Component Status">
     <Block overrides={{ ...COMPONENT_OVERRIDES }}>
       <Select overrides={INPUT_STATUS_STYLE}
         options={options}
@@ -37,6 +39,7 @@ export const ComponentStatus = React.memo((props: any) => {
           props.handleStatusChange(event);
         }}
       />
-    </Block>
+      </Block>
+      </FormControl>
   );
 });
