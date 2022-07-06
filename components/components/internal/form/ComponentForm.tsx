@@ -179,7 +179,7 @@ export default function ComponentForm(props: any) {
         value={val}
         handleGroupChange={setVal}
       />
-      <UptimeBox />
+      {/* <UptimeBox /> */}
       <Footer
         addComponent={addComponent}
         handleSubmit={handleSubmit}
