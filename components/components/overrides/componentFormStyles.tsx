@@ -260,3 +260,13 @@ export const FOOTER_WRAPPER: BlockProps["overrides"] = {
     },
   },
 }
+
+export const COMPONENT_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      margin: "0px",
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  },
+};
