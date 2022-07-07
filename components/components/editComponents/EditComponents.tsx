@@ -1,6 +1,11 @@
+// lib
 import * as React from "react";
-import { PAGE_ID } from "../../../constants";
+
+// components
 import ComponentForm from "../internal/form/ComponentForm";
+
+// constants
+import { PAGE_ID } from "../../../constants";
 
 const status = [
   "operational",

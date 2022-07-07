@@ -20,7 +20,7 @@ import {
 } from "../../overrides/listStyles";
 
 // helpers
-import { deleteIncident } from "../../helpers/deleteIncident";
+import { deleteIncident } from "../../helpers/deleteIncidentHelper";
 import { formatDate } from "../../helpers/formatDate";
 
 interface Props {

@@ -1,10 +1,18 @@
+// lib
 import * as React from "react";
 
+// components
 import { Block } from "baseui/block";
 import { FormControl } from "baseui/form-control";
 import { Select } from "baseui/select";
-import { COMPONENT_OVERRIDES, INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
 
+// styles
+import {
+  COMPONENT_OVERRIDES,
+  INPUT_STATUS_STYLE,
+} from "../../overrides/componentFormStyles";
+
+// constants
 import { ITEMS } from "../../../../constants";
 
 function Image(props: any) {
@@ -28,19 +36,20 @@ export const ComponentStatus = React.memo((props: any) => {
 
   return (
     <FormControl label="Component Status">
-    <Block overrides={COMPONENT_OVERRIDES}>
-      <Select overrides={INPUT_STATUS_STYLE}
-        options={options}
-        backspaceRemoves={false}
-        clearable={false}
-        searchable={false}
-        placeholder="Select Component Status"
-        value={[options[props.id]]}
-        onChange={(event) => {
-          props.handleStatusChange(event);
-        }}
-      />
+      <Block overrides={COMPONENT_OVERRIDES}>
+        <Select
+          overrides={INPUT_STATUS_STYLE}
+          options={options}
+          backspaceRemoves={false}
+          clearable={false}
+          searchable={false}
+          placeholder="Select Component Status"
+          value={[options[props.id]]}
+          onChange={(event) => {
+            props.handleStatusChange(event);
+          }}
+        />
       </Block>
-      </FormControl>
+    </FormControl>
   );
 });

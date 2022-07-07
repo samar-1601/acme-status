@@ -1,16 +1,27 @@
+// lib
 import * as React from "react";
 
+// components
+import { Block } from "baseui/block";
+import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
+import Image from "next/image";
+import Link from "next/link";
+import { useSnackbar } from "baseui/snackbar";
+import { TombStoneLoader } from "./TombStoneLoader";
+import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
+
+
+// constants
 import {
   ComponentStatusIconUrls,
   getDisplayComponentStatusText,
   PAGE_ID,
 } from "../../../constants";
 
-import { StatefulPopover, TRIGGER_TYPE } from "baseui/popover";
-import Image from "next/image";
-import Link from "next/link";
+// helpers
+import { deleteComponent } from "../internal/helpers/deleteComponentHandler";
 
-import { Block } from "baseui/block";
+// styles
 import {
   COMPONENTS_BUTTON_AREA,
   DETAIL_STYLES,
@@ -18,10 +29,6 @@ import {
   LIST_ITEM,
   LOADER,
 } from "../overrides/componentListStyles";
-import { useSnackbar } from "baseui/snackbar";
-import { deleteComponent } from "../internal/helpers/deleteComponent";
-import { TombStoneLoader } from "./TombStoneLoader";
-import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 import { COMPONENT_ICON_HOVER_OVERRIDES } from "../../incidents/list/overrides/listStyles";
 
 export const ComponentList = function (props: any) {

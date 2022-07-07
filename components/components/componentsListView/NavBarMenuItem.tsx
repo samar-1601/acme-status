@@ -1,5 +1,10 @@
-import { Block } from "baseui/block";
+// lib
 import * as React from "react";
+
+// components
+import { Block } from "baseui/block";
+
+// styles
 import {
   DIV_INSIDE_NAV,
   DIV_INSIDE_NAV_DISABLED,

@@ -1,8 +1,12 @@
-import { Block } from "baseui/block";
-import Router from "next/router";
+// lib
 import * as React from "react";
+import Router from "next/router";
 
+// components
+import { Block } from "baseui/block";
 import { FiArrowLeft } from "react-icons/fi";
+
+// styles
 import {
   HEADER_BAR_OVERRIDES,
   BACK_ICON_OVERRIDES,
@@ -12,6 +16,7 @@ import {
 interface Props {
   headerText: string; // text to render in the header
 }
+
 export const Header: React.FC<Props> = React.memo(({ headerText }) => {
   return (
     <Block overrides={HEADER_BAR_OVERRIDES}>

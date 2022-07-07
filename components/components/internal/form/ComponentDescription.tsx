@@ -1,5 +1,10 @@
+// lib
 import * as React from "react";
+
+// components
 import { FormControl } from "baseui/form-control";
+
+// styles
 import { useStyletron } from "styletron-react";
 
 export const ComponentDescription = React.memo((props: any) => {

@@ -1,13 +1,22 @@
-import { Block } from "baseui/block";
-import { FormControl } from "baseui/form-control";
-import { Select } from "baseui/select";
+// lib
 import * as React from "react";
-import { PAGE_ID } from "../../../../constants";
+
+// components
+import { Block } from "baseui/block";
+import { Select } from "baseui/select";
+import { FormControl } from "baseui/form-control";
+
+// styles
 import { INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
+
+// constants
+import { PAGE_ID } from "../../../../constants";
 
 export const ComponentGroup = function (props: any) {
   const [groups, setGroups] = React.useState([{}]);
-  const[place, setPlace] = React.useState<string>("This component does not belong to a group");
+  const [place, setPlace] = React.useState<string>(
+    "This component does not belong to a group"
+  );
 
   const getComponentGroups = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`;
@@ -44,15 +53,16 @@ export const ComponentGroup = function (props: any) {
       }}
     >
       <FormControl label="Component group">
-        <Select overrides={INPUT_STATUS_STYLE}
+        <Select
+          overrides={INPUT_STATUS_STYLE}
           creatable
           options={groups}
           labelKey="label"
           valueKey="id"
           onChange={(e) => {
-            console.log(e)
-            props.setVal(e.option)
-            setPlace("")
+            console.log(e);
+            props.setVal(e.option);
+            setPlace("");
           }}
           value={props.val}
           placeholder={place}

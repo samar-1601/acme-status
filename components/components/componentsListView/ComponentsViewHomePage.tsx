@@ -1,7 +1,17 @@
-import { Block } from "baseui/block";
+// lib
 import * as React from "react";
-import { Page } from "../../../constants";
+
+// components
+import { Block } from "baseui/block";
 import { ComponentList } from "./ComponentList";
+import { CreateComponentButton } from "./CreateComponentButton";
+import { NavBarMenuItem } from "./NavBarMenuItem";
+import { Header } from "./Header";
+
+// constants
+import { Page } from "../../../constants";
+
+// styles
 import {
   COMPONENTS_LIST_VIEW,
   CONTAINER,
@@ -9,10 +19,7 @@ import {
   NAV,
   NAV_BAR_WRAPPER,
 } from "../overrides/componentListStyles";
-import { CreateComponentButton } from "./CreateComponentButton";
 
-import { NavBarMenuItem } from "./NavBarMenuItem";
-import { Header } from "./Header";
 
 export const ComponentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = React.useState<Page>(Page.Active); // variable indicating the current selected navbar menu-item

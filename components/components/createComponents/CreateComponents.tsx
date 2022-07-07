@@ -1,4 +1,7 @@
+// lib
 import * as React from "react";
+
+// components
 import ComponentForm from "../internal/form/ComponentForm";
 
 export const ComponentCreation = React.memo(() => {

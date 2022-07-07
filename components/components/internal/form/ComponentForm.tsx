@@ -1,8 +1,10 @@
+// lib
 import * as React from "react";
 import { useState } from "react";
-
 import Router from "next/router";
 
+// components
+import { Block } from "baseui/block";
 import { ComponentDescription } from "./ComponentDescription";
 import { ComponentGroup } from "./ComponentGroup";
 import { ComponentName } from "./ComponentName";
@@ -11,11 +13,12 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
-import { Block } from "baseui/block";
+// styles
 import { FORM_STYLES } from "../../overrides/componentFormStyles";
 
-import { createComponent } from "../helpers/createComponent";
-import { updateComponent } from "../helpers/updateComponent";
+// helpers
+import { createComponent } from "../helpers/createComponentSubmit";
+import { updateComponent } from "../helpers/updateComponentSubmit";
 
 const status = [
   "operational",
