@@ -1,6 +1,5 @@
 # Status App
 Built for customer faced companies to create and manage Issues (Incidents) and Components.
-Deployed link : 
 
 Admin-site: https://status-app.vercel.app/
 
