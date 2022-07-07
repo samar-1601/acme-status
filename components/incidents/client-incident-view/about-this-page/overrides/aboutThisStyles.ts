@@ -46,6 +46,7 @@ export const COMPONENT_NAME_TEXT_OVERRIDES: BlockProps["overrides"] = {
       fontSize: "1rem",
       lineHeight: "1.5rem",
       fontWeight: 500,
+      textTransform: "capitalize",
     },
   },
 };

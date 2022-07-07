@@ -32,6 +32,7 @@ export const RenderComponentGroups: React.FC<Props> = React.memo(
                     padding: "0 0 4px 0px",
                     margin: "0px",
                     border: "none",
+                    textTransform: "capitalize",
                   },
                 },
                 Content: {
