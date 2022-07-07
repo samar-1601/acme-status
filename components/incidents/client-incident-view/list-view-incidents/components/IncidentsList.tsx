@@ -36,8 +36,7 @@ interface Props {
  * @returns A list of JSX Elements with data obtained from the API response
  */
 export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
-  // const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
-  const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
+  const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API request (completed/not completed)
 
   const cache = useRef(
     new CellMeasurerCache({
@@ -52,6 +51,8 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * dataList : JSON response for the limit(currently 15) items in the current pageNumber
    * isLoading : whether the data has loaded or not from the API
    * hasMore : is there more data to fetch when we scroll
+   * isError : is there error in loading
+   * status : get the response status from API call
    */
   const { dataList, isLoading, hasMore, fetchMore, isError, status } =
     useLoadIncidentsListData(pageType);

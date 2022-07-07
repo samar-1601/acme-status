@@ -22,6 +22,7 @@ interface Props {
 
 /**
  * React component to render the Header components on the top of the fixed navigation bar
+ * some functionalities are commented beacuse Search supprt wasn't available in the Atlassion API we were using
  */
 export const HeaderBarContents: React.FC<Props> = React.memo(
   ({
