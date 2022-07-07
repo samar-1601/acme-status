@@ -231,7 +231,17 @@ export const SAVE_BUTTON: BlockProps["overrides"] = {
       className: "primary-button",
     },
   },
-}
+};
+export const SUBMIT_BUTTON: BlockProps["overrides"] = {
+  Block: {
+    style: () => ({
+      width: "92px",
+      alignSelf: "end",
+      height: "34px",
+      margin: "20px",
+    }),
+  },
+};
 
 export const CANCEL_BUTTON: BlockProps["overrides"] = {
   Block: {
@@ -244,7 +254,7 @@ export const CANCEL_BUTTON: BlockProps["overrides"] = {
       className: "secondary-button",
     },
   },
-}
+};
 
 export const FOOTER_WRAPPER: BlockProps["overrides"] = {
   Block: {
@@ -259,7 +269,7 @@ export const FOOTER_WRAPPER: BlockProps["overrides"] = {
       className: "footer-bar",
     },
   },
-}
+};
 
 export const COMPONENT_OVERRIDES: BlockProps["overrides"] = {
   Block: {

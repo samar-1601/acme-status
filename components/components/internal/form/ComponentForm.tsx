@@ -29,13 +29,14 @@ const status = [
 ];
 
 export default function ComponentForm(props: any) {
-  const [state, setState] = useState({
-    addComponent: props.addComponent,
-    componentName: props.componentName,
-    componentDescription: props.componentDescription,
-    componentGroup: props.componentGroup,
-    componentStatus: props.componentStatus,
-  });
+  // const [state, setState] = useState({
+  //   addComponent: props.addComponent,
+  //   componentName: props.componentName,
+  //   componentDescription: props.componentDescription,
+  //   componentGroup: props.componentGroup,
+  //   componentStatus: props.componentStatus,
+  // });
+
   const [addComponent, setAddComponent] = useState<Boolean>(props.addComponent);
   const [componentName, setComponentName] = useState<String>(
     props.componentName

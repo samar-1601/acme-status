@@ -9,6 +9,7 @@ import ComponentForm from "../internal/form/ComponentForm";
 import { PAGE_ID } from "../../../constants";
 import TombStone from "../../incidents/internal/formComponents/TombStone";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
+import { ComponentFormTombStoneLoader } from "../internal/form/TombStone";
 
 const status = [
   "operational",
@@ -74,7 +75,7 @@ export default function EditComponent(props: any) {
   return state.isError ? (
     <IncidentErrorPage message="Sorry Unable to Fetch Data. Please Try Again!" />
   ) : state.isLoading ? (
-    <TombStone type={"Create"} />
+    <ComponentFormTombStoneLoader type="Edit" />
   ) : (
     <ComponentForm
       id={props.componentId}
