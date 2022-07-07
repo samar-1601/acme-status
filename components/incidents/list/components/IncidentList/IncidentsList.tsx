@@ -93,12 +93,13 @@ export const IncidentsList: React.FC<Props> = React.memo(
 
     /**
      * Triggered when the query is entered changes
+     * Currently not in use as search functionality is not present on API for pagonated response
      */
-    useEffect(() => {
-      console.log(query);
-      setPageLoaded(false);
-      reFetch();
-    }, [query]);
+    // useEffect(() => {
+    //   console.log(query);
+    //   setPageLoaded(false);
+    //   reFetch();
+    // }, [query]);
 
     useEffect(() => {
       if (isRefreshPressed) {

@@ -3,7 +3,6 @@ import Link from "next/link";
 import ContentLoader from "react-content-loader";
 import {
   FOOTER_BAR_OVERRIDES,
-  SUBMIT_BUTTON_OVERRIDES,
   CANCEL_BUTTON_OVERRIDES,
   SUBMIT_BUTTON_DISABLED_OVERRIDES,
 } from "../form/overrides/BlockOverrides";

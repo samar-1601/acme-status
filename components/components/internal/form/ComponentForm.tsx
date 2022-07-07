@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 
 import Router from "next/router";
 
@@ -8,7 +9,6 @@ import { ComponentName } from "./ComponentName";
 import { ComponentStatus } from "./ComponentStatus";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
-import { UptimeBox } from "./UptimeBox";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 import { Block } from "baseui/block";
@@ -26,43 +26,31 @@ const status = [
 ];
 
 export default function ComponentForm(props: any) {
-  const [addComponent, setAddComponent] = React.useState<Boolean>(
-    props.addComponent
-  );
-  const [componentName, setComponentName] = React.useState<String>(
+  const [addComponent, setAddComponent] = useState<Boolean>(props.addComponent);
+  const [componentName, setComponentName] = useState<String>(
     props.componentName
   );
-  const [componentDescription, setComponentDescription] =
-    React.useState<String>(props.componentDescription);
-  const [componentStatus, setComponentStatus] = React.useState<number>(
+  const [componentDescription, setComponentDescription] = useState<String>(
+    props.componentDescription
+  );
+  const [componentStatus, setComponentStatus] = useState<number>(
     props.componentStatus
   );
-  const [componentGroup, setComponentGroup] = React.useState<any>(
+  const [componentGroup, setComponentGroup] = useState<any>(
     props.componentGroup
   );
-  const[val, setVal] = React.useState<any>([]);
-  const [submit, setSubmit] = React.useState<Boolean>(false);
+  const [val, setVal] = useState<any>([]);
+  const [submit, setSubmit] = useState<Boolean>(false);
   const { enqueue, dequeue } = useSnackbar();
 
   React.useEffect(() => {
-    console.log(val)
-  }, [val]);
-
-  React.useEffect(() => {
-    setComponentName(props.componentName);
-  }, [props.componentName]);
-
-  React.useEffect(() => {
-    setComponentDescription(props.componentDescription);
-  }, [props.componentDescription]);
-
-  React.useEffect(() => {
-    setComponentStatus(props.componentStatus);
-  }, [props.componentStatus]);
-
-  React.useEffect(() => {
-    setComponentGroup(props.componentGroup);
-  }, [props.componentGroup]);
+    if (props) {
+      setComponentName(props.componentName);
+      setComponentGroup(props.componentGroup);
+      setComponentDescription(props.componentDescription);
+      setComponentStatus(props.componentStatus);
+    }
+  }, [props]);
 
   const handleNameChange = React.useCallback(
     (e) => setComponentName(e.target.value),
@@ -80,11 +68,15 @@ export default function ComponentForm(props: any) {
 
   const handleGroupChange = React.useCallback((e) => {
     console.log(e);
-    setComponentGroup(e.option)
+    setComponentGroup(e.option);
   }, []);
 
+  const handleCancel = () => {
+    Router.push("/components");
+  };
+
   const handleSubmit = () => {
-    console.log(componentGroup)
+    console.log(componentGroup);
     setSubmit(true);
     let payload: any;
     if (addComponent) {
@@ -97,8 +89,7 @@ export default function ComponentForm(props: any) {
             group_id: componentGroup.id,
           },
         };
-      }
-      else {
+      } else {
         payload = {
           component: {
             description: componentDescription,
@@ -152,10 +143,6 @@ export default function ComponentForm(props: any) {
         );
       }
     }
-  };
-
-  const handleCancel = () => {
-    Router.push("/components");
   };
 
   return (

@@ -1,5 +1,5 @@
 //lib
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 
 //components
@@ -13,7 +13,6 @@ import { AffectedComponents } from "../formComponents/AffectedComponents";
 //constants
 import { getIncidentStatus, getStatus } from "../../../../constants";
 import { ComponentObject } from "../../../../types";
-import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
 
 //styles
 import {
@@ -23,7 +22,6 @@ import {
   SUBMIT_BUTTON_OVERRIDES,
   ONSUBMIT_BUTTON_STYLE_OVERRIDES,
 } from "./overrides/BlockOverrides";
-import TombStone from "../formComponents/TombStone";
 import { getDefaultMessageFromStatus } from "../helpers/helperFunctions";
 
 //NOTE : id used in component is not the actual id of the component. Instead use compId for the same.

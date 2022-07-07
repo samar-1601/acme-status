@@ -162,9 +162,7 @@ const WelcomePage: React.FC = React.memo(() => {
             <Block overrides={TEXT_OVERRIDES}>
               <Block overrides={HEADER_OVERRIDES}>Component Form</Block>
               <Block overrides={DESCRIPTION_OVERRIDES}>
-                The Components Form allows users to add or edit a component. The
-                start date of a component can also be altered after checking the
-                display uptime checkbox.
+                The Components Form allows users to add or edit a component.
               </Block>
             </Block>
           </Block>

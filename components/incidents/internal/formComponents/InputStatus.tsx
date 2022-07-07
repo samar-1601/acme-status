@@ -1,14 +1,8 @@
 //lib
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
 //components
 import { FormControl } from "baseui/form-control";
-import {
-  ProgressBar,
-  ProgressBarRounded,
-  SIZE,
-  StyledBarProgress,
-} from "baseui/progress-bar";
 import { FlexGrid, FlexGridItem } from "baseui/flex-grid";
 import { Block } from "baseui/block";
 import { Slider } from "baseui/slider";
@@ -25,9 +19,6 @@ import { STATUSNames } from "../../../../constants";
 
 //styles
 import { INPUT_STATUS_OVERRIDES } from "../form/overrides/FormControlOverrides";
-import { State } from "baseui/input";
-import { withStyle } from "baseui";
-import { BsCircleFill } from "react-icons/bs";
 
 interface InputStatusOnClickEvent {
   nativeEvent: {
