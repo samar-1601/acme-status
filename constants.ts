@@ -1,5 +1,6 @@
 import { STATUSType } from "./types";
 export const PAGE_ID = "7dwwybj29fy8";
+export const PAGE_NAME = "Acme";
 
 export enum Page {
   Active = "Active",
@@ -16,6 +17,7 @@ export enum PageType {
   Active = "Active",
   Maintenance = "Maintenance",
   Scheduled = "Scheduled",
+  Completed = "Completed",
 }
 
 /**
@@ -155,6 +157,51 @@ export const getIncidentStatusFromPost = (id: string) => {
       return "Monitoring";
     case "completed":
       return "Resolved";
+  }
+}
+
+/**
+ * ComponentStatusType
+ * status values for incidents
+ * @type {enum}
+ */
+export enum ComponentStatusType {
+  Operational = "operational",
+  UnderMaintenance = "under_maintenance",
+  DegradedPerformance = "degraded_performance",
+  MajorOutage = "major_outage",
+  PartialOutage = "partial_outage",
+}
+
+/**
+ * function to format status text
+ * @param status status of a component
+ * @returns User friendly formatted status text
+ */
+export const getComponentStatusText = (status: string) => {
+  switch (status) {
+    case ComponentStatusType.Operational:
+      return "Operational";
+    case ComponentStatusType.DegradedPerformance:
+      return "Degraded Performance";
+    case ComponentStatusType.MajorOutage:
+      return "Major Outage";
+    case ComponentStatusType.PartialOutage:
+      return "Partial Outage";
+    case ComponentStatusType.UnderMaintenance:
+      return "Under Maintenance";
+    case StatusType.Completed:
+      return "Completed";
+    case StatusType.InProgress:
+      return "In Progress";
+    case StatusType.Investigating:
+      return "Investigating";
+    case StatusType.Resolved:
+      return "Resolved";
+    case StatusType.Scheduled:
+      return "Scheduled";
+    case StatusType.Verifying:
+      return "Verifying";
     default:
       return "";
   }
