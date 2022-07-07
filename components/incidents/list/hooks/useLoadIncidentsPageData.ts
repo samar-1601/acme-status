@@ -1,15 +1,8 @@
 // lib
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // constants
 import { PageType, PAGE_ID } from "../../../../constants";
-
-/**
- * Loads data from API
- * @param pageNumber pageNumber required for paginated data
- * @param pageType type of page
- * @returns API response and API loading status
- */
 
 const limit = 15; // determines the no. of rows of data in a page
 
