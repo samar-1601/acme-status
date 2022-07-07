@@ -1,6 +1,10 @@
 # Status App
 Built for customer faced companies to create and manage Issues (Incidents) and Components.
 
+Admin-site: https://status-app.vercel.app/
+
+Clients-site : https://status-app.vercel.app/client
+
 # Nextjs + Base Web + TypeScript
 
 This is an opinionated scaffold of Next.js and Base Web. It comes with:
