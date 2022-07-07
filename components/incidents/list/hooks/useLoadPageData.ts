@@ -24,17 +24,17 @@ const getData = async (pageNumber: number, pageType: string, query: string) => {
    * The URL value is changed according to the PageType to get the desired response.
    */
   try {
-    let URL;
-    URL = query
-      ? `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
-      : `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
-    if (pageType == PageType.Maintenance) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
-    } else if (pageType == PageType.Active) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
-    } else if (pageType == PageType.Scheduled) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
-    }
+    let URL = "http://localhost:3000/api/incidents";
+    // URL = query
+    //   ? `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
+    //   : `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
+    // if (pageType == PageType.Maintenance) {
+    //   URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
+    // } else if (pageType == PageType.Active) {
+    //   URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+    // } else if (pageType == PageType.Scheduled) {
+    //   URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
+    // }
 
     const response = await fetch(URL, {
       headers: {

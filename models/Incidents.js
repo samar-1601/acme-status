@@ -20,7 +20,7 @@ const incidentsSchema = new Schema({
     body: String,
     components: {},
     component_ids: [ String ],
-    scheduled_auto_transition: Boolean
+    scheduled_auto_transition: Boolean,
   }
 );
 

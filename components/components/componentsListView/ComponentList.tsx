@@ -187,7 +187,7 @@ export const ComponentList = function (props: any) {
 
   const getComponents = async () => {
     try {
-      const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+      const URL = `http://localhost:3000/api/components`;
       const response = await fetch(URL, {
         headers: {
           "Content-Type": "application/json",
