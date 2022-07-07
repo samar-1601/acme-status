@@ -48,5 +48,5 @@ export default async function addComponents(req:NextApiRequest, res:NextApiRespo
         console.log(error);
         res.json({ error });
       }
-}
+    }
 }
