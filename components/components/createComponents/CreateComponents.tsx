@@ -4,6 +4,9 @@ import * as React from "react";
 // components
 import ComponentForm from "../internal/form/ComponentForm";
 
+/**
+ * @returns Component Creation form with no prefilled data
+ */
 export const ComponentCreation = React.memo(() => {
   return (
     <ComponentForm

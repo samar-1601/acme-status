@@ -1,8 +1,16 @@
+// lib
+import Router from "next/router";
+
+// components
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
-import Router from "next/router";
+
+// constants
 import { PAGE_ID } from "../../../../constants";
 
+/**
+ * Post component group details to the API
+ */
 export const createComponentGroup = function (props: any) {
   fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/component-groups", {
     method: "POST",
@@ -14,6 +22,9 @@ export const createComponentGroup = function (props: any) {
   });
 };
 
+/**
+ * Post component details to the API
+ */
 export const createComponent = function (props: any) {
   fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
     method: "POST",

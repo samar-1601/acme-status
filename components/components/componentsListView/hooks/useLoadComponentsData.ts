@@ -1,5 +1,5 @@
 // lib
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // constants
 import { Page, PAGE_ID } from "../../../../constants";
@@ -70,6 +70,9 @@ const getComponents = async () => {
   }
 };
 
+/**
+ * @returns List of Components after fetching from API
+ */
 export default function useLoadComponentsData(pageType: Page) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API

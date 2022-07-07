@@ -1,6 +1,12 @@
+// lib
+import * as React from "react";
+import Router from "next/router";
+
+// components
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
-import Router from "next/router";
+
+// constants
 import { PAGE_ID } from "../../../../constants";
 
 export const updateComponent = function (props: any) {

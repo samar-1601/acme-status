@@ -2,7 +2,7 @@
 import { formatDate } from "../../list-view-incidents/helpers/formatDate";
 
 // constants
-import { ComponentStatusType, getComponentStatusText, PageType } from "../../../../../constants";
+import { ComponentStatusType, getComponentStatusText, PageType } from "../../../../../constants"; // static path
 
 /**
  * function for determining the color for a component-status-type

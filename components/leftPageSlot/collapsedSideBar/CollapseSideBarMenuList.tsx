@@ -39,7 +39,7 @@ export const CollapsedSideBarMenuList: React.FC<Props> = React.memo(
         />
         <CollapsedSideBarMenuItem
           onClick={() => {
-            Router.push("/client");
+            window.open("/client", "_blank");
           }}
           menuItem={SideBarMenu.ClientsPage}
           activeMenuItem={activeMenuItem}

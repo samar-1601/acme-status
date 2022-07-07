@@ -12,7 +12,7 @@ import { INPUT_STATUS_STYLE } from "../overrides/componentFormStyles";
 // constants
 import { PAGE_ID } from "../../../../constants";
 
-export const ComponentGroup = function (props: any) {
+export const ComponentGroup = React.memo((props: any) => {
   const [groups, setGroups] = React.useState([{}]);
   const [place, setPlace] = React.useState<string>(
     "This component does not belong to a group"
@@ -70,4 +70,4 @@ export const ComponentGroup = function (props: any) {
       </FormControl>
     </Block>
   );
-};
+});

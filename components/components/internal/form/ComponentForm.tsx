@@ -29,6 +29,13 @@ const status = [
 ];
 
 export default function ComponentForm(props: any) {
+  const [state, setState] = useState({
+    addComponent: props.addComponent,
+    componentName: props.componentName,
+    componentDescription: props.componentDescription,
+    componentGroup: props.componentGroup,
+    componentStatus: props.componentStatus,
+  });
   const [addComponent, setAddComponent] = useState<Boolean>(props.addComponent);
   const [componentName, setComponentName] = useState<String>(
     props.componentName
@@ -45,15 +52,6 @@ export default function ComponentForm(props: any) {
   const [val, setVal] = useState<any>([]);
   const [submit, setSubmit] = useState<Boolean>(false);
   const { enqueue, dequeue } = useSnackbar();
-
-  React.useEffect(() => {
-    if (props) {
-      setComponentName(props.componentName);
-      setComponentGroup(props.componentGroup);
-      setComponentDescription(props.componentDescription);
-      setComponentStatus(props.componentStatus);
-    }
-  }, [props]);
 
   const handleNameChange = React.useCallback(
     (e) => setComponentName(e.target.value),

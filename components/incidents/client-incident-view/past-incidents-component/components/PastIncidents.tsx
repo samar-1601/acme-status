@@ -7,89 +7,47 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 
 // constants
-import { PAGE_ID } from "../../../../../constants";
 import { PastIncidentsList } from "./PastIncidentsList";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
-
-/**
- * @returns list of completed incidents in the given PAGE_ID
- */
-const getCompletedIncidents = async () => {
-  try {
-    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?q=completed+resolved`;
-
-    const response = await fetch(URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-      },
-    });
-    const completedList = await response.json();
-    const status: number = response.status;
-
-    return [completedList, status, false];
-  } catch (err) {
-    console.log(err);
-    return [[], 500, true];
-  }
-};
+import useLoadPastIncidents from "../hooks/useLoadPastIncidents";
 
 /**
  * A react functional component for rendering past Incidents
  */
 export const PastIncidents: React.FC = React.memo(() => {
-  const [state, setState] = useState({
-    pastIncidentsList: [],
-    isLoaded: false,
-    isError: false,
-    status: 200,
-  });
+  const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API request (completed/not completed)
 
   /**
-   * Helper function to get JSX components from API data
-   * @returns a JSX componentList ready to render after styling the API response
+   * API response
+   * dataList : JSON response for the limit(currently 15) items in the current pageNumber
+   * isLoading : whether the data has loaded or not from the API
+   * isError : is there error in loading
+   * status : get the response status from API call
    */
-  const loadComponentsList = useCallback(async () => {
-    try {
-      let completedIncidents = [],
-        responseStatus: number = 200,
-        responseIsError = false;
-      [completedIncidents, responseStatus, responseIsError] =
-        await getCompletedIncidents();
+  const { dataList, isLoading, isError, status } = useLoadPastIncidents();
 
-      /**
-       * isLoaded : To notify the loading spinner whether data has loaded
-       * pastIncidentsList : List storing the JSX components to render when data has loaded.
-       */
-      setState({
-        ...state,
-        pastIncidentsList: completedIncidents,
-        isLoaded: true,
-        isError: responseIsError,
-        status: responseStatus,
-      });
-    } catch (err) {
-      setState({ ...state, isError: true });
-      console.log(err);
-    }
-  }, []);
-
-  // Load data for the when the page loads for the first time
+  /**
+   * triggered when the data is loaded from the API
+   * sets pageLoaded for the current page (for the loading spinner)
+   */
   useEffect(() => {
-    loadComponentsList();
-  }, []);
+    // if page has loaded
+    if (!isLoading) {
+      return setPageLoaded(true);
+    }
+  }, [isLoading]);
 
-  if (state.isError) {
+  if (isError) {
     return (
       <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
     );
-  } else if (state.status == 420) {
+  } else if (status == 420) {
     return (
       <IncidentErrorPage message="Too Many requests, try again after sometime!" />
     );
   } else
-    return state.isLoaded ? (
-      state.pastIncidentsList.length == 0 ? (
+    return pageLoaded ? (
+      dataList.length == 0 ? (
         <Block
           overrides={{
             Block: {
@@ -105,7 +63,7 @@ export const PastIncidents: React.FC = React.memo(() => {
           No past Incidents !!
         </Block>
       ) : (
-        <PastIncidentsList incidentList={state.pastIncidentsList} />
+        <PastIncidentsList incidentList={dataList} />
       )
     ) : (
       <Block

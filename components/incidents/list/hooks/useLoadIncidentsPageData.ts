@@ -53,7 +53,10 @@ const getData = async (pageNumber: number, pageType: string, query: string) => {
   }
 };
 
-export default function useLoadPageData(pageType: PageType, query: string) {
+export default function useLoadIncidentsPageData(
+  pageType: PageType,
+  query: string
+) {
   const [state, setState] = useState({
     dataList: Array(), // dataList : stores data response from API
     isLoading: true, // isLoading : status of loading data from API
