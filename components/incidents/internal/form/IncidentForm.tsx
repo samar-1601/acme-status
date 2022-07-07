@@ -88,6 +88,10 @@ export default function IncidentForm(props: IncidentCreationProps) {
     setIncidentMessage(e.target.value);
   }, []);
 
+  useEffect(() => {
+    console.log(affectedComponents);
+  });
+
   /**
    * Function handleComponentUpdate
    * @params idx, selected, optionType

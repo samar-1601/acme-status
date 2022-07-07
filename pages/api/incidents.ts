@@ -1,6 +1,7 @@
 import connectMongo from "../../utils/connectMongo";
 import Incidents from "../../models/Incidents"
 import { NextApiRequest, NextApiResponse } from "next";
+import Components from "../../models/Components";
 
 /**
  * @param {import('next').NextApiRequest} req
@@ -19,7 +20,11 @@ export default async function addIncidents(req:NextApiRequest, res:NextApiRespon
         console.log('CREATING DOCUMENT');
         const test = await Incidents.create(req.body.incident);
         console.log('CREATED DOCUMENT');
-
+        for(id in Object.keys(req.body.incident.components)){
+          await Components.updateOne({"_id": id}, {
+            status: req.body.incident.components[id]
+          }).clone().catch(function(err){console.log(err)});
+        }
         res.json({ test });
       } catch (error) {
         console.log(error);

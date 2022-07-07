@@ -107,7 +107,8 @@ export default function IncidentCreation() {
 
   //will execute on component mounting gets data from API sets it and sends to CreateIncident
   useEffect(() => {
-    const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    // const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    const compURL = `http://localhost:3000/api/components`;
     fetch(compURL, {
       method: "GET",
       headers: {
@@ -124,7 +125,7 @@ export default function IncidentCreation() {
             compName: item.name,
             compType: STATUS[item.status],
             id: index,
-            compId: item.id,
+            compId: item["_id"],
             selected: false,
           };
         });
