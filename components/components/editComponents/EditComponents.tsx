@@ -17,11 +17,6 @@ const status = [
 
 export default function EditComponent(props: any) {
   const [componentName, setComponentName] = React.useState<String>("");
-  const [componentDescription, setComponentDescription] =
-    React.useState<String>("");
-  const [componentStatus, setComponentStatus] = React.useState<Number>(0);
-  const [componentGroup, setComponentGroup] = React.useState<any>("");
-  const [uptime, displayUptime] = React.useState<Boolean>(false);
 
   const getComponent = async () => {
     const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${props.componentId}`;
@@ -38,6 +33,11 @@ export default function EditComponent(props: any) {
     setComponentStatus(status.indexOf(xjson.status));
     setComponentGroup(xjson.group_id);
   };
+  const [componentDescription, setComponentDescription] =
+    React.useState<String>("");
+  const [componentStatus, setComponentStatus] = React.useState<Number>(0);
+  const [componentGroup, setComponentGroup] = React.useState<any>("");
+  const [uptime, displayUptime] = React.useState<Boolean>(false);
 
   React.useEffect(() => {
     getComponent();

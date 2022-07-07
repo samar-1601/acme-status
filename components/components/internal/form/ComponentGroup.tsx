@@ -7,7 +7,7 @@ import { Select } from "baseui/select";
 import { FormControl } from "baseui/form-control";
 
 // styles
-import { INPUT_STATUS_STYLE } from "../../overrides/componentFormStyles";
+import { INPUT_STATUS_STYLE } from "../overrides/componentFormStyles";
 
 // constants
 import { PAGE_ID } from "../../../../constants";

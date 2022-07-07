@@ -11,7 +11,7 @@ import {
   navActiveItem,
   navNonActiveItem,
   spanInsideNav,
-} from "../overrides/componentListStyles";
+} from "../../overrides/componentListStyles";
 
 interface Props {
   currentPage: string;

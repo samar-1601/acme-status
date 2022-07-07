@@ -3,10 +3,10 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
-import { ComponentList } from "./ComponentList";
-import { CreateComponentButton } from "./CreateComponentButton";
-import { NavBarMenuItem } from "./NavBarMenuItem";
-import { Header } from "./Header";
+import { ComponentList } from "./components/ComponentList";
+import { CreateComponentButton } from "./components/HeaderBar/CreateComponentButton";
+import { NavBarMenuItem } from "./components/HeaderBar/NavBarMenuItem";
+import { Header } from "./components/HeaderBar/Header";
 
 // constants
 import { Page } from "../../../constants";
@@ -18,7 +18,7 @@ import {
   CONTENT,
   NAV,
   NAV_BAR_WRAPPER,
-} from "../overrides/componentListStyles";
+} from "./overrides/componentListStyles";
 
 
 export const ComponentsViewHomePage: React.FC = () => {

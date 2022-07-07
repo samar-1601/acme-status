@@ -6,7 +6,7 @@ import { FormControl } from "baseui/form-control";
 import { Input } from "baseui/input";
 
 // styles
-import { INPUT_NAME_STYLE } from "../../overrides/componentFormStyles";
+import { INPUT_NAME_STYLE } from "../overrides/componentFormStyles";
 
 export const ComponentName = React.memo((props: any) => {
   return (

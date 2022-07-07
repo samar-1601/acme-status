@@ -1,10 +1,18 @@
+// components
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
+
+// constants
 import { PAGE_ID } from "../../../../constants";
 
-export const deleteComponent = function (props: any) {
+export const deleteComponent = function (
+  id:String,
+  setLoaded: Function,
+  enqueue: any,
+  reFetch: Function,
+) {
   fetch(
-    "https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id,
+    "https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + id,
     {
       method: "DELETE",
       headers: {
@@ -13,11 +21,12 @@ export const deleteComponent = function (props: any) {
       },
     }
   )
-    .then((response) => {
+    .then(async (response) => {
       if (response.status != 204) {
         throw "Error in Deletion";
       }
-      props.enqueue(
+      setLoaded(false);
+      enqueue(
         {
           message: (
             <Block display="flex">
@@ -28,11 +37,12 @@ export const deleteComponent = function (props: any) {
         },
         DURATION.short
       );
-      props.setLoaded(false);
+      await reFetch();
+      setLoaded(true);
     })
     .catch((err) => {
       console.log(err);
-      props.enqueue(
+      enqueue(
         {
           message: (
             <Block display="flex">

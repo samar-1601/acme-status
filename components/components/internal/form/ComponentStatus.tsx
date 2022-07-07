@@ -10,7 +10,7 @@ import { Select } from "baseui/select";
 import {
   COMPONENT_OVERRIDES,
   INPUT_STATUS_STYLE,
-} from "../../overrides/componentFormStyles";
+} from "../overrides/componentFormStyles";
 
 // constants
 import { ITEMS } from "../../../../constants";

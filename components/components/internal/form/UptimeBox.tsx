@@ -15,7 +15,7 @@ import {
   DATE_STYLES,
   getColorFullBars,
   HORIZONTAL_LINE,
-} from "../../overrides/componentFormStyles";
+} from "../overrides/componentFormStyles";
 
 export const UptimeBox = React.memo((props: any) => {
   const [date, setDate] = React.useState([new Date()]);

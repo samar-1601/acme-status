@@ -9,7 +9,7 @@ import {
   CANCEL_BUTTON,
   FOOTER_WRAPPER,
   SAVE_BUTTON,
-} from "../../overrides/componentFormStyles";
+} from "../overrides/componentFormStyles";
 
 export const Footer = React.memo((props: any) => {
   return (

@@ -44,7 +44,6 @@ interface Props {
  */
 export const IncidentsList: React.FC<Props> = React.memo(
   ({ pageType, query, isRefreshPressed, setRefreshPressed }) => {
-    // const [pageNumber, setPageNumber] = useState<number>(1); // stores the page number for infinite scrolling and data-fetching
     const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API resquest (completed/not completed)
     const { enqueue, dequeue } = useSnackbar();
     const cache = useRef(
@@ -60,6 +59,9 @@ export const IncidentsList: React.FC<Props> = React.memo(
      * dataList : JSON response for the limit(currently 15) items in the current pageNumber
      * isLoading : whether the data has loaded or not from the API
      * hasMore : is there more data to fetch when we scroll
+     * isError : is there error in loading
+     * status : get the response status from API call
+     * refetch : function to refresh/refetch data from API
      */
     const {
       dataList,

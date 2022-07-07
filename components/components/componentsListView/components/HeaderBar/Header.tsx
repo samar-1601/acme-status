@@ -11,7 +11,7 @@ import {
   HEADER_BAR_OVERRIDES,
   BACK_ICON_OVERRIDES,
   HEADER_BAR_LEFT_WRAPPER_OVERRIDES,
-} from "../../incidents/list/overrides/navStyles";
+} from "../../../../incidents/list/overrides/navStyles";
 
 interface Props {
   headerText: string; // text to render in the header

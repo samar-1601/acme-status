@@ -14,7 +14,7 @@ import { Header } from "./Header";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 // styles
-import { FORM_STYLES } from "../../overrides/componentFormStyles";
+import { FORM_STYLES } from "../overrides/componentFormStyles";
 
 // helpers
 import { createComponent } from "../helpers/createComponentSubmit";

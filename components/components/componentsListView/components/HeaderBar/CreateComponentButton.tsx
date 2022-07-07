@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Block } from "baseui/block";
 
 // styles
-import { CREATE_COMPONENT_BUTTON } from "../overrides/componentListStyles";
+import { CREATE_COMPONENT_BUTTON } from "../../overrides/componentListStyles";
 
 export const CreateComponentButton = React.memo(() => {
   return (
