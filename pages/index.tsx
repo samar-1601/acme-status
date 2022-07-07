@@ -7,14 +7,12 @@ import { Block } from "baseui/block";
 import { Spinner } from "baseui/spinner";
 import WelcomePage from "../components/welcomePage/WelcomePage";
 import LandingPage from "../components/landingPage/LandingPage";
-// import { ClientsHomePage } from "../components/incidents/client-incident-view/ClientHomePage";
 
 // styles
 import { LOADER_OVERRIDES } from "../components/incidents/list/overrides/listStyles";
 import { useEffect } from "react";
 
 // constants
-// import { PAGE_NAME } from "../constants";
 
 const Home = () => {
   const { data: session, status } = useSession(); // get user's session details
@@ -40,7 +38,6 @@ const Home = () => {
     <>
       <Head>
         <title>Status App</title>
-        {/* <title>{PAGE_NAME} Status</title> */} 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -51,9 +48,6 @@ const Home = () => {
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <LandingPage />
-        {/* <link rel="icon" href="/titleIcon.png" />
-      </Head>
-      <ClientsHomePage /> */}
     </>
   );
 };

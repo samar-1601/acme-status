@@ -170,7 +170,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
             console.log(InitialData);
             setComponents(InitialData);
             setIncidentName(json.name);
-            setIncidentStatus(getIncidentStatusFromPost(json.status));
+            setIncidentStatus(getIncidentStatusFromPost(json.status) ?? "");
             setIncidentMessage(json.incident_updates[0].body);
             setStateOfPage(1);
           })

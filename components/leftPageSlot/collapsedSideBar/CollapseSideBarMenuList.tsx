@@ -37,15 +37,13 @@ export const CollapsedSideBarMenuList: React.FC<Props> = React.memo(
           menuItem={SideBarMenu.Components}
           activeMenuItem={activeMenuItem}
         />
-        <a
-          href="https://client-incident-list-view.netlify.app/"
-          target="_blank"
-        >
-          <CollapsedSideBarMenuItem
-            menuItem={SideBarMenu.ClientsPage}
-            activeMenuItem={activeMenuItem}
-          />
-        </a>
+        <CollapsedSideBarMenuItem
+          onClick={() => {
+            Router.push("/client");
+          }}
+          menuItem={SideBarMenu.ClientsPage}
+          activeMenuItem={activeMenuItem}
+        />
       </Block>
     );
   }

@@ -41,15 +41,13 @@ export const FullSideBarMenuList: React.FC<Props> = React.memo(
           menuItem={SideBarMenu.Components}
           activeMenuItem={activeMenuItem}
         />
-        <a
-          href="https://client-incident-list-view.netlify.app/"
-          target="_blank"
-        >
-          <FullSideBarMenuItem
-            menuItem={SideBarMenu.ClientsPage}
-            activeMenuItem={activeMenuItem}
-          />
-        </a>
+        <FullSideBarMenuItem
+          onClick={() => {
+            window.open("/client", "_blank");
+          }}
+          menuItem={SideBarMenu.ClientsPage}
+          activeMenuItem={activeMenuItem}
+        />
       </Block>
     );
   }
