@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 
 // components
 import { Block } from "baseui/block";
-import { TombStoneLoader } from "./TombStoneLoader";
-import IncidentErrorPage from "../../../incidentError/IncidentErrorPage";
+import { TombStoneLoader } from "../TombStoneLoader";
+import IncidentErrorPage from "../../../../incidentError/IncidentErrorPage";
 import { RenderComponentsList } from "./RenderComponentsList";
 
 // styles
-import { LOADER } from "../overrides/componentListStyles";
+import { LOADER } from "../../overrides/componentListStyles";
 
 // constants
-import { Page } from "../../../../constants";
+import { Page } from "../../../../../constants";
 
 // hooks
-import useLoadComponentsData from "../hooks/useLoadComponentsData";
+import useLoadComponentsData from "../../hooks/useLoadComponentsData";
 
 interface Props {
   pageType: Page;

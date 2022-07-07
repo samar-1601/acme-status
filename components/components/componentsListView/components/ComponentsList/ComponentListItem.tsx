@@ -9,19 +9,19 @@ import Image from "next/image";
 import {
   getDisplayComponentStatusText,
   ComponentStatusIconUrls,
-} from "../../../../constants";
+} from "../../../../../constants";
 
 // styles
-import { COMPONENT_ICON_HOVER_OVERRIDES } from "../../../incidents/list/overrides/listStyles";
+import { COMPONENT_ICON_HOVER_OVERRIDES } from "../../../../incidents/list/overrides/listStyles";
 import {
   DETAIL_STYLES,
   ELEMENT,
   LIST_ITEM,
   COMPONENTS_BUTTON_AREA,
-} from "../overrides/componentListStyles";
+} from "../../overrides/componentListStyles";
 
 // helpers
-import { deleteComponent } from "../../internal/helpers/deleteComponentHandler";
+import { deleteComponent } from "../../../internal/helpers/deleteComponentHandler";
 
 
 interface Props {

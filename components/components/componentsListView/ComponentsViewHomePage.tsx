@@ -3,7 +3,7 @@ import * as React from "react";
 
 // components
 import { Block } from "baseui/block";
-import { ComponentList } from "./components/ComponentList";
+import { ComponentList } from "./components/ComponentsList/ComponentList";
 import { CreateComponentButton } from "./components/HeaderBar/CreateComponentButton";
 import { NavBarMenuItem } from "./components/HeaderBar/NavBarMenuItem";
 import { Header } from "./components/HeaderBar/Header";
@@ -19,7 +19,6 @@ import {
   NAV,
   NAV_BAR_WRAPPER,
 } from "./overrides/componentListStyles";
-
 
 export const ComponentsViewHomePage: React.FC = () => {
   const [activePage, setPage] = React.useState<Page>(Page.Active); // variable indicating the current selected navbar menu-item
