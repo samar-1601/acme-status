@@ -118,15 +118,32 @@ export default function IncidentCreation() {
       .then((json) => {
         console.log(json);
         //convert the data fetched from API to ComponentObject[] and store in global variable InitialData
-        InitialData = json.map((item: ComponentsJSONObject, index: Number) => {
-          return {
-            compName: item.name,
-            compType: STATUS[item.status],
-            id: index,
-            compId: item.id,
-            selected: false,
-          };
-        });
+        // for (let i = 0, j = 0; i < json.length; i++) {
+        //   if (json[i].group == false) {
+        //     InitialData[j].compName = json[i].name;
+        //     InitialData[j].compType = STATUS[json[i].status];
+        //     InitialData[j].id = json[i].id;
+        //     InitialData[j].compId = json[i].id;
+        //     InitialData[j].selected = false;
+        //     j++;
+        //   }
+        // }
+        InitialData = json
+          .filter(function (it: any) {
+            if (it.group == false) {
+              return true;
+            }
+            return false;
+          })
+          .map((item: ComponentsJSONObject, index: Number) => {
+            return {
+              compName: item.name,
+              compType: STATUS[item.status],
+              id: index,
+              compId: item.id,
+              selected: false,
+            };
+          });
         setComponents(InitialData); //set state of components to InitialData
         setStateOfPage(1); //set state of page to succesfully fetched data
         // console.log("setting");

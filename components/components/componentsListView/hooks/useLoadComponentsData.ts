@@ -56,11 +56,14 @@ const getComponents = async () => {
     });
     let xjson = await response.json();
     let dataItem: any = [];
-    for (let i = 0; i < xjson.length; i++) {
-      dataItem[i] = xjson[i];
-      dataItem[i].msg = await getMsg(xjson[i].id);
+    for (let i = 0, j = 0; i < xjson.length; i++) {
+      if(xjson[i].group == false){
+        dataItem[j] = xjson[i];
+        dataItem[j].msg = await getMsg(xjson[i].id);
+        j++;
+      }
     }
-
+    console.log("here is dataitem", dataItem);
     const status: number = response.status;
 
     return [dataItem, status, false];
