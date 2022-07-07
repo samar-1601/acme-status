@@ -50,7 +50,8 @@ export default function IncidentCreation() {
       );
       setIsSubmitClicked(false);
     } else {
-      fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
+      // fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
+      fetch("http://localhost:3000/api/incidents", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
