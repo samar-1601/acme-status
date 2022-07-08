@@ -4,7 +4,7 @@ export interface STATUSType {
 
 export interface ComponentsJSONObject {
   name: String;
-  id: String;
+  _id: String;
   status: string;
 }
 

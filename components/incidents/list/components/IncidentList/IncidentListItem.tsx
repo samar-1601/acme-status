@@ -56,7 +56,7 @@ export const RenderIncidentData: React.FC<Props> = React.memo(
             <Block overrides={BUTTON_AREA} className="button-area">
               <Link
                 href={{
-                  pathname: `/incidents/edit/${incident["id"]}`, // send the incident ID to the update page address
+                  pathname: `/incidents/edit/${incident["_id"]}`, // send the incident ID to the update page address
                 }}
               >
                 <Block className="edit-icon-wrapper">
