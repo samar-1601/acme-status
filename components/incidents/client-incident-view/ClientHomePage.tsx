@@ -1,3 +1,6 @@
+// lib
+import { useEffect } from "react";
+
 // components
 import { IncidentsList } from "./list-view-incidents/components/IncidentsList";
 import { Block } from "baseui/block";
@@ -22,6 +25,14 @@ import {
  * @returns various components placed columnwise
  */
 export const ClientsHomePage: React.FC = () => {
+  // reload page after every 1 minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Block overrides={PAGE_CONTAINER_OVERRIDES}>
       <Block overrides={HOME_PAGE_HEADER_OVERRIDES}>{PAGE_NAME}</Block>

@@ -5,7 +5,6 @@ import * as React from "react";
 // components
 import { useSnackbar, DURATION } from "baseui/snackbar";
 import { PageSlot } from "../pageSlot/PageSlot";
-import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
 
 // constants
 import { SideBarMenu } from "../../constants";
@@ -25,7 +24,7 @@ const LandingPage = React.memo(() => {
 
   useEffect(() => {
     if (localStorage.getItem("loadingCount") == undefined) {
-      // if the page has loaded for the first time after logging in then only shoe the message.
+      // if the page has loaded for the first time after logging in then only show the message.
       // dequeue();
       enqueue(
         {

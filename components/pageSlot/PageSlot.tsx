@@ -5,6 +5,8 @@ import { Children, useState } from "react";
 // components
 import { Block } from "baseui/block";
 import Head from "next/head";
+import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
+import CollapsedSideBar from "../leftPageSlot/collapsedSideBar/CollapsedSideBar";
 
 // styles
 import {
@@ -13,9 +15,9 @@ import {
   PAGE_WRAPPER_OVERRIDES,
   RIGHT_CONTENT_OVERRIDES,
 } from "./overrides/pageSlotStyles";
+
+// constants
 import { SideBarMenu } from "../../constants";
-import FullSideBar from "../leftPageSlot/fullSideBar/FullSideBar";
-import CollapsedSideBar from "../leftPageSlot/collapsedSideBar/CollapsedSideBar";
 
 const Slot: React.FC<{
   name: "leftNavBar" | "rightContent";
@@ -33,6 +35,9 @@ const RightContent: React.FC<RightProps> = React.memo(({ rightContent }) => {
   );
 });
 
+/**
+ * @returns PageSlot with tow slots left(sidebar) and right(for selected content) 
+ */
 export const PageSlot = ({
   children,
   activeMenuItem,
@@ -47,10 +52,12 @@ export const PageSlot = ({
     (child) => child.props.name === "rightContent"
   );
 
+  // check if the sidebar is collapsed from localstorage
   const [isOpen, setIsOpen] = useState<boolean>(
     localStorage.getItem("isSideBarOpen") == "false" ? false : true
   );
 
+  // update the sidebar collapsed status in the localstorage as well
   const handleIsOpenChange = React.useCallback(() => {
     localStorage.setItem("isSideBarOpen", `${!isOpen}`);
     setIsOpen(!isOpen);
@@ -63,7 +70,7 @@ export const PageSlot = ({
         <link rel="icon" href="/Status_icon.png" />
       </Head>
       <Block overrides={PAGE_WRAPPER_OVERRIDES}>
-        {isOpen ? (
+        {isOpen ? ( // if sidebar is open then show full sidebar on the left page slot else the collpased one
           <Block overrides={LEFT_CONTENT_OVERRIDES}>
             <FullSideBar
               activeItemID={activeMenuItem}

@@ -1,5 +1,5 @@
 // lib
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect} from "react";
 import * as React from "react";
 
 // components
@@ -37,35 +37,12 @@ export const PastIncidents: React.FC = React.memo(() => {
     }
   }, [isLoading]);
 
-  if (isError) {
-    return (
-      <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
-    );
-  } else if (status == 420) {
-    return (
-      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
-    );
-  } else
-    return pageLoaded ? (
-      dataList.length == 0 ? (
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                marginTop: "15vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              },
-            },
-          }}
-        >
-          No past Incidents !!
-        </Block>
-      ) : (
-        <PastIncidentsList incidentList={dataList} />
-      )
-    ) : (
+  return status == 420 ? (
+    <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+  ) : isError || status != 200 ? (
+    <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
+  ) : pageLoaded ? (
+    dataList.length == 0 ? (
       <Block
         overrides={{
           Block: {
@@ -78,7 +55,25 @@ export const PastIncidents: React.FC = React.memo(() => {
           },
         }}
       >
-        <Spinner />
+        No past Incidents !!
       </Block>
-    );
+    ) : (
+      <PastIncidentsList incidentList={dataList} />
+    )
+  ) : (
+    <Block
+      overrides={{
+        Block: {
+          style: {
+            marginTop: "15vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        },
+      }}
+    >
+      <Spinner />
+    </Block>
+  );
 });
