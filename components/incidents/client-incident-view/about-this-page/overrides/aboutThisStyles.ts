@@ -21,6 +21,13 @@ export const COMPONENT_DETAILS_WRAPPER_OVERRIDES: BlockProps["overrides"] = {
     },
   },
 };
+export const COMPONENT_DETAILS_WRAPPER_NO_BORDER_OVERRIDES: BlockProps["overrides"] = {
+  Block: {
+    style: {
+      padding: "30px 25px",
+    },
+  },
+};
 export const COMPONENT_GROUP_DETAILS_WRAPPER_OVERRIDES: BlockProps["overrides"] =
   {
     Block: {

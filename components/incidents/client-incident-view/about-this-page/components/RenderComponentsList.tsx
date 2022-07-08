@@ -8,6 +8,7 @@ import {
   COMPONENT_STATUS_OVERRIDES,
   HORIZONTAL_LINE_OVERRIDES,
   COMPONENT_NAME_TEXT_OVERRIDES,
+  COMPONENT_DETAILS_WRAPPER_NO_BORDER_OVERRIDES,
 } from "../overrides/aboutThisStyles";
 import { getComponentStatusText } from "../../../../../constants";
 import { ColoredBars } from "./ColoredBars";
@@ -17,14 +18,15 @@ interface Props {
   totalDays: number;
   componentList: any[];
   componentUptimeMap: any;
+  fromComponentGroup?: boolean;
 }
 /**
  * get render ready list for a given components list
  * @param componentList List of components
  * @returns formatted list with required styling
  */
-export const RenderComponents: React.FC<Props> = React.memo(
-  ({ totalDays, componentList, componentUptimeMap }) => {
+export const RenderComponentsList: React.FC<Props> = React.memo(
+  ({ totalDays, componentList, componentUptimeMap, fromComponentGroup }) => {
     let renderComponentList: JSX.Element[] = [];
     if (componentList) {
       for (const component of componentList) {
@@ -55,7 +57,13 @@ export const RenderComponents: React.FC<Props> = React.memo(
         }
         renderComponentList.push(
           <Block
-            overrides={COMPONENT_DETAILS_WRAPPER_OVERRIDES}
+            overrides={
+              fromComponentGroup
+                ? componentList.length == 1
+                  ? COMPONENT_DETAILS_WRAPPER_NO_BORDER_OVERRIDES
+                  : COMPONENT_DETAILS_WRAPPER_OVERRIDES
+                : COMPONENT_DETAILS_WRAPPER_OVERRIDES
+            }
             key={component["id"]}
           >
             <Block overrides={COMPONENT_HEADER_OVERRIDES}>

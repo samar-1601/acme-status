@@ -3,7 +3,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 
 // loading and helper functions
-import { RenderComponents } from "./RenderComponentsList";
+import { RenderComponentsList } from "./RenderComponentsList";
 
 // components
 import { Block } from "baseui/block";
@@ -54,7 +54,7 @@ export const AboutThisSite = React.memo(() => {
     <>
       <Legends />
       <Block overrides={COMPONENT_LIST_WRAPPER_OVERRIDES}>
-        <RenderComponents
+        <RenderComponentsList
           totalDays={90}
           componentList={pureComponentsList}
           componentUptimeMap={componentUptimeMap}

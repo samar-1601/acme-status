@@ -1,7 +1,7 @@
 import { Block } from "baseui/block";
 import React from "react";
 import { COMPONENT_GROUP_DETAILS_WRAPPER_OVERRIDES } from "../overrides/aboutThisStyles";
-import { RenderComponents } from "./RenderComponentsList";
+import { RenderComponentsList } from "./RenderComponentsList";
 import { Accordion, Panel } from "baseui/accordion";
 
 interface Props {
@@ -43,10 +43,11 @@ export const RenderComponentGroups: React.FC<Props> = React.memo(
                 },
               }}
             >
-              <RenderComponents
+              <RenderComponentsList
                 componentList={componentsList}
                 componentUptimeMap={componentUptimeMap}
                 totalDays={90}
+                fromComponentGroup={true}
               />
             </Panel>
           </Accordion>
