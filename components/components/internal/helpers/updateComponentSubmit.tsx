@@ -6,12 +6,12 @@ import Router from "next/router";
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
 
-// constants
-import { PAGE_ID } from "../../../../constants";
-
 export const updateComponent = function (props: any) {
   fetch(
-    "https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + props.id,
+    "https://api.statuspage.io/v1/pages/" +
+      process.env.PAGE_ID +
+      "/components/" +
+      props.id,
     {
       method: "PATCH",
       headers: {

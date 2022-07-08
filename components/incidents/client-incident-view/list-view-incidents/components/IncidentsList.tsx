@@ -69,14 +69,6 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
   }, [isLoading]);
 
   /**
-   * Triggered when the PageType changes i.e when the user clicks another navigation bar item
-   * Initialises pageLoaded to false
-   */
-  useEffect(() => {
-    setPageLoaded(false);
-  }, [pageType]);
-
-  /**
    * AutoSizer : enables the auto sizing of the child elements based on their size
    * List : enables virtualization by populating the DOM with only the rows which are seen on screen
    * CellMeasurer : tells the size of the element

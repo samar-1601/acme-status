@@ -1,6 +1,5 @@
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
-import { PAGE_ID } from "../../../../constants";
 
 export const deleteIncident = async (
   incidentId: string,
@@ -10,7 +9,7 @@ export const deleteIncident = async (
 ) => {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
-      PAGE_ID +
+      process.env.PAGE_ID +
       "/incidents/" +
       incidentId,
     {

@@ -2,17 +2,17 @@
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
 
-// constants
-import { PAGE_ID } from "../../../../constants";
-
 export const deleteComponent = function (
-  id:String,
+  id: String,
   setLoaded: Function,
   enqueue: any,
-  reFetch: Function,
+  reFetch: Function
 ) {
   fetch(
-    "https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components/" + id,
+    "https://api.statuspage.io/v1/pages/" +
+      process.env.PAGE_ID +
+      "/components/" +
+      id,
     {
       method: "DELETE",
       headers: {

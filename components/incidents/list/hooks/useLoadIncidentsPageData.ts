@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // constants
-import { PageType, PAGE_ID } from "../../../../constants";
+import { PageType } from "../../../../constants";
 
 const limit = 15; // determines the no. of rows of data in a page
 
@@ -19,14 +19,14 @@ const getData = async (pageNumber: number, pageType: string, query: string) => {
   try {
     let URL;
     URL = query
-      ? `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
-      : `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
+      ? `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
+      : `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
     if (pageType == PageType.Maintenance) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Active) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
-      URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
     }
 
     const response = await fetch(URL, {

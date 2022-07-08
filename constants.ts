@@ -1,5 +1,4 @@
 import { STATUSType } from "./types";
-export const PAGE_ID = "7dwwybj29fy8";
 export const PAGE_NAME = "Acme";
 
 export enum Page {

@@ -1,9 +1,6 @@
 // lib
 import { useEffect, useState } from "react";
 
-// constants
-import { PAGE_ID } from "../../../../../constants";
-
 /**
  * Get a components' uptime value
  * @param componentID ID of the component for which we need uptime
@@ -11,7 +8,7 @@ import { PAGE_ID } from "../../../../../constants";
  */
 export const getComponentUptime = async (componentID: string) => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${componentID}/uptime`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${componentID}/uptime`;
 
     const response = await fetch(URL, {
       headers: {
@@ -33,7 +30,7 @@ export const getComponentUptime = async (componentID: string) => {
  */
 export const getComponents = async () => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
 
     const response = await fetch(URL, {
       headers: {

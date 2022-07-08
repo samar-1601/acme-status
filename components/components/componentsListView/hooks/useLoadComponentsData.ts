@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 // constants
-import { Page, PAGE_ID } from "../../../../constants";
+import { Page } from "../../../../constants";
 
 /**
  * Loads uptime data for a component from API using component id
@@ -10,7 +10,7 @@ import { Page, PAGE_ID } from "../../../../constants";
  */
 const getMsg = async (id: string) => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${id}/uptime`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${id}/uptime`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const getMsg = async (id: string) => {
  */
 const getComponents = async () => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const getComponents = async () => {
     let xjson = await response.json();
     let dataItem: any = [];
     for (let i = 0, j = 0; i < xjson.length; i++) {
-      if(xjson[i].group == false){
+      if (xjson[i].group == false) {
         dataItem[j] = xjson[i];
         dataItem[j].msg = await getMsg(xjson[i].id);
         j++;

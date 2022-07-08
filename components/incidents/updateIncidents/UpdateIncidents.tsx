@@ -9,7 +9,7 @@ import IncidentForm from "../internal/form/IncidentForm";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
-import { STATUS, getIncidentStatusFromPost, PAGE_ID } from "../../../constants";
+import { STATUS, getIncidentStatusFromPost } from "../../../constants";
 import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 import { Block } from "baseui/block";
@@ -65,7 +65,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
     } else {
       fetch(
         "https://api.statuspage.io/v1/pages/" +
-          PAGE_ID +
+          process.env.PAGE_ID +
           "/incidents/" +
           props.incidentId,
         {
@@ -123,7 +123,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
 
   //useEffect for fetching components and incidentDetails from API
   useEffect(() => {
-    const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    const compURL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
     fetch(compURL, {
       method: "GET",
       headers: {
@@ -147,7 +147,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
         // console.log("setting");
       })
       .then(() => {
-        const incidentURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/${props.incidentId}`;
+        const incidentURL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/${props.incidentId}`;
         console.log(incidentURL);
         fetch(incidentURL, {
           method: "GET",

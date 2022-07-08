@@ -9,9 +9,6 @@ import { FormControl } from "baseui/form-control";
 // styles
 import { INPUT_STATUS_STYLE } from "../overrides/componentFormStyles";
 
-// constants
-import { PAGE_ID } from "../../../../constants";
-
 export const ComponentGroup = React.memo((props: any) => {
   const [groups, setGroups] = React.useState([{}]);
   const [place, setPlace] = React.useState<string>(
@@ -19,7 +16,7 @@ export const ComponentGroup = React.memo((props: any) => {
   );
 
   const getComponentGroups = async () => {
-    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/component-groups`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/component-groups`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",

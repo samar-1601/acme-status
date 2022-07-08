@@ -5,35 +5,40 @@ import Router from "next/router";
 import { Block } from "baseui/block";
 import { DURATION } from "baseui/snackbar";
 
-// constants
-import { PAGE_ID } from "../../../../constants";
-
 /**
  * Post component group details to the API
  */
 export const createComponentGroup = function (props: any) {
-  fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/component-groups", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-    },
-    body: JSON.stringify(props.payload),
-  });
+  fetch(
+    "https://api.statuspage.io/v1/pages/" +
+      process.env.PAGE_ID +
+      "/component-groups",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+      },
+      body: JSON.stringify(props.payload),
+    }
+  );
 };
 
 /**
  * Post component details to the API
  */
 export const createComponent = function (props: any) {
-  fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/components", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-    },
-    body: JSON.stringify(props.payload),
-  })
+  fetch(
+    "https://api.statuspage.io/v1/pages/" + process.env.PAGE_ID + "/components",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+      },
+      body: JSON.stringify(props.payload),
+    }
+  )
     .then((response) => response.json())
     .then((json) => {
       if ("error" in json) {

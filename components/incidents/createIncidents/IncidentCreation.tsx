@@ -10,7 +10,7 @@ import { ComponentObject, ComponentsJSONObject } from "../../../types";
 import { useSnackbar, DURATION } from "baseui/snackbar";
 
 //constants
-import { STATUS, PAGE_ID } from "../../../constants";
+import { STATUS } from "../../../constants";
 import { Block } from "baseui/block";
 import TombStone from "../internal/formComponents/TombStone";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
@@ -50,14 +50,19 @@ export default function IncidentCreation() {
       );
       setIsSubmitClicked(false);
     } else {
-      fetch("https://api.statuspage.io/v1/pages/" + PAGE_ID + "/incidents", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
-        },
-        body: JSON.stringify(payload),
-      })
+      fetch(
+        "https://api.statuspage.io/v1/pages/" +
+          process.env.PAGE_ID +
+          "/incidents",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `OAuth ${process.env.NEXT_PUBLIC_AUTH_TOKEN ?? ""}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      )
         .then((response) => response.json())
         .then((json) => {
           //if successful POST show Successfully submitted form details in SnackBar
@@ -106,7 +111,7 @@ export default function IncidentCreation() {
 
   //will execute on component mounting gets data from API sets it and sends to CreateIncident
   useEffect(() => {
-    const compURL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components`;
+    const compURL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
     fetch(compURL, {
       method: "GET",
       headers: {

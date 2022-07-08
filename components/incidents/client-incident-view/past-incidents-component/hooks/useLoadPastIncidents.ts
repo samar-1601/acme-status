@@ -1,15 +1,12 @@
 // lib
 import { useCallback, useEffect, useState } from "react";
 
-// constants
-import { PAGE_ID } from "../../../../../constants";
-
 /**
  * @returns list of completed incidents in the given PAGE_ID
  */
 const getPastIncidents = async () => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/incidents/?q=completed+resolved`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?q=completed+resolved`;
 
     const response = await fetch(URL, {
       headers: {

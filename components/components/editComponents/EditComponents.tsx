@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import ComponentForm from "../internal/form/ComponentForm";
 
 // constants
-import { PAGE_ID } from "../../../constants";
-import TombStone from "../../incidents/internal/formComponents/TombStone";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
 import { ComponentFormTombStoneLoader } from "../internal/form/TombStone";
 
@@ -26,7 +24,7 @@ const status = [
  */
 const getComponent = async (componentId: string) => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${PAGE_ID}/components/${componentId}`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${componentId}`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
