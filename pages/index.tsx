@@ -12,8 +12,6 @@ import LandingPage from "../components/landingPage/LandingPage";
 import { LOADER_OVERRIDES } from "../components/incidents/list/overrides/listStyles";
 import { useEffect } from "react";
 
-// constants
-
 const Home = () => {
   const { data: session, status } = useSession(); // get user's session details
   useEffect(() => {
