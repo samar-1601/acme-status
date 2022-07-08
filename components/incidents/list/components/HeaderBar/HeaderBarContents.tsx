@@ -13,11 +13,11 @@ import { RefreshButton } from "./RefreshButton";
 
 interface Props {
   headerText: string; // text to render in the header
-  onSubmit: Function;
-  activePage: PageType;
+  onSubmit?: Function;
+  activePage?: PageType;
   setRefreshPressed: Function;
   isRefreshPressed: boolean;
-  query: string;
+  query?: string;
 }
 
 /**

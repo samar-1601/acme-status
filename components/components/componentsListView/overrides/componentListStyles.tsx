@@ -15,6 +15,7 @@ export const CONTENT: BlockProps["overrides"] = {
     style: {
       position: "relative",
       margin: "10px 0px",
+      overflow: "overlay",
     },
   },
 };
@@ -115,6 +116,7 @@ export const CONTAINER: BlockProps["overrides"] = {
       position: "sticky",
       zIndex: 10,
       backgroundColor: "#EEEFF1",
+      overflow: "overlay",
     },
   },
 };
@@ -123,6 +125,7 @@ export const COMPONENTS_LIST_VIEW: BlockProps["overrides"] = {
   Block: {
     style: {
       width: "100%",
+      overflow: "overlay",
     },
   },
 };
@@ -143,6 +146,7 @@ export const HEADER: BlockProps["overrides"] = {
       fontSize: "20px",
       display: "flex",
       justifyContent: "space-between",
+      overflow: "overlay",
     },
   },
 };

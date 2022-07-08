@@ -1,13 +1,12 @@
 // lib
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // components
 import { Block } from "baseui/block";
 import { CreateComponentButton } from "./components/HeaderBar/CreateComponentButton";
 import { NavBarMenuItem } from "./components/HeaderBar/NavBarMenuItem";
 import IncidentErrorPage from "../../incidentError/IncidentErrorPage";
-import { Header } from "./components/HeaderBar/Header";
 import { RenderComponentsList } from "./components/ComponentsList/RenderComponentsList";
 import { TombStoneLoader } from "./components/TombStoneLoader";
 
@@ -26,10 +25,12 @@ import {
 
 // custom hooks
 import useLoadComponentsData from "./hooks/useLoadComponentsData";
+import { HeaderBarContents } from "../../incidents/list/components/HeaderBar/HeaderBarContents";
 
 export const ComponentsViewHomePage = () => {
   const [activePage, setPage] = useState<Page>(Page.Active); // variable indicating the current selected navbar menu-item
   const [pageLoaded, setPageLoaded] = useState<boolean>(false); // boolean value determining the status of API request (completed/not completed)
+  const [isRefreshPressed, setIsRefreshPressed] = useState<boolean>(false); // variable to check if the refresh button is pressed
 
   /**
    * API response
@@ -42,16 +43,35 @@ export const ComponentsViewHomePage = () => {
   const { dataList, isLoading, reFetch, isError, status } =
     useLoadComponentsData(activePage);
 
-  React.useEffect(() => {
+  /**
+   * triggered when the data is loaded from the API
+   * sets pageLoaded for the current page (for the loading spinner)
+   */
+  useEffect(() => {
     if (!isLoading) {
-      setPageLoaded(true);
+      setIsRefreshPressed(false);
+      return setPageLoaded(true);
     }
   }, [isLoading]);
+
+  /**
+   * triggered if refresh button is pressed
+   */
+  useEffect(() => {
+    if (isRefreshPressed) {
+      setPageLoaded(false);
+      reFetch();
+    }
+  }, [isRefreshPressed]);
 
   return (
     <Block overrides={COMPONENTS_LIST_VIEW}>
       <Block overrides={CONTAINER}>
-        <Header headerText="Components" />
+        <HeaderBarContents
+          headerText="Components"
+          isRefreshPressed={isRefreshPressed}
+          setRefreshPressed={setIsRefreshPressed}
+        />
         <Block overrides={NAV_BAR_WRAPPER}>
           <Block overrides={NAV}>
             <NavBarMenuItem
