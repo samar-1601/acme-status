@@ -6,7 +6,6 @@ import { Block } from "baseui/block";
 
 // helpers
 import { formatDate } from "../../list-view-incidents/helpers/formatDate";
-import { formattedDateInSlashFormat } from "../helpers/formatDateInSlashFormat";
 
 // styles
 import {
