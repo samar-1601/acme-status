@@ -19,10 +19,53 @@ import {
   PAST_INCIDENT_HOVER_OVERRIDES,
 } from "../overrides/pastIncidentsStyles";
 import { getComponentStatusText, PageType } from "../../../../../constants";
+import { getGroupedIncidentsUpdatedOnSameDate } from "../helpers/getGroupsofIncidents";
 
 interface Props {
   incidentList: any;
 }
+
+const renderIncidentsForDate = (incidents: any) => {
+  let incidentsForDate = [];
+
+  // iterate through incidents for a day and format them with required styling
+  for (const incident of incidents) {
+    const incidentName = incident["name"];
+    const incidentUpdates = incident["incident_updates"];
+    let renderIncidentUpdates: JSX.Element[] = [];
+
+    // iterate through an incidents' updates and style them
+    for (let i = 0; i < incidentUpdates.length; i++) {
+      const update = incidentUpdates[i];
+      const renderUpdate = (
+        <Block
+          key={update["id"]}
+          overrides={PAST_INCIDENT_DETAILS_WRAPPER_OVERRIDES}
+        >
+          <Block overrides={PAST_INCIDENT_STATUS_OVERRIDES}>
+            {getComponentStatusText(update["status"])}
+          </Block>
+          <Block overrides={PAST_INCIDENT_STATUS_BODY_OVERRIDES}>
+            {" "}
+            - {update["body"]}{" "}
+          </Block>
+          <Block overrides={PAST_INCIDENT_STATUS_DATE_OVERRIDES}>
+            {formatDate(update["updated_at"])}
+          </Block>
+        </Block>
+      );
+      renderIncidentUpdates.push(renderUpdate); // push all updates together in a list
+    }
+    // push all incidents with their updates together
+    incidentsForDate.push(
+      <Block key={incident["id"]} overrides={PAST_INCIDENT_WRAPPER_OVERRIDES}>
+        <Block overrides={PAST_INCIDENT_NAME_OVERRIDES}>{incidentName}</Block>
+        <Block>{renderIncidentUpdates}</Block>
+      </Block>
+    );
+  }
+  return incidentsForDate;
+};
 
 /**
  * Helper function for PastIncidents List component
@@ -32,90 +75,26 @@ interface Props {
 export const PastIncidentsList: React.FC<Props> = React.memo(
   ({ incidentList }) => {
     let map = new Map(); // map to store all incident updates for the same day together (date is used as key)
+    map = getGroupedIncidentsUpdatedOnSameDate(incidentList);
 
-    // iterate through the incidents and add keys for the map and subsequently add the incidents completed on the same day together
-    for (let i = 0; i < incidentList.length; i++) {
-      const incident: any = incidentList[i];
-      const date: string | Date = formattedDateInSlashFormat(
-        new Date(incident["updated_at"])
-      );
-      let previous = [];
-      if (map.has(date)) previous = map.get(date);
-
-      map.set(date, previous.concat(incident)); // concat the new incidents to the previous ones on the same day
-    }
-    map = new Map(
-      [...map]
-        .sort(function (a: any, b: any) {
-          // '01/03/2014'.split('/')
-          // gives ["01", "03", "2014"]
-          let aa: any[] = a.toString().split("/");
-          let bb: any[] = b.toString().split("/");
-          return aa[2] - bb[2] || aa[1] - bb[1] || aa[0] - bb[0];
-        })
-        .reverse()
-    ); // sort the groups in decreasing order of dates
-    console.log(map);
     let renderList: JSX.Element[] = []; // list to store formatted data
-    let index = 0;
 
     // iterate through each date and format the related incidents with required styling
-    map.forEach(function (value, key) {
+    map.forEach(function (incidents, key) {
       let date = key.split("/");
 
       // month is 0-based, that's why we need dataParts[1] - 1
       var dateObject = new Date(
         date[2] + "/" + date[1] + "/" + String(Number(date[0]) + 1)
       );
-      const headerDate = formatDate(dateObject, PageType.Completed); // date for a group
-      const incidents = value; // list of incidents on a date
+      const headerDate = formatDate(dateObject, PageType.Completed); // formatted date for a group of incidents
+
       let incidentsForDate = [];
-
-      // iterate through incidents for a day and format them with required styling
-      for (const incident of incidents) {
-        const incidentName = incident["name"];
-        const incidentUpdates = incident["incident_updates"];
-        let renderIncidentUpdates: JSX.Element[] = [];
-
-        // iterate through an incidents' updates and style them
-        for (let i = 0; i < incidentUpdates.length; i++) {
-          const update = incidentUpdates[i];
-          const renderUpdate = (
-            <Block
-              key={update["id"]}
-              overrides={PAST_INCIDENT_DETAILS_WRAPPER_OVERRIDES}
-            >
-              <Block overrides={PAST_INCIDENT_STATUS_OVERRIDES}>
-                {getComponentStatusText(update["status"])}
-              </Block>
-              <Block overrides={PAST_INCIDENT_STATUS_BODY_OVERRIDES}>
-                {" "}
-                - {update["body"]}{" "}
-              </Block>
-              <Block overrides={PAST_INCIDENT_STATUS_DATE_OVERRIDES}>
-                {formatDate(update["updated_at"])}
-              </Block>
-            </Block>
-          );
-          renderIncidentUpdates.push(renderUpdate); // push all updates together in a list
-        }
-        // push all incidents with their updates together
-        incidentsForDate.push(
-          <Block
-            key={incident["id"]}
-            overrides={PAST_INCIDENT_WRAPPER_OVERRIDES}
-          >
-            <Block overrides={PAST_INCIDENT_NAME_OVERRIDES}>
-              {incidentName}
-            </Block>
-            <Block>{renderIncidentUpdates}</Block>
-          </Block>
-        );
-      }
+      incidentsForDate = renderIncidentsForDate(incidents);
 
       // couple the date and the incidents for this day
       renderList.push(
-        <Block key={index++}>
+        <Block key={headerDate}>
           <Block overrides={PAST_INCIDENT_HOVER_OVERRIDES}>{headerDate}</Block>
           <Block>{incidentsForDate.reverse()}</Block>
         </Block>

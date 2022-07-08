@@ -143,8 +143,6 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
             selected: false,
           };
         });
-        // setComponents(InitialData);
-        // console.log("setting");
       })
       .then(() => {
         const incidentURL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/${props.incidentId}`;

@@ -44,39 +44,6 @@ interface InputStatusprops {
  */
 export const InputStatus = React.memo((props: InputStatusprops) => {
   /**
-   * Function for handling updateStatus on progress bar click
-   * @params e SpecialEvent Type only for click on inputStatus Bar
-   * Added bar className to blue region of progress bar. As offset is calculated from the start of the bar
-   * which is hidden so we substract the hidden part if click happens on the blue region.
-   * Otherwise if click happens on the white region then we directly get the offset and calculate status.
-   * Then we call props.updateStatus to update the state.
-   */
-
-  const updateStatusBarOnClick = useCallback(
-    (e: InputStatusOnClickEvent) => {
-      let percentage = 0;
-      if (e.target.classList.contains("root")) {
-        return;
-      }
-      if (!e.target.classList.contains("bar")) {
-        let substractedTo = 0;
-        if (props.incidentStatus == "Identified") {
-          substractedTo = (66 / 100) * e.target.offsetWidth;
-        } else if (props.incidentStatus == "Monitoring") {
-          substractedTo = (33 / 100) * e.target.offsetWidth;
-        }
-        percentage =
-          ((e.nativeEvent.offsetX - substractedTo) * 100) /
-          e.target.offsetWidth;
-      } else {
-        percentage = (e.nativeEvent.offsetX * 100) / e.target.offsetWidth;
-      }
-      props.updateStatus(getStatusFromPercentage(percentage));
-    },
-    [props.incidentStatus]
-  );
-
-  /**
    * Contains the four statuses --> Investigating, Identified, Monitoring and Resolved as FlexGridItems
    */
   const flexItems = useMemo(
@@ -115,57 +82,7 @@ export const InputStatus = React.memo((props: InputStatusprops) => {
         overrides={{ ...INPUT_STATUS_OVERRIDES }}
       >
         <>
-          <Block
-          // overrides={{
-          //   Block: {
-          //     props: {
-          //       onClick: (event: InputStatusOnClickEvent) =>
-          //         updateStatusBarOnClick(event),
-          //     },
-          //   },
-          // }}
-          >
-            {/* <ProgressBar
-              value={calculateStatus(props.incidentStatus)}
-              size={SIZE.large}
-              steps={undefined}
-              overrides={{
-                Bar: {
-                  style: ({ $theme }) => ({
-                    cursor: "pointer",
-                    margin: "25px 10% 0px",
-                    height: "6px",
-                    position: "relative",
-                  }),
-                  props: {
-                    className: "bar",
-                  },
-                },
-                BarContainer: {
-                  style: {},
-                  props: {
-                    className: "root",
-                  },
-                },
-                BarProgress: {
-                  style: ({ $value }) => {
-                    return {
-                      backgroundColor: getStatusBarColor(props.incidentStatus),
-                      position: "relative",
-                      transition:
-                        "transform ease 0.2s, background-color ease 0.2s",
-                      ":after": {
-                        position: "absolute",
-                        content: `"A"`,
-                        zIndex: "100",
-                        backgroundColor: "white",
-                        left: "5px",
-                      },
-                    };
-                  },
-                },
-              }}
-            /> */}
+          <Block>
             <Slider
               value={[calculateStatus(props.incidentStatus)]}
               onChange={(value) => {
