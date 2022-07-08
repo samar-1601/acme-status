@@ -16,7 +16,7 @@ export const ComponentGroup = React.memo((props: any) => {
   );
 
   const getComponentGroups = async () => {
-    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/component-groups`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/component-groups`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",

@@ -2,11 +2,11 @@
 import { useCallback, useEffect, useState } from "react";
 
 /**
- * @returns list of completed incidents in the given PAGE_ID
+ * @returns list of completed incidents in the given NEXT_PUBLIC_PAGE_ID
  */
 const getPastIncidents = async () => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?q=completed+resolved`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/?q=completed+resolved`;
 
     const response = await fetch(URL, {
       headers: {

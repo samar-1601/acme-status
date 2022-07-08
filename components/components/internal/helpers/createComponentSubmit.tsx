@@ -11,7 +11,7 @@ import { DURATION } from "baseui/snackbar";
 export const createComponentGroup = function (props: any) {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
-      process.env.PAGE_ID +
+      process.env.NEXT_PUBLIC_PAGE_ID +
       "/component-groups",
     {
       method: "POST",
@@ -29,7 +29,9 @@ export const createComponentGroup = function (props: any) {
  */
 export const createComponent = function (props: any) {
   fetch(
-    "https://api.statuspage.io/v1/pages/" + process.env.PAGE_ID + "/components",
+    "https://api.statuspage.io/v1/pages/" +
+      process.env.NEXT_PUBLIC_PAGE_ID +
+      "/components",
     {
       method: "POST",
       headers: {

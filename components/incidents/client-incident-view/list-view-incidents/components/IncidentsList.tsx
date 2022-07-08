@@ -73,81 +73,74 @@ export const IncidentsList: React.FC<Props> = React.memo(({ pageType }) => {
    * List : enables virtualization by populating the DOM with only the rows which are seen on screen
    * CellMeasurer : tells the size of the element
    */
-  if (isError) {
-    return (
-      <IncidentErrorPage message="Unable to Load Data. Please Try Again!!!" />
-    );
-  } else if (status == 420) {
-    return (
-      <IncidentErrorPage message="Too Many requests, try again after sometime!" />
-    );
-  } else
-    return pageLoaded ? (
-      // if page has Loaded
-      dataList.length == 0 ? (
-        // If the page has no data
-        <Block overrides={LOADER_OVERRIDES}>
-          This Page has no Incidents !!
-        </Block>
-      ) : (
-        // If the page has loaded and has data to display
-        <Block
-          overrides={{
-            Block: {
-              style: {
-                borderTop: "1px solid #E6E6E9",
-              },
-            },
-          }}
-        >
-          <InfiniteLoader
-            isRowLoaded={({ index }) =>
-              !hasMore || index < (dataList.length ?? 0)
-            } // whether the current row is loaded
-            loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
-            rowCount={dataList.length + 1} // total row count of the data to be displayed
-          >
-            {({ onRowsRendered, registerChild }) => (
-              <div style={{ width: "100%", height: `56vh` }}>
-                <AutoSizer>
-                  {({ width, height }) => (
-                    <List
-                      width={width}
-                      height={height}
-                      onRowsRendered={onRowsRendered}
-                      ref={registerChild}
-                      rowHeight={cache.current.rowHeight ?? 0}
-                      deferredMeasurementCache={cache.current ?? 0}
-                      rowCount={dataList.length ?? 0}
-                      rowRenderer={({ key, index, style, parent }) => {
-                        const element = dataList[index];
-                        return (
-                          <CellMeasurer
-                            key={key}
-                            cache={cache.current}
-                            parent={parent}
-                            columnIndex={0}
-                            rowIndex={index}
-                          >
-                            <div style={style}>
-                              <IncidentListItem
-                                incident={element}
-                                pageType={pageType}
-                              />
-                            </div>
-                          </CellMeasurer>
-                        );
-                      }}
-                    ></List>
-                  )}
-                </AutoSizer>
-              </div>
-            )}
-          </InfiniteLoader>
-        </Block>
-      )
+  return status == 420 ? (
+    <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+  ) : isError || status != 200 ? (
+    <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
+  ) : pageLoaded ? (
+    // if page has Loaded
+    dataList.length == 0 ? (
+      // If the page has no data
+      <Block overrides={LOADER_OVERRIDES}>This Page has no Incidents !!</Block>
     ) : (
-      // if page has not loaded
-      <TombStoneLoader pageType={pageType} />
-    );
+      // If the page has loaded and has data to display
+      <Block
+        overrides={{
+          Block: {
+            style: {
+              borderTop: "1px solid #E6E6E9",
+            },
+          },
+        }}
+      >
+        <InfiniteLoader
+          isRowLoaded={({ index }) =>
+            !hasMore || index < (dataList.length ?? 0)
+          } // whether the current row is loaded
+          loadMoreRows={() => fetchMore()} // function triggered when we scroll and need more data to load
+          rowCount={dataList.length + 1} // total row count of the data to be displayed
+        >
+          {({ onRowsRendered, registerChild }) => (
+            <div style={{ width: "100%", height: `56vh` }}>
+              <AutoSizer>
+                {({ width, height }) => (
+                  <List
+                    width={width}
+                    height={height}
+                    onRowsRendered={onRowsRendered}
+                    ref={registerChild}
+                    rowHeight={cache.current.rowHeight ?? 0}
+                    deferredMeasurementCache={cache.current ?? 0}
+                    rowCount={dataList.length ?? 0}
+                    rowRenderer={({ key, index, style, parent }) => {
+                      const element = dataList[index];
+                      return (
+                        <CellMeasurer
+                          key={key}
+                          cache={cache.current}
+                          parent={parent}
+                          columnIndex={0}
+                          rowIndex={index}
+                        >
+                          <div style={style}>
+                            <IncidentListItem
+                              incident={element}
+                              pageType={pageType}
+                            />
+                          </div>
+                        </CellMeasurer>
+                      );
+                    }}
+                  ></List>
+                )}
+              </AutoSizer>
+            </div>
+          )}
+        </InfiniteLoader>
+      </Block>
+    )
+  ) : (
+    // if page has not loaded
+    <TombStoneLoader pageType={pageType} />
+  );
 });

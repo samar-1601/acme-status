@@ -10,7 +10,7 @@ import { Page } from "../../../../constants";
  */
 const getMsg = async (id: string) => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${id}/uptime`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components/${id}/uptime`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const getMsg = async (id: string) => {
  */
 const getComponents = async () => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",

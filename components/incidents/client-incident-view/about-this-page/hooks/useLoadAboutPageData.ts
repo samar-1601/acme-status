@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
  */
 export const getComponentUptime = async (componentID: string) => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${componentID}/uptime`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components/${componentID}/uptime`;
 
     const response = await fetch(URL, {
       headers: {
@@ -30,7 +30,7 @@ export const getComponentUptime = async (componentID: string) => {
  */
 export const getComponents = async () => {
   try {
-    let URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
+    let URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components`;
 
     const response = await fetch(URL, {
       headers: {

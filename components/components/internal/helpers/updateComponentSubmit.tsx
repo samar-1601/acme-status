@@ -9,7 +9,7 @@ import { DURATION } from "baseui/snackbar";
 export const updateComponent = function (props: any) {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
-      process.env.PAGE_ID +
+      process.env.NEXT_PUBLIC_PAGE_ID +
       "/components/" +
       props.id,
     {

@@ -45,10 +45,10 @@ export const AboutThisSite = React.memo(() => {
     }
   }, [isLoading]);
 
-  return isError ? (
-    <IncidentErrorPage message="Failed to Fetch Components!!!" />
-  ) : status == 420 ? (
+  return status == 420 ? (
     <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+  ) : isError || status != 200 ? (
+    <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
   ) : pageLoaded ? (
     // render components if data has loaded
     <>

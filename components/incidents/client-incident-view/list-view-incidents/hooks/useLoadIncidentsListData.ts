@@ -25,11 +25,11 @@ const getData = async (pageNumber: number, pageType: string) => {
    */
   try {
     let URL;
-    URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
+    URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
     if (pageType == PageType.Active) {
-      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
-      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
     }
 
     const response = await fetch(URL, {

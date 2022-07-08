@@ -10,7 +10,7 @@ export const deleteComponent = function (
 ) {
   fetch(
     "https://api.statuspage.io/v1/pages/" +
-      process.env.PAGE_ID +
+      process.env.NEXT_PUBLIC_PAGE_ID +
       "/components/" +
       id,
     {

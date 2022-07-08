@@ -19,14 +19,24 @@ const getData = async (pageNumber: number, pageType: string, query: string) => {
   try {
     let URL;
     URL = query
-      ? `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
-      : `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/?limit=${limit}&page=${pageNumber}`;
+      ? `https://api.statuspage.io/v1/pages/${
+          process.env.NEXT_PUBLIC_PAGE_ID ?? ""
+        }/incidents/?limit=${limit}&page=${pageNumber}&q=${query}`
+      : `https://api.statuspage.io/v1/pages/${
+          process.env.NEXT_PUBLIC_PAGE_ID ?? ""
+        }/incidents/?limit=${limit}&page=${pageNumber}`;
     if (pageType == PageType.Maintenance) {
-      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${
+        process.env.NEXT_PUBLIC_PAGE_ID ?? ""
+      }/incidents/active_maintenance/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Active) {
-      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${
+        process.env.NEXT_PUBLIC_PAGE_ID ?? ""
+      }/incidents/unresolved/?per_page=${limit}&page=${pageNumber}`;
     } else if (pageType == PageType.Scheduled) {
-      URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
+      URL = `https://api.statuspage.io/v1/pages/${
+        process.env.NEXT_PUBLIC_PAGE_ID ?? ""
+      }/incidents/scheduled/?per_page=${limit}&page=${pageNumber}`;
     }
 
     const response = await fetch(URL, {
@@ -41,7 +51,7 @@ const getData = async (pageNumber: number, pageType: string, query: string) => {
 
     return [dataItem, status, false];
   } catch (err) {
-    console.log(err);
+    console.log("err1: ", err);
     return [[], 500, true];
   }
 };
@@ -84,6 +94,8 @@ export default function useLoadIncidentsPageData(
         dataItem.length > 0 && !query && dataItem.length == limit,
         "API data:",
         dataItem.length,
+        "response status : ",
+        responseStatus,
         dataItem
       );
 
@@ -104,7 +116,7 @@ export default function useLoadIncidentsPageData(
         ...state,
         isError: true,
       });
-      console.log(err);
+      console.log("err2 :", err);
     }
   };
 

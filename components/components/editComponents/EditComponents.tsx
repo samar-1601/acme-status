@@ -24,7 +24,7 @@ const status = [
  */
 const getComponent = async (componentId: string) => {
   try {
-    const URL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components/${componentId}`;
+    const URL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components/${componentId}`;
     const response = await fetch(URL, {
       headers: {
         "Content-Type": "application/json",

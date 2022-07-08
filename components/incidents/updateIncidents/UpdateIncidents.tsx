@@ -65,7 +65,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
     } else {
       fetch(
         "https://api.statuspage.io/v1/pages/" +
-          process.env.PAGE_ID +
+          process.env.NEXT_PUBLIC_PAGE_ID +
           "/incidents/" +
           props.incidentId,
         {
@@ -123,7 +123,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
 
   //useEffect for fetching components and incidentDetails from API
   useEffect(() => {
-    const compURL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/components`;
+    const compURL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/components`;
     fetch(compURL, {
       method: "GET",
       headers: {
@@ -147,7 +147,7 @@ export default function UpdateIncident(props: UpdateIncidentProps) {
         // console.log("setting");
       })
       .then(() => {
-        const incidentURL = `https://api.statuspage.io/v1/pages/${process.env.PAGE_ID}/incidents/${props.incidentId}`;
+        const incidentURL = `https://api.statuspage.io/v1/pages/${process.env.NEXT_PUBLIC_PAGE_ID}/incidents/${props.incidentId}`;
         console.log(incidentURL);
         fetch(incidentURL, {
           method: "GET",

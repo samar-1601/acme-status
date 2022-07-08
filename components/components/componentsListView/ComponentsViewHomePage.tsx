@@ -71,10 +71,10 @@ export const ComponentsViewHomePage = () => {
         </Block>
       </Block>
       <Block overrides={CONTENT}>
-        {isError ? (
-          <IncidentErrorPage message="Sorry Unable to Fetch Components" />
-        ) : status == 420 ? (
+        {status == 420 ? (
           <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+        ) : isError || status != 200 ? (
+          <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
         ) : pageLoaded ? (
           <RenderComponentsList
             dataList={dataList}

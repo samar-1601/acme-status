@@ -48,6 +48,7 @@ export const IncidentsViewHomePage = () => {
    */
   const { dataList, isLoading, hasMore, fetchMore, reFetch, isError, status } =
     useLoadIncidentsPageData(activePage, query);
+  console.log("isError : ", isError);
 
   /**
    * triggered when the data is loaded from the API
@@ -98,10 +99,10 @@ export const IncidentsViewHomePage = () => {
       </Block>
       {/* --- page content below header --- */}
       <Block overrides={CONTENT_OVERRIDES}>
-        {isError ? (
-          <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
-        ) : status == 420 ? (
+        {status == 420 ? (
           <IncidentErrorPage message="Too Many requests, try again after sometime!" />
+        ) : isError || status != 200 ? (
+          <IncidentErrorPage message="Sorry Unable to Fetch Incidents" />
         ) : pageLoaded ? (
           dataList.length == 0 ? (
             // If the page has no data
