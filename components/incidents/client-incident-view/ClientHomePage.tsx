@@ -35,7 +35,7 @@ export const ClientsHomePage: React.FC = () => {
 
   return (
     <Block overrides={PAGE_CONTAINER_OVERRIDES}>
-      {/* <Block overrides={HOME_PAGE_HEADER_OVERRIDES}>{PAGE_NAME}</Block>
+      <Block overrides={HOME_PAGE_HEADER_OVERRIDES}>{PAGE_NAME}</Block>
       <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
         <Block overrides={H1_OVERRIDES}> Active Incidents </Block>
         <IncidentsList pageType={PageType.Active} />
@@ -46,8 +46,8 @@ export const ClientsHomePage: React.FC = () => {
       </Block>
       <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
         <Block overrides={H3_OVERRIDES}> About This Site</Block>
-        <AboutThisSite /> */}
-      {/* </Block> */}
+        <AboutThisSite />
+      </Block>
       <Block overrides={CLIENTS_COMMON_COMPONENTS_WRAPPER_OVERRIDES}>
         <Block overrides={H3_OVERRIDES}> Past Incidents</Block>
         <PastIncidents />
